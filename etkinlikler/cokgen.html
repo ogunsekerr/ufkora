@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5. Sınıf Çokgen Dünyası: 15-Gen ve Ötesi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    h1, h2, h3, .font-fun {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+    /* Özel kaydırma çubuğu */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .shape-pulse {
+      animation: gentlePulse 3s ease-in-out infinite;
+    }
+    @keyframes gentlePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    .canvas-container {
+      background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
+      background-size: 20px 20px;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-sky-50 to-amber-50 min-h-screen text-slate-800 flex flex-col antialiased">
+
+  <header class="bg-white/90 backdrop-blur-md shadow-sm border-b border-indigo-100 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 to-violet-500 text-white flex items-center justify-center shadow-lg shadow-indigo-200">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-violet-600">
+            5. Sınıf Çokgen Dünyası
+          </h1>
+          <p class="text-xs sm:text-sm font-semibold text-slate-500">15-Gen ve Ötesinin Büyülü Geometrisi</p>
+        </div>
+      </div>
+
+      <!-- Sekme Düğmeleri -->
+      <nav class="flex items-center p-1.5 bg-slate-100/90 rounded-2xl border border-slate-200 shadow-inner">
+        <button id="tab-btn-explore" onclick="switchTab('explore')" class="tab-button flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 bg-white text-indigo-700 shadow-sm">
+          <span>🔍 Keşif & Laboratuvar</span>
+        </button>
+        <button id="tab-btn-game" onclick="switchTab('game')" class="tab-button flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:text-indigo-600 transition-all duration-200">
+          <span>🎮 İste Çizdir & Çokgen Oyunu</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col">
+    
+    <!-- SEKME 1: ÇOKGEN LABORATUVARI (15-GEN VE ÖTESİ) -->
+    <section id="tab-explore" class="tab-content flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- Sol Panel: Ayarlar & Hızlı Butonlar -->
+      <div class="lg:col-span-4 bg-white/95 rounded-3xl p-5 sm:p-6 shadow-xl shadow-indigo-100/60 border border-indigo-50 flex flex-col gap-5">
+        
+        <div class="border-b border-slate-100 pb-3">
+          <div class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full mb-1">
+            <span>📐 5. Sınıf Kazanımı</span>
+          </div>
+          <h2 class="text-xl font-bold text-slate-800">Çokgen İnceleme Stüdyosu</h2>
+          <p class="text-xs text-slate-500 mt-0.5">
+            Kenar sayısını artırın; çokgenin köşelerini, kenarlarını ve çembere dönüşümünü izleyin!
+          </p>
+        </div>
+
+        <!-- Kenar Sayısı Kaydırıcısı -->
+        <div class="bg-indigo-50/60 rounded-2xl p-4 border border-indigo-100">
+          <div class="flex justify-between items-center mb-2">
+            <label for="side-slider" class="text-sm font-bold text-indigo-900">Kenar Sayısı:</label>
+            <span id="slider-val-badge" class="bg-indigo-600 text-white font-fun font-bold px-3 py-1 rounded-xl text-base shadow-sm">
+              15-gen
+            </span>
+          </div>
+          <input id="side-slider" type="range" min="3" max="60" value="15" step="1" 
+                 class="w-full h-3 bg-indigo-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+          <div class="flex justify-between text-[11px] font-bold text-indigo-400 mt-1 px-1">
+            <span>Üçgen (3)</span>
+            <span>15-gen</span>
+            <span>60-gen</span>
+          </div>
+        </div>
+
+        <!-- Hızlı Süper Çokgen Butonları -->
+        <div>
+          <label class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Hızlı 15+ Seçenekleri:</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="setSides(15)" class="quick-btn p-2 rounded-xl text-xs font-bold border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 transition">
+              ⭐ 15-gen
+            </button>
+            <button onclick="setSides(18)" class="quick-btn p-2 rounded-xl text-xs font-bold border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 transition">
+              🔷 18-gen
+            </button>
+            <button onclick="setSides(20)" class="quick-btn p-2 rounded-xl text-xs font-bold border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 transition">
+              💎 20-gen
+            </button>
+            <button onclick="setSides(24)" class="quick-btn p-2 rounded-xl text-xs font-bold border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 transition">
+              ✨ 24-gen
+            </button>
+            <button onclick="setSides(30)" class="quick-btn p-2 rounded-xl text-xs font-bold border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 transition">
+              🌀 30-gen
+            </button>
+            <button onclick="setSides(50)" class="quick-btn p-2 rounded-xl text-xs font-bold border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 transition">
+              🟣 50-gen
+            </button>
+          </div>
+        </div>
+
+        <!-- Görsel Katman Kontrolleri -->
+        <div class="space-y-2 pt-2 border-t border-slate-100">
+          <label class="text-xs font-bold text-slate-500 uppercase tracking-wider block">Görsel Seçenekler:</label>
+          
+          <label class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition">
+            <input type="checkbox" id="chk-vertices" checked class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 accent-indigo-600">
+            <span class="text-xs font-bold text-slate-700">Köşeleri Renkli Göster (Köşe Noktaları)</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition">
+            <input type="checkbox" id="chk-labels" class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 accent-indigo-600">
+            <span class="text-xs font-bold text-slate-700">Köşe Harflerini / Sayılarını Yaz</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition">
+            <input type="checkbox" id="chk-diagonals" class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 accent-indigo-600">
+            <span class="text-xs font-bold text-indigo-600">Köşegen Ağı (Desenini Çiz) ✨</span>
+          </label>
+
+          <label class="flex items-center gap-3 p-2 rounded-xl hover:bg-slate-50 cursor-pointer border border-transparent hover:border-slate-200 transition">
+            <input type="checkbox" id="chk-circle-hint" class="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 accent-indigo-600">
+            <span class="text-xs font-bold text-amber-600">Dış Çemberi Karşılaştır (Sır Perdesi)</span>
+          </label>
+        </div>
+
+        <!-- 5. Sınıf Merak Köşesi -->
+        <div class="bg-amber-50 rounded-2xl p-3.5 border border-amber-200/80 text-amber-900 text-xs leading-relaxed">
+          <p class="font-bold flex items-center gap-1.5 mb-1 text-amber-800">
+            <span>💡</span> Öğretmenin Sırrı:
+          </p>
+          <p>
+            "Çocuklar, kenar sayısını 15'ten 40'a ve 50'ye doğru çıkardığınızda çokgen neye benziyor? Evet, bir <strong>çembere</strong> benziyor ama unutmayın; büyüteçle baksak bile her kenarı minicik birer <strong>düz doğru parçasıdır</strong>!"
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Sağ Panel: Etkileşimli Kanvas ve Bilgi Kartları -->
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        
+        <!-- Kanvas Kutusu -->
+        <div class="bg-white rounded-3xl p-4 sm:p-5 shadow-xl shadow-indigo-100/60 border border-indigo-50 relative flex flex-col items-center">
+          
+          <!-- Üst Bilgi Başlığı -->
+          <div class="w-full flex flex-wrap items-center justify-between gap-2 mb-3 px-2">
+            <div class="flex items-center gap-2">
+              <span id="canvas-polygon-name" class="font-fun text-xl sm:text-2xl font-bold text-indigo-900">
+                Onbeşgen (15-gen)
+              </span>
+              <span id="polygon-status-tag" class="text-xs bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md">
+                Düzgün Çokgen
+              </span>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <button onclick="rotatePolygonAnim()" class="text-xs font-bold bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 px-3 py-1.5 rounded-xl border border-slate-200 transition flex items-center gap-1">
+                <span>🔄 Döndür</span>
+              </button>
+              <button onclick="resetLabView()" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl transition">
+                Sıfırla
+              </button>
+            </div>
+          </div>
+
+          <!-- Canvas Çizim Alanı -->
+          <div class="w-full h-[360px] sm:h-[420px] rounded-2xl relative canvas-container border border-slate-200 flex items-center justify-center overflow-hidden bg-slate-50/50">
+            <canvas id="lab-canvas" class="w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
+            
+            <!-- Bilgi Notu Float -->
+            <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-slate-200 text-[11px] font-bold text-slate-600 shadow-sm pointer-events-none">
+              🖱️ Parmağınızla veya fareyle çevirebilirsiniz
+            </div>
+          </div>
+
+          <!-- 5. Sınıf Özellik Rozetleri -->
+          <div class="w-full grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+            <div class="bg-indigo-50/70 p-3 rounded-2xl border border-indigo-100 text-center">
+              <span class="block text-xs font-bold text-indigo-600">Kenar Sayısı</span>
+              <span id="badge-edge-count" class="text-2xl font-fun font-bold text-indigo-900">15</span>
+            </div>
+            <div class="bg-violet-50/70 p-3 rounded-2xl border border-violet-100 text-center">
+              <span class="block text-xs font-bold text-violet-600">Köşe Sayısı</span>
+              <span id="badge-vertex-count" class="text-2xl font-fun font-bold text-violet-900">15</span>
+            </div>
+            <div class="bg-sky-50/70 p-3 rounded-2xl border border-sky-100 text-center">
+              <span class="block text-xs font-bold text-sky-600">İç Açı Sayısı</span>
+              <span id="badge-angle-count" class="text-2xl font-fun font-bold text-sky-900">15</span>
+            </div>
+            <div class="bg-emerald-50/70 p-3 rounded-2xl border border-emerald-100 text-center">
+              <span class="block text-xs font-bold text-emerald-600">Bir İç Açısı (Yaklaşık)</span>
+              <span id="badge-single-angle" class="text-2xl font-fun font-bold text-emerald-900">156°</span>
+            </div>
+          </div>
+
+          <!-- 5. Sınıf Kural Hatırlatma -->
+          <div class="w-full mt-3 p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs text-slate-600 flex items-center justify-between">
+            <span>📌 <strong>Temel Kural:</strong> Tüm çokgenlerde <em>Kenar Sayısı = Köşe Sayısı = İç Açı Sayısı</em>dır!</span>
+            <span class="font-bold text-indigo-600 hidden sm:inline">15-gen = 15 Kenar, 15 Köşe</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SEKME 2: İSTEDİĞİN ÇOKGENİ ÇİZDİR & OYUN ALANI -->
+    <section id="tab-game" class="tab-content hidden flex-1 flex-col gap-6">
+      
+      <!-- Üst Bölüm: İstediğin Sayıyı Yazıp Çizdirme Konsolu -->
+      <div class="bg-white rounded-3xl p-5 sm:p-6 shadow-xl shadow-indigo-100/60 border border-indigo-50">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1 rounded-full mb-1">
+              <span>🚀 Sınırsız Çokgen Motoru</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-800">
+              Kaç-Gen Görmek İstiyorsan Hemen Yaz!
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-500">
+              İster 17, ister 25, ister 100-gen... Sayıyı yazın, anında çizilsin ve mikroskopla inceleyin!
+            </p>
+          </div>
+
+          <!-- Giriş Kutusu ve Çiz Düğmesi -->
+          <form onsubmit="handleCustomDraw(event)" class="flex items-center gap-2 w-full md:w-auto">
+            <div class="relative flex-1 md:w-48">
+              <input id="custom-sides-input" type="number" min="3" max="200" placeholder="Örn: 24" 
+                     class="w-full pl-4 pr-10 py-3 rounded-2xl border-2 border-indigo-200 focus:border-indigo-600 focus:outline-none text-lg font-bold font-fun text-indigo-900 bg-indigo-50/40">
+              <span class="absolute right-3 top-3.5 text-xs font-bold text-indigo-400 pointer-events-none">gen</span>
+            </div>
+            <button type="submit" class="bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-fun font-bold px-6 py-3 rounded-2xl shadow-lg shadow-indigo-200 transition transform active:scale-95 text-base flex items-center gap-2">
+              <span>🎨 Çizdir!</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Popüler Büyük Çokgen Rozetleri -->
+        <div class="flex flex-wrap items-center gap-2 mt-4 pt-3 border-t border-slate-100">
+          <span class="text-xs font-bold text-slate-400">Merak Edilenler:</span>
+          <button onclick="drawSpecific(16)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 transition">16-gen</button>
+          <button onclick="drawSpecific(21)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 transition">21-gen</button>
+          <button onclick="drawSpecific(36)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 transition">36-gen</button>
+          <button onclick="drawSpecific(48)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 transition">48-gen</button>
+          <button onclick="drawSpecific(64)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 transition">64-gen</button>
+          <button onclick="drawSpecific(100)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition">🔥 100-gen (Hektagon)</button>
+        </div>
+      </div>
+
+      <!-- Orta Alan: İki Kolon - Özel Çizim Alanı & Oyun Konsolu -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Özel Çizim Görüntüleyici -->
+        <div class="lg:col-span-6 bg-white rounded-3xl p-5 shadow-xl shadow-indigo-100/60 border border-indigo-50 flex flex-col items-center">
+          <div class="w-full flex items-center justify-between mb-3">
+            <div>
+              <span id="custom-display-title" class="font-fun text-xl font-bold text-indigo-900">
+                24-gen Görünümü
+              </span>
+              <p id="custom-edge-note" class="text-xs text-slate-500 font-semibold">24 Eşit Kenar & 24 Köşe</p>
+            </div>
+            
+            <!-- Zoom Mikroskop Kontrolü -->
+            <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+              <button onclick="zoomCustom(0.8)" title="Uzaklaştır" class="w-8 h-8 rounded-lg bg-white text-slate-700 font-bold hover:bg-indigo-50 hover:text-indigo-600 transition flex items-center justify-center text-sm shadow-sm">-</button>
+              <span id="zoom-label" class="text-[11px] font-bold text-slate-600 px-1.5">100%</span>
+              <button onclick="zoomCustom(1.25)" title="Yakınlaştır (Mikroskop)" class="w-8 h-8 rounded-lg bg-white text-slate-700 font-bold hover:bg-indigo-50 hover:text-indigo-600 transition flex items-center justify-center text-sm shadow-sm">+</button>
+            </div>
+          </div>
+
+          <!-- Kanvas -->
+          <div class="w-full h-80 rounded-2xl canvas-container border border-slate-200 flex items-center justify-center relative overflow-hidden bg-white">
+            <canvas id="custom-canvas" class="w-full h-full block"></canvas>
+            
+            <div id="zoom-hint" class="absolute top-3 right-3 bg-amber-100/90 text-amber-900 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-amber-200 pointer-events-none">
+              🔍 Mikroskop Modu Mevcut
+            </div>
+          </div>
+
+          <!-- Canlı Çokgen Bilgi Kutucuğu -->
+          <div id="custom-detail-box" class="w-full mt-4 p-3 bg-indigo-50/70 border border-indigo-100 rounded-2xl text-xs text-indigo-950 flex flex-col gap-1">
+            <div class="font-bold flex items-center justify-between">
+              <span id="custom-info-header">24-gen'in Geometri Kimliği:</span>
+              <span class="text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Kapalı Düzlemsel Şekil</span>
+            </div>
+            <p id="custom-info-body">
+              Bu şeklin tam 24 köşesi ve 24 kenarı vardır. Kenar sayısı çok fazla olduğu için uzaktan neredeyse bir madeni para gibi yuvarlak görünür!
+            </p>
+          </div>
+        </div>
+
+        <!-- Sağ Taraf: "Çokgen Ustası" Oyunu -->
+        <div class="lg:col-span-6 bg-gradient-to-br from-violet-600 via-indigo-700 to-indigo-800 text-white rounded-3xl p-5 sm:p-6 shadow-xl shadow-indigo-300/50 flex flex-col justify-between min-h-[460px]">
+          
+          <!-- Oyun Üst Bilgi Barı -->
+          <div>
+            <div class="flex items-center justify-between border-b border-white/20 pb-3 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl">🏆</span>
+                <div>
+                  <h3 class="font-fun text-xl font-bold leading-tight">Çokgen Dedektifi Oyunu</h3>
+                  <p class="text-xs text-indigo-200">5. Sınıflar İçin Hızlı Zeka Soruları</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-center">
+                  <span class="text-[10px] uppercase font-bold text-indigo-200 block">Puan</span>
+                  <span id="game-score" class="font-fun text-lg font-bold">0</span>
+                </div>
+                <div class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-xl text-center">
+                  <span class="text-[10px] uppercase font-bold text-indigo-200 block">Soru</span>
+                  <span id="game-round" class="font-fun text-lg font-bold">1/10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Soru Alanı -->
+            <div id="game-card" class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-5 mb-4">
+              <div class="flex items-center justify-between mb-2">
+                <span id="question-category" class="text-xs font-bold bg-amber-400 text-amber-950 px-2.5 py-0.5 rounded-full">
+                  15-Gen ve Üstü Sorusu
+                </span>
+                <span id="question-timer-hint" class="text-xs text-indigo-200">✨ Dikkatli Düşün</span>
+              </div>
+              
+              <h4 id="question-text" class="text-base sm:text-lg font-bold text-white mb-2 leading-snug">
+                17 kenarı olan bir düzgün çokgenin toplam kaç tane köşesi vardır?
+              </h4>
+
+              <!-- Küçük Görsel İpucu Kutusu (İhtiyaç olursa) -->
+              <div id="question-visual" class="h-24 bg-white/10 rounded-xl flex items-center justify-center mb-3 overflow-hidden border border-white/10 hidden">
+                <canvas id="quiz-canvas" class="w-full h-full"></canvas>
+              </div>
+
+              <!-- Şıklar Izgarası -->
+              <div id="options-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mt-3">
+                <!-- Şık butonları dinamik dolacak -->
+              </div>
+            </div>
+
+            <!-- Geri Bildirim Mesajı -->
+            <div id="game-feedback" class="hidden p-3 rounded-2xl text-xs sm:text-sm font-bold text-center transition-all duration-300">
+              <!-- Bildirim -->
+            </div>
+          </div>
+
+          <!-- Alt Kontrol Düğmeleri -->
+          <div class="flex items-center justify-between pt-3 border-t border-white/10 mt-3">
+            <button onclick="startNewGame()" class="text-xs font-bold text-indigo-200 hover:text-white transition flex items-center gap-1">
+              <span>🔄 Oyunu Yeniden Başlat</span>
+            </button>
+            <button id="next-question-btn" onclick="nextQuestion()" class="hidden bg-white text-indigo-900 hover:bg-amber-300 font-fun font-bold px-4 py-2 rounded-xl text-sm shadow-md transition transform active:scale-95">
+              Sonraki Soru ➡️
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    // Tarayıcı içi yapay ses efektleri (Harici dosya gerekmez)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playTone(type = 'click') {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        const now = audioCtx.currentTime;
+        if (type === 'click') {
+          osc.frequency.setValueAtTime(480, now);
+          osc.frequency.exponentialRampToValueAtTime(320, now + 0.05);
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'correct') {
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+          osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+          gain.gain.setValueAtTime(0.18, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (type === 'wrong') {
+          osc.frequency.setValueAtTime(260, now);
+          osc.frequency.setValueAtTime(200, now + 0.1);
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+          osc.start(now);
+          osc.stop(now + 0.25);
+        } else if (type === 'fanfare') {
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.setValueAtTime(880, now + 0.15);
+          gain.gain.setValueAtTime(0.2, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+          osc.start(now);
+          osc.stop(now + 0.5);
+        }
+      } catch (e) {
+        // Ses çalınamazsa sessizce devam et
+      }
+    }
+  </script>
+
+  <script>
+    // Çokgen Adlandırmaları (Türkçe)
+    const polygonNames = {
+      3: "Üçgen",
+      4: "Dörtgen",
+      5: "Beşgen",
+      6: "Altıgen",
+      7: "Yedigen",
+      8: "Sekizgen",
+      9: "Dokuzgen",
+      10: "Ongan (Dekagon)",
+      11: "Onbirgen",
+      12: "Onikigen",
+      13: "Onüçgen",
+      14: "Ondörtgen",
+      15: "Onbeşgen (Pentadekagon)",
+      16: "Onaltıgen",
+      17: "Onyedigen",
+      18: "Onsekizgen",
+      19: "Ondokuzgen",
+      20: "Yirmigen (İkosagon)",
+      24: "Yirmidörtgen",
+      30: "Otuzgen",
+      36: "Otuzaltıgen",
+      40: "Kırkgen",
+      50: "Elligen",
+      60: "Altmışgen",
+      100: "Yüzgen (Hektagon)",
+      200: "İkiyüzgen"
+    };
+
+    function getPolygonName(n) {
+      if (polygonNames[n]) return polygonNames[n];
+      return n + "-gen";
+    }
+
+    // Sekme Değiştirme
+    function switchTab(tabId) {
+      playTone('click');
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(t => t.classList.add('hidden'));
+
+      const btnExplore = document.getElementById('tab-btn-explore');
+      const btnGame = document.getElementById('tab-btn-game');
+
+      if (tabId === 'explore') {
+        document.getElementById('tab-explore').classList.remove('hidden');
+        btnExplore.className = "tab-button flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 bg-white text-indigo-700 shadow-sm";
+        btnGame.className = "tab-button flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:text-indigo-600 transition-all duration-200";
+        renderLabCanvas();
+      } else {
+        document.getElementById('tab-game').classList.remove('hidden');
+        btnGame.className = "tab-button flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all duration-200 bg-white text-indigo-700 shadow-sm";
+        btnExplore.className = "tab-button flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:text-indigo-600 transition-all duration-200";
+        renderCustomCanvas();
+      }
+    }
+  </script>
+
+  <script>
+    // Tab 1: Laboratuvar Canvas Değişkenleri
+    const labCanvas = document.getElementById('lab-canvas');
+    const labCtx = labCanvas.getContext('2d');
+    const sideSlider = document.getElementById('side-slider');
+    const sliderValBadge = document.getElementById('slider-val-badge');
+    const chkVertices = document.getElementById('chk-vertices');
+    const chkLabels = document.getElementById('chk-labels');
+    const chkDiagonals = document.getElementById('chk-diagonals');
+    const chkCircleHint = document.getElementById('chk-circle-hint');
+
+    let currentLabSides = 15;
+    let labRotation = 0;
+    let isDragging = false;
+    let lastMouseX = 0;
+
+    // Retina & Responsive Canvas Boyutlandırma
+    function resizeCanvas(canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+      return { width: rect.width, height: rect.height };
+    }
+
+    function renderLabCanvas() {
+      if (!labCanvas.offsetParent) return; // Görünür değilse çizme
+      const { width, height } = resizeCanvas(labCanvas);
+
+      const n = currentLabSides;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = Math.min(width, height) * 0.38;
+
+      labCtx.clearRect(0, 0, width, height);
+
+      // Köşe Noktalarını Hesapla
+      const points = [];
+      const angleStep = (Math.PI * 2) / n;
+      // İlk tepe noktası düzgün hizalansın diye -PI/2 ofseti
+      const startAngle = -Math.PI / 2 + labRotation;
+
+      for (let i = 0; i < n; i++) {
+        const theta = startAngle + i * angleStep;
+        points.push({
+          x: centerX + radius * Math.cos(theta),
+          y: centerY + radius * Math.sin(theta),
+          angle: theta
+        });
+      }
+
+      // 1. Dış Çember Kılavuzu (İpucu Açıksa)
+      if (chkCircleHint.checked) {
+        labCtx.save();
+        labCtx.beginPath();
+        labCtx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+        labCtx.strokeStyle = 'rgba(245, 158, 11, 0.45)';
+        labCtx.lineWidth = 2.5;
+        labCtx.setLineDash([6, 6]);
+        labCtx.stroke();
+        labCtx.restore();
+      }
+
+      // 2. Köşegenler (Açıksa)
+      if (chkDiagonals.checked && n >= 4) {
+        labCtx.save();
+        labCtx.beginPath();
+        // 15+ kenarlı çokgenlerde köşegen ağı çok büyüleyicidir!
+        labCtx.strokeStyle = 'rgba(99, 102, 241, 0.16)';
+        labCtx.lineWidth = 1;
+        for (let i = 0; i < n; i++) {
+          for (let j = i + 2; j < n; j++) {
+            // Komşu kenarlar köşegen değildir, n-1 ile 0 da komşudur
+            if (i === 0 && j === n - 1) continue;
+            labCtx.moveTo(points[i].x, points[i].y);
+            labCtx.lineTo(points[j].x, points[j].y);
+          }
+        }
+        labCtx.stroke();
+        labCtx.restore();
+      }
+
+      // 3. Çokgenin Gövde Alanı & Kenarları
+      labCtx.save();
+      labCtx.beginPath();
+      labCtx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < n; i++) {
+        labCtx.lineTo(points[i].x, points[i].y);
+      }
+      labCtx.closePath();
+
+      // Dolgu Gradyanı
+      const grad = labCtx.createRadialGradient(centerX, centerY, radius * 0.1, centerX, centerY, radius);
+      grad.addColorStop(0, 'rgba(238, 242, 255, 0.85)');
+      grad.addColorStop(1, 'rgba(224, 231, 255, 0.4)');
+      labCtx.fillStyle = grad;
+      labCtx.fill();
+
+      // Kenar Çizgileri
+      labCtx.strokeStyle = '#4f46e5';
+      labCtx.lineWidth = n > 35 ? 2 : 3.5;
+      labCtx.lineJoin = 'round';
+      labCtx.stroke();
+      labCtx.restore();
+
+      // 4. Köşeler ve İsimlendirmeler
+      if (chkVertices.checked) {
+        const dotRadius = n > 30 ? 3.5 : 5.5;
+        points.forEach((pt, index) => {
+          // Köşe Noktası
+          labCtx.save();
+          labCtx.beginPath();
+          labCtx.arc(pt.x, pt.y, dotRadius, 0, Math.PI * 2);
+          labCtx.fillStyle = '#f43f5e';
+          labCtx.fill();
+          labCtx.lineWidth = 2;
+          labCtx.strokeStyle = '#ffffff';
+          labCtx.stroke();
+
+          // Köşe Numaraları / Harfleri (İstenirse)
+          if (chkLabels.checked && (n <= 30 || index % 2 === 0)) {
+            const labelDist = radius + (n > 25 ? 18 : 22);
+            const lx = centerX + labelDist * Math.cos(pt.angle);
+            const ly = centerY + labelDist * Math.sin(pt.angle);
+            labCtx.font = 'bold 11px Fredoka, sans-serif';
+            labCtx.fillStyle = '#4338ca';
+            labCtx.textAlign = 'center';
+            labCtx.textBaseline = 'middle';
+            labCtx.fillText((index + 1).toString(), lx, ly);
+          }
+          labCtx.restore();
+        });
+      }
+
+      // Merkez Noktası
+      labCtx.beginPath();
+      labCtx.arc(centerX, centerY, 3, 0, Math.PI * 2);
+      labCtx.fillStyle = '#94a3b8';
+      labCtx.fill();
+
+      updateLabStats(n);
+    }
+
+    function updateLabStats(n) {
+      document.getElementById('canvas-polygon-name').textContent = getPolygonName(n);
+      document.getElementById('badge-edge-count').textContent = n;
+      document.getElementById('badge-vertex-count').textContent = n;
+      document.getElementById('badge-angle-count').textContent = n;
+
+      // Düzgün çokgenin bir iç açısı formülü: (n - 2) * 180 / n
+      const singleAngle = ((n - 2) * 180) / n;
+      document.getElementById('badge-single-angle').textContent = singleAngle.toFixed(1).replace('.0', '') + '°';
+      sliderValBadge.textContent = n + '-gen';
+    }
+
+    // Slider Olayı
+    sideSlider.addEventListener('input', (e) => {
+      currentLabSides = parseInt(e.target.value);
+      renderLabCanvas();
+    });
+
+    // Kontrol Kutuları
+    [chkVertices, chkLabels, chkDiagonals, chkCircleHint].forEach(chk => {
+      chk.addEventListener('change', () => {
+        playTone('click');
+        renderLabCanvas();
+      });
+    });
+
+    function setSides(n) {
+      playTone('click');
+      currentLabSides = n;
+      sideSlider.value = n;
+      renderLabCanvas();
+    }
+
+    function rotatePolygonAnim() {
+      playTone('click');
+      let step = 0;
+      const totalSteps = 40;
+      function stepAnim() {
+        labRotation += 0.05;
+        renderLabCanvas();
+        step++;
+        if (step < totalSteps) {
+          requestAnimationFrame(stepAnim);
+        }
+      }
+      stepAnim();
+    }
+
+    function resetLabView() {
+      playTone('click');
+      currentLabSides = 15;
+      sideSlider.value = 15;
+      labRotation = 0;
+      chkVertices.checked = true;
+      chkLabels.checked = false;
+      chkDiagonals.checked = false;
+      chkCircleHint.checked = false;
+      renderLabCanvas();
+    }
+
+    // Fare / Dokunmatik İle Çevirme
+    labCanvas.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      lastMouseX = e.clientX;
+    });
+    window.addEventListener('mouseup', () => isDragging = false);
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - lastMouseX;
+      labRotation += deltaX * 0.01;
+      lastMouseX = e.clientX;
+      renderLabCanvas();
+    });
+
+    // Dokunmatik (Tablet / Akıllı Tahta)
+    labCanvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        lastMouseX = e.touches[0].clientX;
+      }
+    });
+    window.addEventListener('touchend', () => isDragging = false);
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      const deltaX = e.touches[0].clientX - lastMouseX;
+      labRotation += deltaX * 0.01;
+      lastMouseX = e.touches[0].clientX;
+      renderLabCanvas();
+    });
+  </script>
+
+  <script>
+    // Tab 2: Özel Çizim Alanı Mantığı
+    const customCanvas = document.getElementById('custom-canvas');
+    const customCtx = customCanvas.getContext('2d');
+    const customInput = document.getElementById('custom-sides-input');
+
+    let customSides = 24;
+    let customZoom = 1.0;
+
+    function handleCustomDraw(e) {
+      if (e) e.preventDefault();
+      const val = parseInt(customInput.value);
+      if (isNaN(val) || val < 3) {
+        customInput.value = 15;
+        drawSpecific(15);
+        return;
+      }
+      if (val > 360) {
+        drawSpecific(360);
+        return;
+      }
+      drawSpecific(val);
+    }
+
+    function drawSpecific(n) {
+      playTone('correct');
+      customSides = n;
+      customInput.value = n;
+      customZoom = 1.0;
+      document.getElementById('zoom-label').textContent = '100%';
+      updateCustomDescriptions(n);
+      renderCustomCanvas();
+    }
+
+    function zoomCustom(factor) {
+      playTone('click');
+      customZoom = Math.min(Math.max(customZoom * factor, 0.5), 4.0);
+      document.getElementById('zoom-label').textContent = Math.round(customZoom * 100) + '%';
+      renderCustomCanvas();
+    }
+
+    function updateCustomDescriptions(n) {
+      document.getElementById('custom-display-title').textContent = `${getPolygonName(n)} (${n}-gen)`;
+      document.getElementById('custom-edge-note').textContent = `${n} Kenar & ${n} Köşe (Doğru parçalarından oluşur)`;
+      document.getElementById('custom-info-header').textContent = `${n}-gen'in 5. Sınıf Geometri Kimliği:`;
+
+      const oneInterior = (((n - 2) * 180) / n).toFixed(1);
+      
+      let comment = "";
+      if (n >= 15 && n < 30) {
+        comment = `Harika bir seçim! ${n}-gen'in tam ${n} köşesi ve ${n} düz kenarı vardır. Her bir iç açısı yaklaşık ${oneInterior}° dir. Açılar 180°'ye yaklaştıkça kenarlar sanki eğrilmiş gibi görünür ama yaklaştığınızda düz olduğunu görebilirsiniz!`;
+      } else if (n >= 30) {
+        comment = `Vay canına! Tam ${n} kenarlı devasa bir çokgen! Gözümüz bunu neredeyse bir çember gibi algılar. "+" butonuna basıp mikroskopla yakınlaştırarak köşelerdeki düz kenar kırılmalarını inceleyebilirsiniz!`;
+      } else {
+        comment = `Klasik bir çokgen! ${n} kenarı, ${n} köşesi ve ${n} iç açısı bulunur.`;
+      }
+
+      document.getElementById('custom-info-body').textContent = comment;
+    }
+
+    function renderCustomCanvas() {
+      if (!customCanvas.offsetParent) return;
+      const { width, height } = resizeCanvas(customCanvas);
+
+      const n = customSides;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const baseRadius = Math.min(width, height) * 0.4;
+      const radius = baseRadius * customZoom;
+
+      customCtx.clearRect(0, 0, width, height);
+
+      const points = [];
+      const angleStep = (Math.PI * 2) / n;
+      const startAngle = -Math.PI / 2;
+
+      for (let i = 0; i < n; i++) {
+        const theta = startAngle + i * angleStep;
+        points.push({
+          x: centerX + radius * Math.cos(theta),
+          y: centerY + radius * Math.sin(theta)
+        });
+      }
+
+      // İç Dolgu
+      customCtx.save();
+      customCtx.beginPath();
+      customCtx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < n; i++) {
+        customCtx.lineTo(points[i].x, points[i].y);
+      }
+      customCtx.closePath();
+      customCtx.fillStyle = 'rgba(99, 102, 241, 0.08)';
+      customCtx.fill();
+
+      // Kenar Çizgisi
+      customCtx.strokeStyle = '#4338ca';
+      customCtx.lineWidth = n > 50 && customZoom <= 1 ? 1.5 : 3;
+      customCtx.lineJoin = 'round';
+      customCtx.stroke();
+      customCtx.restore();
+
+      // Köşe Noktaları (Zoom yüksekse veya kenar makulse)
+      if (n <= 40 || customZoom > 1.4) {
+        customCtx.save();
+        points.forEach((pt) => {
+          customCtx.beginPath();
+          customCtx.arc(pt.x, pt.y, customZoom > 2 ? 5 : 3, 0, Math.PI * 2);
+          customCtx.fillStyle = '#06b6d4';
+          customCtx.fill();
+        });
+        customCtx.restore();
+      }
+
+      // Merkez Noktası
+      customCtx.beginPath();
+      customCtx.arc(centerX, centerY, 3.5, 0, Math.PI * 2);
+      customCtx.fillStyle = '#e11d48';
+      customCtx.fill();
+    }
+  </script>
+
+  <script>
+    // Tab 2: "Çokgen Dedektifi" Oyun Sistemi
+    const quizQuestions = [
+      {
+        question: "15 kenarı olan bir düzgün çokgenin toplam kaç tane köşesi vardır?",
+        options: ["13 köşe", "15 köşe", "17 köşe", "30 köşe"],
+        correct: 1,
+        hint: "Unutma! Çokgenlerde Kenar Sayısı = Köşe Sayısıdır!"
+      },
+      {
+        question: "18-gen çizmek isteyen Elif, ardışık kaç tane doğru parçasını birleştirmelidir?",
+        options: ["9", "18", "36", "17"],
+        correct: 1,
+        hint: "Her kenar bir doğru parçasıdır; 18-gen için 18 doğru parçası gerekir."
+      },
+      {
+        question: "Aşağıdakilerden hangisi bir çokgenin temel şartlarından biri DEĞİLDİR?",
+        options: [
+          "Doğru parçalarından oluşması",
+          "Kapalı bir şekil olması",
+          "Kenarlarının eğri (yay) şeklinde olması",
+          "En az 3 kenarının bulunması"
+        ],
+        correct: 2,
+        hint: "Çokgenlerin kenarları ASLA eğri olamaz, düz doğru parçası olmalıdır!"
+      },
+      {
+        question: "20 köşesi olan bir çokgenin kaç tane iç açısı vardır?",
+        options: ["10", "19", "20", "40"],
+        correct: 2,
+        hint: "Köşe sayısı ile iç açı sayısı daima birbirine eşittir."
+      },
+      {
+        question: "Kenar sayısı 15'ten 60'a ve 100'e doğru arttırıldığında çokgen uzaktan hangi geometrik şekle benzer?",
+        options: ["Kare", "Çember (Daire)", "Üçgen", "Yıldız"],
+        correct: 1,
+        hint: "Kenarlar çoğaldıkça ve küçüldükçe şekil çemberimsi bir hal alır!"
+      },
+      {
+        question: "Bir 16-genin ardışık olmayan iki köşesini birleştiren doğru parçasına ne ad verilir?",
+        options: ["Kenar", "Köşegen", "Yarıçap", "Yay"],
+        correct: 1,
+        hint: "Komşu olmayan köşeleri birleştiren doğru parçalarına 'köşegen' denir."
+      },
+      {
+        question: "25-gen ile 15-genin köşe sayıları toplamı kaçtır?",
+        options: ["30", "35", "40", "50"],
+        correct: 2,
+        hint: "25 + 15 = 40 köşe!"
+      },
+      {
+        question: "Hangisi 15-genden daha fazla kenara sahiptir?",
+        options: ["Onikigen", "Yedigen", "Onyedigen (17-gen)", "Sekizgen"],
+        correct: 2,
+        hint: "Onyedigenin 17 kenarı vardır (17 > 15)."
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let answered = false;
+
+    function startNewGame() {
+      playTone('fanfare');
+      currentQuestionIndex = 0;
+      score = 0;
+      answered = false;
+      document.getElementById('game-score').textContent = score;
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      answered = false;
+      const q = quizQuestions[currentQuestionIndex];
+      document.getElementById('game-round').textContent = `${currentQuestionIndex + 1}/${quizQuestions.length}`;
+      document.getElementById('question-text').textContent = q.question;
+      
+      const feedback = document.getElementById('game-feedback');
+      feedback.className = "hidden";
+      feedback.textContent = "";
+
+      const nextBtn = document.getElementById('next-question-btn');
+      nextBtn.classList.add('hidden');
+
+      const container = document.getElementById('options-container');
+      container.innerHTML = '';
+
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement('button');
+        btn.className = "quiz-option-btn w-full text-left p-3 rounded-xl bg-white/15 hover:bg-white/30 border border-white/20 text-white font-bold text-xs sm:text-sm transition flex items-center gap-2 transform active:scale-95";
+        btn.innerHTML = `<span class="w-6 h-6 rounded-lg bg-white/20 flex items-center justify-center text-xs font-fun">${String.fromCharCode(65 + idx)}</span> <span>${optText}</span>`;
+        btn.onclick = () => selectAnswer(idx);
+        container.appendChild(btn);
+      });
+    }
+
+    function selectAnswer(chosenIdx) {
+      if (answered) return;
+      answered = true;
+
+      const q = quizQuestions[currentQuestionIndex];
+      const buttons = document.querySelectorAll('.quiz-option-btn');
+      const feedback = document.getElementById('game-feedback');
+      const nextBtn = document.getElementById('next-question-btn');
+
+      if (chosenIdx === q.correct) {
+        playTone('correct');
+        score += 10;
+        document.getElementById('game-score').textContent = score;
+        buttons[chosenIdx].classList.remove('bg-white/15');
+        buttons[chosenIdx].classList.add('bg-emerald-500', 'border-emerald-300', 'text-white');
+        
+        feedback.className = "p-3 rounded-2xl text-xs sm:text-sm font-bold text-center bg-emerald-500/25 border border-emerald-400 text-emerald-100";
+        feedback.innerHTML = `🎉 Harika Doğru Cevap! ${q.hint}`;
+      } else {
+        playTone('wrong');
+        buttons[chosenIdx].classList.remove('bg-white/15');
+        buttons[chosenIdx].classList.add('bg-rose-500', 'border-rose-300', 'text-white');
+        buttons[q.correct].classList.add('bg-emerald-500', 'border-emerald-300', 'text-white');
+
+        feedback.className = "p-3 rounded-2xl text-xs sm:text-sm font-bold text-center bg-rose-500/25 border border-rose-400 text-rose-100";
+        feedback.innerHTML = `💡 İpucu: ${q.hint}`;
+      }
+
+      feedback.classList.remove('hidden');
+      nextBtn.classList.remove('hidden');
+
+      if (currentQuestionIndex === quizQuestions.length - 1) {
+        nextBtn.textContent = "Sonucu Gör 🏆";
+      } else {
+        nextBtn.textContent = "Sonraki Soru ➡️";
+      }
+    }
+
+    function nextQuestion() {
+      playTone('click');
+      if (currentQuestionIndex < quizQuestions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+      } else {
+        // Oyun Bitti Ekranı
+        playTone('fanfare');
+        const card = document.getElementById('game-card');
+        card.innerHTML = `
+          <div class="text-center py-6">
+            <span class="text-5xl block mb-2">🎉🎖️</span>
+            <h3 class="font-fun text-2xl font-bold text-amber-300 mb-1">Tebrikler Çokgen Dedektifi!</h3>
+            <p class="text-indigo-100 text-sm mb-4">5. Sınıf Çokgenler Bilgi Yarışmasını Başarıyla Tamamladın.</p>
+            <div class="inline-block bg-white/20 backdrop-blur-md px-6 py-3 rounded-2xl font-fun text-3xl font-bold text-white mb-4">
+              Toplam Skor: ${score} / ${quizQuestions.length * 10}
+            </div>
+            <div class="flex justify-center">
+              <button onclick="startNewGame()" class="bg-amber-400 hover:bg-amber-300 text-indigo-950 font-fun font-bold px-6 py-2.5 rounded-xl shadow-lg transition">
+                Tekrar Oyna 🔄
+              </button>
+            </div>
+          </div>
+        `;
+        document.getElementById('next-question-btn').classList.add('hidden');
+        document.getElementById('game-feedback').classList.add('hidden');
+      }
+    }
+
+    // Pencere yeniden boyutlandırıldığında canvasları yeniden çiz
+    window.addEventListener('resize', () => {
+      renderLabCanvas();
+      renderCustomCanvas();
+    });
+
+    // Sayfa Yüklendiğinde Başlat
+    window.addEventListener('load', () => {
+      renderLabCanvas();
+      drawSpecific(24);
+      loadQuestion();
+    });
+  </script>
+<a href="/" style="position:fixed;bottom:12px;left:12px;z-index:99999;background:#285c4e;color:white;padding:10px 15px;border-radius:8px;font:13px Arial;text-decoration:none;box-shadow:0 2px 10px #0002">← Ufkora</a></body>
+</html>

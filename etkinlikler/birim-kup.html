@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birim Küp Yapı & Farklı Yönlerden Görünüm Tuvali</title>
+    <!-- Three.js & FontAwesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --panel-bg: rgba(30, 41, 59, 0.9);
+            --panel-border: rgba(255, 255, 255, 0.1);
+            --accent-blue: #3b82f6;
+            --accent-indigo: #6366f1;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            height: 56px;
+            background: rgba(15, 23, 42, 0.98);
+            border-bottom: 1px solid var(--panel-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+            border: none;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.95;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-danger {
+            background: rgba(244, 63, 94, 0.15);
+            border-color: rgba(244, 63, 94, 0.4);
+            color: #fb7185;
+        }
+        .btn-danger:hover {
+            background: var(--accent-rose);
+            color: #fff;
+        }
+
+        /* MAIN LAYOUT */
+        .main-container {
+            flex: 1;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* SIDE PANELS */
+        .panel {
+            width: 320px;
+            background: var(--panel-bg);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--panel-border);
+            display: flex;
+            flex-direction: column;
+            z-index: 5;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .panel-left {
+            border-right: 1px solid var(--panel-border);
+        }
+
+        .panel-right {
+            border-left: 1px solid var(--panel-border);
+            width: 340px;
+        }
+
+        .panel-section {
+            padding: 16px;
+            border-bottom: 1px solid var(--panel-border);
+        }
+
+        .panel-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #38bdf8;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* MODE SELECTOR (ADD / REMOVE) */
+        .mode-switch {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+
+        .mode-btn {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--panel-border);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active.add {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent-blue);
+            color: #60a5fa;
+        }
+
+        .mode-btn.active.remove {
+            background: rgba(244, 63, 94, 0.2);
+            border-color: var(--accent-rose);
+            color: #fb7185;
+        }
+
+        /* STATS BADGE */
+        .stat-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--panel-border);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .stat-card .num {
+            font-size: 24px;
+            font-weight: 800;
+            color: #38bdf8;
+        }
+
+        .stat-card .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.3;
+        }
+
+        /* PRESET STRUCTURES */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .preset-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .preset-card:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--accent-indigo);
+            color: #fff;
+        }
+
+        /* 2D PROJECTION PREVIEWS (RIGHT PANEL) */
+        .views-2d-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .view-2d-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .view-2d-box:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .view-2d-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .view-2d-canvas-wrap {
+            width: 110px;
+            height: 110px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .view-2d-canvas-wrap canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        /* CANVAS VIEWPORT */
+        .canvas-area {
+            flex: 1;
+            position: relative;
+            background: radial-gradient(circle at center, #1e293b 0%, #0a0f1d 100%);
+        }
+
+        #three-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* OVERLAY 3D CONTROLS */
+        .canvas-overlay-top {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--panel-border);
+            padding: 5px 10px;
+            border-radius: 30px;
+            display: flex;
+            gap: 6px;
+            z-index: 6;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .view-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn:hover, .view-btn.active {
+            background: var(--accent-blue);
+            color: #fff;
+        }
+
+        .canvas-instructions {
+            position: absolute;
+            bottom: 14px;
+            left: 14px;
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--panel-border);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            color: var(--text-muted);
+            z-index: 6;
+            line-height: 1.6;
+        }
+
+        .canvas-instructions span {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* CONTROLS & STYLES */
+        .control-group {
+            margin-bottom: 12px;
+        }
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .switch-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 36px;
+            height: 20px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: .3s;
+            border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px; width: 14px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--accent-blue); }
+        input:checked + .slider:before { transform: translateX(16px); }
+
+        select, input[type="color"] {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--panel-border);
+            color: var(--text-main);
+            padding: 7px;
+            border-radius: 6px;
+            font-size: 12px;
+            outline: none;
+        }
+        input[type="color"] { height: 34px; padding: 2px; cursor: pointer; }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #10b981;
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 100;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-area">
+            <i class="fa-solid fa-cubes"></i>
+            <span>Birim Küp & Yön İzdüşüm Tuvali</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-danger" id="btn-clear-all">
+                <i class="fa-solid fa-trash-can"></i> Temizle
+            </button>
+            <button class="btn btn-primary" id="btn-export-png">
+                <i class="fa-solid fa-download"></i> PNG İndir (PowerPoint)
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="main-container">
+        
+        <!-- LEFT PANEL: Modeling Tools & Presets -->
+        <div class="panel panel-left">
+            
+            <!-- Tool Mode (Add / Delete) -->
+            <div class="panel-section">
+                <div class="panel-title"><i class="fa-solid fa-wrench"></i> Küp Ekleme / Çıkarma Modu</div>
+                
+                <div class="mode-switch">
+                    <button class="mode-btn active add" id="mode-add">
+                        <i class="fa-solid fa-plus"></i> Küp Ekle
+                    </button>
+                    <button class="mode-btn remove" id="mode-remove">
+                        <i class="fa-solid fa-minus"></i> Küp Sil
+                    </button>
+                </div>
+
+                <div class="stat-card">
+                    <div>
+                        <div class="label">TOPLAM KÜP SAYISI</div>
+                        <div style="font-size:11px; color:#94a3b8;">(Birim Hacim: <span id="stat-volume">1</span> br³)</div>
+                    </div>
+                    <div class="num" id="stat-cube-count">1</div>
+                </div>
+            </div>
+
+            <!-- Ready Presets (Hazır Modeller) -->
+            <div class="panel-section">
+                <div class="panel-title"><i class="fa-solid fa-layer-group"></i> Hazır Soru Kalıpları & Şablonlar</div>
+                <div class="preset-grid">
+                    <div class="preset-card" data-preset="single">
+                        <i class="fa-solid fa-cube"></i>
+                        <span>1x1 Tek Küp</span>
+                    </div>
+                    <div class="preset-card" data-preset="l-shape">
+                        <i class="fa-solid fa-turn-up"></i>
+                        <span>L - Bloğu</span>
+                    </div>
+                    <div class="preset-card" data-preset="stairs">
+                        <i class="fa-solid fa-stairs"></i>
+                        <span>Basamak / Merdiven</span>
+                    </div>
+                    <div class="preset-card" data-preset="t-shape">
+                        <i class="fa-solid fa-text-width"></i>
+                        <span>T - Şekli</span>
+                    </div>
+                    <div class="preset-card" data-preset="corner">
+                        <i class="fa-solid fa-cube"></i>
+                        <span>Köşe / Kolon</span>
+                    </div>
+                    <div class="preset-card" data-preset="cube-2x2">
+                        <i class="fa-solid fa-table-cells"></i>
+                        <span>2x2x2 Küp Blok</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Styling & Color -->
+            <div class="panel-section">
+                <div class="panel-title"><i class="fa-solid fa-palette"></i> Renk & Kenar Çizgileri</div>
+                
+                <div class="control-group">
+                    <div class="label-row">
+                        <span>Küp Rengi</span>
+                    </div>
+                    <input type="color" id="cube-color" value="#3b82f6">
+                </div>
+
+                <div class="switch-row">
+                    <span>Siyah Kenar Çizgileri (Outlines)</span>
+                    <label class="switch">
+                        <input type="checkbox" id="toggle-edges" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="switch-row">
+                    <span>Her Yüzeye Farklı Tonlama</span>
+                    <label class="switch">
+                        <input type="checkbox" id="toggle-shading" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <div class="control-group">
+                    <div class="label-row">
+                        <span>Arka Plan Rengi</span>
+                    </div>
+                    <select id="bg-style">
+                        <option value="dark">Koyu Stüdyo (Modern)</option>
+                        <option value="light">Açık / Beyaz (Ders Notu)</option>
+                        <option value="transparent">Şeffaf (PPT İçin Saydam PNG)</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CENTER: Interactive 3D Canvas -->
+        <div class="canvas-area">
+            
+            <!-- Quick Views Top Toolbar -->
+            <div class="canvas-overlay-top">
+                <button class="view-btn active" data-view="isometric">İzometrik</button>
+                <button class="view-btn" data-view="front">Ön</button>
+                <button class="view-btn" data-view="top">Üst</button>
+                <button class="view-btn" data-view="right">Sağ</button>
+                <button class="view-btn" data-view="left">Sol</button>
+                <button class="view-btn" data-view="perspective">Serbest 3D</button>
+            </div>
+
+            <canvas id="three-canvas"></canvas>
+
+            <div class="canvas-instructions">
+                <div>🖱️ <span>Sol Tık:</span> Zemine veya küp yüzeyine tıklayarak küp ekle/sil.</div>
+                <div>🔄 <span>Sağ Tık / Sürükle:</span> Yapıyı serbest döndür ve farklı açılardan incele.</div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT PANEL: 2D Views from Different Angles -->
+        <div class="panel panel-right">
+            <div class="panel-section">
+                <div class="panel-title"><i class="fa-solid fa-eye"></i> Yönlere Göre 2B İzdüşümler</div>
+                <p style="font-size:11px; color:var(--text-muted); margin-bottom:12px;">
+                    Matematik sorularındaki gibi yapının yönlere göre 2 boyutlu kare görünümü:
+                </p>
+
+                <div class="views-2d-grid">
+                    <!-- Front -->
+                    <div class="view-2d-box" data-view="front">
+                        <div class="view-2d-title"><i class="fa-solid fa-arrow-up"></i> ÖNDEN</div>
+                        <div class="view-2d-canvas-wrap">
+                            <canvas id="canvas-front" width="100" height="100"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Top -->
+                    <div class="view-2d-box" data-view="top">
+                        <div class="view-2d-title"><i class="fa-solid fa-arrows-to-dot"></i> ÜSTTEN (Kat Sayılı)</div>
+                        <div class="view-2d-canvas-wrap">
+                            <canvas id="canvas-top" width="100" height="100"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Right -->
+                    <div class="view-2d-box" data-view="right">
+                        <div class="view-2d-title"><i class="fa-solid fa-arrow-right"></i> SAĞDAN</div>
+                        <div class="view-2d-canvas-wrap">
+                            <canvas id="canvas-right" width="100" height="100"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Left -->
+                    <div class="view-2d-box" data-view="left">
+                        <div class="view-2d-title"><i class="fa-solid fa-arrow-left"></i> SOLDAN</div>
+                        <div class="view-2d-canvas-wrap">
+                            <canvas id="canvas-left" width="100" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PowerPoint Helper -->
+            <div class="panel-section">
+                <div class="panel-title"><i class="fa-solid fa-lightbulb"></i> PowerPoint İpuçları</div>
+                <div style="font-size:11px; color:var(--text-muted); line-height:1.5;">
+                    • <b>Şeffaf Çıktı:</b> Arka planı <i>Şeffaf</i> seçip "PNG İndir" butonuna bastığınızda, küpler PowerPoint slaydınızın arkasındaki deseni bozmadan doğrudan yerleşir.<br><br>
+                    • <b>Görünüm Seçimi:</b> Üst kısımdan <i>Ön</i>, <i>Üst</i> veya <i>Sağ</i> seçerek doğrudan 2B çizim slaytı elde edebilir, <i>İzometrik</i> ile klasik LGS/MEB soru görseli oluşturabilirsiniz.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-check-circle"></i>
+        <span id="toast-msg">İşlem yapıldı</span>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        // GRID & VOXEL DATA
+        const GRID_SIZE = 8;
+        const CUBE_SIZE = 1;
+        const cubesMap = new Map(); // key: "x,y,z" -> { mesh, outline, x, y, z }
+
+        let scene, renderer, currentCamera;
+        let perspectiveCamera, orthographicCamera;
+        let controls;
+        let planeGridMesh;
+        let raycaster, mouse;
+        let isEditModeAdd = true;
+
+        // Settings
+        const settings = {
+            cubeColor: '#3b82f6',
+            showEdges: true,
+            shading: true,
+            bgStyle: 'dark'
+        };
+
+        const canvas = document.getElementById('three-canvas');
+
+        function init() {
+            // 1. Scene
+            scene = new THREE.Scene();
+
+            // 2. Cameras
+            const aspect = canvas.clientWidth / canvas.clientHeight;
+            perspectiveCamera = new THREE.PerspectiveCamera(40, aspect, 0.1, 1000);
+            perspectiveCamera.position.set(8, 7, 8);
+
+            const frustumSize = 10;
+            orthographicCamera = new THREE.OrthographicCamera(
+                (frustumSize * aspect) / -2,
+                (frustumSize * aspect) / 2,
+                frustumSize / 2,
+                frustumSize / -2,
+                0.1,
+                1000
+            );
+            orthographicCamera.position.set(8, 7, 8);
+
+            currentCamera = orthographicCamera; // Start in clean isometric orthographic mode
+
+            // 3. Renderer
+            renderer = new THREE.WebGLRenderer({
+                canvas: canvas,
+                antialias: true,
+                preserveDrawingBuffer: true,
+                alpha: true
+            });
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+
+            // 4. Lights
+            const ambient = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambient);
+
+            const sunLight = new THREE.DirectionalLight(0xffffff, 0.6);
+            sunLight.position.set(10, 20, 10);
+            scene.add(sunLight);
+
+            const fillLight = new THREE.DirectionalLight(0x94a3b8, 0.4);
+            fillLight.position.set(-10, 10, -10);
+            scene.add(fillLight);
+
+            // 5. Ground Grid Base Plane
+            const gridHelper = new THREE.GridHelper(GRID_SIZE, GRID_SIZE, 0x38bdf8, 0x334155);
+            gridHelper.position.y = 0;
+            scene.add(gridHelper);
+
+            // Invisible plane for raycasting floor clicks
+            const planeGeo = new THREE.PlaneGeometry(GRID_SIZE, GRID_SIZE);
+            planeGeo.rotateX(-Math.PI / 2);
+            const planeMat = new THREE.MeshBasicMaterial({ visible: false });
+            planeGridMesh = new THREE.Mesh(planeGeo, planeMat);
+            scene.add(planeGridMesh);
+
+            // 6. Controls
+            controls = new THREE.OrbitControls(currentCamera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.08;
+            controls.target.set(0, 1, 0);
+
+            // 7. Raycasting for Click-to-Add
+            raycaster = new THREE.Raycaster();
+            mouse = new THREE.Vector2();
+
+            // Event Listeners
+            canvas.addEventListener('pointerdown', onCanvasPointerDown);
+            window.addEventListener('resize', onResize);
+            setupUI();
+            updateBackground();
+
+            // Load initial single cube
+            loadPreset('single');
+            setView('isometric');
+
+            // Render loop
+            animate();
+        }
+
+        // ADD / REMOVE VOXEL LOGIC
+        function getVoxelKey(x, y, z) {
+            return `${x},${y},${z}`;
+        }
+
+        function addCube(x, y, z, silent = false) {
+            const key = getVoxelKey(x, y, z);
+            if (cubesMap.has(key)) return; // already exists
+
+            const geometry = new THREE.BoxGeometry(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE);
+            
+            const material = settings.shading 
+                ? new THREE.MeshStandardMaterial({ color: settings.cubeColor, roughness: 0.35 })
+                : new THREE.MeshBasicMaterial({ color: settings.cubeColor });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(x, y + CUBE_SIZE / 2, z);
+            mesh.userData = { voxelPos: { x, y, z } };
+
+            // Outline Edges
+            const edgeGeo = new THREE.EdgesGeometry(geometry);
+            const edgeMat = new THREE.LineBasicMaterial({ color: 0x0f172a, linewidth: 2 });
+            const edgeLine = new THREE.LineSegments(edgeGeo, edgeMat);
+            edgeLine.visible = settings.showEdges;
+            mesh.add(edgeLine);
+
+            scene.add(mesh);
+            cubesMap.set(key, { mesh, edgeLine, x, y, z });
+
+            if (!silent) {
+                updateAllStatsAnd2DViews();
+            }
+        }
+
+        function removeCube(x, y, z) {
+            const key = getVoxelKey(x, y, z);
+            if (!cubesMap.has(key)) return;
+
+            const cubeObj = cubesMap.get(key);
+            scene.remove(cubeObj.mesh);
+            cubeObj.mesh.geometry.dispose();
+            cubesMap.delete(key);
+
+            updateAllStatsAnd2DViews();
+        }
+
+        function clearAllCubes() {
+            cubesMap.forEach((cubeObj) => {
+                scene.remove(cubeObj.mesh);
+                cubeObj.mesh.geometry.dispose();
+            });
+            cubesMap.clear();
+            updateAllStatsAnd2DViews();
+        }
+
+        // CANVAS CLICK HANDLING
+        let pointerDownPos = { x: 0, y: 0 };
+        function onCanvasPointerDown(event) {
+            pointerDownPos = { x: event.clientX, y: event.clientY };
+            
+            // Only trigger on click (not during long orbit drag)
+            const onPointerUp = (upEvent) => {
+                const dist = Math.hypot(upEvent.clientX - pointerDownPos.x, upEvent.clientY - pointerDownPos.y);
+                if (dist < 5) {
+                    handleVoxelClick(upEvent);
+                }
+                window.removeEventListener('pointerup', onPointerUp);
+            };
+            window.addEventListener('pointerup', onPointerUp);
+        }
+
+        function handleVoxelClick(event) {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, currentCamera);
+
+            // Collect all meshes for intersection (cubes + floor)
+            const targetMeshes = [planeGridMesh];
+            cubesMap.forEach(obj => targetMeshes.push(obj.mesh));
+
+            const intersects = raycaster.intersectObjects(targetMeshes, false);
+
+            if (intersects.length > 0) {
+                const hit = intersects[0];
+
+                if (isEditModeAdd) {
+                    // Calculate placement position based on intersection normal
+                    const position = new THREE.Vector3();
+                    if (hit.object === planeGridMesh) {
+                        position.copy(hit.point).floor().addScalar(0.5);
+                        addCube(Math.floor(hit.point.x) + 0.5, 0, Math.floor(hit.point.z) + 0.5);
+                    } else {
+                        // Clicked on an existing cube face
+                        const currentPos = hit.object.userData.voxelPos;
+                        const normal = hit.face.normal;
+                        const newX = currentPos.x + normal.x * CUBE_SIZE;
+                        const newY = currentPos.y + normal.y * CUBE_SIZE;
+                        const newZ = currentPos.z + normal.z * CUBE_SIZE;
+                        
+                        if (newY >= 0) { // Don't build below floor
+                            addCube(newX, newY, newZ);
+                        }
+                    }
+                } else {
+                    // Remove mode
+                    if (hit.object !== planeGridMesh) {
+                        const currentPos = hit.object.userData.voxelPos;
+                        removeCube(currentPos.x, currentPos.y, currentPos.z);
+                    }
+                }
+            }
+        }
+
+        // PRESETS
+        function loadPreset(name) {
+            clearAllCubes();
+            switch (name) {
+                case 'single':
+                    addCube(0.5, 0, 0.5, true);
+                    break;
+                case 'l-shape':
+                    addCube(-0.5, 0, -0.5, true);
+                    addCube(0.5, 0, -0.5, true);
+                    addCube(0.5, 0, 0.5, true);
+                    addCube(0.5, 1, 0.5, true);
+                    break;
+                case 'stairs':
+                    addCube(-0.5, 0, 0.5, true);
+                    addCube(-0.5, 0, -0.5, true);
+                    addCube(0.5, 0, -0.5, true);
+                    addCube(0.5, 1, -0.5, true);
+                    addCube(0.5, 0, 0.5, true);
+                    break;
+                case 't-shape':
+                    addCube(-0.5, 0, 0.5, true);
+                    addCube(0.5, 0, 0.5, true);
+                    addCube(1.5, 0, 0.5, true);
+                    addCube(0.5, 0, -0.5, true);
+                    addCube(0.5, 1, 0.5, true);
+                    break;
+                case 'corner':
+                    addCube(-0.5, 0, 0.5, true);
+                    addCube(-0.5, 1, 0.5, true);
+                    addCube(-0.5, 2, 0.5, true);
+                    addCube(0.5, 0, 0.5, true);
+                    addCube(0.5, 0, -0.5, true);
+                    break;
+                case 'cube-2x2':
+                    for (let x = -0.5; x <= 0.5; x += 1) {
+                        for (let y = 0; y <= 1; y += 1) {
+                            for (let z = -0.5; z <= 0.5; z += 1) {
+                                addCube(x, y, z, true);
+                            }
+                        }
+                    }
+                    break;
+            }
+            updateAllStatsAnd2DViews();
+        }
+
+        // 2D PROJECTION DRAWINGS (FRONT, TOP, RIGHT, LEFT)
+        function draw2DProjections() {
+            const views = {
+                front: document.getElementById('canvas-front').getContext('2d'),
+                top: document.getElementById('canvas-top').getContext('2d'),
+                right: document.getElementById('canvas-right').getContext('2d'),
+                left: document.getElementById('canvas-left').getContext('2d')
+            };
+
+            // Clear canvases
+            Object.values(views).forEach(ctx => {
+                ctx.clearRect(0, 0, 100, 100);
+            });
+
+            if (cubesMap.size === 0) return;
+
+            // Find bounds
+            let minX = Infinity, maxX = -Infinity;
+            let minY = Infinity, maxY = -Infinity;
+            let minZ = Infinity, maxZ = -Infinity;
+
+            cubesMap.forEach(c => {
+                minX = Math.min(minX, c.x); maxX = Math.max(maxX, c.x);
+                minY = Math.min(minY, c.y); maxY = Math.max(maxY, c.y);
+                minZ = Math.min(minZ, c.z); maxZ = Math.max(maxZ, c.z);
+            });
+
+            // Grid resolution max range
+            const spanX = Math.max(1, maxX - minX + 1);
+            const spanY = Math.max(1, maxY - minY + 1);
+            const spanZ = Math.max(1, maxZ - minZ + 1);
+            const maxSpan = Math.max(spanX, spanY, spanZ, 3);
+            const cellSize = Math.floor(70 / maxSpan);
+
+            // Front (X vs Y)
+            drawProjectedGrid(views.front, minX, maxX, minY, maxY, (x, y) => {
+                let hasCube = false;
+                for (let z = minZ; z <= maxZ; z++) {
+                    if (cubesMap.has(getVoxelKey(x, y, z))) hasCube = true;
+                }
+                return hasCube ? 1 : 0;
+            }, cellSize, false);
+
+            // Top (X vs Z) - with cube height counter!
+            drawProjectedGrid(views.top, minX, maxX, minZ, maxZ, (x, z) => {
+                let count = 0;
+                for (let y = minY; y <= maxY; y++) {
+                    if (cubesMap.has(getVoxelKey(x, y, z))) count++;
+                }
+                return count;
+            }, cellSize, true);
+
+            // Right (Z vs Y from positive X)
+            drawProjectedGrid(views.right, minZ, maxZ, minY, maxY, (z, y) => {
+                let hasCube = false;
+                for (let x = minX; x <= maxX; x++) {
+                    if (cubesMap.has(getVoxelKey(x, y, z))) hasCube = true;
+                }
+                return hasCube ? 1 : 0;
+            }, cellSize, false);
+
+            // Left (Z vs Y from negative X)
+            drawProjectedGrid(views.left, minZ, maxZ, minY, maxY, (z, y) => {
+                let hasCube = false;
+                for (let x = minX; x <= maxX; x++) {
+                    if (cubesMap.has(getVoxelKey(x, y, z))) hasCube = true;
+                }
+                return hasCube ? 1 : 0;
+            }, cellSize, false);
+        }
+
+        function drawProjectedGrid(ctx, minH, maxH, minV, maxV, queryFn, cellSize, showCount) {
+            const cols = maxH - minH + 1;
+            const rows = maxV - minV + 1;
+            const startX = (100 - cols * cellSize) / 2;
+            const startY = (100 - rows * cellSize) / 2;
+
+            for (let c = 0; c < cols; c++) {
+                for (let r = 0; r < rows; r++) {
+                    const hVal = minH + c;
+                    const vVal = maxV - r; // Vertical invert for canvas
+                    const val = queryFn(hVal, vVal);
+
+                    if (val > 0) {
+                        const px = startX + c * cellSize;
+                        const py = startY + r * cellSize;
+
+                        // Fill square
+                        ctx.fillStyle = settings.cubeColor;
+                        ctx.fillRect(px, py, cellSize, cellSize);
+
+                        // Stroke
+                        ctx.strokeStyle = '#0f172a';
+                        ctx.lineWidth = 1.5;
+                        ctx.strokeRect(px, py, cellSize, cellSize);
+
+                        // If Top view, write how many cubes are stacked
+                        if (showCount && val > 0) {
+                            ctx.fillStyle = '#ffffff';
+                            ctx.font = `bold ${Math.max(9, Math.floor(cellSize * 0.55))}px sans-serif`;
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(val, px + cellSize / 2, py + cellSize / 2);
+                        }
+                    }
+                }
+            }
+        }
+
+        function updateAllStatsAnd2DViews() {
+            const count = cubesMap.size;
+            document.getElementById('stat-cube-count').innerText = count;
+            document.getElementById('stat-volume').innerText = count;
+            draw2DProjections();
+        }
+
+        // VIEW NAVIGATION
+        function setView(viewType) {
+            const dist = 10;
+            document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.querySelector(`.view-btn[data-view="${viewType}"]`);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            if (viewType === 'perspective') {
+                currentCamera = perspectiveCamera;
+            } else {
+                currentCamera = orthographicCamera;
+            }
+            controls.object = currentCamera;
+
+            switch (viewType) {
+                case 'front':
+                    currentCamera.position.set(0, 2, dist);
+                    break;
+                case 'top':
+                    currentCamera.position.set(0, dist, 0.001);
+                    break;
+                case 'right':
+                    currentCamera.position.set(dist, 2, 0);
+                    break;
+                case 'left':
+                    currentCamera.position.set(-dist, 2, 0);
+                    break;
+                case 'isometric':
+                default:
+                    currentCamera.position.set(dist, dist * 0.9, dist);
+                    break;
+            }
+
+            currentCamera.lookAt(0, 1, 0);
+            controls.target.set(0, 1, 0);
+            controls.update();
+        }
+
+        // BACKGROUND SETUP
+        function updateBackground() {
+            if (settings.bgStyle === 'transparent') {
+                scene.background = null;
+                renderer.setClearColor(0x000000, 0);
+            } else if (settings.bgStyle === 'light') {
+                scene.background = new THREE.Color(0xf8fafc);
+                renderer.setClearColor(0xf8fafc, 1);
+            } else {
+                scene.background = new THREE.Color(0x0f172a);
+                renderer.setClearColor(0x0f172a, 1);
+            }
+        }
+
+        // UI LISTENERS
+        function setupUI() {
+            // Mode buttons
+            const btnAdd = document.getElementById('mode-add');
+            const btnRemove = document.getElementById('mode-remove');
+
+            btnAdd.addEventListener('click', () => {
+                isEditModeAdd = true;
+                btnAdd.classList.add('active');
+                btnRemove.classList.remove('active');
+            });
+
+            btnRemove.addEventListener('click', () => {
+                isEditModeAdd = false;
+                btnRemove.classList.add('active');
+                btnAdd.classList.remove('active');
+            });
+
+            // Color Picker
+            document.getElementById('cube-color').addEventListener('input', (e) => {
+                settings.cubeColor = e.target.value;
+                cubesMap.forEach(obj => {
+                    obj.mesh.material.color.set(settings.cubeColor);
+                });
+                draw2DProjections();
+            });
+
+            // Toggle Outlines
+            document.getElementById('toggle-edges').addEventListener('change', (e) => {
+                settings.showEdges = e.target.checked;
+                cubesMap.forEach(obj => {
+                    obj.edgeLine.visible = settings.showEdges;
+                });
+            });
+
+            // Background Style
+            document.getElementById('bg-style').addEventListener('change', (e) => {
+                settings.bgStyle = e.target.value;
+                updateBackground();
+            });
+
+            // View buttons
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', () => setView(btn.getAttribute('data-view')));
+            });
+
+            // Presets
+            document.querySelectorAll('.preset-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    loadPreset(card.getAttribute('data-preset'));
+                    showToast('Şablon Yapı Yüklendi');
+                });
+            });
+
+            // Click 2D boxes to switch camera directly
+            document.querySelectorAll('.view-2d-box').forEach(box => {
+                box.addEventListener('click', () => {
+                    setView(box.getAttribute('data-view'));
+                });
+            });
+
+            // Clear All
+            document.getElementById('btn-clear-all').addEventListener('click', () => {
+                clearAllCubes();
+                showToast('Tüm küpler temizlendi');
+            });
+
+            // Export PNG
+            document.getElementById('btn-export-png').addEventListener('click', exportPNG);
+        }
+
+        // EXPORT HIGH-RES PNG FOR PPT
+        function exportPNG() {
+            planeGridMesh.visible = false;
+            renderer.render(scene, currentCamera);
+
+            const dataURL = renderer.domElement.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = `birim-kup-yapisi-${cubesMap.size}-kup.png`;
+            link.href = dataURL;
+            link.click();
+
+            planeGridMesh.visible = true;
+            showToast('PowerPoint İçin PNG İndirildi!');
+        }
+
+        function onResize() {
+            const aspect = canvas.clientWidth / canvas.clientHeight;
+            perspectiveCamera.aspect = aspect;
+            perspectiveCamera.updateProjectionMatrix();
+
+            const frustumSize = 10;
+            orthographicCamera.left = (frustumSize * aspect) / -2;
+            orthographicCamera.right = (frustumSize * aspect) / 2;
+            orthographicCamera.top = frustumSize / 2;
+            orthographicCamera.bottom = frustumSize / -2;
+            orthographicCamera.updateProjectionMatrix();
+
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            draw2DProjections();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, currentCamera);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        window.onload = init;
+    </script>
+<a href="/" style="position:fixed;bottom:12px;left:12px;z-index:99999;background:#285c4e;color:white;padding:10px 15px;border-radius:8px;font:13px Arial;text-decoration:none;box-shadow:0 2px 10px #0002">← Ufkora</a></body>
+</html>
+```eof

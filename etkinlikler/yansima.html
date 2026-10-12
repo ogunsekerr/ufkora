@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>7. Sınıf Yansıma ve Simetri Laboratuvarı</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    input[type=range] {
+      accent-color: #4f46e5;
+    }
+    .touch-none {
+      touch-action: none;
+    }
+    .pseudo-fullscreen {
+      position: fixed !important;
+      inset: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: none !important;
+      z-index: 99999 !important;
+      background-color: #f8fafc !important;
+      padding: 12px !important;
+      margin: 0 !important;
+      overflow-y: auto !important;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-target {
+      animation: pulse-ring 1.8s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col select-none font-sans">
+
+  <!-- Ana Kapsayıcı -->
+  <div id="mainContainer" class="flex-1 flex flex-col max-w-7xl w-full mx-auto p-2 sm:p-4 gap-3">
+    
+    <!-- Üst Başlık & Ana Sekmeler (Laboratuvar / Etkinlik) -->
+    <header class="bg-white rounded-2xl shadow-sm border border-slate-200 p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-pink-500 flex items-center justify-center text-white shadow-md shadow-indigo-200">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base sm:text-xl font-extrabold text-slate-800">Yansıma Dönüşümü</h1>
+            <span class="bg-indigo-50 text-indigo-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-indigo-200">7. Sınıf Matematik</span>
+          </div>
+          <p class="text-xs text-slate-500 hidden sm:block">Ayna simetrisi, dik ve eşit uzaklıkta kare sayma</p>
+        </div>
+      </div>
+
+      <!-- 2 Ana Sekme: Keşif Laboratuvarı vs Kendin Taşı Etkinliği -->
+      <div class="flex items-center gap-2 flex-wrap ml-auto">
+        <div class="bg-slate-100 p-1 rounded-xl flex gap-1 border border-slate-200 text-xs font-bold shadow-inner">
+          <button id="tabBtnLab" class="px-3 py-1.5 rounded-lg bg-white text-indigo-600 shadow-sm transition flex items-center gap-1.5">
+            <span>🔬</span> <span>1. Keşif Laboratuvarı</span>
+          </button>
+          <button id="tabBtnActivity" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+            <span>✍️</span> <span>2. Kendin Taşı (Etkinlik)</span>
+          </button>
+        </div>
+
+        <!-- Tam Ekran Düğmesi -->
+        <button id="btnFullscreen" class="p-2 sm:px-3 sm:py-1.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium text-xs flex items-center gap-1.5 shadow-sm transition" title="Tam Ekran">
+          <svg id="fsIconExpand" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg>
+          <svg id="fsIconCompress" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          <span class="hidden sm:inline" id="fsText">Tam Ekran</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- SEKME 1 KONTROL PANELİ (Keşif Laboratuvarı) -->
+    <section id="panelLab" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-3 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-3 text-sm">
+      
+      <!-- 1. Şekil Seçimi -->
+      <div class="lg:col-span-5 flex flex-col gap-1.5">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">1. Şekil Seçimi (Kareli Zemine Hizalı)</label>
+          <span class="text-[11px] text-indigo-600 font-semibold">Ders Kitabı & Sayılar</span>
+        </div>
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5" id="objectButtons">
+          <button data-obj="CUSTOM_TRIANGLE" class="obj-btn px-2 py-1.5 rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-800 font-bold flex items-center justify-center gap-1 transition text-xs shadow-sm">
+            <span>📐</span> <span>Üçgen</span>
+          </button>
+          <button data-obj="CUSTOM_SQUARE" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>🟦</span> <span>Kare</span>
+          </button>
+          <button data-obj="CUSTOM_TRAPEZOID" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>⏢</span> <span>Yamuk</span>
+          </button>
+          <button data-obj="CUSTOM_SEGMENT" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>📏</span> <span>Doğru Parçası</span>
+          </button>
+          <button data-obj="CLOCK" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>⏰</span> <span>Saat</span>
+          </button>
+          <button data-obj="BOOK_TRIANGLE" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>🔺</span> <span>Üçgen (a)</span>
+          </button>
+          <button data-obj="BOOK_DIAMOND" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>🔷</span> <span>Dörtgen (b)</span>
+          </button>
+          <button data-obj="BOOK_TRAPEZOID" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>⏢</span> <span>Yamuk (c)</span>
+          </button>
+          <button data-obj="CANDLE" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>🕯️</span> <span>Mum</span>
+          </button>
+          <button data-obj="NUM_15" class="obj-btn px-2 py-1.5 rounded-xl border border-pink-200 bg-pink-50/70 hover:border-pink-400 font-bold text-pink-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-mono font-bold">15</span> <span>Sayısı</span>
+          </button>
+          <button data-obj="NUM_82" class="obj-btn px-2 py-1.5 rounded-xl border border-pink-200 bg-pink-50/70 hover:border-pink-400 font-bold text-pink-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-mono font-bold">82</span> <span>Sayısı</span>
+          </button>
+          <button data-obj="NUM_52" class="obj-btn px-2 py-1.5 rounded-xl border border-pink-200 bg-pink-50/70 hover:border-pink-400 font-bold text-pink-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-mono font-bold">52</span> <span>Sayısı</span>
+          </button>
+          <button data-obj="MORPA" class="obj-btn px-2 py-1.5 rounded-xl border border-indigo-200 bg-indigo-50/70 hover:border-indigo-400 font-bold text-indigo-800 flex items-center justify-center gap-1 transition text-xs">
+            <span>🔲</span> <span>MORPA</span>
+          </button>
+          <button data-obj="Z" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-serif font-bold text-sm">Z</span> <span>Harfi</span>
+          </button>
+          <button data-obj="F" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-serif font-bold text-sm">F</span> <span>Harfi</span>
+          </button>
+          <button data-obj="E" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-serif font-bold text-sm">E</span> <span>Harfi</span>
+          </button>
+          <button data-obj="L" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-serif font-bold text-sm">L</span> <span>Harfi</span>
+          </button>
+          <button data-obj="M" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="font-serif font-bold text-sm">M</span> <span>Harfi</span>
+          </button>
+          <button data-obj="BUTTERFLY" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>🦋</span> <span>Kelebek</span>
+          </button>
+          <button data-obj="BOAT" class="obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span>⛵</span> <span>Yelkenli</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Simetri Elemanı (d Doğrusu veya Orijin) -->
+      <div class="lg:col-span-4 flex flex-col gap-1.5">
+        <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">2. Simetri Elemanı (Ayna / Merkez)</label>
+        <div class="grid grid-cols-4 gap-1" id="axisButtons">
+          <button data-axis="vertical" class="axis-btn px-1.5 py-2 rounded-xl border border-rose-500 bg-rose-50 text-rose-800 font-bold flex items-center justify-center gap-1 transition text-xs shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-rose-500 inline-block"></span> Dikey (d)
+          </button>
+          <button data-axis="horizontal" class="axis-btn px-1.5 py-2 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="w-2 h-2 rounded-full bg-slate-300 inline-block"></span> Yatay (d)
+          </button>
+          <button data-axis="diagonal" class="axis-btn px-1.5 py-2 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="w-2 h-2 rounded-full bg-slate-300 inline-block"></span> Eğik (d)
+          </button>
+          <button data-axis="origin" class="axis-btn px-1.5 py-2 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs">
+            <span class="w-2 h-2 rounded-full bg-slate-300 inline-block"></span> Orijin (O)
+          </button>
+        </div>
+
+        <!-- Düzenlenebilir Saat Paneli -->
+        <div id="clockCustomPanel" class="mt-2 p-2 rounded-xl bg-indigo-50/80 border border-indigo-200 flex items-center justify-between gap-2 hidden">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-indigo-950">⏰ Saati Girin:</span>
+            <input id="inputTime" type="text" maxlength="5" value="12:45" class="w-20 px-2 py-1 text-center font-mono font-bold text-sm bg-white border border-indigo-300 rounded-lg text-indigo-950 shadow-inner focus:outline-none focus:ring-2 focus:ring-indigo-500" placeholder="12:45">
+          </div>
+          <span class="text-[11px] font-semibold text-indigo-700 bg-white px-2 py-1 rounded-md border border-indigo-200">Kareye Oturan</span>
+        </div>
+      </div>
+
+      <!-- 3. Yansıma Hareketi & Tahmin Butonu -->
+      <div class="lg:col-span-3 flex flex-col justify-between gap-1.5">
+        <div class="flex items-center justify-between">
+          <label class="text-xs font-bold text-slate-500 uppercase tracking-wide">3. Katlanma Hareketi</label>
+          <span id="progressLabel" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">%100 (Tam Yansıma)</span>
+        </div>
+        
+        <div class="flex items-center gap-2">
+          <button id="btnPlay" class="w-9 h-9 shrink-0 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center shadow-sm transition">
+            <svg id="playIcon" class="w-4 h-4 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="pauseIcon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          
+          <input id="progressSlider" type="range" min="0" max="100" value="100" class="w-full h-2 bg-slate-200 rounded-lg cursor-pointer">
+          
+          <button id="btnResetProgress" class="text-xs text-slate-500 hover:text-slate-800 font-semibold px-2 py-1.5 rounded-lg border border-slate-200 transition shrink-0" title="Başa Al">
+            %0
+          </button>
+        </div>
+
+        <button id="btnToggleReveal" class="w-full mt-1 py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition bg-amber-500 hover:bg-amber-600 text-white">
+          <span id="revealIcon">👁️</span>
+          <span id="revealText">Yansımayı Göster (Tıkla ve Gör)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SEKME 2 KONTROL PANELİ: "Kendin Taşı & Çiz" Etkinlik Sekmesi -->
+    <section id="panelActivity" class="hidden bg-gradient-to-r from-emerald-50 via-teal-50 to-emerald-50 rounded-2xl shadow-sm border border-emerald-200 p-3 sm:p-4 flex flex-col gap-3 text-sm">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-200/60 pb-2.5">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">✍️</span>
+          <div>
+            <h2 class="text-sm font-extrabold text-emerald-950">Öğrenci Etkinliği: Yansımayı Sen Taşı & Çiz!</h2>
+            <p class="text-xs text-emerald-700">Mavi orijinal şeklin aynadaki yansımasını oluşturmak için turuncu köşe noktalarını tutup karşıdaki doğru karelere sürükle.</p>
+          </div>
+        </div>
+
+        <!-- Puan & Doğruluk Durumu -->
+        <div class="flex items-center gap-2 ml-auto">
+          <div class="bg-white border border-emerald-300 px-3 py-1 rounded-xl shadow-sm text-xs font-bold text-emerald-800 flex items-center gap-1.5">
+            <span>🏆 Skor:</span>
+            <span id="activityScoreText" class="text-indigo-600 font-mono text-sm">0 Doğru</span>
+          </div>
+          <button id="btnActivityReset" class="px-2.5 py-1 rounded-xl bg-white border border-emerald-300 hover:bg-emerald-100 text-emerald-900 font-semibold text-xs transition">
+            🔄 Sıfırla
+          </button>
+          <button id="btnActivityNew" class="px-3 py-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition flex items-center gap-1">
+            <span>🎲</span> <span>Yeni Konum</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 items-center">
+        <!-- İstenen 7 Şekil Seçici -->
+        <div class="lg:col-span-6 flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-emerald-900 uppercase tracking-wide">Etkinlik Şeklini Seç:</label>
+          <div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5" id="actShapeButtons">
+            <button data-act="KARE" class="act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-600 bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-1 shadow-sm transition">
+              <span>🟦</span> <span>Kare</span>
+            </button>
+            <button data-act="YAMUK" class="act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              <span>⏢</span> <span>Yamuk</span>
+            </button>
+            <button data-act="DORTGEN" class="act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              <span>🔷</span> <span>Dörtgen</span>
+            </button>
+            <button data-act="DOGRU" class="act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              <span>📏</span> <span>Doğru</span>
+            </button>
+            <button data-act="Z" class="act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              <span class="font-serif font-bold">Z</span> <span>Harfi</span>
+            </button>
+            <button data-act="F" class="act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              <span class="font-serif font-bold">F</span> <span>Harfi</span>
+            </button>
+            <button data-act="H" class="act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              <span class="font-serif font-bold">H</span> <span>Harfi</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Etkinlik Ayna Seçici -->
+        <div class="lg:col-span-3 flex flex-col gap-1.5">
+          <label class="text-xs font-bold text-emerald-900 uppercase tracking-wide">Simetri Doğrusu:</label>
+          <div class="grid grid-cols-3 gap-1" id="actAxisButtons">
+            <button data-actaxis="vertical" class="act-axis-btn px-1.5 py-1.5 rounded-xl border border-rose-500 bg-rose-500 text-white font-bold text-xs flex items-center justify-center gap-1 transition shadow-sm">
+              Dikey (d)
+            </button>
+            <button data-actaxis="horizontal" class="act-axis-btn px-1.5 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              Yatay (d)
+            </button>
+            <button data-actaxis="diagonal" class="act-axis-btn px-1.5 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition">
+              Eğik (d)
+            </button>
+          </div>
+        </div>
+
+        <!-- Kontrol Et & İpucu Butonları -->
+        <div class="lg:col-span-3 flex items-center gap-2 mt-auto">
+          <button id="btnActivityHint" class="flex-1 py-2 px-2.5 rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold text-xs flex items-center justify-center gap-1 transition" title="Hedef silüeti hafifçe göster">
+            <span>💡</span> <span>İpucu</span>
+          </button>
+          <button id="btnActivityCheck" class="flex-1 py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs shadow-md shadow-emerald-200 flex items-center justify-center gap-1.5 transition active:scale-95">
+            <span>🎯</span> <span>Kontrol Et</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Etkinlik Durum Geri Bildirimi -->
+      <div id="actFeedback" class="text-xs font-bold rounded-xl p-2.5 bg-white border border-emerald-200 hidden transition-all"></div>
+    </section>
+
+    <!-- Seçenekler & Görsel Katmanlar -->
+    <div class="flex flex-wrap items-center justify-between gap-2 px-1 text-xs text-slate-600">
+      <div class="flex flex-wrap items-center gap-3">
+        <label class="inline-flex items-center gap-1.5 cursor-pointer font-medium text-amber-800 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200">
+          <input type="checkbox" id="chkAutoHide" checked class="rounded text-amber-600 focus:ring-amber-500 w-4 h-4">
+          <span>🙈 Şekil değişince karşıyı boş bırak (Tahmin et)</span>
+        </label>
+        <label class="inline-flex items-center gap-1.5 cursor-pointer font-medium">
+          <input type="checkbox" id="chkDistance" checked class="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+          <span>📏 Dik İzdüşüm ve Eşit Uzaklık Çentikleri (|AB| = |BC|)</span>
+        </label>
+        <label class="inline-flex items-center gap-1.5 cursor-pointer font-medium">
+          <input type="checkbox" id="chkCounts" checked class="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+          <span>🔢 Aynaya Olan Kare Sayılarını Yaz</span>
+        </label>
+        <label class="inline-flex items-center gap-1.5 cursor-pointer font-medium">
+          <input type="checkbox" id="chkTrail" checked class="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4">
+          <span>✨ Katlanma Geçiş İzi</span>
+        </label>
+      </div>
+
+      <div class="flex items-center gap-2 text-slate-600 font-medium">
+        <span class="inline-block w-3 h-3 rounded-md bg-indigo-700"></span> Orijinal Şekil (Mavi)
+        <span class="inline-block w-3 h-3 rounded-md bg-amber-500 ml-2"></span> Senin Taşıdığın Şekil
+        <span class="inline-block w-3 h-1 bg-rose-600 ml-2"></span> Simetri Doğrusu (d)
+      </div>
+    </div>
+
+    <!-- Çalışma Alanı: Canvas Kapsayıcısı -->
+    <main class="relative flex-1 min-h-[460px] bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex items-center justify-center p-0">
+      <canvas id="geometryCanvas" class="w-full h-full block touch-none cursor-crosshair"></canvas>
+      
+      <!-- İpucu Rozeti -->
+      <div id="canvasTip" class="absolute bottom-3 left-3 bg-slate-900/85 backdrop-blur text-white text-xs px-3 py-1.5 rounded-xl pointer-events-none transition-opacity duration-300 flex items-center gap-1.5 shadow">
+        <span>💡</span> <span id="tipContent">İpucu: Her noktanın d simetri doğrusuna olan dik uzaklığı ile görüntüsünün uzaklığı eşittir!</span>
+      </div>
+    </main>
+
+    <!-- Alt Kural ve Ders Kitabı Kazanım Paneli -->
+    <footer class="bg-white rounded-2xl shadow-sm border border-slate-200 p-3 sm:p-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 items-center">
+        
+        <div class="bg-rose-50 border border-rose-100 rounded-xl p-3 flex items-start gap-3">
+          <div class="text-2xl font-serif text-rose-600 font-bold" id="ruleIcon">d</div>
+          <div>
+            <div class="text-xs font-bold text-rose-950" id="ruleTitle">Simetri Doğrusu Dik Ortalar</div>
+            <p class="text-[11px] text-rose-800 leading-snug mt-0.5" id="ruleDesc">
+              Simetri doğrusu (d), şeklin her noktasını görüntüsüyle birleştiren doğru parçasını <strong>dik ortalar: |AB| = |BC|</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-emerald-50 border border-emerald-100 rounded-xl p-3 flex items-start gap-2.5">
+          <div class="text-2xl">📐</div>
+          <div>
+            <div class="text-xs font-bold text-emerald-950">Eşlik Korunur (Boyut & Açı Aynı)</div>
+            <p class="text-[11px] text-emerald-800 leading-snug mt-0.5">
+              Yansıma sonucunda şeklin <strong>kenar uzunlukları ve açıları değişmez</strong>; görüntü orijinal şekil ile eştir.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-3 flex items-start gap-2.5">
+          <div class="text-2xl">🪞</div>
+          <div>
+            <div class="text-xs font-bold text-indigo-950">Yön Ters Döner (Ayna Görüntüsü)</div>
+            <p class="text-[11px] text-indigo-800 leading-snug mt-0.5">
+              Aynaya bakan birinin sağ elinin aynada sol el görünmesi gibi, şeklin <strong>yönü terslenir</strong>.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const canvas = document.getElementById('geometryCanvas');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('mainContainer');
+
+    // UI Tab Kontrolleri
+    const tabBtnLab = document.getElementById('tabBtnLab');
+    const tabBtnActivity = document.getElementById('tabBtnActivity');
+    const panelLab = document.getElementById('panelLab');
+    const panelActivity = document.getElementById('panelActivity');
+
+    let currentTab = 'lab'; // 'lab' | 'activity'
+
+    // UI Laboratuvar Kontrolleri
+    const progressSlider = document.getElementById('progressSlider');
+    const progressLabel = document.getElementById('progressLabel');
+    const btnPlay = document.getElementById('btnPlay');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const btnResetProgress = document.getElementById('btnResetProgress');
+    const btnFullscreen = document.getElementById('btnFullscreen');
+    const fsIconExpand = document.getElementById('fsIconExpand');
+    const fsIconCompress = document.getElementById('fsIconCompress');
+    const fsText = document.getElementById('fsText');
+
+    const chkDistance = document.getElementById('chkDistance');
+    const chkCounts = document.getElementById('chkCounts');
+    const chkTrail = document.getElementById('chkTrail');
+    const chkAutoHide = document.getElementById('chkAutoHide');
+
+    const ruleTitle = document.getElementById('ruleTitle');
+    const ruleDesc = document.getElementById('ruleDesc');
+    const ruleIcon = document.getElementById('ruleIcon');
+    const tipContent = document.getElementById('tipContent');
+
+    const btnToggleReveal = document.getElementById('btnToggleReveal');
+    const revealIcon = document.getElementById('revealIcon');
+    const revealText = document.getElementById('revealText');
+    const clockCustomPanel = document.getElementById('clockCustomPanel');
+    const inputTime = document.getElementById('inputTime');
+
+    // UI Etkinlik Kontrolleri
+    const activityScoreText = document.getElementById('activityScoreText');
+    const btnActivityReset = document.getElementById('btnActivityReset');
+    const btnActivityNew = document.getElementById('btnActivityNew');
+    const btnActivityHint = document.getElementById('btnActivityHint');
+    const btnActivityCheck = document.getElementById('btnActivityCheck');
+    const actFeedback = document.getElementById('actFeedback');
+
+    let currentObject = 'CUSTOM_TRIANGLE';
+    let currentAxis = 'vertical'; // 'vertical', 'horizontal', 'diagonal', 'origin'
+    let progress = 1.0;
+    let isPlaying = false;
+    let animSpeed = 0.015;
+    let animFrameId = null;
+    let clockTimeStr = '12:45';
+    let isReflectionVisible = false;
+
+    // ETKİNLİK MODU VERİ MODELİ
+    // İstenen Şekiller: Kare, Yamuk, Dörtgen, Doğru Parçası, Z Harfi, F Harfi, H Harfi
+    let activityShape = 'KARE';
+    let activityAxis = 'vertical';
+    let activityScore = 0;
+    let showActivityHint = false;
+    let activityChecked = false;
+    let activityResults = []; // Her noktanın doğruluğu (boolean)
+
+    // Orijinal Şekil Köşeleri (Activity Original)
+    let actOrigPoints = [];
+    // Öğrencinin Taşıdığı Şekil Köşeleri (Activity Student Points)
+    let actStudentPoints = [];
+
+    // Etkinlik Temel Şablonları (Grid birimlerinde)
+    const ACTIVITY_TEMPLATES = {
+      KARE: [
+        { x: 0, y: 0, label: 'A' },
+        { x: 3, y: 0, label: 'B' },
+        { x: 3, y: 3, label: 'C' },
+        { x: 0, y: 3, label: 'D' }
+      ],
+      YAMUK: [
+        { x: 0, y: 0, label: 'A' },
+        { x: 4, y: 0, label: 'B' },
+        { x: 3, y: 3, label: 'C' },
+        { x: 1, y: 3, label: 'D' }
+      ],
+      DORTGEN: [
+        { x: 0, y: 1, label: 'A' },
+        { x: 3, y: 0, label: 'B' },
+        { x: 4, y: 3, label: 'C' },
+        { x: 1, y: 4, label: 'D' }
+      ],
+      DOGRU: [
+        { x: 0, y: 0, label: 'A' },
+        { x: 3, y: 3, label: 'B' }
+      ],
+      Z: [
+        { x: 0, y: 4, label: 'A' },
+        { x: 3, y: 4, label: 'B' },
+        { x: 0, y: 0, label: 'C' },
+        { x: 3, y: 0, label: 'D' }
+      ],
+      F: [
+        { x: 0, y: 0, label: 'A' },
+        { x: 0, y: 4, label: 'B' },
+        { x: 3, y: 4, label: 'C' },
+        { x: 0, y: 2, label: 'D' },
+        { x: 2, y: 2, label: 'E' }
+      ],
+      H: [
+        { x: 0, y: 0, label: 'A' },
+        { x: 0, y: 4, label: 'B' },
+        { x: 0, y: 2, label: 'C' },
+        { x: 3, y: 2, label: 'D' },
+        { x: 3, y: 4, label: 'E' },
+        { x: 3, y: 0, label: 'F' }
+      ]
+    };
+
+    // Laboratuvar Sürüklenebilir Şekiller
+    let draggedVertexIndex = null;
+    let draggedActivityIndex = null;
+
+    const editableShapes = {
+      CUSTOM_TRIANGLE: [
+        { x: -5, y: 4, label: 'A' },
+        { x: -2, y: 5, label: 'B' },
+        { x: -3, y: 1, label: 'C' }
+      ],
+      CUSTOM_SQUARE: [
+        { x: -5, y: 4, label: 'A' },
+        { x: -2, y: 4, label: 'B' },
+        { x: -2, y: 1, label: 'C' },
+        { x: -5, y: 1, label: 'D' }
+      ],
+      CUSTOM_TRAPEZOID: [
+        { x: -6, y: 1, label: 'A' },
+        { x: -2, y: 1, label: 'B' },
+        { x: -3, y: 5, label: 'C' },
+        { x: -5, y: 5, label: 'D' }
+      ],
+      CUSTOM_SEGMENT: [
+        { x: -5, y: 1, label: 'A' },
+        { x: -2, y: 5, label: 'B' }
+      ]
+    };
+
+    // Kareli Zemin Izgara Parametreleri
+    const GRID_EXTENT = 8;
+    let unitSize = 34;
+    let origin = { x: 0, y: 0 };
+
+    function toCanvasX(gx) { return origin.x + gx * unitSize; }
+    function toCanvasY(gy) { return origin.y - gy * unitSize; }
+    function toGridX(cx) { return (cx - origin.x) / unitSize; }
+    function toGridY(cy) { return (origin.y - cy) / unitSize; }
+
+    function reflect(pt, axis) {
+      if (axis === 'vertical') {
+        return { x: -pt.x, y: pt.y, label: pt.label ? pt.label + "'" : undefined };
+      } else if (axis === 'horizontal') {
+        return { x: pt.x, y: -pt.y, label: pt.label ? pt.label + "'" : undefined };
+      } else if (axis === 'diagonal') {
+        return { x: pt.y, y: pt.x, label: pt.label ? pt.label + "'" : undefined };
+      } else if (axis === 'origin') {
+        return { x: -pt.x, y: -pt.y, label: pt.label ? pt.label + "'" : undefined };
+      }
+      return { ...pt };
+    }
+
+    function interpolatePoint(pOrig, pRefl, t) {
+      return {
+        x: pOrig.x + (pRefl.x - pOrig.x) * t,
+        y: pOrig.y + (pRefl.y - pOrig.y) * t
+      };
+    }
+
+    function reflectPoly(poly, axis) {
+      if (poly.contours) {
+        return { ...poly, contours: poly.contours.map(cnt => cnt.map(pt => reflect(pt, axis))) };
+      }
+      return { ...poly, points: poly.points ? poly.points.map(pt => reflect(pt, axis)) : [] };
+    }
+
+    function interpolatePoly(origPoly, targetPoly, t) {
+      if (origPoly.contours && targetPoly.contours) {
+        return {
+          contours: origPoly.contours.map((cnt, cIdx) => {
+            const targetCnt = targetPoly.contours[cIdx];
+            return cnt.map((p, pIdx) => interpolatePoint(p, targetCnt[pIdx], t));
+          })
+        };
+      } else if (origPoly.points && targetPoly.points) {
+        return {
+          points: origPoly.points.map((p, idx) => interpolatePoint(p, targetPoly.points[idx], t))
+        };
+      }
+      return origPoly;
+    }
+
+    const DIGIT_SEGMENTS = {
+      '0': ['a', 'b', 'c', 'd', 'e', 'f'],
+      '1': ['b', 'c'],
+      '2': ['a', 'b', 'g', 'e', 'd'],
+      '3': ['a', 'b', 'g', 'c', 'd'],
+      '4': ['f', 'g', 'b', 'c'],
+      '5': ['a', 'f', 'g', 'c', 'd'],
+      '6': ['a', 'f', 'e', 'd', 'c', 'g'],
+      '7': ['a', 'b', 'c'],
+      '8': ['a', 'b', 'c', 'd', 'e', 'f', 'g'],
+      '9': ['a', 'b', 'c', 'd', 'f', 'g']
+    };
+
+    function getGridSegmentPoints(seg, x0, y0, w, h) {
+      const t = 0.32;
+      const xR = x0 + w;
+      const yT = y0 + h;
+      const yM = y0 + h / 2;
+
+      switch (seg) {
+        case 'a': return [{ x: x0 + 0.15, y: yT }, { x: xR - 0.15, y: yT }, { x: xR - 0.15 - t, y: yT - t }, { x: x0 + 0.15 + t, y: yT - t }];
+        case 'g': return [{ x: x0 + 0.15, y: yM }, { x: x0 + 0.15 + t / 2, y: yM + t / 2 }, { x: xR - 0.15 - t / 2, y: yM + t / 2 }, { x: xR - 0.15, y: yM }, { x: xR - 0.15 - t / 2, y: yM - t / 2 }, { x: x0 + 0.15 + t / 2, y: yM - t / 2 }];
+        case 'd': return [{ x: x0 + 0.15 + t, y: y0 + t }, { x: xR - 0.15 - t, y: y0 + t }, { x: xR - 0.15, y: y0 }, { x: x0 + 0.15, y: y0 }];
+        case 'f': return [{ x: x0, y: yM + 0.15 }, { x: x0, y: yT - 0.15 }, { x: x0 + t, y: yT - 0.15 - t }, { x: x0 + t, y: yM + 0.15 + t }];
+        case 'b': return [{ x: xR - t, y: yM + 0.15 + t }, { x: xR - t, y: yT - 0.15 - t }, { x: xR, y: yT - 0.15 }, { x: xR, y: yM + 0.15 }];
+        case 'e': return [{ x: x0, y: y0 + 0.15 }, { x: x0, y: yM - 0.15 }, { x: x0 + t, y: yM - 0.15 - t }, { x: x0 + t, y: y0 + 0.15 + t }];
+        case 'c': return [{ x: xR - t, y: y0 + 0.15 + t }, { x: xR - t, y: yM - 0.15 - t }, { x: xR, y: yM - 0.15 }, { x: xR, y: y0 + 0.15 }];
+      }
+      return [];
+    }
+
+    function getSafeLayoutBox(axis, width, height) {
+      if (axis === 'vertical') {
+        return { startX: -1 - width, startY: -Math.floor(height / 2) };
+      } else if (axis === 'horizontal') {
+        return { startX: -Math.floor(width / 2), startY: 1.0 };
+      } else {
+        return { startX: -1 - width, startY: 1.0 };
+      }
+    }
+
+    function generateSafeClockPolygons(timeStr, axis) {
+      const polys = [];
+      let str = (timeStr || '12:45').trim();
+      if (!str.includes(':') && str.length === 4) str = str.slice(0, 2) + ':' + str.slice(2);
+      const chars = str.split('');
+      const charWidth = 2, charHeight = 4, colonWidth = 1, spacing = 1;
+      let totalW = 0;
+      for (let i = 0; i < chars.length; i++) {
+        totalW += (chars[i] === ':') ? colonWidth : charWidth;
+        if (i < chars.length - 1) totalW += spacing;
+      }
+      const layout = getSafeLayoutBox(axis, totalW, charHeight);
+      let curX = layout.startX;
+      const baseY = layout.startY;
+
+      for (let i = 0; i < chars.length; i++) {
+        const ch = chars[i];
+        if (ch === ':') {
+          const cx = curX + 0.5, dotR = 0.18;
+          polys.push({ points: [{ x: cx - dotR, y: baseY + 2.8 - dotR }, { x: cx + dotR, y: baseY + 2.8 - dotR }, { x: cx + dotR, y: baseY + 2.8 + dotR }, { x: cx - dotR, y: baseY + 2.8 + dotR }], fill: '#ec4899', stroke: '#be185d', lineWidth: 1.5 });
+          polys.push({ points: [{ x: cx - dotR, y: baseY + 1.2 - dotR }, { x: cx + dotR, y: baseY + 1.2 - dotR }, { x: cx + dotR, y: baseY + 1.2 + dotR }, { x: cx - dotR, y: baseY + 1.2 + dotR }], fill: '#ec4899', stroke: '#be185d', lineWidth: 1.5 });
+          curX += colonWidth + spacing;
+        } else if (DIGIT_SEGMENTS[ch]) {
+          DIGIT_SEGMENTS[ch].forEach(s => {
+            const pts = getGridSegmentPoints(s, curX, baseY, charWidth, charHeight);
+            if (pts.length > 0) polys.push({ points: pts, fill: '#ec4899', stroke: '#be185d', lineWidth: 1.5 });
+          });
+          curX += charWidth + spacing;
+        }
+      }
+      return polys;
+    }
+
+    function generateSafeNumberPolygons(numStr, axis) {
+      const polys = [];
+      const chars = String(numStr).split('');
+      const charWidth = 2, charHeight = 4, spacing = 1;
+      const totalW = chars.length * charWidth + (chars.length - 1) * spacing;
+      const layout = getSafeLayoutBox(axis, totalW, charHeight);
+      let curX = layout.startX;
+      const baseY = layout.startY;
+
+      chars.forEach(ch => {
+        if (DIGIT_SEGMENTS[ch]) {
+          DIGIT_SEGMENTS[ch].forEach(s => {
+            const pts = getGridSegmentPoints(s, curX, baseY, charWidth, charHeight);
+            if (pts.length > 0) polys.push({ points: pts, fill: '#ec4899', stroke: '#be185d', lineWidth: 1.5 });
+          });
+        }
+        curX += charWidth + spacing;
+      });
+      return polys;
+    }
+
+    function generateSafeMorpaPolygons(axis) {
+      const polys = [];
+      const letterWidth = 2, letterHeight = 4, spacing = 1;
+      const totalW = 5 * letterWidth + 4 * spacing;
+      const layout = getSafeLayoutBox(axis, totalW, letterHeight);
+      let curX = layout.startX;
+      const by = layout.startY;
+      const letterFill = 'rgba(79, 70, 229, 0.2)', letterStroke = '#4338ca', letterLineWidth = 2.5;
+
+      // M
+      polys.push({ points: [{ x: curX, y: by }, { x: curX, y: by + 4 }, { x: curX + 0.5, y: by + 4 }, { x: curX + 1.0, y: by + 1.8 }, { x: curX + 1.5, y: by + 4 }, { x: curX + 2.0, y: by + 4 }, { x: curX + 2.0, y: by }, { x: curX + 1.5, y: by }, { x: curX + 1.5, y: by + 2.6 }, { x: curX + 1.0, y: by + 1.0 }, { x: curX + 0.5, y: by + 2.6 }, { x: curX + 0.5, y: by }], fill: letterFill, stroke: letterStroke, lineWidth: letterLineWidth });
+      curX += letterWidth + spacing;
+      // O
+      polys.push({ contours: [[{ x: curX, y: by }, { x: curX, y: by + 4 }, { x: curX + 2, y: by + 4 }, { x: curX + 2, y: by }], [{ x: curX + 0.5, y: by + 0.9 }, { x: curX + 1.5, y: by + 0.9 }, { x: curX + 1.5, y: by + 3.1 }, { x: curX + 0.5, y: by + 3.1 }]], fill: letterFill, stroke: letterStroke, lineWidth: letterLineWidth });
+      curX += letterWidth + spacing;
+      // R
+      polys.push({ contours: [[{ x: curX, y: by }, { x: curX, y: by + 4 }, { x: curX + 2.0, y: by + 4 }, { x: curX + 2.0, y: by + 2.1 }, { x: curX + 1.2, y: by + 2.1 }, { x: curX + 2.0, y: by }, { x: curX + 1.35, y: by }, { x: curX + 0.75, y: by + 1.8 }, { x: curX + 0.5, y: by + 1.8 }, { x: curX + 0.5, y: by }], [{ x: curX + 0.5, y: by + 2.5 }, { x: curX + 1.5, y: by + 2.5 }, { x: curX + 1.5, y: by + 3.4 }, { x: curX + 0.5, y: by + 3.4 }]], fill: letterFill, stroke: letterStroke, lineWidth: letterLineWidth });
+      curX += letterWidth + spacing;
+      // P
+      polys.push({ contours: [[{ x: curX, y: by }, { x: curX, y: by + 4 }, { x: curX + 2.0, y: by + 4 }, { x: curX + 2.0, y: by + 1.9 }, { x: curX + 0.5, y: by + 1.9 }, { x: curX + 0.5, y: by }], [{ x: curX + 0.5, y: by + 2.4 }, { x: curX + 1.5, y: by + 2.4 }, { x: curX + 1.5, y: by + 3.4 }, { x: curX + 0.5, y: by + 3.4 }]], fill: letterFill, stroke: letterStroke, lineWidth: letterLineWidth });
+      curX += letterWidth + spacing;
+      // A
+      polys.push({ contours: [[{ x: curX, y: by }, { x: curX + 0.6, y: by + 4 }, { x: curX + 1.4, y: by + 4 }, { x: curX + 2.0, y: by }, { x: curX + 1.4, y: by }, { x: curX + 1.2, y: by + 1.2 }, { x: curX + 0.8, y: by + 1.2 }, { x: curX + 0.6, y: by }], [{ x: curX + 0.85, y: by + 1.7 }, { x: curX + 1.15, y: by + 1.7 }, { x: curX + 1.0, y: by + 3.1 }]], fill: letterFill, stroke: letterStroke, lineWidth: letterLineWidth });
+      return polys;
+    }
+
+    function transformSafeTemplate(points, axis) {
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      points.forEach(p => {
+        if (p.x < minX) minX = p.x;
+        if (p.x > maxX) maxX = p.x;
+        if (p.y < minY) minY = p.y;
+        if (p.y > maxY) maxY = p.y;
+      });
+      const w = maxX - minX, h = maxY - minY;
+      const target = getSafeLayoutBox(axis, w, h);
+      const shiftX = target.startX - minX;
+      const shiftY = target.startY - minY;
+      return points.map(p => ({ x: Math.round(p.x + shiftX), y: Math.round(p.y + shiftY), label: p.label }));
+    }
+
+    const tplZ = [{ x: 0, y: 0 }, { x: 0, y: 1 }, { x: 2, y: 3 }, { x: 0, y: 3 }, { x: 0, y: 4 }, { x: 3, y: 4 }, { x: 3, y: 3 }, { x: 1, y: 1 }, { x: 3, y: 1 }, { x: 3, y: 0 }];
+    const tplE = [{ x: 0, y: 0 }, { x: 0, y: 5 }, { x: 3, y: 5 }, { x: 3, y: 4 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 2, y: 3 }, { x: 2, y: 2 }, { x: 1, y: 2 }, { x: 1, y: 1 }, { x: 3, y: 1 }, { x: 3, y: 0 }];
+    const tplL = [{ x: 0, y: 0 }, { x: 0, y: 5 }, { x: 1, y: 5 }, { x: 1, y: 1 }, { x: 3, y: 1 }, { x: 3, y: 0 }];
+    const tplF = [{ x: 0, y: 0 }, { x: 0, y: 5 }, { x: 3, y: 5 }, { x: 3, y: 4 }, { x: 1, y: 4 }, { x: 1, y: 3 }, { x: 2, y: 3 }, { x: 2, y: 2 }, { x: 1, y: 2 }, { x: 1, y: 0 }];
+    const tplM = [{ x: 0, y: 0 }, { x: 0, y: 5 }, { x: 1, y: 5 }, { x: 2, y: 2 }, { x: 3, y: 5 }, { x: 4, y: 5 }, { x: 4, y: 0 }, { x: 3, y: 0 }, { x: 3, y: 3 }, { x: 2, y: 1 }, { x: 1, y: 3 }, { x: 1, y: 0 }];
+
+    function getSafeBookPolygons(key, axis) {
+      if (key === 'BOOK_TRIANGLE') {
+        if (axis === 'horizontal') return [{ points: [{ x: -2, y: 4 }, { x: 0, y: 1 }, { x: 2, y: 4 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+        if (axis === 'diagonal' || axis === 'origin') return [{ points: [{ x: -4, y: 3 }, { x: -2, y: 1 }, { x: -4, y: -1 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+        return [{ points: [{ x: -3, y: 3 }, { x: -1, y: 0 }, { x: -3, y: -3 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+      } else if (key === 'BOOK_DIAMOND') {
+        if (axis === 'horizontal') return [{ points: [{ x: -2, y: 2 }, { x: 0, y: 4 }, { x: 2, y: 2 }, { x: 0, y: 0 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+        if (axis === 'vertical') return [{ points: [{ x: -2, y: 2 }, { x: -4, y: 0 }, { x: -2, y: -2 }, { x: 0, y: 0 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+        return [{ points: [{ x: -3, y: 3 }, { x: -1, y: 3 }, { x: -2, y: 5 }, { x: -4, y: 5 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+      } else if (key === 'BOOK_TRAPEZOID') {
+        if (axis === 'diagonal') return [{ points: [{ x: -3, y: 3 }, { x: -1, y: 3 }, { x: 0, y: 0 }, { x: -3, y: 0 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+        if (axis === 'horizontal') return [{ points: [{ x: -2, y: 4 }, { x: 0, y: 4 }, { x: 1, y: 1 }, { x: -3, y: 1 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+        return [{ points: [{ x: -4, y: 2 }, { x: -2, y: 2 }, { x: -1, y: -1 }, { x: -4, y: -1 }], fill: 'rgba(30, 41, 59, 0.1)', stroke: '#0f172a', lineWidth: 2.5 }];
+      } else if (key === 'CANDLE') {
+        const layout = getSafeLayoutBox(axis, 3, 5);
+        const bx = layout.startX, by = layout.startY;
+        return [
+          { points: [{ x: bx + 0.5, y: by }, { x: bx + 2.5, y: by }, { x: bx + 2.5, y: by + 3.2 }, { x: bx + 0.5, y: by + 3.2 }], fill: '#fef08a', stroke: '#ca8a04', lineWidth: 2 },
+          { points: [{ x: bx, y: by - 0.4 }, { x: bx + 3, y: by - 0.4 }, { x: bx + 2.5, y: by }, { x: bx + 0.5, y: by }], fill: '#93c5fd', stroke: '#1d4ed8', lineWidth: 2 },
+          { points: [{ x: bx + 1.4, y: by + 3.2 }, { x: bx + 1.6, y: by + 3.2 }, { x: bx + 1.6, y: by + 3.7 }, { x: bx + 1.4, y: by + 3.7 }], fill: '#334155', stroke: '#0f172a', lineWidth: 1.5 },
+          { points: [{ x: bx + 1.5, y: by + 4.6 }, { x: bx + 1.9, y: by + 3.9 }, { x: bx + 1.5, y: by + 3.6 }, { x: bx + 1.1, y: by + 3.9 }], fill: '#f97316', stroke: '#c2410c', lineWidth: 2 }
+        ];
+      }
+      return [];
+    }
+
+    function resizeCanvas() {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const rect = parent.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+      const w = Math.max(300, rect.width || 800);
+      const h = Math.max(380, rect.height || 500);
+      
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.resetTransform();
+      ctx.scale(dpr, dpr);
+
+      origin.x = w / 2;
+      origin.y = h / 2;
+
+      const targetExtentX = (currentObject === 'CLOCK' || currentObject === 'MORPA') ? 14 : 9;
+      const targetExtentY = 7;
+      const unitX = Math.floor(w / (targetExtentX * 2 + 2));
+      const unitY = Math.floor(h / (targetExtentY * 2 + 2));
+      unitSize = Math.max(22, Math.min(unitX, unitY));
+
+      render();
+    }
+
+    function drawGridAndMirror(width, height) {
+      ctx.clearRect(0, 0, width, height);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#e2e8f0';
+
+      const leftGrid = Math.floor(-origin.x / unitSize);
+      const rightGrid = Math.ceil((width - origin.x) / unitSize);
+      const bottomGrid = Math.floor((origin.y - height) / unitSize);
+      const topGrid = Math.ceil(origin.y / unitSize);
+
+      for (let i = leftGrid; i <= rightGrid; i++) {
+        const x = toCanvasX(i);
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      for (let j = bottomGrid; j <= topGrid; j++) {
+        const y = toCanvasY(j);
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+
+      // Orijin Rozeti
+      ctx.save();
+      ctx.fillStyle = '#64748b';
+      ctx.beginPath();
+      ctx.arc(origin.x, origin.y, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.fillRect(origin.x - 16, origin.y + 6, 18, 16);
+      ctx.fillStyle = '#475569';
+      ctx.font = 'bold 12px serif';
+      ctx.fillText('O', origin.x - 12, origin.y + 18);
+      ctx.restore();
+
+      // Simetri Doğrusu d
+      const activeAxis = (currentTab === 'activity') ? activityAxis : currentAxis;
+
+      ctx.save();
+      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = '#e11d48';
+      ctx.fillStyle = '#e11d48';
+
+      ctx.beginPath();
+      if (activeAxis === 'vertical') {
+        ctx.moveTo(origin.x, 15);
+        ctx.lineTo(origin.x, height - 15);
+        ctx.stroke();
+        drawArrowTip(origin.x, 15, -Math.PI / 2);
+        drawArrowTip(origin.x, height - 15, Math.PI / 2);
+        ctx.font = 'bold 18px serif';
+        ctx.fillText('d', origin.x - 16, 25);
+      } else if (activeAxis === 'horizontal') {
+        ctx.moveTo(15, origin.y);
+        ctx.lineTo(width - 15, origin.y);
+        ctx.stroke();
+        drawArrowTip(15, origin.y, Math.PI);
+        drawArrowTip(width - 15, origin.y, 0);
+        ctx.font = 'bold 18px serif';
+        ctx.fillText('d', width - 25, origin.y - 12);
+      } else if (activeAxis === 'diagonal') {
+        const p1 = { x: toCanvasX(-GRID_EXTENT), y: toCanvasY(-GRID_EXTENT) };
+        const p2 = { x: toCanvasX(GRID_EXTENT), y: toCanvasY(GRID_EXTENT) };
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+        const ang = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+        drawArrowTip(p2.x, p2.y, ang);
+        drawArrowTip(p1.x, p1.y, ang + Math.PI);
+        ctx.font = 'bold 18px serif';
+        ctx.fillText('d', p2.x + 10, p2.y + 10);
+      } else if (activeAxis === 'origin') {
+        ctx.beginPath();
+        ctx.arc(origin.x, origin.y, 8, 0, Math.PI * 2);
+        ctx.fillStyle = '#e11d48';
+        ctx.fill();
+        ctx.strokeStyle = '#fda4af';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.font = 'bold 14px sans-serif';
+        ctx.fillText('Simetri Merkezi (O)', origin.x + 12, origin.y - 12);
+      }
+      ctx.restore();
+    }
+
+    function drawArrowTip(x, y, angle) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(-10, -5);
+      ctx.lineTo(-10, 5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawPolyItem(poly, strokeColor, fillColor, isDashed = false, lineWidth = 2.5) {
+      ctx.save();
+      if (isDashed) ctx.setLineDash([5, 4]);
+      ctx.lineWidth = lineWidth;
+      ctx.strokeStyle = strokeColor;
+      ctx.fillStyle = fillColor;
+
+      ctx.beginPath();
+      if (poly.isSegment && poly.points && poly.points.length >= 2) {
+        ctx.moveTo(toCanvasX(poly.points[0].x), toCanvasY(poly.points[0].y));
+        for (let i = 1; i < poly.points.length; i++) {
+          ctx.lineTo(toCanvasX(poly.points[i].x), toCanvasY(poly.points[i].y));
+        }
+        ctx.stroke();
+        ctx.restore();
+        return;
+      }
+
+      if (poly.contours) {
+        poly.contours.forEach(cnt => {
+          if (!cnt || cnt.length === 0) return;
+          ctx.moveTo(toCanvasX(cnt[0].x), toCanvasY(cnt[0].y));
+          for (let i = 1; i < cnt.length; i++) ctx.lineTo(toCanvasX(cnt[i].x), toCanvasY(cnt[i].y));
+          ctx.closePath();
+        });
+        if (fillColor !== 'transparent') ctx.fill('evenodd');
+      } else if (poly.points) {
+        const pts = poly.points;
+        if (pts.length === 0) { ctx.restore(); return; }
+        ctx.moveTo(toCanvasX(pts[0].x), toCanvasY(pts[0].y));
+        for (let i = 1; i < pts.length; i++) ctx.lineTo(toCanvasX(pts[i].x), toCanvasY(pts[i].y));
+        ctx.closePath();
+        if (fillColor !== 'transparent') ctx.fill();
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawVertexPoint(pt, color = '#0f172a', label = '', isInteractive = false, haloColor = null) {
+      const cx = toCanvasX(pt.x);
+      const cy = toCanvasY(pt.y);
+      ctx.save();
+      
+      if (haloColor) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+        ctx.fillStyle = haloColor;
+        ctx.fill();
+      } else if (isInteractive) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, 10, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(245, 158, 11, 0.25)';
+        ctx.fill();
+      }
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, isInteractive ? 6.5 : 4.5, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+
+      if (label) {
+        ctx.font = 'bold 12px sans-serif';
+        ctx.fillStyle = color;
+        ctx.fillText(label, cx + 8, cy - 8);
+      }
+      ctx.restore();
+    }
+
+    function drawPerpendicularGuide(pOrig, pRefl, customColor = '#94a3b8') {
+      const x1 = toCanvasX(pOrig.x), y1 = toCanvasY(pOrig.y);
+      const x2 = toCanvasX(pRefl.x), y2 = toCanvasY(pRefl.y);
+      const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+
+      ctx.save();
+      ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = customColor;
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#e11d48';
+      ctx.beginPath();
+      ctx.arc(mx, my, 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      drawTick(x1, y1, mx, my);
+      drawTick(mx, my, x2, y2);
+
+      if (chkCounts && chkCounts.checked) {
+        const distGrid = Math.round(Math.hypot(pOrig.x - pRefl.x, pOrig.y - pRefl.y) / 2 * 10) / 10;
+        ctx.font = 'bold 10px sans-serif';
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(`${distGrid} kare`, mx + 4, my - 4);
+      }
+      ctx.restore();
+    }
+
+    function drawTick(ax, ay, bx, by) {
+      const midX = (ax + bx) / 2, midY = (ay + by) / 2;
+      const dx = bx - ax, dy = by - ay;
+      const len = Math.hypot(dx, dy);
+      if (len < 1) return;
+      const nx = -dy / len * 4, ny = dx / len * 4;
+      ctx.beginPath();
+      ctx.moveTo(midX - nx, midY - ny);
+      ctx.lineTo(midX + nx, midY + ny);
+      ctx.strokeStyle = '#64748b';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
+
+    function renderActivityTab(width, height) {
+      if (actOrigPoints.length === 0 || actStudentPoints.length === 0) return;
+
+      const isSegment = (activityShape === 'DOGRU');
+      const isWireLetter = (activityShape === 'Z' || activityShape === 'F' || activityShape === 'H');
+
+      // 1. Orijinal Şekil (Mavi)
+      if (isSegment) {
+        drawPolyItem({ points: actOrigPoints, isSegment: true }, '#2563eb', 'transparent', false, 3.5);
+      } else if (isWireLetter) {
+        drawWireShape(actOrigPoints, '#2563eb', 3.5);
+      } else {
+        drawPolyItem({ points: actOrigPoints }, '#2563eb', 'rgba(37, 99, 235, 0.18)', false, 3);
+      }
+
+      // Orijinal Köşeler
+      actOrigPoints.forEach(pt => drawVertexPoint(pt, '#2563eb', pt.label, false));
+
+      // 2. Doğru Hedef Yansıma (İpucu Açıksa Silüet Olarak Göster)
+      const trueTargets = actOrigPoints.map(pt => reflect(pt, activityAxis));
+      if (showActivityHint) {
+        if (isSegment) {
+          drawPolyItem({ points: trueTargets, isSegment: true }, '#10b981', 'transparent', true, 2);
+        } else if (isWireLetter) {
+          drawWireShape(trueTargets, '#10b981', 2, true);
+        } else {
+          drawPolyItem({ points: trueTargets }, '#10b981', 'rgba(16, 185, 129, 0.12)', true, 2);
+        }
+        trueTargets.forEach(pt => drawVertexPoint(pt, '#10b981', pt.label + "'", false));
+      }
+
+      // 3. Öğrencinin Taşıdığı Şekil (Turuncu / Pembe)
+      const studentStroke = activityChecked && activityResults.every(Boolean) ? '#059669' : '#d97706';
+      const studentFill = activityChecked && activityResults.every(Boolean) ? 'rgba(5, 150, 105, 0.2)' : 'rgba(245, 158, 11, 0.2)';
+
+      if (isSegment) {
+        drawPolyItem({ points: actStudentPoints, isSegment: true }, studentStroke, 'transparent', false, 3.5);
+      } else if (isWireLetter) {
+        drawWireShape(actStudentPoints, studentStroke, 3.5);
+      } else {
+        drawPolyItem({ points: actStudentPoints }, studentStroke, studentFill, false, 3);
+      }
+
+      // Öğrencinin Taşıdığı Köşeler (Büyük ve Tutulabilir)
+      actStudentPoints.forEach((pt, i) => {
+        let halo = 'rgba(245, 158, 11, 0.3)';
+        let ptCol = '#d97706';
+        if (activityChecked) {
+          const isCorrect = activityResults[i];
+          halo = isCorrect ? 'rgba(16, 185, 129, 0.4)' : 'rgba(225, 29, 72, 0.4)';
+          ptCol = isCorrect ? '#059669' : '#e11d48';
+        }
+        drawVertexPoint(pt, ptCol, pt.label ? pt.label + "'" : '', true, halo);
+      });
+
+      // Kontrol Edilmişse ve Doğruysa Eşit Uzaklık Çentiklerini Göster
+      if (activityChecked && activityResults.every(Boolean)) {
+        actOrigPoints.forEach((orig, idx) => {
+          drawPerpendicularGuide(orig, actStudentPoints[idx], '#059669');
+        });
+      }
+    }
+
+    function drawWireShape(pts, color, lineWidth = 3, isDashed = false) {
+      ctx.save();
+      if (isDashed) ctx.setLineDash([4, 4]);
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lineWidth;
+      ctx.beginPath();
+      if (activityShape === 'Z') {
+        // A -> B -> C -> D
+        ctx.moveTo(toCanvasX(pts[0].x), toCanvasY(pts[0].y));
+        ctx.lineTo(toCanvasX(pts[1].x), toCanvasY(pts[1].y));
+        ctx.lineTo(toCanvasX(pts[2].x), toCanvasY(pts[2].y));
+        ctx.lineTo(toCanvasX(pts[3].x), toCanvasY(pts[3].y));
+      } else if (activityShape === 'F') {
+        // A -> B -> C (omurga ve üst dal), D -> E (orta dal)
+        ctx.moveTo(toCanvasX(pts[0].x), toCanvasY(pts[0].y));
+        ctx.lineTo(toCanvasX(pts[1].x), toCanvasY(pts[1].y));
+        ctx.lineTo(toCanvasX(pts[2].x), toCanvasY(pts[2].y));
+        ctx.moveTo(toCanvasX(pts[3].x), toCanvasY(pts[3].y));
+        ctx.lineTo(toCanvasX(pts[4].x), toCanvasY(pts[4].y));
+      } else if (activityShape === 'H') {
+        // A -> B (sol bacak), C -> D (köprü), E -> F (sağ bacak)
+        ctx.moveTo(toCanvasX(pts[0].x), toCanvasY(pts[0].y));
+        ctx.lineTo(toCanvasX(pts[1].x), toCanvasY(pts[1].y));
+        ctx.moveTo(toCanvasX(pts[2].x), toCanvasY(pts[2].y));
+        ctx.lineTo(toCanvasX(pts[3].x), toCanvasY(pts[3].y));
+        ctx.moveTo(toCanvasX(pts[4].x), toCanvasY(pts[4].y));
+        ctx.lineTo(toCanvasX(pts[5].x), toCanvasY(pts[5].y));
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function render() {
+      const width = canvas.clientWidth || (canvas.width / (window.devicePixelRatio || 1));
+      const height = canvas.clientHeight || (canvas.height / (window.devicePixelRatio || 1));
+
+      drawGridAndMirror(width, height);
+
+      // EĞER ETKİNLİK SEKMESİNDEYSEK:
+      if (currentTab === 'activity') {
+        renderActivityTab(width, height);
+        return;
+      }
+
+      // EĞER LABORATUVAR SEKMESİNDEYSEK:
+      let currentPolys = [];
+      const isCustomShape = editableShapes.hasOwnProperty(currentObject);
+
+      if (isCustomShape) {
+        const pts = editableShapes[currentObject];
+        const isSeg = (currentObject === 'CUSTOM_SEGMENT');
+        currentPolys.push({ points: pts, isSegment: isSeg, fill: isSeg ? 'transparent' : 'rgba(79, 70, 229, 0.2)', stroke: '#4338ca', lineWidth: 3 });
+      } else if (currentObject === 'CLOCK') {
+        currentPolys = generateSafeClockPolygons(clockTimeStr, currentAxis);
+      } else if (currentObject.startsWith('BOOK_') || currentObject === 'CANDLE') {
+        currentPolys = getSafeBookPolygons(currentObject, currentAxis);
+      } else if (currentObject === 'NUM_15') {
+        currentPolys = generateSafeNumberPolygons('15', currentAxis);
+      } else if (currentObject === 'NUM_82') {
+        currentPolys = generateSafeNumberPolygons('82', currentAxis);
+      } else if (currentObject === 'NUM_52') {
+        currentPolys = generateSafeNumberPolygons('52', currentAxis);
+      } else if (currentObject === 'MORPA') {
+        currentPolys = generateSafeMorpaPolygons(currentAxis);
+      } else if (currentObject === 'Z') {
+        currentPolys.push({ points: transformSafeTemplate(tplZ, currentAxis), fill: 'rgba(79, 70, 229, 0.2)', stroke: '#4338ca', lineWidth: 2.5 });
+      } else if (currentObject === 'E') {
+        currentPolys.push({ points: transformSafeTemplate(tplE, currentAxis), fill: 'rgba(59, 130, 246, 0.2)', stroke: '#2563eb', lineWidth: 2.5 });
+      } else if (currentObject === 'L') {
+        currentPolys.push({ points: transformSafeTemplate(tplL, currentAxis), fill: 'rgba(16, 185, 129, 0.2)', stroke: '#059669', lineWidth: 2.5 });
+      } else if (currentObject === 'F') {
+        currentPolys.push({ points: transformSafeTemplate(tplF, currentAxis), fill: 'rgba(59, 130, 246, 0.2)', stroke: '#2563eb', lineWidth: 2.5 });
+      } else if (currentObject === 'M') {
+        currentPolys.push({ points: transformSafeTemplate(tplM, currentAxis), fill: 'rgba(79, 70, 229, 0.2)', stroke: '#4338ca', lineWidth: 2.5 });
+      } else if (currentObject === 'BUTTERFLY') {
+        const layout = getSafeLayoutBox(currentAxis, 6, 6);
+        const bx = layout.startX, by = layout.startY, cx = bx + 3;
+        currentPolys.push({ points: [{ x: cx, y: by + 3 }, { x: cx - 1, y: by + 5 }, { x: cx - 3, y: by + 5 }, { x: cx - 3, y: by + 3 }, { x: cx - 1, y: by + 2 }, { x: cx, y: by + 2 }], fill: 'rgba(168, 85, 247, 0.35)', stroke: '#9333ea', lineWidth: 2 });
+        currentPolys.push({ points: [{ x: cx, y: by + 2 }, { x: cx - 2, y: by + 2 }, { x: cx - 3, y: by + 1 }, { x: cx - 2, y: by }, { x: cx, y: by + 1 }], fill: 'rgba(168, 85, 247, 0.35)', stroke: '#9333ea', lineWidth: 2 });
+        currentPolys.push({ points: [{ x: cx, y: by + 3 }, { x: cx + 1, y: by + 5 }, { x: cx + 3, y: by + 5 }, { x: cx + 3, y: by + 3 }, { x: cx + 1, y: by + 2 }, { x: cx, y: by + 2 }], fill: 'rgba(168, 85, 247, 0.35)', stroke: '#9333ea', lineWidth: 2 });
+        currentPolys.push({ points: [{ x: cx, y: by + 2 }, { x: cx + 2, y: by + 2 }, { x: cx + 3, y: by + 1 }, { x: cx + 2, y: by }, { x: cx, y: by + 1 }], fill: 'rgba(168, 85, 247, 0.35)', stroke: '#9333ea', lineWidth: 2 });
+        currentPolys.push({ points: [{ x: cx - 0.25, y: by + 0.5 }, { x: cx + 0.25, y: by + 0.5 }, { x: cx + 0.25, y: by + 4.5 }, { x: cx - 0.25, y: by + 4.5 }], fill: '#334155', stroke: '#0f172a', lineWidth: 2 });
+      } else if (currentObject === 'BOAT') {
+        const layout = getSafeLayoutBox(currentAxis, 4, 4);
+        const bx = layout.startX, by = layout.startY;
+        currentPolys.push({ points: [{ x: bx, y: by + 1 }, { x: bx + 4, y: by + 1 }, { x: bx + 3, y: by }, { x: bx + 1, y: by }], fill: 'rgba(59, 130, 246, 0.3)', stroke: '#1d4ed8', lineWidth: 2.5 });
+        currentPolys.push({ points: [{ x: bx + 2, y: by + 1.2 }, { x: bx + 2, y: by + 4 }, { x: bx + 3.5, y: by + 1.2 }], fill: 'rgba(99, 102, 241, 0.35)', stroke: '#4338ca', lineWidth: 2.5 });
+      }
+
+      currentPolys.forEach(poly => {
+        const targetPoly = reflectPoly(poly, currentAxis);
+        drawPolyItem(poly, poly.stroke, poly.fill, false, poly.lineWidth || 2.5);
+
+        if ((currentObject.startsWith('BOOK_') || isCustomShape) && poly.points) {
+          poly.points.forEach(pt => drawVertexPoint(pt, '#4338ca', pt.label, isCustomShape));
+        }
+
+        if (!isReflectionVisible) return;
+
+        drawPolyItem(targetPoly, '#f43f5e', 'rgba(244, 63, 94, 0.08)', true, poly.lineWidth || 2);
+
+        if (progress > 0) {
+          const transPoly = interpolatePoly(poly, targetPoly, progress);
+          if (chkTrail && chkTrail.checked && progress < 0.99 && progress > 0.05) {
+            drawPolyItem(transPoly, 'rgba(168, 85, 247, 0.35)', 'rgba(168, 85, 247, 0.1)', false, poly.lineWidth || 2);
+          }
+
+          const isFinished = progress >= 0.99;
+          const strokeCol = isFinished ? '#e11d48' : '#7c3aed';
+          const fillCol = isFinished ? 'rgba(225, 29, 72, 0.25)' : 'rgba(124, 58, 237, 0.2)';
+          drawPolyItem(transPoly, strokeCol, fillCol, false, poly.lineWidth || 2.5);
+
+          if (chkDistance && chkDistance.checked && (currentObject !== 'CLOCK' || poly === currentPolys[0])) {
+            const pts = poly.points || (poly.contours ? poly.contours[0] : null);
+            const tPts = targetPoly.points || (targetPoly.contours ? targetPoly.contours[0] : null);
+            if (pts && tPts) {
+              const sampleCount = isCustomShape ? pts.length : (pts.length <= 4 ? pts.length : 2);
+              for (let i = 0; i < sampleCount; i++) drawPerpendicularGuide(pts[i], tPts[i]);
+            }
+          }
+
+          if (isFinished && (currentObject.startsWith('BOOK_') || isCustomShape) && targetPoly.points) {
+            targetPoly.points.forEach(pt => drawVertexPoint(pt, '#e11d48', pt.label, false));
+          }
+        }
+      });
+
+      if (!isReflectionVisible) drawEmptySidePrompt(width, height);
+    }
+
+    function drawEmptySidePrompt(width, height) {
+      let promptX = origin.x + 80, promptY = origin.y;
+      if (currentAxis === 'horizontal') { promptX = origin.x; promptY = origin.y + 70; }
+      else if (currentAxis === 'diagonal' || currentAxis === 'origin') { promptX = origin.x + 80; promptY = origin.y + 70; }
+
+      ctx.save();
+      const badgeW = 270, badgeH = 34;
+      const bx = Math.min(width - badgeW - 15, Math.max(15, promptX - badgeW / 2));
+      const by = Math.min(height - badgeH - 20, Math.max(20, promptY - badgeH / 2));
+
+      ctx.fillStyle = 'rgba(254, 243, 199, 0.92)';
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([4, 3]);
+      ctx.beginPath();
+      ctx.roundRect(bx, by, badgeW, badgeH, 10);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#92400e';
+      ctx.font = 'bold 12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('✨ Karşı taraf boş! Tahmin et & görmek için tıkla 👁️', bx + badgeW / 2, by + badgeH / 2);
+      ctx.restore();
+    }
+
+    function generateActivityQuestion() {
+      activityChecked = false;
+      showActivityHint = false;
+      actFeedback.classList.add('hidden');
+
+      const template = ACTIVITY_TEMPLATES[activityShape] || ACTIVITY_TEMPLATES.KARE;
+      
+      // Şablonun sınırlarını (en ve boy) dinamik hesapla
+      let minTx = Infinity, maxTx = -Infinity, minTy = Infinity, maxTy = -Infinity;
+      template.forEach(p => {
+        if (p.x < minTx) minTx = p.x;
+        if (p.x > maxTx) maxTx = p.x;
+        if (p.y < minTy) minTy = p.y;
+        if (p.y > maxTy) maxTy = p.y;
+      });
+      const shapeW = maxTx - minTx;
+      const shapeH = maxTy - minTy;
+
+      let offsetX = 0, offsetY = 0;
+
+      // 1. Orijinal şekli her tıklamada aynaya farklı mesafelerde ve farklı yüksekliklerde rastgele konumlandır
+      if (activityAxis === 'vertical') {
+        // Aynaya (d doğrusuna) olan mesafe 1 ile 4 kare arasında her seferinde rastgele değişir
+        const gapToMirror = Math.floor(Math.random() * 4) + 1; 
+        offsetX = -gapToMirror - maxTx;
+        
+        // Dikey konum rastgele: yukarı veya aşağı kaydırma
+        const minY = -GRID_EXTENT + 2;
+        const maxY = GRID_EXTENT - 2 - shapeH;
+        offsetY = Math.floor(Math.random() * (maxY - minY + 1)) + minY - minTy;
+
+      } else if (activityAxis === 'horizontal') {
+        // Yatay aynada mesafeyi 1 ile 3 kare arasında rastgele belirle (üst bölge)
+        const gapToMirror = Math.floor(Math.random() * 3) + 1;
+        offsetY = gapToMirror - minTy;
+
+        // Yatay konum rastgele: sola veya sağa kaydırma
+        const minX = -GRID_EXTENT + 2;
+        const maxX = GRID_EXTENT - 2 - shapeW;
+        offsetX = Math.floor(Math.random() * (maxX - minX + 1)) + minX - minTx;
+
+      } else { // Eğik (d) y = x doğrusu
+        // Şekli rastgele seçilen güvenli sol-üst alana yerleştir
+        const candidates = [
+          { ox: -6, oy: 1 }, { ox: -5, oy: 2 }, { ox: -6, oy: 3 },
+          { ox: -4, oy: 2 }, { ox: -5, oy: 0 }, { ox: -7, oy: 1 }
+        ];
+        const pick = candidates[Math.floor(Math.random() * candidates.length)];
+        offsetX = pick.ox - minTx;
+        offsetY = pick.oy - minTy;
+      }
+
+      // Orijinal şeklin köşe noktaları
+      actOrigPoints = template.map(p => ({
+        x: p.x + offsetX,
+        y: p.y + offsetY,
+        label: p.label
+      }));
+
+      // 2. Doğru simetri noktalarını hesapla
+      const trueTargets = actOrigPoints.map(p => reflect(p, activityAxis));
+
+      // 3. Öğrencinin taşıyacağı noktaları (turuncu) başlangıçta rastgele farklı bir bekleme alanına koy
+      // Böylece şekil asla cevabın üzerinde veya aynı yerde başlamaz; öğrenci her seferinde kareleri sayarak taşımak zorunda kalır
+      let dispX = 0, dispY = 0;
+      if (activityAxis === 'vertical') {
+        // Karşı tarafta ama doğru cevaptan 2-4 kare farklı bir yerde ve rastgele yukarı/aşağı kaymış
+        dispX = (Math.random() > 0.5 ? 2 : -2);
+        dispY = Math.floor(Math.random() * 5) - 2; // -2, -1, 0, 1, 2
+      } else if (activityAxis === 'horizontal') {
+        dispX = Math.floor(Math.random() * 5) - 2;
+        dispY = (Math.random() > 0.5 ? 2 : -2);
+      } else {
+        dispX = (Math.random() > 0.5 ? 2 : -2);
+        dispY = (Math.random() > 0.5 ? -2 : 2);
+      }
+
+      // Noktaları hem ötelenmiş hem de hafif dağınık şekilde hazırla
+      actStudentPoints = trueTargets.map((p, idx) => {
+        const jitterX = ((idx % 2 === 0) ? 1 : -1) * (idx > 1 ? 1 : 0);
+        const jitterY = ((idx % 3 === 0) ? -1 : 1) * (idx > 0 ? 1 : 0);
+        
+        let targetX = p.x + dispX + jitterX;
+        let targetY = p.y + dispY + jitterY;
+
+        // Izgara sınırlarında tut
+        targetX = Math.max(-GRID_EXTENT + 1, Math.min(GRID_EXTENT - 1, targetX));
+        targetY = Math.max(-GRID_EXTENT + 1, Math.min(GRID_EXTENT - 1, targetY));
+
+        // Şans eseri doğru noktayla birebir çakışırsa 1 birim kaydır
+        if (targetX === p.x && targetY === p.y) {
+          targetX = Math.min(GRID_EXTENT - 1, targetX + 1);
+        }
+
+        return {
+          x: targetX,
+          y: targetY,
+          label: p.label
+        };
+      });
+
+      activityResults = actStudentPoints.map(() => false);
+      tipContent.textContent = `🎯 ${activityShape} şeklinin köşe noktalarını tutup d doğrusuna göre tam simetriğine yerleştir!`;
+      render();
+    }
+
+    function checkActivityAnswer() {
+      if (actOrigPoints.length === 0) return;
+      const trueTargets = actOrigPoints.map(p => reflect(p, activityAxis));
+
+      let allCorrect = true;
+      activityResults = actStudentPoints.map((studPt, idx) => {
+        const targetPt = trueTargets[idx];
+        const isOk = (studPt.x === targetPt.x && studPt.y === targetPt.y);
+        if (!isOk) allCorrect = false;
+        return isOk;
+      });
+
+      activityChecked = true;
+      actFeedback.classList.remove('hidden');
+
+      if (allCorrect) {
+        activityScore++;
+        activityScoreText.textContent = `${activityScore} Doğru`;
+        actFeedback.className = 'text-xs font-bold rounded-xl p-2.5 bg-emerald-100 border border-emerald-300 text-emerald-950 flex items-center gap-2';
+        actFeedback.innerHTML = '🎉 <strong>MÜKEMMEL!</strong> Tüm köşe noktalarını simetri doğrusuna dik ve tam eşit uzaklığa (|AB| = |BC|) yerleştirdin!';
+      } else {
+        const wrongCount = activityResults.filter(r => !r).length;
+        actFeedback.className = 'text-xs font-bold rounded-xl p-2.5 bg-rose-50 border border-rose-300 text-rose-950 flex items-center gap-2';
+        actFeedback.innerHTML = `⚠️ <strong>${wrongCount} köşe yanlış yerde!</strong> Kırmızı ile işaretli noktaların d doğrusuna dik uzaklığını kare kare sayarak tekrar dene. (İstersen İpucu butonuna basabilirsin)`;
+      }
+      render();
+    }
+
+    tabBtnLab.addEventListener('click', () => {
+      currentTab = 'lab';
+      tabBtnLab.className = 'px-3 py-1.5 rounded-lg bg-white text-indigo-600 shadow-sm transition flex items-center gap-1.5';
+      tabBtnActivity.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5';
+      panelLab.classList.remove('hidden');
+      panelActivity.classList.add('hidden');
+      tipContent.textContent = 'İpucu: Her noktanın d simetri doğrusuna olan dik uzaklığı ile görüntüsünün uzaklığı eşittir!';
+      render();
+    });
+
+    tabBtnActivity.addEventListener('click', () => {
+      currentTab = 'activity';
+      tabBtnActivity.className = 'px-3 py-1.5 rounded-lg bg-white text-emerald-700 shadow-sm transition flex items-center gap-1.5 font-bold';
+      tabBtnLab.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5';
+      panelLab.classList.add('hidden');
+      panelActivity.classList.remove('hidden');
+      generateActivityQuestion();
+    });
+
+    // Etkinlik Şekil Butonları
+    document.querySelectorAll('.act-shape-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.act-shape-btn').forEach(b => {
+          b.className = 'act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition';
+        });
+        btn.className = 'act-shape-btn px-2 py-1.5 rounded-xl border border-emerald-600 bg-emerald-600 text-white font-bold text-xs flex items-center justify-center gap-1 shadow-sm transition';
+        activityShape = btn.getAttribute('data-act');
+        generateActivityQuestion();
+      });
+    });
+
+    // Etkinlik Ayna Doğrusu Butonları
+    document.querySelectorAll('.act-axis-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.act-axis-btn').forEach(b => {
+          b.className = 'act-axis-btn px-1.5 py-1.5 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100 text-emerald-900 font-semibold text-xs flex items-center justify-center gap-1 transition';
+        });
+        btn.className = 'act-axis-btn px-1.5 py-1.5 rounded-xl border border-rose-500 bg-rose-500 text-white font-bold text-xs flex items-center justify-center gap-1 transition shadow-sm';
+        activityAxis = btn.getAttribute('data-actaxis');
+        generateActivityQuestion();
+      });
+    });
+
+    btnActivityCheck.addEventListener('click', checkActivityAnswer);
+    btnActivityReset.addEventListener('click', generateActivityQuestion);
+    btnActivityNew.addEventListener('click', generateActivityQuestion);
+    btnActivityHint.addEventListener('click', () => {
+      showActivityHint = !showActivityHint;
+      btnActivityHint.className = showActivityHint
+        ? 'flex-1 py-2 px-2.5 rounded-xl border border-amber-500 bg-amber-400 text-amber-950 font-extrabold text-xs flex items-center justify-center gap-1 transition'
+        : 'flex-1 py-2 px-2.5 rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold text-xs flex items-center justify-center gap-1 transition';
+      render();
+    });
+
+    function setReflectionVisibility(visible, animate = true) {
+      isReflectionVisible = visible;
+      if (visible) {
+        btnToggleReveal.className = 'w-full mt-1 py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition bg-slate-700 hover:bg-slate-800 text-white';
+        revealIcon.textContent = '🙈';
+        revealText.textContent = 'Yansımayı Gizle (Yeniden Tahmin Et)';
+        if (animate) startAnimation();
+        else setProgress(1.0);
+      } else {
+        btnToggleReveal.className = 'w-full mt-1 py-2 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition bg-amber-500 hover:bg-amber-600 text-white animate-pulse';
+        revealIcon.textContent = '👁️';
+        revealText.textContent = 'Yansımayı Göster (Tıkla ve Gör)';
+        render();
+      }
+    }
+
+    btnToggleReveal.addEventListener('click', () => setReflectionVisibility(!isReflectionVisible, true));
+
+    function setProgress(val) {
+      progress = Math.max(0, Math.min(1, val));
+      progressSlider.value = Math.round(progress * 100);
+      progressLabel.textContent = `%${Math.round(progress * 100)}`;
+      render();
+    }
+
+    progressSlider.addEventListener('input', (e) => {
+      stopAnimation();
+      setProgress(parseFloat(e.target.value) / 100);
+    });
+
+    btnResetProgress.addEventListener('click', () => {
+      stopAnimation();
+      setProgress(0);
+    });
+
+    function togglePlay() {
+      if (isPlaying) stopAnimation();
+      else startAnimation();
+    }
+
+    function startAnimation() {
+      if (progress >= 1) progress = 0;
+      isPlaying = true;
+      playIcon.classList.add('hidden');
+      pauseIcon.classList.remove('hidden');
+      animateStep();
+    }
+
+    function stopAnimation() {
+      isPlaying = false;
+      playIcon.classList.remove('hidden');
+      pauseIcon.classList.add('hidden');
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+    }
+
+    function animateStep() {
+      if (!isPlaying) return;
+      let next = progress + animSpeed;
+      if (next >= 1) {
+        setProgress(1);
+        stopAnimation();
+        return;
+      }
+      setProgress(next);
+      animFrameId = requestAnimationFrame(animateStep);
+    }
+
+    btnPlay.addEventListener('click', togglePlay);
+
+    // Lab Nesne Butonları Dinleyicisi
+    document.querySelectorAll('.obj-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.obj-btn').forEach(b => {
+          b.className = 'obj-btn px-2 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 font-semibold text-slate-700 flex items-center justify-center gap-1 transition text-xs';
+        });
+        btn.className = 'obj-btn px-2 py-1.5 rounded-xl border border-indigo-600 bg-indigo-50 text-indigo-700 font-bold flex items-center justify-center gap-1 transition text-xs shadow-sm';
+        currentObject = btn.getAttribute('data-obj');
+
+        if (currentObject === 'CLOCK') clockCustomPanel.classList.remove('hidden');
+        else clockCustomPanel.classList.add('hidden');
+        
+        resizeCanvas();
+        if (chkAutoHide.checked) setReflectionVisibility(false, false);
+        else setReflectionVisibility(true, false);
+      });
+    });
+
+    inputTime.addEventListener('input', (e) => {
+      clockTimeStr = e.target.value.trim();
+      render();
+    });
+
+    document.querySelectorAll('.axis-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.axis-btn').forEach(b => {
+          b.className = 'axis-btn px-1.5 py-2 rounded-xl border border-slate-200 hover:border-slate-300 font-medium text-slate-700 flex items-center justify-center gap-1 transition text-xs';
+          const dot = b.querySelector('span');
+          if (dot) dot.className = 'w-2 h-2 rounded-full bg-slate-300 inline-block';
+        });
+        btn.className = 'axis-btn px-1.5 py-2 rounded-xl border border-rose-500 bg-rose-50 text-rose-800 font-bold flex items-center justify-center gap-1 transition text-xs shadow-sm';
+        const dot = btn.querySelector('span');
+        if (dot) dot.className = 'w-2 h-2 rounded-full bg-rose-500 inline-block';
+
+        currentAxis = btn.getAttribute('data-axis');
+        updateEducationalCards();
+        if (chkAutoHide.checked) setReflectionVisibility(false, false);
+        else setReflectionVisibility(true, true);
+      });
+    });
+
+    function updateEducationalCards() {
+      if (currentAxis === 'vertical') {
+        ruleIcon.textContent = 'd';
+        ruleTitle.textContent = 'Dikey Simetri Doğrusu';
+        ruleDesc.innerHTML = 'Dikey simetri doğrusu (d), şeklin her noktasını görüntüsüyle birleştiren doğru parçasını <strong>dik ortalar: |AB| = |BC|</strong>.';
+      } else if (currentAxis === 'horizontal') {
+        ruleIcon.textContent = 'd';
+        ruleTitle.textContent = 'Yatay Simetri Doğrusu';
+        ruleDesc.innerHTML = 'Yatay simetri doğrusu (d), şekli üst ve alt parçalara ayırır; dik izdüşümde <strong>|AB| = |BC|</strong> korunur.';
+      } else if (currentAxis === 'diagonal') {
+        ruleIcon.textContent = 'd';
+        ruleTitle.textContent = 'Eğik Simetri Doğrusu';
+        ruleDesc.innerHTML = 'Eğik simetri doğrusu, noktaları 45° açılı eğik doğruya dik yansıtır: <strong>|AB| = |BC|</strong>.';
+      } else if (currentAxis === 'origin') {
+        ruleIcon.textContent = 'O';
+        ruleTitle.textContent = 'Orijin Simetri Merkezi';
+        ruleDesc.innerHTML = 'Orijin (O), şeklin her noktasını merkezden geçirerek <strong>eşit uzaklıkta zıt yöne taşır: |AO| = |OA\'|</strong>.';
+      }
+    }
+
+    [chkDistance, chkCounts, chkTrail].forEach(chk => chk.addEventListener('change', render));
+
+    let isPseudoFs = false;
+    function setFsUI(active) {
+      if (active) {
+        fsIconExpand.classList.add('hidden');
+        fsIconCompress.classList.remove('hidden');
+        fsText.textContent = 'Küçült';
+      } else {
+        fsIconExpand.classList.remove('hidden');
+        fsIconCompress.classList.add('hidden');
+        fsText.textContent = 'Tam Ekran';
+      }
+      setTimeout(resizeCanvas, 100);
+    }
+
+    function togglePseudoFullScreen() {
+      isPseudoFs = !isPseudoFs;
+      if (isPseudoFs) {
+        container.classList.add('pseudo-fullscreen');
+        document.body.classList.add('overflow-hidden');
+      } else {
+        container.classList.remove('pseudo-fullscreen');
+        document.body.classList.remove('overflow-hidden');
+      }
+      setFsUI(isPseudoFs);
+    }
+
+    async function toggleFullScreen() {
+      if (isPseudoFs) { togglePseudoFullScreen(); return; }
+      const isNativeFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      if (isNativeFs) {
+        try {
+          if (document.exitFullscreen) await document.exitFullscreen();
+          else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+        } catch (e) { togglePseudoFullScreen(); }
+        return;
+      }
+      try {
+        if (container.requestFullscreen) await container.requestFullscreen();
+        else if (container.webkitRequestFullscreen) await container.webkitRequestFullscreen();
+        else togglePseudoFullScreen();
+      } catch (err) { togglePseudoFullScreen(); }
+    }
+
+    btnFullscreen.addEventListener('click', toggleFullScreen);
+    document.addEventListener('fullscreenchange', () => {
+      const active = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      if (!isPseudoFs) setFsUI(active);
+    });
+
+    function getPointerGridPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.clientX ?? (e.touches ? e.touches[0].clientX : 0);
+      const clientY = e.clientY ?? (e.touches ? e.touches[0].clientY : 0);
+      return {
+        cx: clientX - rect.left,
+        cy: clientY - rect.top,
+        gx: Math.round(toGridX(clientX - rect.left)),
+        gy: Math.round(toGridY(clientY - rect.top))
+      };
+    }
+
+    canvas.addEventListener('pointerdown', (e) => {
+      const pos = getPointerGridPos(e);
+
+      // 1. Etkinlik Sekmesinde Taşıma:
+      if (currentTab === 'activity') {
+        for (let i = 0; i < actStudentPoints.length; i++) {
+          const vx = toCanvasX(actStudentPoints[i].x);
+          const vy = toCanvasY(actStudentPoints[i].y);
+          if (Math.hypot(vx - pos.cx, vy - pos.cy) <= 22) {
+            draggedActivityIndex = i;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            activityChecked = false; // Hareket ettirince eski sonucu temizle
+            actFeedback.classList.add('hidden');
+            break;
+          }
+        }
+        return;
+      }
+
+      // 2. Laboratuvar Sekmesinde Taşıma:
+      let hitVertex = false;
+      if (editableShapes.hasOwnProperty(currentObject)) {
+        const pts = editableShapes[currentObject];
+        for (let i = 0; i < pts.length; i++) {
+          const vx = toCanvasX(pts[i].x);
+          const vy = toCanvasY(pts[i].y);
+          if (Math.hypot(vx - pos.cx, vy - pos.cy) <= 20) {
+            draggedVertexIndex = i;
+            hitVertex = true;
+            canvas.setPointerCapture(e.pointerId);
+            canvas.style.cursor = 'grabbing';
+            break;
+          }
+        }
+      }
+
+      if (!hitVertex && !isReflectionVisible) {
+        setReflectionVisibility(true, true);
+      }
+    });
+
+    canvas.addEventListener('pointermove', (e) => {
+      const pos = getPointerGridPos(e);
+
+      // Etkinlik modu sürükleme
+      if (draggedActivityIndex !== null && currentTab === 'activity') {
+        actStudentPoints[draggedActivityIndex].x = Math.max(-GRID_EXTENT, Math.min(GRID_EXTENT, pos.gx));
+        actStudentPoints[draggedActivityIndex].y = Math.max(-GRID_EXTENT, Math.min(GRID_EXTENT, pos.gy));
+        render();
+        return;
+      }
+
+      // Laboratuvar modu sürükleme
+      if (draggedVertexIndex !== null && editableShapes.hasOwnProperty(currentObject)) {
+        const pts = editableShapes[currentObject];
+        pts[draggedVertexIndex].x = Math.max(-GRID_EXTENT, Math.min(GRID_EXTENT, pos.gx));
+        pts[draggedVertexIndex].y = Math.max(-GRID_EXTENT, Math.min(GRID_EXTENT, pos.gy));
+        render();
+        return;
+      }
+
+      // Hover imleç güncellemeleri
+      if (currentTab === 'activity') {
+        const isHovering = actStudentPoints.some(pt => Math.hypot(toCanvasX(pt.x) - pos.cx, toCanvasY(pt.y) - pos.cy) <= 22);
+        canvas.style.cursor = isHovering ? 'grab' : 'default';
+      } else if (editableShapes.hasOwnProperty(currentObject)) {
+        const pts = editableShapes[currentObject];
+        const isHovering = pts.some(pt => Math.hypot(toCanvasX(pt.x) - pos.cx, toCanvasY(pt.y) - pos.cy) <= 20);
+        canvas.style.cursor = isHovering ? 'grab' : (isReflectionVisible ? 'crosshair' : 'pointer');
+      }
+    });
+
+    function stopPointerDrag(e) {
+      if (draggedActivityIndex !== null) {
+        try { canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+        draggedActivityIndex = null;
+        canvas.style.cursor = 'default';
+      }
+      if (draggedVertexIndex !== null) {
+        try { canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+        draggedVertexIndex = null;
+        canvas.style.cursor = 'crosshair';
+      }
+    }
+
+    canvas.addEventListener('pointerup', stopPointerDrag);
+    canvas.addEventListener('pointercancel', stopPointerDrag);
+
+    function init() {
+      setReflectionVisibility(false, false);
+      resizeCanvas();
+
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => resizeCanvas());
+        ro.observe(canvas.parentElement);
+      } else {
+        window.addEventListener('resize', resizeCanvas);
+      }
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      init();
+    } else {
+      document.addEventListener('DOMContentLoaded', init);
+    }
+  </script>
+<a href="/" style="position:fixed;bottom:12px;left:12px;z-index:99999;background:#285c4e;color:white;padding:10px 15px;border-radius:8px;font:13px Arial;text-decoration:none;box-shadow:0 2px 10px #0002">← Ufkora</a></body>
+</html>
