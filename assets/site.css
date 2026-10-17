@@ -137,3 +137,5 @@ summary:focus-visible{outline:3px solid var(--forest);outline-offset:3px;border-
 #contact-status{font-size:14px;color:#344e2f;line-height:1.6;margin-bottom:0}#contact-status:empty{display:none}
 @media(max-width:900px){.contact-section{gap:35px;grid-template-columns:1fr}}
 @media(max-width:700px){.contact-section{padding-block:50px 60px}.contact-fields{grid-template-columns:1fr;gap:0}.contact-form{padding:22px}.contact-copy p{font-size:16px}}
+
+.contact-honey{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.contact-actions button:disabled{opacity:.7;cursor:wait}
