@@ -1,2 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,750;12..96,800&family=Nunito+Sans:wght@400;500;600;650;700;800&family=Outfit:wght@400;500;600;700&display=swap');
 body,button,input,select,textarea,nav,p,li,td,th{font-family:'Nunito Sans',Arial,sans-serif!important}h1,h2,h3,h4,h5,h6{font-family:'Bricolage Grotesque',Arial,sans-serif!important}.score,.timer,.counter,.tag,.badge,.pill,.activity-type,.tabular-nums,[data-math-label],svg text{font-family:'Outfit','Nunito Sans',Arial,sans-serif!important;font-variant-numeric:tabular-nums}
+
+/* Shared readable controls in standalone mathematics activities. */
+body:not(.home-page):not(.catalog-page) button{min-height:44px;min-width:44px;line-height:1.4}
+body:not(.home-page):not(.catalog-page) :is(select,input[type=number],input[type=text]){min-height:44px;font-size:16px!important}
+body:not(.home-page):not(.catalog-page) :is(.text-xs,.text-\\[10px\\],.text-\\[11px\\]){font-size:14px!important;line-height:1.55}
+body:not(.home-page):not(.catalog-page) .text-sm{font-size:16px!important;line-height:1.6}
+
+
+body:has(#three-canvas){--text-muted:#c0cbdc}
+body:has(#three-canvas) header{height:auto;min-height:68px;flex-wrap:wrap;gap:10px;padding-block:10px}
+body:has(#three-canvas) :is(.btn,.mode-btn,.view-btn){font-size:14px}
+body:has(#three-canvas) :is(.panel-title,.stat-card .label,.preset-card,.view-2d-title,.canvas-instructions,.label-row,.switch-row){font-size:14px;line-height:1.5}
+body:has(#three-canvas) .preset-card{min-height:52px}
+body:has(#three-canvas) .view-btn.active{background:#1d4ed8}
+body:has(#three-canvas) .toast{background:#047857;font-size:15px}
+body:has(#three-canvas) input[type=color]{height:44px}
+@media(max-width:700px){body:has(#three-canvas) .canvas-overlay-top{flex-wrap:wrap;justify-content:center;max-width:calc(100% - 20px);width:max-content;border-radius:16px;gap:2px}}
