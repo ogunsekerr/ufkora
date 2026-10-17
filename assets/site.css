@@ -121,3 +121,19 @@ summary:focus-visible{outline:3px solid var(--forest);outline-offset:3px;border-
  .activity-card h2{font-size:27px}.activity-body{padding:22px}.activity-curriculum{padding-inline:22px}
 }
 @media(max-width:380px){.journey-links b{font-size:14px}.workshop .journey-links span{font-size:11px}.grade-badge{width:58px;height:58px;font-size:38px}}
+
+.contact-section{display:grid;grid-template-columns:1fr 1.2fr;gap:70px;padding-block:75px 90px}
+.contact-copy h2{margin:20px 0 24px}.contact-copy p{font-size:18px;line-height:1.7;color:#4f624b;max-width:420px}
+.contact-form{background:#fff5e6;padding:30px;border:1px solid #d6ceb7;border-radius:20px;box-shadow:0 10px 30px #5742220b}
+.contact-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.contact-form label{display:flex;flex-direction:column;gap:9px;font-size:15px;font-weight:800;margin-bottom:20px}
+.contact-form input,.contact-form textarea{font:400 16px/1.6 'Nunito Sans',sans-serif;width:100%;min-width:0;padding:13px 15px;border:1px solid #b6bda5;border-radius:10px;background:#fffbf3;color:#204b3b}
+.contact-form input{min-height:52px}.contact-form textarea{resize:vertical;min-height:170px}
+.contact-form input::placeholder,.contact-form textarea::placeholder{color:#66725e;opacity:1}
+.contact-form textarea:focus-visible{outline:3px solid #075a44;outline-offset:3px}
+.contact-help{font-size:14px;line-height:1.6;color:#4f624b;margin:0 0 20px}
+.contact-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}.contact-actions button{cursor:pointer}
+.contact-actions .btn{border:0}.contact-copy-button{font:700 15px 'Nunito Sans',sans-serif;background:none;color:#204b3b;border:0;text-decoration:underline;text-underline-offset:4px;min-height:48px;padding:10px}
+#contact-status{font-size:14px;color:#344e2f;line-height:1.6;margin-bottom:0}#contact-status:empty{display:none}
+@media(max-width:900px){.contact-section{gap:35px;grid-template-columns:1fr}}
+@media(max-width:700px){.contact-section{padding-block:50px 60px}.contact-fields{grid-template-columns:1fr;gap:0}.contact-form{padding:22px}.contact-copy p{font-size:16px}}
