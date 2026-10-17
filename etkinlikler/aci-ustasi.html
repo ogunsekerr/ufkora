@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Açı Ustası - İnteraktif Matematik Etkinliği</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f0f4f8;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        h1, h2, h3, .title-font {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .tab-active {
+            background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+            transform: translateY(-2px);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s infinite;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.6)); }
+            50% { filter: drop-shadow(0 0 12px rgba(239, 68, 68, 1)); }
+        }
+        .scale-transition {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .scale-transition:hover {
+            transform: translateY(-2px);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-blue-500 flex items-center justify-center text-white text-2xl shadow-md">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">Açı Ustası Atölyesi</h1>
+                    <p class="text-xs sm:text-sm text-slate-500 font-semibold">İnteraktif Konu Anlatımı & Sınırsız Soru Çözümü</p>
+                </div>
+            </div>
+
+            <!-- Activity Switcher Tabs -->
+            <div class="flex flex-wrap bg-slate-100 p-1.5 rounded-2xl border border-slate-200 gap-1.5 order-3 lg:order-2 w-full lg:w-auto justify-center">
+                <button id="tabBtn1" onclick="switchActivity(1)" class="tab-active flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all">
+                    <i class="fa-solid fa-ruler-combined"></i>
+                    <span>1. Etkinlik: İletki Okuma</span>
+                </button>
+                <button id="tabBtn2" onclick="switchActivity(2)" class="text-slate-600 hover:bg-white/60 flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all">
+                    <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    <span>2. Etkinlik: Özdeş & Bilinmeyen Açılar</span>
+                </button>
+                <button id="tabBtn3" onclick="switchActivity(3)" class="text-slate-600 hover:bg-white/60 flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all">
+                    <i class="fa-solid fa-bullseye text-rose-500"></i>
+                    <span>3. Etkinlik: Balon Patlatma Oyunu</span>
+                </button>
+            </div>
+
+            <!-- Score & Streak Counter -->
+            <div class="flex items-center gap-3 order-2 lg:order-3">
+                <div class="bg-amber-50 border border-amber-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-500 text-lg"></i>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-amber-700 leading-none">Seri</div>
+                        <div id="streakDisplay" class="text-base font-extrabold text-amber-600 leading-tight">0</div>
+                    </div>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+                    <i class="fa-solid fa-star text-emerald-500 text-lg"></i>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-emerald-700 leading-none">Puan</div>
+                        <div id="scoreDisplay" class="text-base font-extrabold text-emerald-600 leading-tight">0</div>
+                    </div>
+                </div>
+                <button onclick="resetScore()" title="Puanı Sıfırla" class="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-xl transition">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+        
+        <!-- ==================== ETKİNLİK 1: İLETKİ OKUMA ==================== -->
+        <section id="activity1" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Column: Interactive Lesson & Golden Rules (4 cols) -->
+            <div class="lg:col-span-4 space-y-5">
+                <!-- Golden Rule Card -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200 card-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-indigo-100 text-indigo-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Konu Anlatımı</span>
+                        <i class="fa-solid fa-lightbulb text-amber-400 text-xl"></i>
+                    </div>
+                    <h2 class="text-lg font-bold text-slate-800 mb-3">İç mi, Dış mı? Nasıl Anlarız?</h2>
+                    
+                    <div class="space-y-3 text-sm leading-relaxed text-slate-600">
+                        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+                            <p class="font-bold text-slate-800 mb-1"><i class="fa-solid fa-1 text-indigo-600 mr-1.5"></i> Altın Kural: Sıfırı (0°) Bul!</p>
+                            <p>Açının kollarından biri <strong class="text-slate-800">0° çizgisinin</strong> üzerindedir. Hangi 0°'dan başlıyorsak o sıradaki sayıları takip ederiz!</p>
+                        </div>
+
+                        <div class="p-3 rounded-2xl bg-blue-50/80 border border-blue-200">
+                            <div class="flex items-center gap-2 font-bold text-blue-800 mb-1">
+                                <span class="w-3 h-3 rounded-full bg-blue-600 inline-block"></span>
+                                Sağ Koldan Başlıyorsa → İÇ ÖLÇEK
+                            </div>
+                            <p class="text-xs text-blue-900/80">Başlangıç kolu <strong>sağ taraftaki 0°</strong>'ın üzerindeyse <strong class="underline">MAVİ (İÇ)</strong> sayıları okuruz.</p>
+                        </div>
+
+                        <div class="p-3 rounded-2xl bg-rose-50/80 border border-rose-200">
+                            <div class="flex items-center gap-2 font-bold text-rose-800 mb-1">
+                                <span class="w-3 h-3 rounded-full bg-rose-600 inline-block"></span>
+                                Sol Koldan Başlıyorsa → DIŞ ÖLÇEK
+                            </div>
+                            <p class="text-xs text-rose-900/80">Başlangıç kolu <strong>sol taraftaki 0°</strong>'ın üzerindeyse <strong class="underline">KIRMIZI (DIŞ)</strong> sayıları okuruz.</p>
+                        </div>
+
+                        <div class="p-3 rounded-2xl bg-amber-50 border border-amber-200">
+                            <p class="font-bold text-amber-900 mb-1"><i class="fa-solid fa-check-double text-amber-600 mr-1"></i> Sağlama Yöntemi (Kontrol Et!):</p>
+                            <ul class="text-xs text-amber-900/90 space-y-1 list-disc list-inside">
+                                <li>Açı kolları birbirine yakınsa <strong>Dar Açıdır (&lt;90°)</strong>. (Örn: 130° olamaz, 50°'dir!)</li>
+                                <li>Açı kolları açık/yayvansa <strong>Geniş Açıdır (&gt;90°)</strong>.</li>
+                                <li>Aradaki açı sorulursa: Büyük sayıdan küçük sayıyı çıkar!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Teacher / Practice Settings Card -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200 card-shadow">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-indigo-600"></i> Soru Türü Seçimi
+                    </h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="setProtractorFilter('all')" id="pFilter_all" class="p-filter-btn bg-indigo-600 text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-shuffle mr-2"></i>Karışık Sorular (Tüm Yönler)</span>
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                        <button onclick="setProtractorFilter('right')" id="pFilter_right" class="p-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-arrow-right text-blue-600 mr-2"></i>Sağdan Başlayan (İç Ölçek - Mavi)</span>
+                        </button>
+                        <button onclick="setProtractorFilter('left')" id="pFilter_left" class="p-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-arrow-left text-rose-600 mr-2"></i>Soldan Başlayan (Dış Ölçek - Kırmızı)</span>
+                        </button>
+                        <button onclick="setProtractorFilter('between')" id="pFilter_between" class="p-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-arrows-left-right text-purple-600 mr-2"></i>Ortadaki Açı (Fark Hesaplama)</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                        <label for="toggleHelper" class="text-xs font-bold text-slate-600 cursor-pointer select-none">
+                            <i class="fa-solid fa-eye text-indigo-500 mr-1"></i> Doğru Ölçeği Parlat (İpucu Modu)
+                        </label>
+                        <input type="checkbox" id="toggleHelper" onchange="renderProtractorSVG()" class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Protractor Canvas & Question Area (8 cols) -->
+            <div class="lg:col-span-8 space-y-5">
+                <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 card-shadow">
+                    
+                    <!-- Top Question Banner -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+                        <div>
+                            <span id="pQuestionBadge" class="inline-block bg-blue-100 text-blue-700 text-xs font-extrabold px-2.5 py-1 rounded-lg mb-1">SORU #1</span>
+                            <h2 id="pQuestionTitle" class="text-lg sm:text-xl font-bold text-slate-800">Açı ölçer üzerinde gösterilen <span class="text-indigo-600">widehat(AOB)</span> açısı kaç derecedir?</h2>
+                        </div>
+                        <button onclick="generateProtractorQuestion()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2 transition scale-transition">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Yeni Soru Üret
+                        </button>
+                    </div>
+
+                    <!-- Interactive SVG Protractor Container -->
+                    <div class="relative bg-slate-50 rounded-2xl border-2 border-slate-200/80 p-2 sm:p-4 flex flex-col items-center justify-center overflow-hidden">
+                        <!-- Scale Legend Pill -->
+                        <div class="flex flex-wrap items-center justify-center gap-4 mb-2 text-xs font-bold">
+                            <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 border border-rose-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span> DIŞ ÖLÇEK (Soldaki 0°'dan başlar)
+                            </span>
+                            <span class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-700 border border-blue-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> İÇ ÖLÇEK (Sağdaki 0°'dan başlar)
+                            </span>
+                        </div>
+
+                        <div id="protractorSvgContainer" class="w-full max-w-[680px] select-none">
+                            <!-- Dynamic SVG Protractor Rendered by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Interactive Guide & Answer Input -->
+                    <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        
+                        <!-- Step 1: Identify Scale / Type -->
+                        <div class="space-y-2">
+                            <p class="text-xs font-extrabold uppercase tracking-wider text-slate-400">1. Adım: Kendi Kendine Sor!</p>
+                            <div id="pStepHintBox" class="text-sm font-semibold text-slate-700 bg-white p-3.5 rounded-xl border border-slate-200">
+                                Başlangıç kolu hangi <strong>0°</strong> üzerinde? Açımız <strong>Dar</strong> mı <strong>Geniş</strong> mi?
+                            </div>
+                            <button onclick="showProtractorStepHint()" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5 px-2 py-1">
+                                <i class="fa-solid fa-circle-question"></i> Bana Adım Adım İpucu Ver
+                            </button>
+                        </div>
+
+                        <!-- Step 2: Input & Check -->
+                        <div class="flex flex-col gap-2">
+                            <label for="pAnswerInput" class="text-xs font-extrabold uppercase tracking-wider text-slate-500">2. Adım: Cevabını Yaz veya Seç</label>
+                            <div class="flex gap-2">
+                                <div class="relative flex-1">
+                                    <input type="number" id="pAnswerInput" placeholder="Örn: 60" min="0" max="180" 
+                                        onkeydown="if(event.key==='Enter') checkProtractorAnswer()"
+                                        class="w-full px-4 py-3 text-lg font-extrabold text-slate-800 bg-white border-2 border-slate-300 rounded-xl focus:outline-none focus:border-indigo-500 transition">
+                                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xl font-bold text-slate-400">°</span>
+                                </div>
+                                <button onclick="checkProtractorAnswer()" class="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition scale-transition flex items-center gap-2">
+                                    <span>Kontrol Et</span>
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            <!-- Quick Multiple Choice Buttons for faster interaction -->
+                            <div id="pQuickChoices" class="grid grid-cols-4 gap-2 mt-1">
+                                <!-- Filled dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Box -->
+                    <div id="pFeedbackBox" class="hidden mt-4 p-4 rounded-2xl border-2 transition-all"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==================== ETKİNLİK 2: ÖZDEŞ & BİLİNMEYEN AÇILAR ==================== -->
+        <section id="activity2" class="hidden grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Column: Concept Guide (4 cols) -->
+            <div class="lg:col-span-4 space-y-5">
+                <div class="bg-white rounded-3xl p-5 border border-slate-200 card-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-emerald-100 text-emerald-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Konu Özeti</span>
+                        <i class="fa-solid fa-graduation-cap text-emerald-500 text-xl"></i>
+                    </div>
+                    <h2 class="text-lg font-bold text-slate-800 mb-3">Özdeş (Eş) ve Bilinmeyen Açılar</h2>
+
+                    <div class="space-y-3 text-sm text-slate-600">
+                        <div class="p-3 rounded-2xl bg-indigo-50/70 border border-indigo-200">
+                            <p class="font-bold text-indigo-900 mb-1">
+                                <i class="fa-solid fa-clone text-indigo-600 mr-1"></i> Özdeş (Eş) Açı Nedir?
+                            </p>
+                            <p class="text-xs text-indigo-950/80 leading-relaxed">
+                                Ölçüleri (dereceleri) birbirine <strong>tamamen eşit</strong> olan açılara <strong>eş (özdeş) açılar</strong> denir. Sorularda içinde <strong>aynı sembol</strong> (nokta <span class="font-bold">•</span>, tek çizgi <span class="font-bold">|</span>, çift yay vb.) olan açılar birbirine eşittir! Birini bulursan diğerini de bulmuş olursun!
+                            </p>
+                        </div>
+
+                        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                            <p class="font-bold text-slate-800"><i class="fa-solid fa-compass text-blue-500 mr-1"></i> Hesaplama İpuçları:</p>
+                            <div class="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200">
+                                <span class="font-bold text-slate-700">📐 Dik Açı (Ters T / Kutu):</span>
+                                <span class="bg-blue-100 text-blue-800 font-extrabold px-2 py-0.5 rounded">Toplamı = 90°</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200">
+                                <span class="font-bold text-slate-700">📏 Doğru Açı (Düz Çizgi):</span>
+                                <span class="bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded">Toplamı = 180°</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200">
+                                <span class="font-bold text-slate-700">✂️ Ters Açılar (Makas):</span>
+                                <span class="bg-purple-100 text-purple-800 font-extrabold px-2 py-0.5 rounded">Birbirine Eşittir!</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs bg-white p-2 rounded-xl border border-slate-200">
+                                <span class="font-bold text-slate-700">🔄 Tam Açı (Tam Tur):</span>
+                                <span class="bg-amber-100 text-amber-800 font-extrabold px-2 py-0.5 rounded">Toplamı = 360°</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Filter for Activity 2 -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200 card-shadow">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-emerald-600"></i> Soru Tipi Seçimi
+                    </h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="setAngleFilter('all')" id="aFilter_all" class="a-filter-btn bg-indigo-600 text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-shuffle mr-2"></i>Karışık Tekrar (Tüm Konular)</span>
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                        <button onclick="setAngleFilter('identical_straight')" id="aFilter_identical_straight" class="a-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-grip-lines mr-2 text-emerald-600"></i>Doğru Açıda Özdeş Açılar (180°)</span>
+                        </button>
+                        <button onclick="setAngleFilter('identical_right')" id="aFilter_identical_right" class="a-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-vector-square mr-2 text-blue-600"></i>Dik Açıda Özdeş Açılar (90°)</span>
+                        </button>
+                        <button onclick="setAngleFilter('bisector_neighbor')" id="aFilter_bisector_neighbor" class="a-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-clone mr-2 text-amber-600"></i>Eş Açıyı Yan Açıya Taşıma</span>
+                        </button>
+                        <button onclick="setAngleFilter('vertical')" id="aFilter_vertical" class="a-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-scissors mr-2 text-purple-600"></i>Ters (Makas) & Özdeş Açılar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Geometry Canvas & Step Solver (8 cols) -->
+            <div class="lg:col-span-8 space-y-5">
+                <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 card-shadow">
+                    
+                    <!-- Question Header -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span id="aQuestionBadge" class="inline-block bg-emerald-100 text-emerald-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">SORU #1</span>
+                                <span id="aQuestionCategoryTag" class="inline-block bg-slate-100 text-slate-600 text-xs font-bold px-2.5 py-1 rounded-lg">Doğru Açıda Özdeş Açılar</span>
+                            </div>
+                            <h2 id="aQuestionText" class="text-base sm:text-lg font-bold text-slate-800 leading-snug">
+                                Verilen şekle göre bilinmeyen <span class="text-rose-600 font-extrabold">x</span> açısı kaç derecedir?
+                            </h2>
+                        </div>
+                        <button onclick="generateAngleQuestion()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2 transition scale-transition shrink-0">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Yeni Soru Üret
+                        </button>
+                    </div>
+
+                    <!-- Geometry SVG Stage -->
+                    <div class="bg-slate-50 rounded-2xl border-2 border-slate-200/80 p-4 flex flex-col items-center justify-center relative min-h-[300px]">
+                        <div id="angleSvgContainer" class="w-full max-w-[600px] flex justify-center items-center select-none">
+                            <!-- Dynamic Geometry SVG -->
+                        </div>
+                        <div id="identicalLegend" class="mt-2 px-3.5 py-1.5 bg-amber-50 border border-amber-200 rounded-full text-xs font-bold text-amber-900 flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-amber-500"></i>
+                            <span id="identicalLegendText">Aynı renk ve sembole (•) sahip açılar birbirine özdeştir (eşittir)!</span>
+                        </div>
+                    </div>
+
+                    <!-- Scratchpad / Hint & Answer Input -->
+                    <div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4 items-center bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        
+                        <!-- Left: Interactive Hint Box -->
+                        <div class="space-y-2">
+                            <p class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Çözüm İpucu & Adımlar</p>
+                            <div id="aHintBox" class="text-sm font-semibold text-slate-700 bg-white p-3.5 rounded-xl border border-slate-200 min-h-[72px] flex items-center">
+                                İpucuna ihtiyacın olursa aşağıdaki butona tıklayabilirsin!
+                            </div>
+                            <button onclick="showAngleStepHint()" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5 px-2 py-1">
+                                <i class="fa-solid fa-lightbulb text-amber-500"></i> Adım Adım Nasıl Çözülür Göster
+                            </button>
+                        </div>
+
+                        <!-- Right: Answer Entry -->
+                        <div class="flex flex-col gap-2">
+                            <label for="aAnswerInput" class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Bilinmeyen Açı (<span class="text-rose-600">x</span>) Kaç Derecedir?</label>
+                            <div class="flex gap-2">
+                                <div class="relative flex-1">
+                                    <input type="number" id="aAnswerInput" placeholder="x = ?" min="0" max="360"
+                                        onkeydown="if(event.key==='Enter') checkAngleAnswer()"
+                                        class="w-full px-4 py-3 text-lg font-extrabold text-slate-800 bg-white border-2 border-slate-300 rounded-xl focus:outline-none focus:border-indigo-500 transition">
+                                    <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xl font-bold text-slate-400">°</span>
+                                </div>
+                                <button onclick="checkAngleAnswer()" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition scale-transition flex items-center gap-2">
+                                    <span>Kontrol Et</span>
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+                            <!-- Quick Multiple Choice Buttons -->
+                            <div id="aQuickChoices" class="grid grid-cols-4 gap-2 mt-1">
+                                <!-- Filled dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feedback & Solution Walkthrough Box -->
+                    <div id="aFeedbackBox" class="hidden mt-4 p-4 rounded-2xl border-2 transition-all"></div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ETKİNLİK 3: BALON PATLATMA OYUNU (AÇI OKÇUSU) ==================== -->
+        <section id="activity3" class="hidden grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left Column: Game Modes, Mission Info & Guide (4 cols) -->
+            <div class="lg:col-span-4 space-y-5">
+                <!-- Game Mission & Rules Card -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200 card-shadow">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="bg-rose-100 text-rose-700 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">Oyun Rehberi</span>
+                        <i class="fa-solid fa-bullseye text-rose-500 text-xl"></i>
+                    </div>
+                    <h2 class="text-lg font-bold text-slate-800 mb-2">Açı Okçusu: Balon Avı! 🎈</h2>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3">
+                        Verilen göreve göre <strong>yayın açısını sağa veya sola çevirerek</strong> hedefi tam 12'den vur! İster doğrudan ekran üzerindeki oku fareyle/parmağınla sürükle, ister aşağıdaki hassas butonları kullan.
+                    </p>
+
+                    <div class="space-y-2.5 text-xs">
+                        <div class="p-3 rounded-2xl bg-blue-50 border border-blue-200 text-blue-900">
+                            <div class="font-extrabold flex items-center gap-1.5 mb-0.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span> Sağdaki 0°'dan (İç Ölçek - Mavi)
+                            </div>
+                            <p>Görev <strong>"Sağdaki 0°'dan"</strong> diyorsa, sağ yatay çizgiden başlayıp <strong>MAVİ</strong> sayıları takip ederek oku sola doğru kaldır.</p>
+                        </div>
+
+                        <div class="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900">
+                            <div class="font-extrabold flex items-center gap-1.5 mb-0.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-rose-600"></span> Soldaki 0°'dan (Dış Ölçek - Kırmızı)
+                            </div>
+                            <p>Görev <strong>"Soldaki 0°'dan"</strong> diyorsa, sol yatay çizgiden başlayıp <strong>KIRMIZI</strong> sayıları takip ederek oku sağa doğru kaldır.</p>
+                        </div>
+
+                        <div class="p-3 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900">
+                            <div class="font-extrabold flex items-center gap-1.5 mb-0.5">
+                                <i class="fa-solid fa-calculator text-amber-600"></i> Hesapla ve Vur Modu!
+                            </div>
+                            <p>Önce sorudaki <strong>özdeş (eş), dik (90°) veya doğru (180°) açı</strong> ipucunu kullanarak hedef derecesini hesapla, sonra oku o açıya çevirip fırlat!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Mode Selector Card -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200 card-shadow">
+                    <h3 class="font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-gamepad text-rose-600"></i> Oyun Modu Seçimi (Bol Örnek)
+                    </h3>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="setGameMode('all')" id="gMode_all" class="g-mode-btn bg-indigo-600 text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-shuffle mr-2"></i>Karışık Görevler (Tüm Modlar)</span>
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                        <button onclick="setGameMode('inner')" id="gMode_inner" class="g-mode-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-arrow-right text-blue-600 mr-2"></i>Sağdaki 0° (İç Ölçek - Mavi)</span>
+                        </button>
+                        <button onclick="setGameMode('outer')" id="gMode_outer" class="g-mode-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-arrow-left text-rose-600 mr-2"></i>Soldaki 0° (Dış Ölçek - Kırmızı)</span>
+                        </button>
+                        <button onclick="setGameMode('calculate')" id="gMode_calculate" class="g-mode-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-brain text-amber-600 mr-2"></i>Hesapla & Balonu Vur (Özdeş/Tümler/Bütünler)</span>
+                        </button>
+                        <button onclick="setGameMode('multi')" id="gMode_multi" class="g-mode-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition">
+                            <span><i class="fa-solid fa-burst text-purple-600 mr-2"></i>3'lü Balon Avı (Sırayla Patlat!)</span>
+                        </button>
+                    </div>
+
+                    <!-- Helper Options -->
+                    <div class="mt-4 pt-3 border-t border-slate-100 space-y-2.5">
+                        <div class="flex items-center justify-between">
+                            <label for="gameLaserToggle" class="text-xs font-bold text-slate-600 cursor-pointer select-none">
+                                <i class="fa-solid fa-wand-sparkles text-rose-500 mr-1"></i> Nişan Çizgisini (Lazeri) Göster
+                            </label>
+                            <input type="checkbox" id="gameLaserToggle" checked onchange="renderBalloonGameSVG()" class="w-5 h-5 accent-rose-600 rounded cursor-pointer">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label for="gameReadoutToggle" class="text-xs font-bold text-slate-600 cursor-pointer select-none">
+                                <i class="fa-solid fa-eye text-indigo-500 mr-1"></i> Anlık Derece Göstergesini Aç
+                            </label>
+                            <input type="checkbox" id="gameReadoutToggle" onchange="updateGameReadoutVisibility()" class="w-5 h-5 accent-indigo-600 rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Popped Balloon Counter -->
+                    <div class="mt-4 bg-gradient-to-r from-rose-50 to-amber-50 border border-rose-200 rounded-2xl p-3 flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-9 h-9 rounded-xl bg-rose-500 text-white flex items-center justify-center text-base shadow-sm">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <div class="text-[11px] font-bold text-rose-800 uppercase">Patlatılan Balon</div>
+                                <div id="poppedCountDisplay" class="text-lg font-black text-rose-600 leading-none">0 Balon 🎈</div>
+                            </div>
+                        </div>
+                        <button onclick="generateBalloonMission()" class="text-xs font-bold bg-white hover:bg-rose-100 text-rose-700 px-3 py-1.5 rounded-lg border border-rose-200 transition">
+                            Yeni Balonlar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Bow & Protractor Canvas (8 cols) -->
+            <div class="lg:col-span-8 space-y-5">
+                <div class="bg-white rounded-3xl p-5 sm:p-6 border border-slate-200 card-shadow">
+                    
+                    <!-- Top Mission Prompt Banner -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+                        <div class="flex-1">
+                            <div class="flex items-center flex-wrap gap-2 mb-1">
+                                <span id="gMissionBadge" class="inline-block bg-rose-100 text-rose-700 text-xs font-extrabold px-2.5 py-1 rounded-lg">TUR #1</span>
+                                <span id="gMissionCategory" class="inline-block bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-lg">İç Ölçek Nişancısı</span>
+                                <span id="gRoundProgressBadge" class="inline-block bg-amber-100 text-amber-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">Hedef Balon: 1 / 3</span>
+                            </div>
+                            <h2 id="gMissionText" class="text-base sm:text-lg font-bold text-slate-800 leading-snug">
+                                Oku çevirerek <span class="text-rose-600 font-extrabold">hedef balonu</span> patlat!
+                            </h2>
+                        </div>
+                        <button onclick="generateBalloonMission()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold px-4 py-2.5 rounded-xl text-sm flex items-center gap-2 transition scale-transition shrink-0">
+                            <i class="fa-solid fa-rotate"></i> Yeni 3 Balon Getir
+                        </button>
+                    </div>
+
+                    <!-- Interactive SVG Game Stage -->
+                    <div class="relative bg-gradient-to-b from-sky-100/80 via-sky-50/50 to-slate-50 rounded-2xl border-2 border-sky-200/80 p-2 sm:p-3 flex flex-col items-center justify-center overflow-hidden">
+                        
+                        <!-- Top Status Bar inside Game Canvas -->
+                        <div class="w-full flex flex-wrap items-center justify-between gap-2 px-2 mb-1">
+                            <div class="flex items-center gap-2 text-xs font-bold">
+                                <span class="px-2.5 py-1 rounded-full bg-white/90 text-rose-700 border border-rose-200 shadow-sm">
+                                    🔴 Dış Ölçek (Soldan 0°)
+                                </span>
+                                <span class="px-2.5 py-1 rounded-full bg-white/90 text-blue-700 border border-blue-200 shadow-sm">
+                                    🔵 İç Ölçek (Sağdan 0°)
+                                </span>
+                            </div>
+
+                            <!-- Optional Live Angle Readout Badge -->
+                            <div id="gameLiveReadout" class="hidden items-center gap-2 bg-slate-900/90 text-white px-3 py-1 rounded-full text-xs font-extrabold shadow-sm">
+                                <span class="text-blue-300">İç (Sağdan): <strong id="liveInnerDeg">90°</strong></span>
+                                <span class="text-slate-400">|</span>
+                                <span class="text-rose-300">Dış (Soldan): <strong id="liveOuterDeg">90°</strong></span>
+                            </div>
+                        </div>
+
+                        <!-- Main Interactive SVG Container (Touch & Mouse Drag Supported) -->
+                        <div id="balloonGameSvgWrapper" class="w-full max-w-[700px] select-none touch-none cursor-grab active:cursor-grabbing">
+                            <!-- Filled dynamically by renderBalloonGameSVG() -->
+                        </div>
+
+                        <div class="text-[11px] font-bold text-slate-500 mt-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-hand-pointer text-indigo-500"></i>
+                            <span>İpucu: İletki üzerindeki oku parmağınla/fareyle tutup <strong>sağa-sola çevirebilirsin</strong>!</span>
+                        </div>
+                    </div>
+
+                    <!-- STEP 1: MANDATORY ANGLE TYPE CLASSIFICATION (DAR / DİK / GENİŞ) -->
+                    <div class="mt-4 bg-indigo-50/70 p-4 rounded-2xl border-2 border-indigo-200">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                            <div class="flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-indigo-600 text-white font-black text-xs flex items-center justify-center">1</span>
+                                <h3 class="text-xs sm:text-sm font-extrabold text-indigo-950 uppercase tracking-wide">
+                                    1. Adım: Hedeflenen Açının Türünü İşaretle <span class="text-rose-600">(Seçmeden Ok Atılmaz!)</span>
+                                </h3>
+                            </div>
+                            <span id="angleTypeStatusBadge" class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300">
+                                <i class="fa-solid fa-lock mr-1"></i> Önce Açı Türünü Seç!
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2.5">
+                            <button id="typeBtn_dar" onclick="selectGameAngleType('dar')" class="angle-type-btn bg-white hover:bg-indigo-50 text-slate-700 border-2 border-slate-200 rounded-xl p-2.5 flex flex-col items-center justify-center gap-1 transition shadow-sm">
+                                <div class="text-sm sm:text-base font-black text-indigo-700"><i class="fa-solid fa-chevron-left mr-1"></i>Dar Açı</div>
+                                <span class="text-[11px] font-bold text-slate-500">0° ile 89° arası (&lt;90°)</span>
+                            </button>
+                            <button id="typeBtn_dik" onclick="selectGameAngleType('dik')" class="angle-type-btn bg-white hover:bg-indigo-50 text-slate-700 border-2 border-slate-200 rounded-xl p-2.5 flex flex-col items-center justify-center gap-1 transition shadow-sm">
+                                <div class="text-sm sm:text-base font-black text-emerald-700"><i class="fa-solid fa-ruler-combined mr-1"></i>Dik Açı</div>
+                                <span class="text-[11px] font-bold text-slate-500">Tam 90° (=90°)</span>
+                            </button>
+                            <button id="typeBtn_genis" onclick="selectGameAngleType('genis')" class="angle-type-btn bg-white hover:bg-indigo-50 text-slate-700 border-2 border-slate-200 rounded-xl p-2.5 flex flex-col items-center justify-center gap-1 transition shadow-sm">
+                                <div class="text-sm sm:text-base font-black text-rose-700"><i class="fa-solid fa-Angle-left mr-1"></i>Geniş Açı</div>
+                                <span class="text-[11px] font-bold text-slate-500">91° ile 179° arası (&gt;90°)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: Controls Bar: Rotation Buttons, Slider & FIRE Button -->
+                    <div class="mt-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-6 h-6 rounded-full bg-rose-600 text-white font-black text-xs flex items-center justify-center">2</span>
+                            <h3 class="text-xs sm:text-sm font-extrabold text-slate-800 uppercase tracking-wide">
+                                2. Adım: Oku Doğru Açıya Çevir ve Fırlat!
+                            </h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                            
+                            <!-- Fine Tuning & Slider Controls (8 cols) -->
+                            <div class="md:col-span-8 space-y-2.5">
+                                <div class="flex items-center justify-between text-xs font-extrabold text-slate-600">
+                                    <span class="text-rose-600"><i class="fa-solid fa-arrow-rotate-left mr-1"></i> Sola Çevir (Sol 0°'a Yaklaş)</span>
+                                    <span class="text-blue-600">Sağa Çevir (Sağ 0°'a Yaklaş) <i class="fa-solid fa-arrow-rotate-right ml-1"></i></span>
+                                </div>
+
+                                <!-- Range Slider (180 on Left to 0 on Right) -->
+                                <div class="flex items-center gap-3">
+                                    <span class="text-xs font-black text-rose-600 bg-rose-100 px-2 py-1 rounded-lg">Sol Yatay</span>
+                                    <input type="range" id="bowAngleSlider" min="0" max="180" step="1" value="90"
+                                        oninput="onSliderChange(this.value)"
+                                        class="flex-1 h-3 bg-gradient-to-r from-rose-400 via-indigo-400 to-blue-500 rounded-lg appearance-none cursor-pointer accent-indigo-700">
+                                    <span class="text-xs font-black text-blue-600 bg-blue-100 px-2 py-1 rounded-lg">Sağ Yatay</span>
+                                </div>
+
+                                <!-- Step Adjust Buttons -->
+                                <div class="grid grid-cols-5 gap-1.5 pt-1">
+                                    <button onclick="rotateBowBy(5)" class="bg-white hover:bg-rose-50 active:scale-95 text-rose-700 border border-rose-200 font-extrabold py-2 rounded-xl text-xs sm:text-sm shadow-sm transition">
+                                        <i class="fa-solid fa-angles-left mr-1"></i>Sola 5°
+                                    </button>
+                                    <button onclick="rotateBowBy(1)" class="bg-white hover:bg-rose-50 active:scale-95 text-rose-600 border border-slate-200 font-extrabold py-2 rounded-xl text-xs sm:text-sm shadow-sm transition">
+                                        <i class="fa-solid fa-angle-left mr-1"></i>Sola 1°
+                                    </button>
+                                    <button onclick="setBowAngle(90)" class="bg-slate-200 hover:bg-slate-300 active:scale-95 text-slate-800 font-extrabold py-2 rounded-xl text-xs sm:text-sm transition">
+                                        90° Dik
+                                    </button>
+                                    <button onclick="rotateBowBy(-1)" class="bg-white hover:bg-blue-50 active:scale-95 text-blue-600 border border-slate-200 font-extrabold py-2 rounded-xl text-xs sm:text-sm shadow-sm transition">
+                                        Sağa 1°<i class="fa-solid fa-angle-right ml-1"></i>
+                                    </button>
+                                    <button onclick="rotateBowBy(-5)" class="bg-white hover:bg-blue-50 active:scale-95 text-blue-700 border border-blue-200 font-extrabold py-2 rounded-xl text-xs sm:text-sm shadow-sm transition">
+                                        Sağa 5°<i class="fa-solid fa-angles-right ml-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Big Fire Button & Hint Button (4 cols) -->
+                            <div class="md:col-span-4 flex flex-col gap-2">
+                                <button id="fireArrowBtn" onclick="fireArrow()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-rose-500 via-red-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 active:scale-95 text-white font-black text-base sm:text-lg shadow-lg shadow-rose-500/30 transition flex items-center justify-center gap-2.5">
+                                    <i class="fa-solid fa-location-arrow rotate-45 text-xl"></i>
+                                    <span>OKU FIRLAT!</span>
+                                </button>
+                                <button onclick="showGameHint()" class="w-full py-2 px-3 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold text-xs transition flex items-center justify-center gap-1.5">
+                                    <i class="fa-solid fa-lightbulb text-amber-600"></i>
+                                    <span>Hangi Açıya Çevirmeliyim? (İpucu)</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Game Feedback & Explanation Box -->
+                    <div id="gFeedbackBox" class="hidden mt-4 p-4 rounded-2xl border-2 transition-all"></div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // ==================== GLOBAL STATE ====================
+        let score = 0;
+        let streak = 0;
+        let activeTab = 1;
+
+        // Activity 1 State (Protractor)
+        let pFilter = 'all'; // 'all', 'right', 'left', 'between'
+        let pQuestionCount = 0;
+        let currentPQuestion = null;
+
+        // Activity 2 State (Identical & Unknown Angles)
+        let aFilter = 'all'; // 'all', 'identical_straight', 'identical_right', 'bisector_neighbor', 'vertical'
+        let aQuestionCount = 0;
+        let currentAQuestion = null;
+
+        // Simple Web Audio Synth for gentle feedback sounds (no external files)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playFeedbackSound(isSuccess) {
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (isSuccess) {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+                    osc.start(now);
+                    osc.stop(now + 0.45);
+                } else {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(300, now);
+                    osc.frequency.setValueAtTime(220, now + 0.15);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                }
+            } catch (e) {
+                // Ignore audio errors if blocked
+            }
+        }
+
+        function updateScoreboard(points, isCorrect) {
+            if (isCorrect) {
+                streak++;
+                score += points + (streak >= 3 ? 5 : 0);
+            } else {
+                streak = 0;
+            }
+            document.getElementById('scoreDisplay').textContent = score;
+            document.getElementById('streakDisplay').textContent = streak;
+        }
+
+        function resetScore() {
+            score = 0;
+            streak = 0;
+            document.getElementById('scoreDisplay').textContent = '0';
+            document.getElementById('streakDisplay').textContent = '0';
+        }
+
+        function switchActivity(tabNum) {
+            activeTab = tabNum;
+            const sec1 = document.getElementById('activity1');
+            const sec2 = document.getElementById('activity2');
+            const sec3 = document.getElementById('activity3');
+            const btn1 = document.getElementById('tabBtn1');
+            const btn2 = document.getElementById('tabBtn2');
+            const btn3 = document.getElementById('tabBtn3');
+
+            const activeClass = 'tab-active flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all';
+            const inactiveClass = 'text-slate-600 hover:bg-white/60 flex-1 lg:flex-initial flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all';
+
+            sec1.classList.add('hidden'); sec1.classList.remove('grid');
+            sec2.classList.add('hidden'); sec2.classList.remove('grid');
+            sec3.classList.add('hidden'); sec3.classList.remove('grid');
+
+            btn1.className = inactiveClass;
+            btn2.className = inactiveClass;
+            btn3.className = inactiveClass;
+
+            if (tabNum === 1) {
+                sec1.classList.remove('hidden');
+                sec1.classList.add('grid');
+                btn1.className = activeClass;
+            } else if (tabNum === 2) {
+                sec2.classList.remove('hidden');
+                sec2.classList.add('grid');
+                btn2.className = activeClass;
+            } else {
+                sec3.classList.remove('hidden');
+                sec3.classList.add('grid');
+                btn3.className = activeClass;
+                renderBalloonGameSVG();
+            }
+        }
+
+        // ==================== ACTIVITY 1: PROTRACTOR LOGIC ====================
+        function setProtractorFilter(filter) {
+            pFilter = filter;
+            document.querySelectorAll('.p-filter-btn').forEach(btn => {
+                btn.className = 'p-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition';
+                const checkIcon = btn.querySelector('.fa-check');
+                if (checkIcon) checkIcon.remove();
+            });
+            const activeBtn = document.getElementById('pFilter_' + filter);
+            activeBtn.className = 'p-filter-btn bg-indigo-600 text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition';
+            activeBtn.innerHTML += '<i class="fa-solid fa-check"></i>';
+            generateProtractorQuestion();
+        }
+
+        function generateProtractorQuestion() {
+            pQuestionCount++;
+            let mode = pFilter;
+            if (mode === 'all') {
+                const modes = ['right', 'left', 'right', 'left', 'between'];
+                mode = modes[Math.floor(Math.random() * modes.length)];
+            }
+
+            // Pick clean angles (multiples of 5 or 10)
+            const possibleAngles = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160];
+            const measuredAngle = possibleAngles[Math.floor(Math.random() * possibleAngles.length)];
+
+            let startDegRight = 0; // Angle from right horizontal (0 to 180 counter-clockwise)
+            let endDegRight = 0;
+            let scaleToRead = ''; // 'inner' (blue), 'outer' (red), 'both'
+
+            if (mode === 'right') {
+                startDegRight = 0;
+                endDegRight = measuredAngle;
+                scaleToRead = 'inner';
+            } else if (mode === 'left') {
+                startDegRight = 180 - measuredAngle;
+                endDegRight = 180;
+                scaleToRead = 'outer';
+            } else {
+                // 'between' mode
+                const starts = [20, 30, 40, 50, 60];
+                startDegRight = starts[Math.floor(Math.random() * starts.length)];
+                const spans = [40, 50, 60, 70, 80, 90, 100];
+                const span = spans[Math.floor(Math.random() * spans.length)];
+                endDegRight = startDegRight + span;
+                scaleToRead = 'between';
+            }
+
+            const answer = (mode === 'between') ? (endDegRight - startDegRight) : measuredAngle;
+            const supplementTrap = 180 - answer; // Common mistake when reading wrong scale!
+
+            // Generate 4 choices including the correct answer and the inner/outer scale trap
+            let choicesSet = new Set([answer]);
+            if (supplementTrap !== answer && supplementTrap > 0 && supplementTrap < 180) {
+                choicesSet.add(supplementTrap);
+            }
+            while (choicesSet.size < 4) {
+                const offset = (Math.floor(Math.random() * 5) - 2) * 10;
+                const cand = answer + (offset === 0 ? 15 : offset);
+                if (cand > 5 && cand < 175) choicesSet.add(cand);
+            }
+            const choices = Array.from(choicesSet).sort((a, b) => a - b);
+
+            currentPQuestion = {
+                id: pQuestionCount,
+                mode,
+                startDegRight,
+                endDegRight,
+                answer,
+                supplementTrap,
+                scaleToRead,
+                choices,
+                solved: false
+            };
+
+            // Update UI text
+            document.getElementById('pQuestionBadge').textContent = `SORU #${pQuestionCount}`;
+            document.getElementById('pQuestionTitle').innerHTML = `Açı ölçer üzerinde gösterilen <span class="text-indigo-600 font-extrabold">AOB açısı</span> kaç derecedir?`;
+            document.getElementById('pAnswerInput').value = '';
+            document.getElementById('pFeedbackBox').classList.add('hidden');
+
+            // Reset step hint
+            document.getElementById('pStepHintBox').innerHTML = `Başlangıç kolu hangi <strong>0°</strong> üzerinde? Açımız <strong>Dar (&lt;90°)</strong> mı yoksa <strong>Geniş (&gt;90°)</strong> mi?`;
+
+            // Render quick choices
+            const quickContainer = document.getElementById('pQuickChoices');
+            quickContainer.innerHTML = '';
+            choices.forEach(c => {
+                const btn = document.createElement('button');
+                btn.className = 'bg-white hover:bg-indigo-50 text-slate-700 hover:text-indigo-700 font-extrabold py-2 rounded-xl border border-slate-200 text-sm transition shadow-sm';
+                btn.textContent = `${c}°`;
+                btn.onclick = () => {
+                    document.getElementById('pAnswerInput').value = c;
+                    checkProtractorAnswer();
+                };
+                quickContainer.appendChild(btn);
+            });
+
+            renderProtractorSVG();
+        }
+
+        function polarToCartesian(cx, cy, r, angleDegFromRight) {
+            const rad = (angleDegFromRight * Math.PI) / 180;
+            return {
+                x: cx + r * Math.cos(rad),
+                y: cy - r * Math.sin(rad)
+            };
+        }
+
+        function renderProtractorSVG() {
+            if (!currentPQuestion) return;
+            const helperOn = document.getElementById('toggleHelper').checked;
+            const { mode, startDegRight, endDegRight, answer } = currentPQuestion;
+
+            const cx = 350;
+            const cy = 290;
+            const outerR = 250;
+            const innerR = 185;
+            const bodyInnerR = 140;
+
+            let svg = `<svg viewBox="0 0 700 340" class="w-full h-auto drop-shadow-sm">`;
+
+            // Definitions for arrowheads & gradients
+            svg += `
+                <defs>
+                    <marker id="rayArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+                    </marker>
+                    <marker id="rayArrowZero" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+                    </marker>
+                </defs>
+            `;
+
+            // Protractor Semi-transparent Plastic Body
+            svg += `
+                <path d="M ${cx - outerR} ${cy} A ${outerR} ${outerR} 0 0 1 ${cx + outerR} ${cy} L ${cx + outerR} ${cy + 22} L ${cx - outerR} ${cy + 22} Z" 
+                      fill="#ffffff" fill-opacity="0.92" stroke="#94a3b8" stroke-width="2.5" />
+                <path d="M ${cx - bodyInnerR} ${cy} A ${bodyInnerR} ${bodyInnerR} 0 0 1 ${cx + bodyInnerR} ${cy} Z" 
+                      fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" />
+            `;
+
+            // Highlighted active scale ring if Helper is ON
+            if (helperOn) {
+                if (mode === 'right') {
+                    // Highlight Inner Scale (Blue)
+                    svg += `<path d="M ${cx - innerR} ${cy} A ${innerR} ${innerR} 0 0 1 ${cx + innerR} ${cy}" fill="none" stroke="#3b82f6" stroke-width="28" stroke-opacity="0.18"/>`;
+                } else if (mode === 'left') {
+                    // Highlight Outer Scale (Red)
+                    svg += `<path d="M ${cx - (outerR - 22)} ${cy} A ${outerR - 22} ${outerR - 22} 0 0 1 ${cx + (outerR - 22)} ${cy}" fill="none" stroke="#e11d48" stroke-width="28" stroke-opacity="0.18"/>`;
+                }
+            }
+
+            // Shaded Angle Sector between startDegRight and endDegRight
+            const sectorR = 115;
+            const pStartSector = polarToCartesian(cx, cy, sectorR, startDegRight);
+            const pEndSector = polarToCartesian(cx, cy, sectorR, endDegRight);
+            const largeArc = (endDegRight - startDegRight) > 180 ? 1 : 0;
+
+            svg += `
+                <path d="M ${cx} ${cy} L ${pStartSector.x} ${pStartSector.y} A ${sectorR} ${sectorR} 0 ${largeArc} 0 ${pEndSector.x} ${pEndSector.y} Z"
+                      fill="#6366f1" fill-opacity="0.18" stroke="#4f46e5" stroke-width="2" />
+            `;
+
+            // Draw Ticks and Scale Numbers (0 to 180)
+            for (let deg = 0; deg <= 180; deg++) {
+                // deg is measured from RIGHT (0° inner, 180° outer)
+                const isMajor10 = (deg % 10 === 0);
+                const isMid5 = (deg % 5 === 0 && !isMajor10);
+
+                // Outer ticks
+                let tickLen = isMajor10 ? 14 : (isMid5 ? 9 : 5);
+                const pOut1 = polarToCartesian(cx, cy, outerR, deg);
+                const pOut2 = polarToCartesian(cx, cy, outerR - tickLen, deg);
+                svg += `<line x1="${pOut1.x}" y1="${pOut1.y}" x2="${pOut2.x}" y2="${pOut2.y}" stroke="${isMajor10 ? '#475569' : '#94a3b8'}" stroke-width="${isMajor10 ? '1.8' : '1'}" />`;
+
+                // Inner ticks
+                if (isMajor10 || isMid5) {
+                    const iTickLen = isMajor10 ? 10 : 6;
+                    const pIn1 = polarToCartesian(cx, cy, bodyInnerR, deg);
+                    const pIn2 = polarToCartesian(cx, cy, bodyInnerR + iTickLen, deg);
+                    svg += `<line x1="${pIn1.x}" y1="${pIn1.y}" x2="${pIn2.x}" y2="${pIn2.y}" stroke="${isMajor10 ? '#475569' : '#94a3b8'}" stroke-width="${isMajor10 ? '1.5' : '1'}" />`;
+                }
+
+                // Numbers every 10 degrees
+                if (isMajor10) {
+                    const innerVal = deg;          // 0 on right, 180 on left
+                    const outerVal = 180 - deg;    // 0 on left, 180 on right
+
+                    // Outer Scale Label (Red/Rose - starts from left 0)
+                    const pOuterNum = polarToCartesian(cx, cy, outerR - 26, deg);
+                    const isTargetOuter = (mode === 'left' && deg === startDegRight) || (mode === 'left' && deg === 180);
+                    const outerFontSize = (helperOn && isTargetOuter) ? '14' : '11.5';
+                    const outerOpacity = (helperOn && mode === 'right') ? '0.35' : '1';
+
+                    svg += `<text x="${pOuterNum.x}" y="${pOuterNum.y}" fill="#e11d48" fill-opacity="${outerOpacity}" font-size="${outerFontSize}" font-weight="800" text-anchor="middle" dominant-baseline="middle">${outerVal}</text>`;
+
+                    // Inner Scale Label (Blue - starts from right 0)
+                    const pInnerNum = polarToCartesian(cx, cy, innerR - 18, deg);
+                    const isTargetInner = (mode === 'right' && deg === endDegRight) || (mode === 'right' && deg === 0);
+                    const innerFontSize = (helperOn && isTargetInner) ? '14' : '11.5';
+                    const innerOpacity = (helperOn && mode === 'left') ? '0.35' : '1';
+
+                    svg += `<text x="${pInnerNum.x}" y="${pInnerNum.y}" fill="#2563eb" fill-opacity="${innerOpacity}" font-size="${innerFontSize}" font-weight="800" text-anchor="middle" dominant-baseline="middle">${innerVal}</text>`;
+                }
+            }
+
+            // Base baseline of protractor
+            svg += `<line x1="${cx - outerR}" y1="${cy}" x2="${cx + outerR}" y2="${cy}" stroke="#64748b" stroke-width="2" />`;
+
+            // Draw the two Rays of the Angle (OA and OB)
+            const rayLength = outerR + 18;
+            const pRay1 = polarToCartesian(cx, cy, rayLength, startDegRight);
+            const pRay2 = polarToCartesian(cx, cy, rayLength, endDegRight);
+
+            const isRay1Zero = (startDegRight === 0);
+            const isRay2Zero = (endDegRight === 180);
+
+            // Ray 1
+            svg += `<line x1="${cx}" y1="${cy}" x2="${pRay1.x}" y2="${pRay1.y}" stroke="${isRay1Zero ? '#16a34a' : '#0f172a'}" stroke-width="4" stroke-linecap="round" marker-end="url(#${isRay1Zero ? 'rayArrowZero' : 'rayArrow'})" />`;
+            // Ray 2
+            svg += `<line x1="${cx}" y1="${cy}" x2="${pRay2.x}" y2="${pRay2.y}" stroke="${isRay2Zero ? '#16a34a' : '#0f172a'}" stroke-width="4" stroke-linecap="round" marker-end="url(#${isRay2Zero ? 'rayArrowZero' : 'rayArrow'})" />`;
+
+            // Highlight circle on the reading intersection if helper is ON
+            if (helperOn) {
+                if (mode === 'right') {
+                    const pHit = polarToCartesian(cx, cy, innerR - 18, endDegRight);
+                    svg += `<circle cx="${pHit.x}" cy="${pHit.y}" r="16" fill="none" stroke="#2563eb" stroke-width="3" stroke-dasharray="4 2" />`;
+                    const pZero = polarToCartesian(cx, cy, innerR - 18, 0);
+                    svg += `<circle cx="${pZero.x}" cy="${pZero.y}" r="14" fill="#22c55e" fill-opacity="0.25" stroke="#16a34a" stroke-width="2.5" />`;
+                } else if (mode === 'left') {
+                    const pHit = polarToCartesian(cx, cy, outerR - 26, startDegRight);
+                    svg += `<circle cx="${pHit.x}" cy="${pHit.y}" r="16" fill="none" stroke="#e11d48" stroke-width="3" stroke-dasharray="4 2" />`;
+                    const pZero = polarToCartesian(cx, cy, outerR - 26, 180);
+                    svg += `<circle cx="${pZero.x}" cy="${pZero.y}" r="14" fill="#22c55e" fill-opacity="0.25" stroke="#16a34a" stroke-width="2.5" />`;
+                }
+            }
+
+            // Vertex O and Point Labels A & B
+            svg += `<circle cx="${cx}" cy="${cy}" r="6" fill="#4f46e5" stroke="#ffffff" stroke-width="2" />`;
+            svg += `<text x="${cx}" y="${cy + 18}" fill="#1e293b" font-size="15" font-weight="800" text-anchor="middle">O</text>`;
+
+            const pLabelA = polarToCartesian(cx, cy, rayLength + 16, startDegRight);
+            const pLabelB = polarToCartesian(cx, cy, rayLength + 16, endDegRight);
+            svg += `<text x="${pLabelA.x}" y="${pLabelA.y}" fill="#0f172a" font-size="16" font-weight="900" text-anchor="middle" dominant-baseline="middle">A</text>`;
+            svg += `<text x="${pLabelB.x}" y="${pLabelB.y}" fill="#0f172a" font-size="16" font-weight="900" text-anchor="middle" dominant-baseline="middle">B</text>`;
+
+            // Question mark inside the angle arc
+            const midAngle = (startDegRight + endDegRight) / 2;
+            const pQMark = polarToCartesian(cx, cy, 68, midAngle);
+            svg += `<text x="${pQMark.x}" y="${pQMark.y}" fill="#4338ca" font-size="18" font-weight="900" text-anchor="middle" dominant-baseline="middle">?°</text>`;
+
+            svg += `</svg>`;
+            document.getElementById('protractorSvgContainer').innerHTML = svg;
+        }
+
+        function showProtractorStepHint() {
+            if (!currentPQuestion) return;
+            const { mode, startDegRight, endDegRight, answer } = currentPQuestion;
+            const hintBox = document.getElementById('pStepHintBox');
+            const typeText = answer < 90 ? 'Dar Açıdır (90°\'den küçük olmalı!)' : (answer > 90 ? 'Geniş Açıdır (90°\'den büyük olmalı!)' : 'Dik Açıdır (90°)');
+
+            if (mode === 'right') {
+                hintBox.innerHTML = `
+                    <div class="space-y-1 text-xs sm:text-sm">
+                        <p>✅ <strong>1. İpucu:</strong> Başlangıç kolu (OA) <strong>SAĞ taraftaki 0°</strong> üzerinde duruyor.</p>
+                        <p>🔵 <strong>2. İpucu:</strong> Sağdaki 0° <strong class="text-blue-600">MAVİ (İÇ)</strong> ölçekte olduğu için <strong>mavi sayıları</strong> takip etmelisin!</p>
+                        <p>📐 <strong>3. Kontrol:</strong> Görseldeki açı bir <strong>${typeText}</strong></p>
+                    </div>
+                `;
+            } else if (mode === 'left') {
+                hintBox.innerHTML = `
+                    <div class="space-y-1 text-xs sm:text-sm">
+                        <p>✅ <strong>1. İpucu:</strong> Başlangıç kolu (OB) <strong>SOL taraftaki 0°</strong> üzerinde duruyor.</p>
+                        <p>🔴 <strong>2. İpucu:</strong> Soldaki 0° <strong class="text-rose-600">KIRMIZI (DIŞ)</strong> ölçekte olduğu için <strong>kırmızı sayıları</strong> takip etmelisin!</p>
+                        <p>📐 <strong>3. Kontrol:</strong> Görseldeki açı bir <strong>${typeText}</strong></p>
+                    </div>
+                `;
+            } else {
+                hintBox.innerHTML = `
+                    <div class="space-y-1 text-xs sm:text-sm">
+                        <p>✅ <strong>1. İpucu:</strong> İki kol da 0° üzerinde değil! Ortada bir açı var.</p>
+                        <p>🟣 <strong>2. İpucu:</strong> Mavi (iç) ölçekte kollar <strong>${startDegRight}°</strong> ve <strong>${endDegRight}°</strong>'yi gösteriyor.</p>
+                        <p>➖ <strong>3. İşlem:</strong> Büyük sayıdan küçük sayıyı çıkar: <strong>${endDegRight}° - ${startDegRight}° = ?</strong></p>
+                    </div>
+                `;
+            }
+            document.getElementById('toggleHelper').checked = true;
+            renderProtractorSVG();
+        }
+
+        function checkProtractorAnswer() {
+            if (!currentPQuestion) return;
+            const inputVal = parseInt(document.getElementById('pAnswerInput').value, 10);
+            const fb = document.getElementById('pFeedbackBox');
+            fb.classList.remove('hidden');
+
+            if (isNaN(inputVal)) {
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-amber-50 border-amber-300 text-amber-900 font-bold text-sm';
+                fb.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i>Lütfen kutucuğa bir derece yaz veya aşağıdaki şıklardan birine tıkla!`;
+                return;
+            }
+
+            const { mode, answer, supplementTrap, startDegRight, endDegRight } = currentPQuestion;
+
+            if (inputVal === answer) {
+                playFeedbackSound(true);
+                if (!currentPQuestion.solved) {
+                    updateScoreboard(10, true);
+                    currentPQuestion.solved = true;
+                }
+                let explanation = '';
+                if (mode === 'right') {
+                    explanation = `Başlangıç kolu sağdaki 0°'da olduğu için <strong>İç Ölçeği (Mavi)</strong> okuduk ve <strong>${answer}°</strong> bulduk.`;
+                } else if (mode === 'left') {
+                    explanation = `Başlangıç kolu soldaki 0°'da olduğu için <strong>Dış Ölçeği (Kırmızı)</strong> okuduk ve <strong>${answer}°</strong> bulduk.`;
+                } else {
+                    explanation = `İki kol arasındaki farkı hesapladık: <strong>${endDegRight}° - ${startDegRight}° = ${answer}°</strong>.`;
+                }
+
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-emerald-50 border-emerald-300 text-emerald-900';
+                fb.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-base">Harika! Doğru Cevap: ${answer}° 🎉</h4>
+                                <p class="text-xs sm:text-sm mt-0.5">${explanation}</p>
+                            </div>
+                        </div>
+                        <button onclick="generateProtractorQuestion()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-sm transition">
+                            Sıradaki Soru <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                playFeedbackSound(false);
+                updateScoreboard(0, false);
+
+                // Special diagnostic message if the student confused inner and outer scales!
+                let trapDiagnostic = '';
+                if (inputVal === supplementTrap && mode !== 'between') {
+                    const rightScaleName = mode === 'right' ? 'MAVİ (İÇ)' : 'KIRMIZI (DIŞ)';
+                    const wrongScaleName = mode === 'right' ? 'Kırmızı (Dış)' : 'Mavi (İç)';
+                    const angleKind = answer < 90 ? 'DAR AÇI (90°\'den küçük)' : 'GENİŞ AÇI (90°\'den büyük)';
+                    trapDiagnostic = `
+                        <div class="mt-2 p-3 bg-white rounded-xl border border-rose-200 text-xs sm:text-sm text-slate-700">
+                            <p class="font-extrabold text-rose-700 mb-1"><i class="fa-solid fa-bell mr-1"></i> Dikkat! İç ve Dış Ölçeği Karıştırdın!</p>
+                            <p>Sen <strong>${wrongScaleName}</strong> ölçekteki <strong>${inputVal}°</strong> sayısını okudun. Ama açının sıfır kolu diğer tarafta olduğu için <strong>${rightScaleName}</strong> ölçeği okumalısın!</p>
+                            <p class="mt-1 font-bold text-indigo-700">💡 İpucu: Şekildeki açıya dikkatli bak, bu bir ${angleKind}. Bu yüzden ${inputVal}° olamaz!</p>
+                        </div>
+                    `;
+                } else {
+                    trapDiagnostic = `<p class="text-xs sm:text-sm mt-1">Tekrar deneyelim! "Bana Adım Adım İpucu Ver" butonuna basarak hangi ölçeğe bakman gerektiğini görebilirsin.</p>`;
+                }
+
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-rose-50 border-rose-300 text-rose-900';
+                fb.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-xmark"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-extrabold text-base">${inputVal}° tam olmadı, tekrar bakalım!</h4>
+                            ${trapDiagnostic}
+                        </div>
+                    </div>
+                `;
+                document.getElementById('toggleHelper').checked = true;
+                renderProtractorSVG();
+            }
+        }
+
+
+        // ==================== ACTIVITY 2: IDENTICAL & UNKNOWN ANGLES ====================
+        function setAngleFilter(filter) {
+            aFilter = filter;
+            document.querySelectorAll('.a-filter-btn').forEach(btn => {
+                btn.className = 'a-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition';
+                const checkIcon = btn.querySelector('.fa-check');
+                if (checkIcon) checkIcon.remove();
+            });
+            const activeBtn = document.getElementById('aFilter_' + filter);
+            activeBtn.className = 'a-filter-btn bg-indigo-600 text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition';
+            activeBtn.innerHTML += '<i class="fa-solid fa-check"></i>';
+            generateAngleQuestion();
+        }
+
+        function generateAngleQuestion() {
+            aQuestionCount++;
+            let type = aFilter;
+            if (type === 'all') {
+                const types = [
+                    'identical_straight_find_equal',
+                    'identical_straight_find_middle',
+                    'identical_right',
+                    'bisector_neighbor',
+                    'vertical_identical'
+                ];
+                type = types[Math.floor(Math.random() * types.length)];
+            } else if (type === 'identical_straight') {
+                type = Math.random() < 0.55 ? 'identical_straight_find_equal' : 'identical_straight_find_middle';
+            } else if (type === 'vertical') {
+                type = 'vertical_identical';
+            }
+
+            let qData = {};
+
+            if (type === 'identical_straight_find_equal') {
+                // Straight line (180°): Two identical angles (•) and one known angle. Find one identical angle (x).
+                const equalAngles = [35, 40, 45, 50, 55, 60, 65, 70];
+                const eqVal = equalAngles[Math.floor(Math.random() * equalAngles.length)];
+                const knownVal = 180 - (2 * eqVal);
+                qData = {
+                    type,
+                    categoryName: 'Doğru Açıda Özdeş Açılar (180°)',
+                    questionText: `AOB doğrusal bir açıdır (180°). Noktalı (<span class="text-amber-600 font-black">•</span>) açılar birbirine <strong>özdeş (eş)</strong> olduğuna göre, bilinmeyen <span class="text-rose-600 font-extrabold">x</span> açısı kaç derecedir?`,
+                    answer: eqVal,
+                    angles: [eqVal, eqVal, knownVal], // From right to left
+                    labels: ['• (x)', '•', `${knownVal}°`],
+                    identicalIndices: [0, 1],
+                    hintSteps: [
+                        `📏 <strong>1. Adım:</strong> Düz bir çizgi (Doğru Açı) üzerindeki tüm açıların toplamı <strong>180°</strong>'dir.`,
+                        `➖ <strong>2. Adım:</strong> Önce bilinen ${knownVal}°'yi 180°'den çıkaralım: <strong>180° - ${knownVal}° = ${180 - knownVal}°</strong>.`,
+                        `➗ <strong>3. Adım:</strong> Kalan ${180 - knownVal}° iki <strong>özdeş (•)</strong> açıya eşit paylaştırılır: <strong>${180 - knownVal}° ÷ 2 = ${eqVal}°</strong>!`
+                    ]
+                };
+            } else if (type === 'identical_straight_find_middle') {
+                // Straight line (180°): Two identical angles (•), one of them is given, find the remaining angle x.
+                const equalAngles = [40, 45, 50, 55, 60, 65, 70];
+                const eqVal = equalAngles[Math.floor(Math.random() * equalAngles.length)];
+                const xVal = 180 - (2 * eqVal);
+                qData = {
+                    type,
+                    categoryName: 'Özdeş Açıyı Taşıma & Doğru Açı',
+                    questionText: `Şekildeki noktalı (<span class="text-amber-600 font-black">•</span>) açılar birbirine <strong>özdeştir (eşittir)</strong>. Noktalı açılardan biri <strong>${eqVal}°</strong> olduğuna göre ortadaki <span class="text-rose-600 font-extrabold">x</span> açısı kaç derecedir?`,
+                    answer: xVal,
+                    angles: [eqVal, xVal, eqVal],
+                    labels: [`• ${eqVal}°`, 'x = ?', '•'],
+                    identicalIndices: [0, 2],
+                    hintSteps: [
+                        `🔄 <strong>1. Adım (Özdeş Açı):</strong> Noktalı (•) açılar birbirine eşittir! Sağdaki noktalı açı ${eqVal}° ise, soldaki noktalı açı da <strong>${eqVal}°</strong>'dir.`,
+                        `➕ <strong>2. Adım:</strong> İki noktalı açıyı toplayalım: <strong>${eqVal}° + ${eqVal}° = ${2 * eqVal}°</strong>.`,
+                        `➖ <strong>3. Adım:</strong> Doğru açı 180° olduğu için: <strong>180° - ${2 * eqVal}° = ${xVal}°</strong> bulunur!`
+                    ]
+                };
+            } else if (type === 'identical_right') {
+                // Right angle (90°) split into 2 identical angles + 1 known angle, OR 1 known + 1 identical.
+                const subMode = Math.random() < 0.6 ? 'two_equal' : 'transfer_equal';
+                if (subMode === 'two_equal') {
+                    const eqPoss = [20, 25, 30, 35];
+                    const eqVal = eqPoss[Math.floor(Math.random() * eqPoss.length)];
+                    const knownVal = 90 - (2 * eqVal);
+                    qData = {
+                        type,
+                        categoryName: 'Dik Açıda Özdeş Açılar (90°)',
+                        questionText: `KLM açısı bir <strong>dik açıdır (90°)</strong>. Noktalı (<span class="text-amber-600 font-black">•</span>) açılar birbirine <strong>özdeş (eş)</strong> olduğuna göre <span class="text-rose-600 font-extrabold">x</span> kaç derecedir?`,
+                        answer: eqVal,
+                        angles: [knownVal, eqVal, eqVal],
+                        labels: [`${knownVal}°`, '•', '• (x)'],
+                        identicalIndices: [1, 2],
+                        hintSteps: [
+                            `📐 <strong>1. Adım:</strong> Köşedeki diklik sembolü (⦜) toplam açının <strong>90°</strong> olduğunu gösterir.`,
+                            `➖ <strong>2. Adım:</strong> 90°'den bilinen ${knownVal}°'yi çıkaralım: <strong>90° - ${knownVal}° = ${90 - knownVal}°</strong>.`,
+                            `➗ <strong>3. Adım:</strong> Kalan ${90 - knownVal}° iki özdeş (•) açıya eşit bölünür: <strong>${90 - knownVal}° ÷ 2 = ${eqVal}°</strong>!`
+                        ]
+                    };
+                } else {
+                    const eqPoss = [25, 30, 35, 40];
+                    const eqVal = eqPoss[Math.floor(Math.random() * eqPoss.length)];
+                    const xVal = 90 - eqVal;
+                    qData = {
+                        type,
+                        categoryName: 'Dik Açı (90°) Hesaplama',
+                        questionText: `Şekildeki büyük açı <strong>dik açıdır (90°)</strong>. Yanındaki açı <strong>${eqVal}°</strong> olduğuna göre bilinmeyen <span class="text-rose-600 font-extrabold">x</span> açısı kaç derecedir?`,
+                        answer: xVal,
+                        angles: [eqVal, xVal],
+                        labels: [`${eqVal}°`, 'x = ?'],
+                        identicalIndices: [],
+                        hintSteps: [
+                            `📐 <strong>1. Adım:</strong> Dik açının toplam ölçüsü her zaman <strong>90°</strong>'dir.`,
+                            `➖ <strong>2. Adım:</strong> Bilinmeyen x açısını bulmak için: <strong>90° - ${eqVal}° = ${xVal}°</strong> işlemini yaparız!`
+                        ]
+                    };
+                }
+            } else if (type === 'bisector_neighbor') {
+                // Total angle is given, or two identical angles + 1 neighbor angle, asking total angle x
+                const eqPoss = [25, 30, 35, 40, 45];
+                const eqVal = eqPoss[Math.floor(Math.random() * eqPoss.length)];
+                const extraVal = [30, 40, 45, 50][Math.floor(Math.random() * 4)];
+                const totalAns = (2 * eqVal) + extraVal;
+
+                qData = {
+                    type,
+                    categoryName: 'Özdeş Açıları Toplama',
+                    questionText: `Şekildeki noktalı (<span class="text-amber-600 font-black">•</span>) açılar birbirine <strong>özdeştir</strong>. Noktalı açılardan biri <strong>${eqVal}°</strong> ve yanındaki açı <strong>${extraVal}°</strong> ise, <strong>en büyük açının tamamı (<span class="text-rose-600 font-extrabold">x</span>)</strong> kaç derecedir?`,
+                    answer: totalAns,
+                    angles: [eqVal, eqVal, extraVal],
+                    labels: [`• ${eqVal}°`, '•', `${extraVal}°`],
+                    identicalIndices: [0, 1],
+                    askTotal: true,
+                    hintSteps: [
+                        `🔄 <strong>1. Adım:</strong> Noktalı (•) açılar özdeş olduğu için ikisi de <strong>${eqVal}°</strong>'dir.`,
+                        `➕ <strong>2. Adım:</strong> En büyük açıyı (tamamını) bulmak için üç küçük açıyı toplarız:`,
+                        `🎯 <strong>3. İşlem:</strong> <strong>${eqVal}° + ${eqVal}° + ${extraVal}° = ${totalAns}°</strong>!`
+                    ]
+                };
+            } else {
+                // 'vertical_identical': Intersecting lines (Scissors / Ters Açılar) with identical bisected angle
+                const eqPoss = [30, 35, 40, 45, 50, 55];
+                const eqVal = eqPoss[Math.floor(Math.random() * eqPoss.length)];
+                const totalVertical = eqVal * 2;
+                qData = {
+                    type: 'vertical_identical',
+                    categoryName: 'Ters (Makas) & Özdeş Açılar',
+                    questionText: `Kesişen iki doğruda karşılıklı (ters) açılar birbirine eşittir. Sağdaki açı <strong>iki özdeş (•)</strong> parçaya bölünmüş ve bir parçası <strong>${eqVal}°</strong> olduğuna göre, karşıdaki <span class="text-rose-600 font-extrabold">x</span> açısı kaç derecedir?`,
+                    answer: totalVertical,
+                    eqVal,
+                    hintSteps: [
+                        `🔄 <strong>1. Adım:</strong> Sağ taraftaki iki noktalı (•) açı birbirine özdeştir. Biri ${eqVal}° ise diğeri de <strong>${eqVal}°</strong>'dir.`,
+                        `➕ <strong>2. Adım:</strong> Sağdaki açının tamamı: <strong>${eqVal}° + ${eqVal}° = ${totalVertical}°</strong> olur.`,
+                        `✂️ <strong>3. Adım (Ters Açılar):</strong> Makasın karşılıklı kolları arasındaki açılar eşittir! Dolayısıyla <strong>x = ${totalVertical}°</strong>!`
+                    ]
+                };
+            }
+
+            // Generate 4 multiple choice options
+            let choicesSet = new Set([qData.answer]);
+            // Add plausible distractors
+            if (qData.angles && qData.angles[0]) choicesSet.add(qData.angles[0]);
+            if (180 - qData.answer > 10 && 180 - qData.answer < 170) choicesSet.add(180 - qData.answer);
+            while (choicesSet.size < 4) {
+                const diff = (Math.floor(Math.random() * 5) - 2) * 10;
+                const cand = qData.answer + (diff === 0 ? 15 : diff);
+                if (cand >= 15 && cand <= 175) choicesSet.add(cand);
+            }
+
+            qData.choices = Array.from(choicesSet).sort((a, b) => a - b);
+            qData.id = aQuestionCount;
+            qData.solved = false;
+            currentAQuestion = qData;
+
+            // Update DOM
+            document.getElementById('aQuestionBadge').textContent = `SORU #${aQuestionCount}`;
+            document.getElementById('aQuestionCategoryTag').textContent = qData.categoryName;
+            document.getElementById('aQuestionText').innerHTML = qData.questionText;
+            document.getElementById('aAnswerInput').value = '';
+            document.getElementById('aFeedbackBox').classList.add('hidden');
+            document.getElementById('aHintBox').innerHTML = `İpucuna ihtiyacın olursa aşağıdaki <strong>"Adım Adım Nasıl Çözülür Göster"</strong> butonuna tıklayabilirsin!`;
+
+            const quickContainer = document.getElementById('aQuickChoices');
+            quickContainer.innerHTML = '';
+            qData.choices.forEach(c => {
+                const btn = document.createElement('button');
+                btn.className = 'bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 font-extrabold py-2 rounded-xl border border-slate-200 text-sm transition shadow-sm';
+                btn.textContent = `${c}°`;
+                btn.onclick = () => {
+                    document.getElementById('aAnswerInput').value = c;
+                    checkAngleAnswer();
+                };
+                quickContainer.appendChild(btn);
+            });
+
+            renderAngleGeometrySVG();
+        }
+
+        function renderAngleGeometrySVG() {
+            if (!currentAQuestion) return;
+            const q = currentAQuestion;
+            const cx = 300;
+            const cy = (q.type === 'vertical_identical') ? 155 : 230;
+            const rayR = 175;
+
+            let svg = `<svg viewBox="0 0 600 290" class="w-full h-auto">`;
+            svg += `
+                <defs>
+                    <marker id="geoArrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+                    </marker>
+                </defs>
+            `;
+
+            if (q.type === 'vertical_identical') {
+                // Draw intersecting lines (Scissors)
+                const halfSpread = q.answer / 2; // e.g. 35 deg
+                // Left side has angle [-halfSpread, +halfSpread] around 180°
+                // Right side has angle [-halfSpread, +halfSpread] around 0°, split by 0° ray!
+                const deg1 = halfSpread;
+                const deg2 = 180 + halfSpread;
+                const deg3 = 180 - halfSpread;
+                const deg4 = 360 - halfSpread;
+
+                const rVert = 160;
+                const p1 = polarToCartesian(cx, cy, rVert, deg1);
+                const p2 = polarToCartesian(cx, cy, rVert, deg2);
+                const p3 = polarToCartesian(cx, cy, rVert, deg3);
+                const p4 = polarToCartesian(cx, cy, rVert, deg4);
+                const pMidRight = polarToCartesian(cx, cy, rVert, 0);
+
+                // Left X sector
+                const arcR = 65;
+                const pa2 = polarToCartesian(cx, cy, arcR, deg3);
+                const pa3 = polarToCartesian(cx, cy, arcR, deg2);
+                svg += `<path d="M ${cx} ${cy} L ${pa2.x} ${pa2.y} A ${arcR} ${arcR} 0 0 1 ${pa3.x} ${pa3.y} Z" fill="#f43f5e" fill-opacity="0.18" stroke="#e11d48" stroke-width="2.5"/>`;
+
+                // Right two identical sectors
+                const prTop = polarToCartesian(cx, cy, arcR, deg1);
+                const prMid = polarToCartesian(cx, cy, arcR, 0);
+                const prBot = polarToCartesian(cx, cy, arcR, deg4);
+                svg += `<path d="M ${cx} ${cy} L ${prMid.x} ${prMid.y} A ${arcR} ${arcR} 0 0 0 ${prTop.x} ${prTop.y} Z" fill="#f59e0b" fill-opacity="0.22" stroke="#d97706" stroke-width="2"/>`;
+                svg += `<path d="M ${cx} ${cy} L ${prBot.x} ${prBot.y} A ${arcR} ${arcR} 0 0 0 ${prMid.x} ${prMid.y} Z" fill="#f59e0b" fill-opacity="0.22" stroke="#d97706" stroke-width="2"/>`;
+
+                // Main intersecting lines
+                svg += `<line x1="${p2.x}" y1="${p2.y}" x2="${p1.x}" y2="${p1.y}" stroke="#1e293b" stroke-width="3.5" marker-start="url(#geoArrow)" marker-end="url(#geoArrow)"/>`;
+                svg += `<line x1="${p3.x}" y1="${p3.y}" x2="${p4.x}" y2="${p4.y}" stroke="#1e293b" stroke-width="3.5" marker-start="url(#geoArrow)" marker-end="url(#geoArrow)"/>`;
+                // Bisector ray on the right
+                svg += `<line x1="${cx}" y1="${cy}" x2="${pMidRight.x}" y2="${pMidRight.y}" stroke="#d97706" stroke-width="3" stroke-dasharray="5 3" marker-end="url(#geoArrow)"/>`;
+
+                // Identical dots & labels on right
+                const pd1 = polarToCartesian(cx, cy, 44, halfSpread / 2);
+                const pd2 = polarToCartesian(cx, cy, 44, 360 - halfSpread / 2);
+                svg += `<circle cx="${pd1.x}" cy="${pd1.y}" r="4.5" fill="#d97706"/>`;
+                svg += `<circle cx="${pd2.x}" cy="${pd2.y}" r="4.5" fill="#d97706"/>`;
+
+                const pl1 = polarToCartesian(cx, cy, 95, halfSpread / 2 + 4);
+                svg += `<text x="${pl1.x}" y="${pl1.y}" fill="#b45309" font-size="15" font-weight="900" text-anchor="middle" dominant-baseline="middle">${q.eqVal}°</text>`;
+
+                // Left x label
+                const plX = polarToCartesian(cx, cy, 90, 180);
+                svg += `<text x="${plX.x}" y="${plX.y}" fill="#e11d48" font-size="18" font-weight="900" text-anchor="middle" dominant-baseline="middle">x = ?</text>`;
+
+                svg += `<circle cx="${cx}" cy="${cy}" r="5.5" fill="#1e293b"/>`;
+            } else {
+                // Cumulative rays starting from 0° (Right horizontal)
+                let cumDeg = 0;
+                const rayAngles = [0];
+                q.angles.forEach(a => {
+                    cumDeg += a;
+                    rayAngles.push(cumDeg);
+                });
+
+                // Draw angle sectors & labels
+                for (let i = 0; i < q.angles.length; i++) {
+                    const aStart = rayAngles[i];
+                    const aEnd = rayAngles[i + 1];
+                    const aMid = (aStart + aEnd) / 2;
+                    const isIdentical = q.identicalIndices && q.identicalIndices.includes(i);
+                    const isUnknownX = q.labels[i].includes('x');
+
+                    const arcRadius = isIdentical ? 72 : (64 + (i % 2) * 12);
+                    const pStart = polarToCartesian(cx, cy, arcRadius, aStart);
+                    const pEnd = polarToCartesian(cx, cy, arcRadius, aEnd);
+
+                    const fillCol = isUnknownX ? '#f43f5e' : (isIdentical ? '#f59e0b' : '#3b82f6');
+                    const strokeCol = isUnknownX ? '#e11d48' : (isIdentical ? '#d97706' : '#2563eb');
+
+                    svg += `
+                        <path d="M ${cx} ${cy} L ${pStart.x} ${pStart.y} A ${arcRadius} ${arcRadius} 0 0 0 ${pEnd.x} ${pEnd.y} Z"
+                              fill="${fillCol}" fill-opacity="0.18" stroke="${strokeCol}" stroke-width="2.5" />
+                    `;
+
+                    // If identical angle, draw a clear dot (•) inside the arc
+                    if (isIdentical) {
+                        const pDot = polarToCartesian(cx, cy, arcRadius * 0.58, aMid);
+                        svg += `<circle cx="${pDot.x}" cy="${pDot.y}" r="5" fill="#b45309" />`;
+                    }
+
+                    // Label text outside the arc
+                    const pText = polarToCartesian(cx, cy, arcRadius + 30, aMid);
+                    const cleanLabel = q.labels[i].replace('• ', '').replace('•', '');
+                    if (cleanLabel.trim() !== '') {
+                        svg += `<text x="${pText.x}" y="${pText.y}" fill="${strokeCol}" font-size="16" font-weight="900" text-anchor="middle" dominant-baseline="middle">${cleanLabel}</text>`;
+                    }
+                }
+
+                // If right angle (total 90°), draw the little square symbol at the vertex
+                if (cumDeg === 90) {
+                    const sq = 22;
+                    svg += `<polyline points="${cx + sq},${cy} ${cx + sq},${cy - sq} ${cx},${cy - sq}" fill="none" stroke="#475569" stroke-width="2" />`;
+                    svg += `<circle cx="${cx + sq / 2}" cy="${cy - sq / 2}" r="2" fill="#475569" />`;
+                }
+
+                // If askTotal is true, draw an outer overarching arc showing "Tamamı = x"
+                if (q.askTotal) {
+                    const outerArcR = 135;
+                    const pOutS = polarToCartesian(cx, cy, outerArcR, 0);
+                    const pOutE = polarToCartesian(cx, cy, outerArcR, cumDeg);
+                    const pOutMid = polarToCartesian(cx, cy, outerArcR + 22, cumDeg / 2);
+                    svg += `<path d="M ${pOutS.x} ${pOutS.y} A ${outerArcR} ${outerArcR} 0 0 0 ${pOutE.x} ${pOutE.y}" fill="none" stroke="#e11d48" stroke-width="2.5" stroke-dasharray="6 4" />`;
+                    svg += `<text x="${pOutMid.x}" y="${pOutMid.y}" fill="#e11d48" font-size="16" font-weight="900" text-anchor="middle" dominant-baseline="middle">Tamamı (x) = ?</text>`;
+                }
+
+                // Draw all rays
+                rayAngles.forEach((deg, idx) => {
+                    const pRay = polarToCartesian(cx, cy, rayR, deg);
+                    svg += `<line x1="${cx}" y1="${cy}" x2="${pRay.x}" y2="${pRay.y}" stroke="#1e293b" stroke-width="3.5" stroke-linecap="round" marker-end="url(#geoArrow)" />`;
+                });
+
+                // Vertex Point O
+                svg += `<circle cx="${cx}" cy="${cy}" r="6" fill="#1e293b" stroke="#ffffff" stroke-width="2" />`;
+                svg += `<text x="${cx}" y="${cy + 22}" fill="#334155" font-size="15" font-weight="800" text-anchor="middle">O</text>`;
+            }
+
+            svg += `</svg>`;
+            document.getElementById('angleSvgContainer').innerHTML = svg;
+        }
+
+        function showAngleStepHint() {
+            if (!currentAQuestion) return;
+            const hintBox = document.getElementById('aHintBox');
+            hintBox.innerHTML = `
+                <div class="space-y-1.5 text-xs sm:text-sm">
+                    ${currentAQuestion.hintSteps.map(s => `<p>${s}</p>`).join('')}
+                </div>
+            `;
+        }
+
+        function checkAngleAnswer() {
+            if (!currentAQuestion) return;
+            const inputVal = parseInt(document.getElementById('aAnswerInput').value, 10);
+            const fb = document.getElementById('aFeedbackBox');
+            fb.classList.remove('hidden');
+
+            if (isNaN(inputVal)) {
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-amber-50 border-amber-300 text-amber-900 font-bold text-sm';
+                fb.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-2"></i>Lütfen bulduğun açıyı kutucuğa yaz veya şıklardan birini seç!`;
+                return;
+            }
+
+            if (inputVal === currentAQuestion.answer) {
+                playFeedbackSound(true);
+                if (!currentAQuestion.solved) {
+                    updateScoreboard(15, true);
+                    currentAQuestion.solved = true;
+                }
+
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-emerald-50 border-emerald-300 text-emerald-900';
+                fb.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-base">Süpersin! x = ${currentAQuestion.answer}° Doğru! 👏</h4>
+                                <div class="text-xs sm:text-sm mt-1 space-y-0.5 text-emerald-950/90">
+                                    ${currentAQuestion.hintSteps.map(s => `<p>${s}</p>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="generateAngleQuestion()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2 rounded-xl text-sm transition shrink-0">
+                            Yeni Soru <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                playFeedbackSound(false);
+                updateScoreboard(0, false);
+                showAngleStepHint();
+
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-rose-50 border-rose-300 text-rose-900';
+                fb.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-base">${inputVal}° doğru değil, ama çok yaklaştın!</h4>
+                            <p class="text-xs sm:text-sm mt-1">Yukarıdaki <strong>Çözüm İpucu & Adımlar</strong> kutusuna senin için çözüm yolunu açtım. Adımları takip ederek işlemi tekrar yapalım!</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // ==================== ACTIVITY 3: BALLOON POP ANGLE ARCHER GAME ====================
+        let gMode = 'all'; // 'all', 'inner', 'outer', 'calculate', 'multi'
+        let gMissionCount = 0;
+        let poppedBalloonsTotal = 0;
+        let bowAngleRight = 90; // Standard math angle from Right 0° (0 to 180)
+        let isDraggingBow = false;
+        let arrowAnimState = null; // { active: true, progress: 0..1, angle: number }
+        let popParticles = []; // Visual burst particles when a balloon pops
+        let currentGMission = null;
+        let selectedGameAngleType = null; // 'dar', 'dik', 'genis'
+        let isAngleTypeVerified = false;
+
+        function playPopSound() {
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const now = audioCtx.currentTime;
+                // Short punchy pop + cheerful chime
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(180, now);
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+                osc.frequency.setValueAtTime(659.25, now + 0.09);
+                osc.frequency.setValueAtTime(880, now + 0.18);
+                gain.gain.setValueAtTime(0.22, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } catch (e) {}
+        }
+
+        function setGameMode(mode) {
+            gMode = mode;
+            document.querySelectorAll('.g-mode-btn').forEach(btn => {
+                btn.className = 'g-mode-btn bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition';
+                const checkIcon = btn.querySelector('.fa-check');
+                if (checkIcon) checkIcon.remove();
+            });
+            const activeBtn = document.getElementById('gMode_' + mode);
+            activeBtn.className = 'g-mode-btn bg-indigo-600 text-white font-bold text-xs sm:text-sm py-2.5 px-3 rounded-xl text-left flex items-center justify-between transition';
+            activeBtn.innerHTML += '<i class="fa-solid fa-check"></i>';
+            generateBalloonMission();
+        }
+
+        function updateGameReadoutVisibility() {
+            const show = document.getElementById('gameReadoutToggle').checked;
+            const badge = document.getElementById('gameLiveReadout');
+            if (show) {
+                badge.classList.remove('hidden');
+                badge.classList.add('flex');
+            } else {
+                badge.classList.add('hidden');
+                badge.classList.remove('flex');
+            }
+            updateLiveDegreeNumbers();
+            renderBalloonGameSVG();
+        }
+
+        function updateLiveDegreeNumbers() {
+            document.getElementById('liveInnerDeg').textContent = `${bowAngleRight}°`;
+            document.getElementById('liveOuterDeg').textContent = `${180 - bowAngleRight}°`;
+            // Keep slider synchronized (slider left=0 is 180 deg, right=180 is 0 deg for natural left-to-right feel!)
+            const slider = document.getElementById('bowAngleSlider');
+            if (slider) {
+                slider.value = 180 - bowAngleRight;
+            }
+        }
+
+        function onSliderChange(sliderVal) {
+            // Slider goes from 0 (Left = 180° inner) to 180 (Right = 0° inner)
+            const newAngleRight = 180 - parseInt(sliderVal, 10);
+            setBowAngle(newAngleRight);
+        }
+
+        function setBowAngle(degFromRight) {
+            bowAngleRight = Math.max(5, Math.min(175, Math.round(degFromRight)));
+            updateLiveDegreeNumbers();
+            renderBalloonGameSVG();
+        }
+
+        function rotateBowBy(deltaDegFromRight) {
+            setBowAngle(bowAngleRight + deltaDegFromRight);
+        }
+
+        function resetAngleTypeSelectionUI() {
+            selectedGameAngleType = null;
+            isAngleTypeVerified = false;
+            ['dar', 'dik', 'genis'].forEach(t => {
+                const btn = document.getElementById('typeBtn_' + t);
+                if (btn) {
+                    btn.className = 'angle-type-btn bg-white hover:bg-indigo-50 text-slate-700 border-2 border-slate-200 rounded-xl p-2.5 flex flex-col items-center justify-center gap-1 transition shadow-sm';
+                }
+            });
+            const badge = document.getElementById('angleTypeStatusBadge');
+            if (badge) {
+                badge.className = 'text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300';
+                badge.innerHTML = `<i class="fa-solid fa-lock mr-1"></i> Önce Açı Türünü Seç!`;
+            }
+        }
+
+        function getRequiredAngleTypeForStep(stepObj) {
+            // stepObj.measuredDeg is the actual geometric degree of the angle (0..180)
+            if (stepObj.measuredDeg < 90) return 'dar';
+            if (stepObj.measuredDeg === 90) return 'dik';
+            return 'genis';
+        }
+
+        function selectGameAngleType(typeKey) {
+            if (!currentGMission) return;
+            selectedGameAngleType = typeKey;
+            const currentStep = currentGMission.steps[currentGMission.currentTargetIdx];
+            const expectedType = getRequiredAngleTypeForStep(currentStep);
+
+            // Reset button styles first
+            ['dar', 'dik', 'genis'].forEach(t => {
+                const btn = document.getElementById('typeBtn_' + t);
+                if (btn) {
+                    btn.className = 'angle-type-btn bg-white hover:bg-indigo-50 text-slate-700 border-2 border-slate-200 rounded-xl p-2.5 flex flex-col items-center justify-center gap-1 transition shadow-sm';
+                }
+            });
+
+            const clickedBtn = document.getElementById('typeBtn_' + typeKey);
+            const badge = document.getElementById('angleTypeStatusBadge');
+            const fb = document.getElementById('gFeedbackBox');
+
+            const typeNames = { dar: 'Dar Açı (<90°)', dik: 'Dik Açı (90°)', genis: 'Geniş Açı (>90°)' };
+
+            if (typeKey === expectedType) {
+                isAngleTypeVerified = true;
+                playFeedbackSound(true);
+                clickedBtn.className = 'angle-type-btn bg-emerald-50 text-emerald-900 border-2 border-emerald-500 rounded-xl p-2.5 flex flex-col items-center justify-center gap-1 transition shadow-md ring-2 ring-emerald-200';
+                badge.className = 'text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300';
+                badge.innerHTML = `<i class="fa-solid fa-lock-open mr-1"></i> Açı Türü Doğru (${typeNames[typeKey]})! Şimdi Oku Çevir ve Fırlat!`;
+
+                fb.classList.remove('hidden');
+                fb.className = 'mt-4 p-3.5 rounded-2xl border-2 bg-emerald-50 border-emerald-300 text-emerald-900 text-xs sm:text-sm font-bold';
+                fb.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 mr-1.5 text-base"></i> Harika! Hedef açının <strong>${typeNames[typeKey]}</strong> olduğunu doğru buldun! Şimdi 2. Adımda oku <strong>${currentStep.measuredDeg}°</strong> olacak şekilde çevirip <strong>OKU FIRLAT</strong> butonuna basabilirsin!`;
+            } else {
+                isAngleTypeVerified = false;
+                playFeedbackSound(false);
+                clickedBtn.className = 'angle-type-btn bg-rose-50 text-rose-900 border-2 border-rose-500 rounded-xl p-2.5 flex flex-col items-center justify-center gap-1 transition shadow-sm';
+                badge.className = 'text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300';
+                badge.innerHTML = `<i class="fa-solid fa-xmark mr-1"></i> Yanlış Açı Türü! Tekrar Dene!`;
+
+                fb.classList.remove('hidden');
+                fb.className = 'mt-4 p-3.5 rounded-2xl border-2 bg-rose-50 border-rose-300 text-rose-900 text-xs sm:text-sm';
+                fb.innerHTML = `
+                    <div class="font-extrabold mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Dikkat! Açı Türü "${typeNames[typeKey]}" Değil!</div>
+                    <p>Hedeflenen açımız <strong>${currentStep.measuredDeg}°</strong>. Hatırla: 90°'den küçükse <strong>Dar Açı</strong>, tam 90° ise <strong>Dik Açı</strong>, 90°'den büyükse <strong>Geniş Açı</strong> olur. Doğru açı türünü seçmeden ok fırlatılamaz!</p>
+                `;
+            }
+        }
+
+        function createSingleBalloonStep(subMode, stepIndex, usedAnglesRight) {
+            // Pick an angle that isn't too close to already placed balloons in this 3-balloon round
+            const allAngles = [20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 90, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160];
+            let stepType = subMode;
+            if (stepType === 'all' || stepType === 'multi') {
+                const pool = ['inner', 'outer', 'calculate'];
+                stepType = pool[stepIndex % pool.length];
+            }
+
+            let angleRight = 60;
+            let measuredDeg = 60;
+            let scaleDir = 'inner'; // 'inner' (from right 0) or 'outer' (from left 0)
+            let prompt = '';
+            let hint = '';
+
+            // Filter available angles so the 3 balloons don't overlap on the protractor
+            const isAngleFree = (angR) => usedAnglesRight.every(u => Math.abs(u - angR) >= 20);
+
+            if (stepType === 'inner') {
+                const candidates = allAngles.filter(a => isAngleFree(a));
+                measuredDeg = candidates[Math.floor(Math.random() * candidates.length)] || 45;
+                angleRight = measuredDeg;
+                scaleDir = 'inner';
+                prompt = `<strong>${stepIndex + 1}. Balon Hedefi:</strong> Yayı <strong>SAĞDAKİ 0° çizgisinden (Mavi İç Ölçek)</strong> başlayarak <span class="text-blue-600 font-black text-xl">${measuredDeg}°</span> olacak şekilde çevir, açı türünü seç ve balonu patlat!`;
+                hint = `🔵 <strong>İpucu:</strong> "Sağdaki 0°" dediği için <strong>MAVİ (İç)</strong> ölçekteki <strong>${measuredDeg}°</strong> çizgisine nişan almalısın. (${measuredDeg < 90 ? 'Dar Açı' : (measuredDeg === 90 ? 'Dik Açı' : 'Geniş Açı')})`;
+            } else if (stepType === 'outer') {
+                const candidates = allAngles.filter(a => isAngleFree(180 - a));
+                measuredDeg = candidates[Math.floor(Math.random() * candidates.length)] || 50;
+                angleRight = 180 - measuredDeg;
+                scaleDir = 'outer';
+                prompt = `<strong>${stepIndex + 1}. Balon Hedefi:</strong> Yayı <strong>SOLDAKİ 0° çizgisinden (Kırmızı Dış Ölçek)</strong> başlayarak <span class="text-rose-600 font-black text-xl">${measuredDeg}°</span> olacak şekilde çevir, açı türünü seç ve balonu patlat!`;
+                hint = `🔴 <strong>İpucu:</strong> "Soldaki 0°" dediği için <strong>KIRMIZI (Dış)</strong> ölçekteki <strong>${measuredDeg}°</strong> (yani mavi ölçekte ${angleRight}°) hizasına nişan almalısın!`;
+            } else {
+                // 'calculate' mode
+                scaleDir = 'inner';
+                const calcTypes = ['identical_straight', 'identical_right', 'complementary', 'supplementary', 'bisector_double'];
+                const cType = calcTypes[Math.floor(Math.random() * calcTypes.length)];
+
+                if (cType === 'identical_straight') {
+                    const opts = [35, 40, 45, 50, 55, 65, 70].filter(a => isAngleFree(a));
+                    measuredDeg = opts[Math.floor(Math.random() * opts.length)] || 50;
+                    const known = 180 - 2 * measuredDeg;
+                    prompt = `<strong>${stepIndex + 1}. Balon Hedefi (Hesapla & Vur):</strong> Doğru açıda (180°) <strong>${known}°</strong> ve <strong>iki özdeş (•) açı</strong> vardır. Özdeş açılardan <strong>birini</strong> hesapla, türünü seç ve <strong>Sağdaki 0°'dan (Mavi)</strong> vur!`;
+                    hint = `🧮 <strong>Hesaplama:</strong> 180° - ${known}° = ${180 - known}°. İki özdeş açıya böl: <strong>${180 - known}° ÷ 2 = ${measuredDeg}°</strong>! Mavi ölçekte <strong>${measuredDeg}°</strong>'ye nişan al!`;
+                } else if (cType === 'identical_right') {
+                    const opts = [25, 30, 35, 40].filter(a => isAngleFree(a));
+                    measuredDeg = opts[Math.floor(Math.random() * opts.length)] || 30;
+                    const known = 90 - 2 * measuredDeg;
+                    prompt = `<strong>${stepIndex + 1}. Balon Hedefi (Hesapla & Vur):</strong> Dik açıda (90°) <strong>${known}°</strong> ve <strong>iki özdeş (•) açı</strong> vardır. Özdeş açılardan <strong>birini</strong> hesapla, türünü seç ve <strong>Sağdaki 0°'dan (Mavi)</strong> vur!`;
+                    hint = `🧮 <strong>Hesaplama:</strong> 90° - ${known}° = ${90 - known}°. İki eş açıya böl: <strong>${90 - known}° ÷ 2 = ${measuredDeg}°</strong>! Mavi ölçekte <strong>${measuredDeg}°</strong>'ye nişan al!`;
+                } else if (cType === 'complementary') {
+                    const opts = [20, 25, 30, 35, 40, 50, 55, 60, 65, 70].filter(a => isAngleFree(90 - a));
+                    const given = opts[Math.floor(Math.random() * opts.length)] || 35;
+                    measuredDeg = 90 - given;
+                    prompt = `<strong>${stepIndex + 1}. Balon Hedefi (Hesapla & Vur):</strong> Toplamları <strong>dik açı (90°)</strong> olan iki açıdan biri <strong>${given}°</strong> ise diğer açıyı hesapla, türünü seç ve <strong>Sağdaki 0°'dan (Mavi)</strong> vur!`;
+                    hint = `🧮 <strong>Hesaplama:</strong> 90° - ${given}° = <strong>${measuredDeg}°</strong>! Mavi ölçekte <strong>${measuredDeg}°</strong>'ye nişan al!`;
+                } else if (cType === 'supplementary') {
+                    const opts = [40, 50, 60, 65, 70, 75, 110, 120, 130, 140].filter(a => isAngleFree(180 - a));
+                    const given = opts[Math.floor(Math.random() * opts.length)] || 60;
+                    measuredDeg = 180 - given;
+                    prompt = `<strong>${stepIndex + 1}. Balon Hedefi (Hesapla & Vur):</strong> Doğru açı (180°) üzerindeki iki komşu açıdan biri <strong>${given}°</strong> ise diğerini hesapla, türünü seç ve <strong>Sağdaki 0°'dan (Mavi)</strong> vur!`;
+                    hint = `🧮 <strong>Hesaplama:</strong> 180° - ${given}° = <strong>${measuredDeg}°</strong>! Mavi ölçekte <strong>${measuredDeg}°</strong>'ye nişan al!`;
+                } else {
+                    const opts = [25, 30, 35, 40, 45, 55, 60, 65].filter(a => isAngleFree(a * 2));
+                    const onePart = opts[Math.floor(Math.random() * opts.length)] || 45;
+                    measuredDeg = onePart * 2;
+                    prompt = `<strong>${stepIndex + 1}. Balon Hedefi (Hesapla & Vur):</strong> Birbirine <strong>özdeş (eş)</strong> iki komşu açıdan biri <strong>${onePart}°</strong> ise ikisinin <strong>toplamını</strong> hesapla, türünü seç ve <strong>Sağdaki 0°'dan (Mavi)</strong> vur!`;
+                    hint = `🧮 <strong>Hesaplama:</strong> Özdeş iki açının toplamı: <strong>${onePart}° + ${onePart}° = ${measuredDeg}°</strong>! Mavi ölçekte <strong>${measuredDeg}°</strong>'ye nişan al!`;
+                }
+                angleRight = measuredDeg;
+            }
+
+            return {
+                angleRight,
+                measuredDeg,
+                scaleDir,
+                prompt,
+                hint
+            };
+        }
+
+        function generateBalloonMission() {
+            gMissionCount++;
+            popParticles = [];
+            arrowAnimState = null;
+
+            const balloonColors = [
+                { fill: '#f43f5e', stroke: '#be123c', name: 'Kırmızı' },
+                { fill: '#3b82f6', stroke: '#1d4ed8', name: 'Mavi' },
+                { fill: '#10b981', stroke: '#047857', name: 'Yeşil' }
+            ];
+
+            // Always generate 3 distinct balloons on the protractor for every round!
+            const usedAngles = [];
+            const steps = [];
+            const balloons = [];
+
+            for (let i = 0; i < 3; i++) {
+                const stepData = createSingleBalloonStep(gMode, i, usedAngles);
+                usedAngles.push(stepData.angleRight);
+                steps.push(stepData);
+                balloons.push({
+                    angleRight: stepData.angleRight,
+                    measuredDeg: stepData.measuredDeg,
+                    scaleDir: stepData.scaleDir,
+                    isTarget: i === 0,
+                    stepIndex: i,
+                    popped: false,
+                    color: balloonColors[i],
+                    label: `${i + 1}`
+                });
+            }
+
+            const modeTitles = {
+                all: 'Karışık 3\'lü Balon Avı',
+                inner: 'Sağdaki 0° (İç Ölçek - Mavi)',
+                outer: 'Soldaki 0° (Dış Ölçek - Kırmızı)',
+                calculate: 'Hesapla & Balonu Vur',
+                multi: '3\'lü Kombo Balon Avı'
+            };
+
+            currentGMission = {
+                id: gMissionCount,
+                subMode: gMode,
+                steps,
+                balloons,
+                currentTargetIdx: 0,
+                categoryLabel: modeTitles[gMode] || '3\'lü Balon Avı',
+                promptHTML: steps[0].prompt,
+                hintHTML: steps[0].hint
+            };
+
+            // Update DOM Header
+            document.getElementById('gMissionBadge').textContent = `TUR #${gMissionCount}`;
+            document.getElementById('gMissionCategory').textContent = currentGMission.categoryLabel;
+            document.getElementById('gRoundProgressBadge').textContent = `Hedef Balon: 1 / 3`;
+            document.getElementById('gMissionText').innerHTML = currentGMission.promptHTML;
+            document.getElementById('gFeedbackBox').classList.add('hidden');
+
+            // Reset mandatory angle type selector (Dar / Dik / Geniş)
+            resetAngleTypeSelectionUI();
+
+            // Reset bow to neutral 90 degrees so student rotates it intentionally
+            setBowAngle(90);
+        }
+
+        function renderBalloonGameSVG() {
+            const container = document.getElementById('balloonGameSvgWrapper');
+            if (!container || !currentGMission) return;
+
+            const showLaser = document.getElementById('gameLaserToggle').checked;
+            const cx = 350;
+            const cy = 310;
+            const outerR = 235;
+            const innerR = 175;
+            const bodyInnerR = 132;
+            const balloonOrbitR = 268; // Balloons float just outside the protractor rim!
+
+            let svg = `<svg id="balloonGameSvg" viewBox="0 0 700 355" class="w-full h-auto select-none">`;
+
+            // Definitions for gradients and filters
+            svg += `
+                <defs>
+                    <radialGradient id="balloonShine" cx="35%" cy="30%" r="65%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
+                        <stop offset="40%" stop-color="#ffffff" stop-opacity="0.1"/>
+                        <stop offset="100%" stop-color="#000000" stop-opacity="0.15"/>
+                    </radialGradient>
+                </defs>
+            `;
+
+            // Protractor Semi-transparent Arc Body
+            svg += `
+                <path d="M ${cx - outerR} ${cy} A ${outerR} ${outerR} 0 0 1 ${cx + outerR} ${cy} L ${cx + outerR} ${cy + 20} L ${cx - outerR} ${cy + 20} Z" 
+                      fill="#ffffff" fill-opacity="0.90" stroke="#94a3b8" stroke-width="2" />
+                <path d="M ${cx - bodyInnerR} ${cy} A ${bodyInnerR} ${bodyInnerR} 0 0 1 ${cx + bodyInnerR} ${cy} Z" 
+                      fill="#f8fafc" fill-opacity="0.85" stroke="#cbd5e1" stroke-width="1.5" />
+            `;
+
+            // Shaded active sector from right or left depending on current target balloon's scaleDir
+            const sectorR = 95;
+            const activeStep = currentGMission.steps[currentGMission.currentTargetIdx];
+            if (activeStep && activeStep.scaleDir === 'outer') {
+                // Shade from Left 0° (180°) to bowAngleRight
+                const pLeft0 = polarToCartesian(cx, cy, sectorR, 180);
+                const pBow = polarToCartesian(cx, cy, sectorR, bowAngleRight);
+                svg += `<path d="M ${cx} ${cy} L ${pLeft0.x} ${pLeft0.y} A ${sectorR} ${sectorR} 0 0 1 ${pBow.x} ${pBow.y} Z" fill="#f43f5e" fill-opacity="0.18" stroke="#e11d48" stroke-width="1.5" />`;
+            } else {
+                // Shade from Right 0° (0°) to bowAngleRight
+                const pRight0 = polarToCartesian(cx, cy, sectorR, 0);
+                const pBow = polarToCartesian(cx, cy, sectorR, bowAngleRight);
+                svg += `<path d="M ${cx} ${cy} L ${pRight0.x} ${pRight0.y} A ${sectorR} ${sectorR} 0 0 0 ${pBow.x} ${pBow.y} Z" fill="#3b82f6" fill-opacity="0.18" stroke="#2563eb" stroke-width="1.5" />`;
+            }
+
+            // Protractor Ticks & Scale Numbers (0 to 180)
+            for (let deg = 0; deg <= 180; deg++) {
+                const isMajor10 = (deg % 10 === 0);
+                const isMid5 = (deg % 5 === 0 && !isMajor10);
+
+                if (isMajor10 || isMid5) {
+                    const tickLen = isMajor10 ? 12 : 7;
+                    const pOut1 = polarToCartesian(cx, cy, outerR, deg);
+                    const pOut2 = polarToCartesian(cx, cy, outerR - tickLen, deg);
+                    svg += `<line x1="${pOut1.x}" y1="${pOut1.y}" x2="${pOut2.x}" y2="${pOut2.y}" stroke="${isMajor10 ? '#475569' : '#94a3b8'}" stroke-width="${isMajor10 ? '1.8' : '1.2'}" />`;
+
+                    const iTickLen = isMajor10 ? 9 : 5;
+                    const pIn1 = polarToCartesian(cx, cy, bodyInnerR, deg);
+                    const pIn2 = polarToCartesian(cx, cy, bodyInnerR + iTickLen, deg);
+                    svg += `<line x1="${pIn1.x}" y1="${pIn1.y}" x2="${pIn2.x}" y2="${pIn2.y}" stroke="${isMajor10 ? '#475569' : '#94a3b8'}" stroke-width="${isMajor10 ? '1.5' : '1'}" />`;
+                }
+
+                if (isMajor10) {
+                    const innerVal = deg;
+                    const outerVal = 180 - deg;
+                    const isAimed = Math.abs(deg - bowAngleRight) <= 2;
+
+                    const pOuterNum = polarToCartesian(cx, cy, outerR - 24, deg);
+                    svg += `<text x="${pOuterNum.x}" y="${pOuterNum.y}" fill="#e11d48" font-size="${isAimed ? '13.5' : '11'}" font-weight="800" text-anchor="middle" dominant-baseline="middle">${outerVal}</text>`;
+
+                    const pInnerNum = polarToCartesian(cx, cy, innerR - 18, deg);
+                    svg += `<text x="${pInnerNum.x}" y="${pInnerNum.y}" fill="#2563eb" font-size="${isAimed ? '13.5' : '11'}" font-weight="800" text-anchor="middle" dominant-baseline="middle">${innerVal}</text>`;
+                }
+            }
+
+            // Base Baseline (0° - 180° Line)
+            svg += `<line x1="${cx - outerR - 15}" y1="${cy}" x2="${cx + outerR + 15}" y2="${cy}" stroke="#475569" stroke-width="2.5" />`;
+
+            // Draw Floating Balloons around the outer rim
+            currentGMission.balloons.forEach((b, idx) => {
+                if (b.popped) return;
+                const pos = polarToCartesian(cx, cy, balloonOrbitR, b.angleRight);
+                const stringStart = polarToCartesian(cx, cy, balloonOrbitR - 22, b.angleRight);
+                const stringEnd = polarToCartesian(cx, cy, outerR + 2, b.angleRight);
+
+                const isActiveTarget = (b.stepIndex === currentGMission.currentTargetIdx);
+                const ringPulse = isActiveTarget ? `<circle cx="${pos.x}" cy="${pos.y}" r="26" fill="none" stroke="#f59e0b" stroke-width="3.5" stroke-dasharray="5 3" />` : '';
+
+                // Balloon String pointing toward protractor tick
+                svg += `<line x1="${stringStart.x}" y1="${stringStart.y}" x2="${stringEnd.x}" y2="${stringEnd.y}" stroke="#64748b" stroke-width="1.8" stroke-dasharray="2 2" />`;
+                svg += ringPulse;
+
+                // Balloon Body
+                svg += `
+                    <g class="cursor-pointer" onclick="setBowAngle(${b.angleRight})">
+                        <ellipse cx="${pos.x}" cy="${pos.y}" rx="19" ry="22" fill="${b.color.fill}" stroke="${b.color.stroke}" stroke-width="2" />
+                        <ellipse cx="${pos.x}" cy="${pos.y}" rx="19" ry="22" fill="url(#balloonShine)" />
+                        <polygon points="${pos.x - 4},${pos.y + 22} ${pos.x + 4},${pos.y + 22} ${pos.x},${pos.y + 18}" fill="${b.color.fill}" />
+                        <text x="${pos.x}" y="${pos.y + 1}" fill="#ffffff" font-size="14" font-weight="900" text-anchor="middle" dominant-baseline="middle">${b.label}</text>
+                    </g>
+                `;
+            });
+
+            // Pop Particles Burst Effect
+            popParticles.forEach(p => {
+                svg += `<circle cx="${p.x}" cy="${p.y}" r="${p.r}" fill="${p.color}" />`;
+            });
+
+            // Laser Sight Line (if enabled)
+            if (showLaser) {
+                const pLaserEnd = polarToCartesian(cx, cy, balloonOrbitR - 10, bowAngleRight);
+                svg += `<line x1="${cx}" y1="${cy}" x2="${pLaserEnd.x}" y2="${pLaserEnd.y}" stroke="#f43f5e" stroke-width="2.5" stroke-dasharray="6 5" stroke-opacity="0.75" />`;
+            }
+
+            // Draw the Rotatable Archer's Bow & Arrow at Center (cx, cy)
+            const bowRadius = 58;
+            const bowArcStart = polarToCartesian(cx, cy, bowRadius, bowAngleRight - 42);
+            const bowArcEnd = polarToCartesian(cx, cy, bowRadius, bowAngleRight + 42);
+            const bowGrip = polarToCartesian(cx, cy, bowRadius + 8, bowAngleRight);
+
+            // Bow String
+            svg += `<line x1="${bowArcStart.x}" y1="${bowArcStart.y}" x2="${cx}" y2="${cy}" stroke="#cbd5e1" stroke-width="2" />`;
+            svg += `<line x1="${bowArcEnd.x}" y1="${bowArcEnd.y}" x2="${cx}" y2="${cy}" stroke="#cbd5e1" stroke-width="2" />`;
+
+            // Wooden/Carbon Recurve Bow Curve
+            svg += `<path d="M ${bowArcStart.x} ${bowArcStart.y} Q ${bowGrip.x} ${bowGrip.y} ${bowArcEnd.x} ${bowArcEnd.y}" fill="none" stroke="#d97706" stroke-width="6" stroke-linecap="round" />`;
+
+            // Arrow Shaft & Tip (either resting in bow or flying!)
+            let arrowStartDist = 0;
+            let arrowEndDist = 115;
+            let arrowAngle = bowAngleRight;
+
+            if (arrowAnimState && arrowAnimState.active) {
+                arrowAngle = arrowAnimState.angle;
+                arrowStartDist = arrowAnimState.progress * (balloonOrbitR - 70);
+                arrowEndDist = arrowStartDist + 85;
+            }
+
+            const pArrTail = polarToCartesian(cx, cy, arrowStartDist, arrowAngle);
+            const pArrTip = polarToCartesian(cx, cy, arrowEndDist, arrowAngle);
+            const pArrLeftWing = polarToCartesian(cx, cy, arrowEndDist - 14, arrowAngle + 4.5);
+            const pArrRightWing = polarToCartesian(cx, cy, arrowEndDist - 14, arrowAngle - 4.5);
+
+            // Arrow Shaft
+            svg += `<line x1="${pArrTail.x}" y1="${pArrTail.y}" x2="${pArrTip.x}" y2="${pArrTip.y}" stroke="#0f172a" stroke-width="4" stroke-linecap="round" />`;
+            // Arrowhead Triangle
+            svg += `<polygon points="${pArrTip.x},${pArrTip.y} ${pArrLeftWing.x},${pArrLeftWing.y} ${pArrRightWing.x},${pArrRightWing.y}" fill="#e11d48" stroke="#9f1239" stroke-width="1" />`;
+
+            // Drag Handle Knob on the Arrow/Ray so student sees where to grab
+            if (!arrowAnimState || !arrowAnimState.active) {
+                const pKnob = polarToCartesian(cx, cy, 115, bowAngleRight);
+                svg += `
+                    <circle cx="${pKnob.x}" cy="${pKnob.y}" r="13" fill="#4f46e5" fill-opacity="0.2" stroke="#4f46e5" stroke-width="2" />
+                    <circle cx="${pKnob.x}" cy="${pKnob.y}" r="5" fill="#4f46e5" />
+                `;
+            }
+
+            // Pivot Center Point
+            svg += `<circle cx="${cx}" cy="${cy}" r="8" fill="#1e293b" stroke="#ffffff" stroke-width="2.5" />`;
+
+            svg += `</svg>`;
+            container.innerHTML = svg;
+        }
+
+        function setupBowDragListeners() {
+            const wrapper = document.getElementById('balloonGameSvgWrapper');
+            if (!wrapper) return;
+
+            function handlePointerMove(clientX, clientY) {
+                const svgEl = document.getElementById('balloonGameSvg');
+                if (!svgEl) return;
+                const rect = svgEl.getBoundingClientRect();
+                const scaleX = 700 / rect.width;
+                const scaleY = 355 / rect.height;
+
+                const svgX = (clientX - rect.left) * scaleX;
+                const svgY = (clientY - rect.top) * scaleY;
+
+                const cx = 350;
+                const cy = 310;
+                const dx = svgX - cx;
+                const dy = cy - svgY; // Upward is positive
+
+                let angleRad = Math.atan2(dy, dx);
+                let angleDeg = (angleRad * 180) / Math.PI;
+                if (angleDeg < 0) {
+                    angleDeg = dx < 0 ? 175 : 5;
+                }
+                setBowAngle(angleDeg);
+            }
+
+            wrapper.addEventListener('mousedown', (e) => {
+                isDraggingBow = true;
+                handlePointerMove(e.clientX, e.clientY);
+            });
+            window.addEventListener('mousemove', (e) => {
+                if (!isDraggingBow) return;
+                handlePointerMove(e.clientX, e.clientY);
+            });
+            window.addEventListener('mouseup', () => {
+                isDraggingBow = false;
+            });
+
+            wrapper.addEventListener('touchstart', (e) => {
+                if (e.touches.length > 0) {
+                    isDraggingBow = true;
+                    handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            wrapper.addEventListener('touchmove', (e) => {
+                if (!isDraggingBow || e.touches.length === 0) return;
+                e.preventDefault();
+                handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: false });
+
+            wrapper.addEventListener('touchend', () => {
+                isDraggingBow = false;
+            });
+        }
+
+        function createBurstParticles(angleRight, colorHex) {
+            const cx = 350;
+            const cy = 310;
+            const center = polarToCartesian(cx, cy, 268, angleRight);
+            popParticles = [];
+            for (let i = 0; i < 14; i++) {
+                const a = (i * 360 / 14) * (Math.PI / 180);
+                const dist = 12 + Math.random() * 20;
+                popParticles.push({
+                    x: center.x + Math.cos(a) * dist,
+                    y: center.y + Math.sin(a) * dist,
+                    r: 3 + Math.random() * 3.5,
+                    color: i % 2 === 0 ? colorHex : '#fbbf24'
+                });
+            }
+        }
+
+        function fireArrow() {
+            if (!currentGMission || (arrowAnimState && arrowAnimState.active)) return;
+
+            const fb = document.getElementById('gFeedbackBox');
+            const currentIdx = currentGMission.currentTargetIdx;
+            const currentStep = currentGMission.steps[currentIdx];
+            const targetBalloon = currentGMission.balloons[currentIdx];
+            const expectedType = getRequiredAngleTypeForStep(currentStep);
+            const typeNames = { dar: 'Dar Açı (<90°)', dik: 'Dik Açı (90°)', genis: 'Geniş Açı (>90°)' };
+
+            // CHECK 1: Must select and verify the correct Angle Type (Dar / Dik / Geniş) BEFORE firing!
+            if (!selectedGameAngleType) {
+                playFeedbackSound(false);
+                fb.classList.remove('hidden');
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-amber-50 border-amber-300 text-amber-950';
+                fb.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-base">Önce 1. Adımda Açı Türünü Seçmelisin! 🔒</h4>
+                            <p class="text-xs sm:text-sm mt-1">Hedeflenen açının <strong>Dar Açı mı, Dik Açı mı, Geniş Açı mı</strong> olduğunu yukarıdaki kutulardan işaretlemeden ok fırlatılamaz!</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            if (!isAngleTypeVerified || selectedGameAngleType !== expectedType) {
+                playFeedbackSound(false);
+                fb.classList.remove('hidden');
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-rose-50 border-rose-300 text-rose-900';
+                fb.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-base">Açı Türü Yanlış Seçildiği İçin Ok Atılamadı! ❌</h4>
+                            <p class="text-xs sm:text-sm mt-1">Hedefimiz <strong>${currentStep.measuredDeg}°</strong>. Lütfen önce 1. Adımda doğru açı türünü (Dar / Dik / Geniş) işaretle!</p>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // CHECK 2: Verify if the Bow's Angle matches the target balloon BEFORE shooting!
+            // If it's not aimed at the right angle, DO NOT release the arrow!
+            const shotAngle = bowAngleRight;
+            const tolerance = 3; // +/- 3 degrees tolerance
+            const isSupplementTrap = Math.abs((180 - targetBalloon.angleRight) - shotAngle) <= tolerance && (180 - targetBalloon.angleRight !== targetBalloon.angleRight);
+
+            if (Math.abs(targetBalloon.angleRight - shotAngle) > tolerance) {
+                playFeedbackSound(false);
+                updateScoreboard(0, false);
+                fb.classList.remove('hidden');
+
+                if (isSupplementTrap) {
+                    const rightScaleText = currentStep.scaleDir === 'inner' ? 'SAĞDAKİ 0° (Mavi İç Ölçek)' : 'SOLDAKİ 0° (Kırmızı Dış Ölçek)';
+                    fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-amber-50 border-amber-300 text-amber-950';
+                    fb.innerHTML = `
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-compass"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-base">Ok Fırlatılmadı! İç ve Dış Ölçeği Karıştırdın! ⚠️</h4>
+                                <p class="text-xs sm:text-sm mt-1">Açı türünü <strong>${typeNames[expectedType]}</strong> olarak doğru seçtin ama oku ters taraftaki ölçeğe çevirdin! Görevde <strong>${rightScaleText}</strong> üzerinden <strong>${currentStep.measuredDeg}°</strong> istendiğine dikkat et!</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    const diff = Math.abs(targetBalloon.angleRight - shotAngle);
+                    fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-rose-50 border-rose-300 text-rose-900';
+                    fb.innerHTML = `
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500 text-white flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-ban"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-base">Açı Doğru Değil, Ok Fırlatılmadı! (Şu anki Açı: Mavi ${shotAngle}° | Kırmızı ${180 - shotAngle}°)</h4>
+                                <p class="text-xs sm:text-sm mt-1">Hedef açıya <strong>${diff}°</strong> uzaktasın. Önce oku doğru açıya (${currentStep.scaleDir === 'inner' ? 'Mavi ' + currentStep.measuredDeg + '°' : 'Kırmızı ' + currentStep.measuredDeg + '°'}) çevir, doğru olduğunda ok fırlayacak!</p>
+                                <div class="mt-2 p-2.5 bg-white rounded-xl border border-rose-200 text-xs text-slate-700">${currentGMission.hintHTML}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            // BOTH Angle Type AND Aimed Degree are Correct! Launch the arrow to pop the balloon!
+            arrowAnimState = { active: true, progress: 0, angle: targetBalloon.angleRight };
+
+            const animInterval = setInterval(() => {
+                arrowAnimState.progress += 0.18;
+                if (arrowAnimState.progress >= 1) {
+                    clearInterval(animInterval);
+                    arrowAnimState.active = false;
+                    evaluateArrowHit(targetBalloon);
+                } else {
+                    renderBalloonGameSVG();
+                }
+            }, 25);
+        }
+
+        function evaluateArrowHit(hitBalloon) {
+            const fb = document.getElementById('gFeedbackBox');
+            fb.classList.remove('hidden');
+
+            // Pop the target balloon!
+            hitBalloon.popped = true;
+            playPopSound();
+            createBurstParticles(hitBalloon.angleRight, hitBalloon.color.fill);
+            poppedBalloonsTotal++;
+            document.getElementById('poppedCountDisplay').textContent = `${poppedBalloonsTotal} Balon 🎈`;
+
+            // Check if there are remaining balloons among the 3 balloons
+            if (currentGMission.currentTargetIdx < 2) {
+                const poppedNum = currentGMission.currentTargetIdx + 1;
+                currentGMission.currentTargetIdx++;
+                const nextIdx = currentGMission.currentTargetIdx;
+
+                currentGMission.balloons.forEach(b => {
+                    b.isTarget = (b.stepIndex === nextIdx);
+                });
+
+                const nextStep = currentGMission.steps[nextIdx];
+                currentGMission.promptHTML = nextStep.prompt;
+                currentGMission.hintHTML = nextStep.hint;
+
+                document.getElementById('gRoundProgressBadge').textContent = `Hedef Balon: ${nextIdx + 1} / 3`;
+                document.getElementById('gMissionText').innerHTML = currentGMission.promptHTML;
+
+                // Reset Step 1 (Dar/Dik/Geniş) for the new balloon!
+                resetAngleTypeSelectionUI();
+                updateScoreboard(10, true);
+
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-emerald-50 border-emerald-300 text-emerald-900';
+                fb.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg shrink-0">
+                            <i class="fa-solid fa-burst"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-base">Tam İsabet! ${poppedNum}. Balon Patladı! 🎈💥</h4>
+                            <p class="text-xs sm:text-sm mt-0.5">Şimdi sırada <strong>${nextIdx + 1}. Balon</strong> var! Önce yeni açının <strong>Dar / Dik / Geniş</strong> türünü seç, sonra oku çevirip patlat!</p>
+                        </div>
+                    </div>
+                `;
+                renderBalloonGameSVG();
+            } else {
+                // All 3 Balloons Popped! Celebrate and spawn 3 brand new balloons at new locations!
+                updateScoreboard(20, true);
+                renderBalloonGameSVG();
+
+                fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-emerald-50 border-emerald-400 text-emerald-950 shadow-md';
+                fb.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-11 h-11 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-base">Muhteşem! 3 Balonun 3'ünü de Patlattın! 🎉🎈🎈🎈</h4>
+                                <p class="text-xs sm:text-sm mt-0.5">Farklı açılarda <strong>yeni 3 balon</strong> hazırlanıyor...</p>
+                            </div>
+                        </div>
+                        <button onclick="generateBalloonMission()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm transition shadow-sm">
+                            Hemen Yeni 3 Balon Gelsin <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                `;
+
+                // Automatically spawn 3 new balloons in different places after a brief celebration
+                setTimeout(() => {
+                    if (activeTab === 3 && currentGMission && currentGMission.balloons.every(b => b.popped)) {
+                        generateBalloonMission();
+                    }
+                }, 2200);
+            }
+        }
+
+        function showGameHint() {
+            if (!currentGMission) return;
+            const fb = document.getElementById('gFeedbackBox');
+            fb.classList.remove('hidden');
+            fb.className = 'mt-4 p-4 rounded-2xl border-2 bg-amber-50 border-amber-300 text-amber-950';
+            fb.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center text-base shrink-0">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <div class="text-xs sm:text-sm leading-relaxed">
+                        ${currentGMission.hintHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize all three activities on page load
+        window.onload = function () {
+            generateProtractorQuestion();
+            generateAngleQuestion();
+            generateBalloonMission();
+            setupBowDragListeners();
+        };
+    </script>
+</body>
+</html>

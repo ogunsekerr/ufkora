@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6. Sınıf: Veriden Olasılığa - Para ve Zar Laboratuvarı</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 100%);
+            min-height: 100vh;
+        }
+        h1, h2, h3, .fun-font {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* ================= 3D MADENİ PARA STİLLERİ ================= */
+        .coin-scene {
+            width: 170px;
+            height: 170px;
+            perspective: 900px;
+            margin: 0 auto;
+        }
+        .coin {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+        }
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2), inset 0 0 18px rgba(255,255,255,0.6);
+            border: 8px solid #d97706;
+            user-select: none;
+        }
+        /* Yazı Yüzü (Ön) */
+        .coin-heads {
+            background: radial-gradient(circle at 30% 30%, #fef08a, #f59e0b 65%, #b45309);
+            color: #78350f;
+            transform: rotateY(0deg);
+        }
+        /* Tura Yüzü (Arka) */
+        .coin-tails {
+            background: radial-gradient(circle at 30% 30%, #fde047, #eab308 65%, #a16207);
+            color: #713f12;
+            transform: rotateY(180deg);
+        }
+        .coin-inner-ring {
+            width: 82%;
+            height: 82%;
+            border-radius: 50%;
+            border: 3px dashed rgba(120, 53, 15, 0.45);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ================= 3D ZAR STİLLERİ ================= */
+        .dice-scene {
+            width: 130px;
+            height: 130px;
+            perspective: 800px;
+            margin: 20px auto;
+        }
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: translateZ(-65px);
+            transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+        }
+        .cube-face {
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(145deg, #ffffff, #f1f5f9);
+            border: 3px solid #cbd5e1;
+            border-radius: 24px;
+            box-shadow: inset 0 0 16px rgba(0,0,0,0.08), 0 6px 12px rgba(0,0,0,0.1);
+            padding: 18px;
+            display: grid;
+            grid-template-areas:
+                "a . c"
+                "e g f"
+                "d . b";
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            backface-visibility: hidden;
+        }
+        .pip {
+            display: block;
+            align-self: center;
+            justify-self: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #475569, #0f172a);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .pip.red-pip {
+            background: radial-gradient(circle at 30% 30%, #ef4444, #991b1b);
+            width: 28px;
+            height: 28px;
+        }
+        /* Zar yüzlerinin 3B konumları */
+        .face-1 { transform: rotateY(0deg) translateZ(65px); }
+        .face-2 { transform: rotateY(180deg) translateZ(65px); }
+        .face-3 { transform: rotateY(90deg) translateZ(65px); }
+        .face-4 { transform: rotateY(-90deg) translateZ(65px); }
+        .face-5 { transform: rotateX(90deg) translateZ(65px); }
+        .face-6 { transform: rotateX(-90deg) translateZ(65px); }
+
+        /* Nokta (Pip) yerleşimleri */
+        .face-1 .pip:nth-child(1) { grid-area: g; }
+
+        .face-2 .pip:nth-child(1) { grid-area: a; }
+        .face-2 .pip:nth-child(2) { grid-area: b; }
+
+        .face-3 .pip:nth-child(1) { grid-area: a; }
+        .face-3 .pip:nth-child(2) { grid-area: g; }
+        .face-3 .pip:nth-child(3) { grid-area: b; }
+
+        .face-4 .pip:nth-child(1) { grid-area: a; }
+        .face-4 .pip:nth-child(2) { grid-area: c; }
+        .face-4 .pip:nth-child(3) { grid-area: d; }
+        .face-4 .pip:nth-child(4) { grid-area: b; }
+
+        .face-5 .pip:nth-child(1) { grid-area: a; }
+        .face-5 .pip:nth-child(2) { grid-area: c; }
+        .face-5 .pip:nth-child(3) { grid-area: g; }
+        .face-5 .pip:nth-child(4) { grid-area: d; }
+        .face-5 .pip:nth-child(5) { grid-area: b; }
+
+        .face-6 .pip:nth-child(1) { grid-area: a; }
+        .face-6 .pip:nth-child(2) { grid-area: c; }
+        .face-6 .pip:nth-child(3) { grid-area: e; }
+        .face-6 .pip:nth-child(4) { grid-area: f; }
+        .face-6 .pip:nth-child(5) { grid-area: d; }
+        .face-6 .pip:nth-child(6) { grid-area: b; }
+
+        /* Gölgeler ve Zıplama Efekti */
+        .object-shadow {
+            width: 110px;
+            height: 18px;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0) 75%);
+            margin: 18px auto 0;
+            border-radius: 50%;
+            transition: transform 0.7s ease, opacity 0.7s ease;
+        }
+        .jumping {
+            animation: jumpArc 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .shadow-shrinking {
+            animation: shadowPulse 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        @keyframes jumpArc {
+            0% { transform: translateY(0) scale(1); }
+            45% { transform: translateY(-75px) scale(1.12); }
+            80% { transform: translateY(5px) scale(0.97); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        @keyframes shadowPulse {
+            0% { transform: scale(1); opacity: 0.9; }
+            45% { transform: scale(0.45); opacity: 0.3; }
+            100% { transform: scale(1); opacity: 0.9; }
+        }
+
+        /* Sonuç Rozeti Animasyonu */
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.08); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .pop-badge {
+            animation: popIn 0.35s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-12"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
+
+    <!-- Üst Başlık -->
+    <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/20 p-3 rounded-2xl backdrop-blur-sm border border-white/20">
+                    <i class="fa-solid fa-dice text-2xl text-amber-300"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider bg-amber-400 text-indigo-950 px-2.5 py-0.5 rounded-full">6. Sınıf Matematik</span>
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight mt-0.5">Veriden Olasılığa: Deney Laboratuvarı</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button id="soundToggleBtn" onclick="toggleSound()" class="flex items-center gap-2 bg-white/15 hover:bg-white/25 px-4 py-2 rounded-xl text-sm font-semibold transition border border-white/20">
+                    <i id="soundIcon" class="fa-solid fa-volume-high text-emerald-300"></i>
+                    <span id="soundText">Ses Açık</span>
+                </button>
+                <button onclick="resetAllData()" class="flex items-center gap-2 bg-rose-500/80 hover:bg-rose-500 px-4 py-2 rounded-xl text-sm font-semibold transition shadow-sm">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Tümünü Sıfırla</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 mt-6">
+        <!-- Sekmeler: Madeni Para / Zar / İkisi Birlikte -->
+        <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-3 rounded-2xl shadow-sm border border-slate-200/80 mb-6">
+            <div class="flex flex-wrap gap-2" role="tablist">
+                <button onclick="setMode('both')" id="tab-both" class="px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center gap-2 bg-indigo-600 text-white shadow-sm">
+                    <i class="fa-solid fa-layer-group"></i> İkisi Birlikte
+                </button>
+                <button onclick="setMode('coin')" id="tab-coin" class="px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700">
+                    <i class="fa-solid fa-coins text-amber-500"></i> Sadece Madeni Para
+                </button>
+                <button onclick="setMode('dice')" id="tab-dice" class="px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700">
+                    <i class="fa-solid fa-dice-Five text-indigo-500"></i> Sadece Zar
+                </button>
+            </div>
+
+            <!-- Hızlı Bilgi Kutusu -->
+            <div class="flex items-center gap-2 text-xs sm:text-sm bg-indigo-50 text-indigo-800 px-3.5 py-2 rounded-xl border border-indigo-100">
+                <i class="fa-solid fa-lightbulb text-amber-500 text-base"></i>
+                <span><strong>İpucu:</strong> Deneme sayısı arttıkça <em>deneysel olasılık</em>, <em>teorik olasılığa</em> yaklaşır!</span>
+            </div>
+        </div>
+
+        <!-- Deney Alanı Grid -->
+        <div id="experimentGrid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+            <!-- ================= SOL KART: MADENİ PARA ATMA ================= -->
+            <section id="coinSection" class="bg-white rounded-3xl shadow-md border border-slate-200/80 p-6 flex flex-col justify-between">
+                <div>
+                    <!-- Kart Başlığı -->
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-coins"></i>
+                            </span>
+                            <div>
+                                <h2 class="text-xl font-bold text-slate-800">Madeni Para Atma Deneyi</h2>
+                                <p class="text-xs text-slate-500">Olası Durumlar: <strong>{Yazı, Tura}</strong> (2 eş olasılıklı durum)</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-xl">
+                            Teorik Olasılık: 1/2 (%50)
+                        </span>
+                    </div>
+
+                    <!-- 3B Para Sahnesi -->
+                    <div class="py-4 flex flex-col items-center justify-center bg-gradient-to-b from-amber-50/50 to-slate-50 rounded-2xl border border-slate-100 relative overflow-hidden">
+                        <div id="coinJumpWrapper" class="coin-scene" onclick="flipCoin()" title="Atmak için tıkla!">
+                            <div id="coinElement" class="coin">
+                                <!-- Ön Yüz: YAZI -->
+                                <div class="coin-face coin-heads">
+                                    <div class="coin-inner-ring">
+                                        <span class="text-xs font-bold tracking-widest uppercase opacity-75">TÜRKİYE</span>
+                                        <span class="text-3xl font-extrabold fun-font tracking-wide my-1">YAZI</span>
+                                        <span class="text-sm font-bold bg-amber-900/15 px-2.5 py-0.5 rounded-full">1 TL</span>
+                                    </div>
+                                </div>
+                                <!-- Arka Yüz: TURA -->
+                                <div class="coin-face coin-tails">
+                                    <div class="coin-inner-ring">
+                                        <i class="fa-solid fa-crown text-2xl mb-1 opacity-85"></i>
+                                        <span class="text-3xl font-extrabold fun-font tracking-wide">TURA</span>
+                                        <span class="text-xs font-semibold opacity-75 mt-1">CUMHURİYET</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="coinShadow" class="object-shadow"></div>
+
+                        <!-- Sonuç Göstergesi -->
+                        <div class="mt-4 h-10 flex items-center justify-center">
+                            <div id="coinResultBadge" class="px-5 py-1.5 rounded-full text-sm font-bold bg-slate-200 text-slate-700 shadow-sm">
+                                Paraya veya aşağıdaki butona tıkla!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kontrol Butonları -->
+                    <div class="grid grid-cols-3 gap-2.5 my-5">
+                        <button id="btnFlipCoin" onclick="flipCoin()" class="col-span-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 active:scale-[0.99] text-white font-bold py-3.5 px-5 rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-hand-pointer"></i>
+                            <span>PARAYI AT!</span>
+                        </button>
+                        <button onclick="simulateMultipleCoins(10)" class="bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-semibold py-3.5 px-3 rounded-2xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5" title="Hızlıca 10 kez para at">
+                            <i class="fa-solid fa-bolt text-amber-500"></i>
+                            <span>10 Kez At</span>
+                        </button>
+                    </div>
+
+                    <!-- Sıklık ve Deneysel Olasılık Tablosu -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-chart-simple text-amber-500"></i>
+                                Sıklık Tablosu ve Deneysel Olasılık
+                            </h3>
+                            <span class="text-xs font-bold bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600">
+                                Toplam Atış: <strong id="coinTotalCount" class="text-indigo-600">0</strong>
+                            </span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <!-- YAZI Satırı -->
+                            <div class="bg-white p-3 rounded-xl border border-slate-200/80">
+                                <div class="flex justify-between text-xs sm:text-sm font-semibold mb-1.5">
+                                    <span class="flex items-center gap-2">
+                                        <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                        YAZI Gelme Durumu
+                                    </span>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-slate-500">Sıklık: <strong id="headsCount" class="text-slate-800">0</strong></span>
+                                        <span class="bg-amber-50 text-amber-800 px-2 py-0.5 rounded-md font-bold" id="headsProb">0/0 (%0)</span>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden relative">
+                                    <!-- %50 Teorik Çizgi -->
+                                    <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-400/60 z-10" title="Teorik Olasılık (%50)"></div>
+                                    <div id="headsBar" class="bg-gradient-to-r from-amber-400 to-amber-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <!-- TURA Satırı -->
+                            <div class="bg-white p-3 rounded-xl border border-slate-200/80">
+                                <div class="flex justify-between text-xs sm:text-sm font-semibold mb-1.5">
+                                    <span class="flex items-center gap-2">
+                                        <span class="w-3 h-3 rounded-full bg-orange-500 inline-block"></span>
+                                        TURA Gelme Durumu
+                                    </span>
+                                    <div class="flex items-center gap-3">
+                                        <span class="text-slate-500">Sıklık: <strong id="tailsCount" class="text-slate-800">0</strong></span>
+                                        <span class="bg-orange-50 text-orange-800 px-2 py-0.5 rounded-md font-bold" id="tailsProb">0/0 (%0)</span>
+                                    </div>
+                                </div>
+                                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden relative">
+                                    <div class="absolute left-1/2 top-0 bottom-0 w-0.5 bg-slate-400/60 z-10" title="Teorik Olasılık (%50)"></div>
+                                    <div id="tailsBar" class="bg-gradient-to-r from-orange-400 to-orange-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Son Atışlar Geçmişi -->
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-1.5 overflow-x-auto py-1" id="coinHistoryList">
+                        <span class="text-xs text-slate-400 italic">Henüz atış yapılmadı...</span>
+                    </div>
+                    <button onclick="resetCoinData()" class="text-xs text-slate-400 hover:text-rose-600 font-medium shrink-0 transition">
+                        Sıfırla
+                    </button>
+                </div>
+            </section>
+
+            <!-- ================= SAĞ KART: ZAR ATMA ================= -->
+            <section id="diceSection" class="bg-white rounded-3xl shadow-md border border-slate-200/80 p-6 flex flex-col justify-between">
+                <div>
+                    <!-- Kart Başlığı -->
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-dice"></i>
+                            </span>
+                            <div>
+                                <h2 class="text-xl font-bold text-slate-800">Zar Atma Deneyi</h2>
+                                <p class="text-xs text-slate-500">Olası Durumlar: <strong>{1, 2, 3, 4, 5, 6}</strong> (6 eş olasılıklı durum)</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold bg-indigo-50 text-indigo-700 border border-indigo-200 px-3 py-1.5 rounded-xl">
+                            Teorik Olasılık: 1/6 (%16,7)
+                        </span>
+                    </div>
+
+                    <!-- 3B Zar Sahnesi -->
+                    <div class="py-4 flex flex-col items-center justify-center bg-gradient-to-b from-indigo-50/50 to-slate-50 rounded-2xl border border-slate-100 relative overflow-hidden">
+                        <div id="diceJumpWrapper" class="dice-scene" onclick="rollDice()" title="Atmak için tıkla!">
+                            <div id="diceElement" class="cube">
+                                <!-- Yüz 1 -->
+                                <div class="cube-face face-1">
+                                    <span class="pip red-pip"></span>
+                                </div>
+                                <!-- Yüz 2 -->
+                                <div class="cube-face face-2">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <!-- Yüz 3 -->
+                                <div class="cube-face face-3">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <!-- Yüz 4 -->
+                                <div class="cube-face face-4">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <!-- Yüz 5 -->
+                                <div class="cube-face face-5">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <!-- Yüz 6 -->
+                                <div class="cube-face face-6">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="diceShadow" class="object-shadow"></div>
+
+                        <!-- Sonuç Göstergesi -->
+                        <div class="mt-4 h-10 flex items-center justify-center">
+                            <div id="diceResultBadge" class="px-5 py-1.5 rounded-full text-sm font-bold bg-slate-200 text-slate-700 shadow-sm">
+                                Zara veya aşağıdaki butona tıkla!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kontrol Butonları -->
+                    <div class="grid grid-cols-3 gap-2.5 my-5">
+                        <button id="btnRollDice" onclick="rollDice()" class="col-span-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 active:scale-[0.99] text-white font-bold py-3.5 px-5 rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2 text-base">
+                            <i class="fa-solid fa-dice"></i>
+                            <span>ZARI AT!</span>
+                        </button>
+                        <button onclick="simulateMultipleDice(12)" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-800 border border-indigo-200 font-semibold py-3.5 px-3 rounded-2xl transition text-xs sm:text-sm flex items-center justify-center gap-1.5" title="Hızlıca 12 kez zar at">
+                            <i class="fa-solid fa-bolt text-indigo-500"></i>
+                            <span>12 Kez At</span>
+                        </button>
+                    </div>
+
+                    <!-- Zar Sıklık ve Deneysel Olasılık Tablosu -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200/70">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-bold text-slate-700 flex items-center gap-1.5">
+                                <i class="fa-solid fa-chart-column text-indigo-500"></i>
+                                Zar Yüzleri Sıklık ve Olasılık Tablosu
+                            </h3>
+                            <span class="text-xs font-bold bg-white px-2.5 py-1 rounded-lg border border-slate-200 text-slate-600">
+                                Toplam Atış: <strong id="diceTotalCount" class="text-indigo-600">0</strong>
+                            </span>
+                        </div>
+
+                        <div id="diceStatsGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                            <!-- JS ile 1-6 arası kartlar buraya oluşturulacak -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Son Zar Atışları Geçmişi -->
+                <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-1.5 overflow-x-auto py-1" id="diceHistoryList">
+                        <span class="text-xs text-slate-400 italic">Henüz atış yapılmadı...</span>
+                    </div>
+                    <button onclick="resetDiceData()" class="text-xs text-slate-400 hover:text-rose-600 font-medium shrink-0 transition">
+                        Sıfırla
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- İkisini Aynı Anda Atma Barı -->
+        <div id="bothActionBanner" class="mt-6 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-4 text-white shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-base sm:text-lg">İkisini Aynı Anda Atmaya Ne Dersin?</h3>
+                    <p class="text-xs sm:text-sm text-emerald-50">Tek tıklamayla hem madeni parayı hem de zarı havaya fırlat!</p>
+                </div>
+            </div>
+            <button onclick="throwBoth()" class="w-full sm:w-auto bg-white text-emerald-800 hover:bg-emerald-50 font-bold px-6 py-3 rounded-xl shadow transition flex items-center justify-center gap-2 shrink-0">
+                <i class="fa-solid fa-play"></i>
+                <span>İKİSİNİ BİRLİKTE AT!</span>
+            </button>
+        </div>
+
+        <!-- 6. Sınıf Kavram Özeti ve Mini Etkinlik Sorusu -->
+        <section class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="text-xs font-bold uppercase text-indigo-600 mb-1">Kavram 1</div>
+                <h4 class="font-bold text-slate-800 mb-1">Deney ve Çıktı Nedir?</h4>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Parayı veya zarı havaya atma işlemine <strong>deney</strong>, elde edebileceğimiz her bir sonuca (örneğin <em>Tura</em> gelmesi veya <em>4</em> gelmesi) <strong>çıktı</strong> denir.
+                </p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="text-xs font-bold uppercase text-amber-600 mb-1">Kavram 2</div>
+                <h4 class="font-bold text-slate-800 mb-1">Deneysel Olasılık</h4>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Bir olayın gerçekleşme sayısının (sıklığının), yapılan toplam deneme sayısına oranıdır:
+                    <span class="block mt-1.5 font-semibold text-slate-800 bg-slate-100 px-2.5 py-1 rounded-lg text-center">
+                        İstenen Durum Sayısı / Toplam Atış Sayısı
+                    </span>
+                </p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+                <div class="text-xs font-bold uppercase text-emerald-600 mb-1">Kavram 3</div>
+                <h4 class="font-bold text-slate-800 mb-1">Teorik Olasılık</h4>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Deney yapılmadan önce tüm çıktılar eş olasılıklı olduğunda beklenen olasılıktır. Parada her yüz için <strong>1/2 (%50)</strong>, zarda her yüz için <strong>1/6 (%16,7)</strong>'dir.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // ================= DURUM DEĞİŞKENLERİ =================
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        // Madeni Para Verileri
+        let isCoinFlipping = false;
+        let coinRotX = 0;
+        let coinRotY = 0;
+        let coinStats = {
+            heads: 0,
+            tails: 0,
+            total: 0,
+            history: []
+        };
+
+        // Zar Verileri
+        let isDiceRolling = false;
+        let diceRotX = 0;
+        let diceRotY = 0;
+        let diceStats = {
+            counts: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
+            total: 0,
+            history: []
+        };
+
+        // Zar yüzlerinin ekrana dönük olması için gereken temel açılar
+        const diceFaceAngles = {
+            1: { x: 0,   y: 0 },
+            2: { x: 0,   y: 180 },
+            3: { x: 0,   y: -90 },
+            4: { x: 0,   y: 90 },
+            5: { x: -90, y: 0 },
+            6: { x: 90,  y: 0 }
+        };
+
+        // ================= SES EFEKTLERİ (WEB AUDIO API) =================
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playCoinSound(type) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                if (type === 'throw') {
+                    // Metalik çınlama sesi
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1100, now);
+                    osc.frequency.exponentialRampToValueAtTime(2200, now + 0.18);
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'land') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(880, now);
+                    osc.frequency.exponentialRampToValueAtTime(1320, now + 0.15);
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }
+            } catch (e) {
+                console.warn('Ses çalınamadı:', e);
+            }
+        }
+
+        function playDiceSound(type) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                if (type === 'roll') {
+                    osc.type = 'square';
+                    osc.frequency.setValueAtTime(240, now);
+                    osc.frequency.exponentialRampToValueAtTime(420, now + 0.12);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.14);
+                } else if (type === 'land') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.24);
+                }
+            } catch (e) {
+                console.warn('Ses çalınamadı:', e);
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            const text = document.getElementById('soundText');
+            if (soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-emerald-300';
+                text.textContent = 'Ses Açık';
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-rose-300';
+                text.textContent = 'Ses Kapalı';
+            }
+        }
+
+        // ================= GÖRÜNÜM MODU SEÇİMİ =================
+        function setMode(mode) {
+            const coinSec = document.getElementById('coinSection');
+            const diceSec = document.getElementById('diceSection');
+            const grid = document.getElementById('experimentGrid');
+            const bothBanner = document.getElementById('bothActionBanner');
+
+            const tabs = {
+                both: document.getElementById('tab-both'),
+                coin: document.getElementById('tab-coin'),
+                dice: document.getElementById('tab-dice')
+            };
+
+            Object.keys(tabs).forEach(k => {
+                if (k === mode) {
+                    tabs[k].className = 'px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center gap-2 bg-indigo-600 text-white shadow-sm';
+                } else {
+                    tabs[k].className = 'px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center gap-2 bg-slate-100 hover:bg-slate-200 text-slate-700';
+                }
+            });
+
+            if (mode === 'both') {
+                coinSec.classList.remove('hidden');
+                diceSec.classList.remove('hidden');
+                grid.className = 'grid grid-cols-1 lg:grid-cols-2 gap-6';
+                bothBanner.classList.remove('hidden');
+            } else if (mode === 'coin') {
+                coinSec.classList.remove('hidden');
+                diceSec.classList.add('hidden');
+                grid.className = 'grid grid-cols-1 max-w-2xl mx-auto gap-6';
+                bothBanner.classList.add('hidden');
+            } else if (mode === 'dice') {
+                coinSec.classList.add('hidden');
+                diceSec.classList.remove('hidden');
+                grid.className = 'grid grid-cols-1 max-w-2xl mx-auto gap-6';
+                bothBanner.classList.add('hidden');
+            }
+        }
+
+        // ================= MADENİ PARA ATMA FONKSİYONU =================
+        function flipCoin() {
+            if (isCoinFlipping) return;
+            isCoinFlipping = true;
+
+            const coinEl = document.getElementById('coinElement');
+            const jumpWrapper = document.getElementById('coinJumpWrapper');
+            const shadowEl = document.getElementById('coinShadow');
+            const badge = document.getElementById('coinResultBadge');
+            const btn = document.getElementById('btnFlipCoin');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            playCoinSound('throw');
+
+            // Rastgele sonuç belirle: 0 -> YAZI, 1 -> TURA
+            const isTails = Math.random() < 0.5;
+            const resultText = isTails ? 'TURA' : 'YAZI';
+
+            // Her atışta en az 5-7 tam tur dönsün
+            const extraSpinsY = (Math.floor(Math.random() * 3) + 5) * 360;
+            const extraSpinsX = (Math.floor(Math.random() * 2) + 2) * 360;
+
+            // Hedef Y açısı: YAZI için 360'ın katı, TURA için +180 derece
+            const currentModY = coinRotY % 360;
+            const targetBaseY = coinRotY - currentModY + extraSpinsY;
+            coinRotY = isTails ? targetBaseY + 180 : targetBaseY;
+            coinRotX += extraSpinsX;
+
+            // Zıplama animasyonunu tetikle
+            jumpWrapper.classList.remove('jumping');
+            shadowEl.classList.remove('shadow-shrinking');
+            void jumpWrapper.offsetWidth;
+            jumpWrapper.classList.add('jumping');
+            shadowEl.classList.add('shadow-shrinking');
+
+            coinEl.style.transform = `rotateY(${coinRotY}deg) rotateX(${coinRotX}deg)`;
+
+            badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-amber-100 text-amber-800 animate-pulse';
+            badge.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i> Para havada dönüyor...';
+
+            setTimeout(() => {
+                playCoinSound('land');
+                recordCoinResult(resultText);
+
+                if (resultText === 'YAZI') {
+                    badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-amber-500 text-white shadow pop-badge';
+                    badge.innerHTML = '<i class="fa-solid fa-check-circle mr-1.5"></i> Sonuç: <strong>YAZI</strong> Geldi!';
+                } else {
+                    badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-orange-600 text-white shadow pop-badge';
+                    badge.innerHTML = '<i class="fa-solid fa-crown mr-1.5"></i> Sonuç: <strong>TURA</strong> Geldi!';
+                }
+
+                isCoinFlipping = false;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
+            }, 1400);
+        }
+
+        function recordCoinResult(result) {
+            if (result === 'YAZI') {
+                coinStats.heads++;
+            } else {
+                coinStats.tails++;
+            }
+            coinStats.total++;
+            coinStats.history.unshift(result);
+            if (coinStats.history.length > 12) coinStats.history.pop();
+            updateCoinUI();
+        }
+
+        function simulateMultipleCoins(count) {
+            if (isCoinFlipping) return;
+            playCoinSound('land');
+            let lastRes = 'YAZI';
+            for (let i = 0; i < count; i++) {
+                lastRes = Math.random() < 0.5 ? 'TURA' : 'YAZI';
+                recordCoinResult(lastRes);
+            }
+            const badge = document.getElementById('coinResultBadge');
+            badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-amber-600 text-white shadow pop-badge';
+            badge.innerHTML = `<i class="fa-solid fa-bolt mr-1.5"></i> ${count} atış eklendi! (Son: ${lastRes})`;
+        }
+
+        function updateCoinUI() {
+            const { heads, tails, total, history } = coinStats;
+            document.getElementById('coinTotalCount').textContent = total;
+            document.getElementById('headsCount').textContent = heads;
+            document.getElementById('tailsCount').textContent = tails;
+
+            const headsPct = total > 0 ? Math.round((heads / total) * 100) : 0;
+            const tailsPct = total > 0 ? Math.round((tails / total) * 100) : 0;
+
+            document.getElementById('headsProb').textContent = `${heads}/${total} (%${headsPct})`;
+            document.getElementById('tailsProb').textContent = `${tails}/${total} (%${tailsPct})`;
+
+            document.getElementById('headsBar').style.width = `${headsPct}%`;
+            document.getElementById('tailsBar').style.width = `${tailsPct}%`;
+
+            const histContainer = document.getElementById('coinHistoryList');
+            if (history.length === 0) {
+                histContainer.innerHTML = '<span class="text-xs text-slate-400 italic">Henüz atış yapılmadı...</span>';
+            } else {
+                histContainer.innerHTML = '<span class="text-xs font-semibold text-slate-400 mr-1 shrink-0">Son:</span>' +
+                    history.map((item, idx) => {
+                        const isYazi = item === 'YAZI';
+                        const ring = idx === 0 ? 'ring-2 ring-amber-400 font-bold' : 'opacity-80';
+                        const bg = isYazi ? 'bg-amber-100 text-amber-800' : 'bg-orange-100 text-orange-800';
+                        return `<span class="text-xs px-2 py-0.5 rounded-md shrink-0 ${bg} ${ring}">${item}</span>`;
+                    }).join('');
+            }
+        }
+
+        function resetCoinData() {
+            coinStats = { heads: 0, tails: 0, total: 0, history: [] };
+            updateCoinUI();
+            const badge = document.getElementById('coinResultBadge');
+            badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-slate-200 text-slate-700';
+            badge.textContent = 'Veriler sıfırlandı. Parayı at!';
+        }
+
+        // ================= ZAR ATMA FONKSİYONU =================
+        function initDiceStatsGrid() {
+            const grid = document.getElementById('diceStatsGrid');
+            let html = '';
+            const diceIcons = ['one', 'two', 'three', 'four', 'five', 'six'];
+
+            for (let i = 1; i <= 6; i++) {
+                html += `
+                    <div id="diceStatCard-${i}" class="bg-white p-2.5 rounded-xl border border-slate-200/80 transition">
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="flex items-center gap-1.5 font-bold text-slate-700 text-sm">
+                                <i class="fa-solid fa-dice-${diceIcons[i - 1]} text-indigo-600 text-base"></i>
+                                <span>${i} Gelme</span>
+                            </span>
+                            <span id="diceCount-${i}" class="text-xs font-extrabold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-md">0 kez</span>
+                        </div>
+                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden my-1.5">
+                            <div id="diceBar-${i}" class="bg-indigo-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <div class="flex justify-between items-center text-[11px] text-slate-500">
+                            <span>Deneysel:</span>
+                            <strong id="diceProb-${i}" class="text-indigo-700">0/0 (%0)</strong>
+                        </div>
+                    </div>
+                `;
+            }
+            grid.innerHTML = html;
+        }
+
+        function rollDice() {
+            if (isDiceRolling) return;
+            isDiceRolling = true;
+
+            const diceEl = document.getElementById('diceElement');
+            const jumpWrapper = document.getElementById('diceJumpWrapper');
+            const shadowEl = document.getElementById('diceShadow');
+            const badge = document.getElementById('diceResultBadge');
+            const btn = document.getElementById('btnRollDice');
+
+            btn.disabled = true;
+            btn.classList.add('opacity-75');
+
+            playDiceSound('roll');
+
+            // 1 ile 6 arasında rastgele tam sayı seç
+            const resultNumber = Math.floor(Math.random() * 6) + 1;
+            const targetAngle = diceFaceAngles[resultNumber];
+
+            // Her atışta çoklu 360 derece dönüş ekle
+            const spinsX = (Math.floor(Math.random() * 3) + 4) * 360;
+            const spinsY = (Math.floor(Math.random() * 3) + 4) * 360;
+
+            const baseRotX = diceRotX - (diceRotX % 360);
+            const baseRotY = diceRotY - (diceRotY % 360);
+
+            diceRotX = baseRotX - spinsX + targetAngle.x;
+            diceRotY = baseRotY - spinsY + targetAngle.y;
+
+            jumpWrapper.classList.remove('jumping');
+            shadowEl.classList.remove('shadow-shrinking');
+            void jumpWrapper.offsetWidth;
+            jumpWrapper.classList.add('jumping');
+            shadowEl.classList.add('shadow-shrinking');
+
+            diceEl.style.transform = `translateZ(-65px) rotateX(${diceRotX}deg) rotateY(${diceRotY}deg)`;
+
+            badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-indigo-100 text-indigo-800 animate-pulse';
+            badge.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i> Zar yuvarlanıyor...';
+
+            setTimeout(() => {
+                playDiceSound('land');
+                recordDiceResult(resultNumber);
+
+                badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-indigo-600 text-white shadow pop-badge';
+                badge.innerHTML = `<i class="fa-solid fa-star mr-1.5 text-amber-300"></i> Sonuç: <strong>${resultNumber}</strong> Geldi!`;
+
+                // Son gelen zar kartını vurgula
+                for (let i = 1; i <= 6; i++) {
+                    const card = document.getElementById(`diceStatCard-${i}`);
+                    if (i === resultNumber) {
+                        card.className = 'bg-indigo-50/70 p-2.5 rounded-xl border-2 border-indigo-500 transition shadow-sm';
+                    } else {
+                        card.className = 'bg-white p-2.5 rounded-xl border border-slate-200/80 transition';
+                    }
+                }
+
+                isDiceRolling = false;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75');
+            }, 1400);
+        }
+
+        function recordDiceResult(num) {
+            diceStats.counts[num]++;
+            diceStats.total++;
+            diceStats.history.unshift(num);
+            if (diceStats.history.length > 14) diceStats.history.pop();
+            updateDiceUI();
+        }
+
+        function simulateMultipleDice(count) {
+            if (isDiceRolling) return;
+            playDiceSound('land');
+            let lastNum = 1;
+            for (let i = 0; i < count; i++) {
+                lastNum = Math.floor(Math.random() * 6) + 1;
+                recordDiceResult(lastNum);
+            }
+            const badge = document.getElementById('diceResultBadge');
+            badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-indigo-600 text-white shadow pop-badge';
+            badge.innerHTML = `<i class="fa-solid fa-bolt mr-1.5"></i> ${count} zar atışı eklendi! (Son: ${lastNum})`;
+        }
+
+        function updateDiceUI() {
+            const { counts, total, history } = diceStats;
+            document.getElementById('diceTotalCount').textContent = total;
+
+            for (let i = 1; i <= 6; i++) {
+                const c = counts[i];
+                const pct = total > 0 ? ((c / total) * 100).toFixed(1) : 0;
+                document.getElementById(`diceCount-${i}`).textContent = `${c} kez`;
+                document.getElementById(`diceProb-${i}`).textContent = `${c}/${total} (%${pct})`;
+                document.getElementById(`diceBar-${i}`).style.width = `${Math.min(100, pct * 2.2)}%`;
+            }
+
+            const histContainer = document.getElementById('diceHistoryList');
+            if (history.length === 0) {
+                histContainer.innerHTML = '<span class="text-xs text-slate-400 italic">Henüz atış yapılmadı...</span>';
+            } else {
+                histContainer.innerHTML = '<span class="text-xs font-semibold text-slate-400 mr-1 shrink-0">Son:</span>' +
+                    history.map((num, idx) => {
+                        const ring = idx === 0 ? 'ring-2 ring-indigo-500 font-extrabold bg-indigo-600 text-white' : 'bg-indigo-100 text-indigo-800 font-semibold';
+                        return `<span class="w-6 h-6 rounded-lg text-xs flex items-center justify-center shrink-0 ${ring}">${num}</span>`;
+                    }).join('');
+            }
+        }
+
+        function resetDiceData() {
+            diceStats = {
+                counts: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
+                total: 0,
+                history: []
+            };
+            updateDiceUI();
+            for (let i = 1; i <= 6; i++) {
+                document.getElementById(`diceStatCard-${i}`).className = 'bg-white p-2.5 rounded-xl border border-slate-200/80 transition';
+            }
+            const badge = document.getElementById('diceResultBadge');
+            badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-slate-200 text-slate-700';
+            badge.textContent = 'Veriler sıfırlandı. Zarı at!';
+        }
+
+        // ================= İKİSİNİ BİRLİKTE AT VE GENEL SIFIRLAMA =================
+        function throwBoth() {
+            flipCoin();
+            rollDice();
+        }
+
+        function resetAllData() {
+            resetCoinData();
+            resetDiceData();
+        }
+
+        // Sayfa Yüklendiğinde Başlat
+        window.onload = function () {
+            initDiceStatsGrid();
+            updateCoinUI();
+            updateDiceUI();
+        };
+    </script>
+</body>
+</html>

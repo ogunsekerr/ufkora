@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. Sınıf Toplama İşlemi Macera Adası</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: radial-gradient(circle at top left, #e0f2fe, #fef9c3, #fce7f3);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .game-font {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .digit-box {
+            width: 3.2rem;
+            height: 3.6rem;
+            font-size: 1.75rem;
+            font-weight: 800;
+            text-align: center;
+            border-radius: 0.75rem;
+            transition: all 0.2s ease;
+        }
+        @media (min-width: 640px) {
+            .digit-box {
+                width: 4rem;
+                height: 4.4rem;
+                font-size: 2.1rem;
+            }
+        }
+        .carry-box {
+            width: 2.4rem;
+            height: 2.4rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+        @media (min-width: 640px) {
+            .carry-box {
+                width: 2.8rem;
+                height: 2.8rem;
+                font-size: 1.25rem;
+            }
+        }
+        .btn-3d {
+            transition: all 0.15s ease;
+            box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+        }
+        .btn-3d:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+        }
+        .tab-active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 rgba(0,0,0,0.18);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            80% { transform: scale(1.06); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+        .animate-shake {
+            animation: shake 0.35s ease-in-out;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="text-slate-800 p-3 sm:p-6 select-none"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Üst Başlık ve Skor Kartı -->
+        <header class="bg-white/90 backdrop-blur-md rounded-3xl p-4 sm:p-6 shadow-xl border-4 border-indigo-200 mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-3xl shadow-lg">
+                    <i class="fa-solid fa-rocket"></i>
+                </div>
+                <div>
+                    <span class="bg-indigo-100 text-indigo-700 text-xs sm:text-sm font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">4. Sınıf Matematik</span>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-indigo-950 mt-1">Toplama İşlemi Macera Adası</h1>
+                </div>
+            </div>
+
+            <!-- Toplam Yıldız & Ses Kontrolü -->
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-100 border-2 border-amber-300 rounded-2xl px-4 py-2 flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-star text-amber-500 text-2xl animate-pulse"></i>
+                    <div>
+                        <div class="text-xs text-amber-800 font-bold uppercase">Toplam Puan</div>
+                        <div id="globalScore" class="text-xl font-black text-amber-600 game-font">0</div>
+                    </div>
+                </div>
+                <button id="soundToggleBtn" onclick="toggleSound()" class="w-12 h-12 rounded-2xl bg-slate-100 hover:bg-slate-200 border-2 border-slate-300 flex items-center justify-center text-slate-700 text-xl btn-3d" title="Sesi Aç/Kapat">
+                    <i id="soundIcon" class="fa-solid fa-volume-high text-indigo-600"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Sekmeler (4 Etkinlik + 1 Süreli Yarışma) -->
+        <nav class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 mb-6">
+            <button onclick="switchTab('act1')" id="tab-act1" class="tab-btn tab-active bg-gradient-to-b from-blue-400 to-blue-600 text-white p-3 rounded-2xl font-bold flex flex-col sm:flex-row items-center justify-center gap-2 border-2 border-blue-700 transition-all">
+                <i class="fa-solid fa-layer-group text-xl sm:text-2xl"></i>
+                <div class="text-center sm:text-left">
+                    <div class="text-[11px] opacity-90">1. Etkinlik</div>
+                    <div class="text-xs sm:text-sm game-font leading-tight">Basamak Atölyesi</div>
+                </div>
+            </button>
+
+            <button onclick="switchTab('act2')" id="tab-act2" class="tab-btn bg-white hover:bg-purple-50 text-purple-900 p-3 rounded-2xl font-bold flex flex-col sm:flex-row items-center justify-center gap-2 border-2 border-purple-200 transition-all shadow-md">
+                <i class="fa-solid fa-key text-xl sm:text-2xl text-purple-600"></i>
+                <div class="text-center sm:text-left">
+                    <div class="text-[11px] text-purple-600">2. Etkinlik</div>
+                    <div class="text-xs sm:text-sm game-font leading-tight">Şifre Bulmaca</div>
+                </div>
+            </button>
+
+            <button onclick="switchTab('act3')" id="tab-act3" class="tab-btn bg-white hover:bg-emerald-50 text-emerald-900 p-3 rounded-2xl font-bold flex flex-col sm:flex-row items-center justify-center gap-2 border-2 border-emerald-200 transition-all shadow-md">
+                <i class="fa-solid fa-magnifying-glass-plus text-xl sm:text-2xl text-emerald-600"></i>
+                <div class="text-center sm:text-left">
+                    <div class="text-[11px] text-emerald-600">3. Etkinlik</div>
+                    <div class="text-xs sm:text-sm game-font leading-tight">Kayıp Semboller</div>
+                </div>
+            </button>
+
+            <button onclick="switchTab('act4')" id="tab-act4" class="tab-btn bg-white hover:bg-amber-50 text-amber-900 p-3 rounded-2xl font-bold flex flex-col sm:flex-row items-center justify-center gap-2 border-2 border-amber-200 transition-all shadow-md">
+                <i class="fa-solid fa-scale-balanced text-xl sm:text-2xl text-amber-500"></i>
+                <div class="text-center sm:text-left">
+                    <div class="text-[11px] text-amber-600">4. Etkinlik</div>
+                    <div class="text-xs sm:text-sm game-font leading-tight">İkili İşlem Dedektifi</div>
+                </div>
+            </button>
+
+            <button onclick="switchTab('quiz')" id="tab-quiz" class="col-span-2 sm:col-span-1 tab-btn bg-white hover:bg-rose-50 text-rose-900 p-3 rounded-2xl font-bold flex flex-col sm:flex-row items-center justify-center gap-2 border-2 border-rose-200 transition-all shadow-md">
+                <i class="fa-solid fa-stopwatch text-xl sm:text-2xl text-rose-600"></i>
+                <div class="text-center sm:text-left">
+                    <div class="text-[11px] text-rose-600">Büyük Heyecan</div>
+                    <div class="text-xs sm:text-sm game-font leading-tight">Süreli Yarışma</div>
+                </div>
+            </button>
+        </nav>
+
+        <!-- ==================== 1. ETKİNLİK: BASAMAK VE ELDELİ TOPLAMA ATÖLYESİ ==================== -->
+        <section id="section-act1" class="activity-section bg-white rounded-3xl p-4 sm:p-8 shadow-xl border-4 border-blue-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b-2 border-slate-100">
+                <div>
+                    <h2 class="text-2xl font-bold text-blue-900 flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-blue-500"></i> Eldeli Toplama ve Basamak Atölyesi
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-1">Sağdaki <strong>Birler Basamağından</strong> başlayarak rakamları topla! Elde varsa üstteki yuvarlak kutucuğa yazmayı unutma.</p>
+                </div>
+                <button onclick="generateAct1Problem()" class="bg-blue-100 hover:bg-blue-200 text-blue-800 font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 btn-3d shrink-0">
+                    <i class="fa-solid fa-rotate"></i> Yeni İşlem
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <!-- İşlem Tahtası -->
+                <div class="lg:col-span-7 bg-slate-50 rounded-3xl p-4 sm:p-6 border-2 border-slate-200 flex flex-col items-center">
+                    
+                    <!-- Basamak İsimleri -->
+                    <div class="grid grid-cols-6 gap-2 sm:gap-3 mb-2 text-center w-full max-w-md">
+                        <div></div>
+                        <div class="text-[10px] sm:text-xs font-extrabold bg-rose-100 text-rose-700 py-1 rounded-lg">On Binler</div>
+                        <div class="text-[10px] sm:text-xs font-extrabold bg-purple-100 text-purple-700 py-1 rounded-lg">Binler</div>
+                        <div class="text-[10px] sm:text-xs font-extrabold bg-emerald-100 text-emerald-700 py-1 rounded-lg">Yüzler</div>
+                        <div class="text-[10px] sm:text-xs font-extrabold bg-amber-100 text-amber-700 py-1 rounded-lg">Onlar</div>
+                        <div class="text-[10px] sm:text-xs font-extrabold bg-blue-100 text-blue-700 py-1 rounded-lg">Birler</div>
+                    </div>
+
+                    <!-- Elde Kutucukları -->
+                    <div class="grid grid-cols-6 gap-2 sm:gap-3 mb-3 items-center justify-items-center w-full max-w-md">
+                        <div class="text-xs font-bold text-slate-400">ELDE:</div>
+                        <input type="text" maxlength="1" id="act1-carry-4" class="carry-box bg-rose-50 border-2 border-dashed border-rose-300 text-rose-700 focus:outline-none focus:border-rose-500" placeholder="0">
+                        <input type="text" maxlength="1" id="act1-carry-3" class="carry-box bg-purple-50 border-2 border-dashed border-purple-300 text-purple-700 focus:outline-none focus:border-purple-500" placeholder="0">
+                        <input type="text" maxlength="1" id="act1-carry-2" class="carry-box bg-emerald-50 border-2 border-dashed border-emerald-300 text-emerald-700 focus:outline-none focus:border-emerald-500" placeholder="0">
+                        <input type="text" maxlength="1" id="act1-carry-1" class="carry-box bg-amber-50 border-2 border-dashed border-amber-300 text-amber-700 focus:outline-none focus:border-amber-500" placeholder="0">
+                        <div class="w-8 h-8 flex items-center justify-center text-slate-300 text-xs font-bold">-</div>
+                    </div>
+
+                    <!-- 1. Toplanan -->
+                    <div class="grid grid-cols-6 gap-2 sm:gap-3 mb-2 items-center justify-items-center w-full max-w-md">
+                        <div></div>
+                        <div class="digit-box flex items-center justify-center text-slate-300"></div>
+                        <div id="act1-n1-3" class="digit-box bg-white border-2 border-purple-200 text-purple-900 flex items-center justify-center shadow-sm">4</div>
+                        <div id="act1-n1-2" class="digit-box bg-white border-2 border-emerald-200 text-emerald-900 flex items-center justify-center shadow-sm">5</div>
+                        <div id="act1-n1-1" class="digit-box bg-white border-2 border-amber-200 text-amber-900 flex items-center justify-center shadow-sm">8</div>
+                        <div id="act1-n1-0" class="digit-box bg-white border-2 border-blue-200 text-blue-900 flex items-center justify-center shadow-sm">7</div>
+                    </div>
+
+                    <!-- 2. Toplanan -->
+                    <div class="grid grid-cols-6 gap-2 sm:gap-3 pb-4 border-b-4 border-slate-800 items-center justify-items-center w-full max-w-md">
+                        <div class="text-3xl font-black text-blue-600">+</div>
+                        <div class="digit-box flex items-center justify-center text-slate-300"></div>
+                        <div id="act1-n2-3" class="digit-box bg-white border-2 border-purple-200 text-purple-900 flex items-center justify-center shadow-sm">3</div>
+                        <div id="act1-n2-2" class="digit-box bg-white border-2 border-emerald-200 text-emerald-900 flex items-center justify-center shadow-sm">6</div>
+                        <div id="act1-n2-1" class="digit-box bg-white border-2 border-amber-200 text-amber-900 flex items-center justify-center shadow-sm">4</div>
+                        <div id="act1-n2-0" class="digit-box bg-white border-2 border-blue-200 text-blue-900 flex items-center justify-center shadow-sm">9</div>
+                    </div>
+
+                    <!-- Toplam (Cevap Kutucukları) -->
+                    <div class="grid grid-cols-6 gap-2 sm:gap-3 mt-4 items-center justify-items-center w-full max-w-md">
+                        <div class="text-xs font-bold text-slate-500">TOPLAM</div>
+                        <input type="text" maxlength="1" id="act1-ans-4" class="digit-box bg-white border-4 border-rose-300 text-rose-900 focus:outline-none focus:ring-4 focus:ring-rose-200" placeholder="?">
+                        <input type="text" maxlength="1" id="act1-ans-3" class="digit-box bg-white border-4 border-purple-300 text-purple-900 focus:outline-none focus:ring-4 focus:ring-purple-200" placeholder="?">
+                        <input type="text" maxlength="1" id="act1-ans-2" class="digit-box bg-white border-4 border-emerald-300 text-emerald-900 focus:outline-none focus:ring-4 focus:ring-emerald-200" placeholder="?">
+                        <input type="text" maxlength="1" id="act1-ans-1" class="digit-box bg-white border-4 border-amber-300 text-amber-900 focus:outline-none focus:ring-4 focus:ring-amber-200" placeholder="?">
+                        <input type="text" maxlength="1" id="act1-ans-0" class="digit-box bg-white border-4 border-blue-400 text-blue-900 focus:outline-none focus:ring-4 focus:ring-blue-200" placeholder="?">
+                    </div>
+
+                    <div class="mt-6 flex flex-wrap gap-3 justify-center w-full">
+                        <button onclick="checkAct1()" class="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold px-6 py-3 rounded-2xl text-lg btn-3d flex items-center gap-2">
+                            <i class="fa-solid fa-check-double"></i> Kontrol Et
+                        </button>
+                        <button onclick="giveAct1Hint()" class="bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-5 py-3 rounded-2xl text-base btn-3d flex items-center gap-2">
+                            <i class="fa-solid fa-lightbulb"></i> İpucu Ver
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Rehber Bilgi ve Geribildirim Kutusu -->
+                <div class="lg:col-span-5 flex flex-col gap-4">
+                    <div id="act1-feedback" class="bg-blue-50 border-2 border-blue-200 rounded-3xl p-5 text-blue-950">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500 text-white flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                            <h3 class="font-bold text-lg">Matematik Robotu Diyor ki:</h3>
+                        </div>
+                        <p id="act1-feedback-text" class="text-sm sm:text-base leading-relaxed">
+                            Toplama işlemine her zaman <strong>en sağdaki Birler Basamağından</strong> başlarız. Toplam 10 veya 10'dan büyükse, birlikleri sonuca yazar, onluğu komşu basamağa <strong>ELDE</strong> olarak göndeririz!
+                        </p>
+                    </div>
+
+                    <div class="bg-amber-50/80 border-2 border-amber-200 rounded-3xl p-5">
+                        <h4 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-amber-600"></i> Basamak Değerleri Özeti
+                        </h4>
+                        <div id="act1-place-breakdown" class="space-y-1.5 text-xs sm:text-sm font-semibold text-slate-700">
+                            <!-- JS ile doldurulacak -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 2. ETKİNLİK: ŞİFRE BULMACA ==================== -->
+        <section id="section-act2" class="activity-section hidden bg-white rounded-3xl p-4 sm:p-8 shadow-xl border-4 border-purple-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b-2 border-slate-100">
+                <div>
+                    <h2 class="text-2xl font-bold text-purple-900 flex items-center gap-2">
+                        <i class="fa-solid fa-user-secret text-purple-600"></i> Gizli Şifre Bulmaca
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-1">Toplama işlemlerini çöz, çıkan sonuçların eşleştiği harfleri bularak <strong>Gizli Kelimeyi</strong> ortaya çıkar!</p>
+                </div>
+                <button onclick="initCipherPuzzle()" class="bg-purple-100 hover:bg-purple-200 text-purple-800 font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 btn-3d shrink-0">
+                    <i class="fa-solid fa-shuffle"></i> Yeni Bulmaca
+                </button>
+            </div>
+
+            <!-- İpucu Konusu -->
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-2xl p-4 mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-compass text-3xl text-amber-300"></i>
+                    <div>
+                        <div class="text-xs uppercase tracking-wider text-purple-200 font-bold">Gizli Şifre İpucu</div>
+                        <div id="cipher-clue" class="text-lg sm:text-xl font-bold game-font">Uzay araştırmaları yapan bilim insanı</div>
+                    </div>
+                </div>
+                <div id="cipher-progress" class="bg-white/20 px-4 py-1.5 rounded-full text-sm font-extrabold">
+                    0 / 6 Harf Çözüldü
+                </div>
+            </div>
+
+            <!-- İşlem Kartları Grid -->
+            <div id="cipher-questions-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <!-- JS ile oluşturulacak -->
+            </div>
+
+            <!-- Şifre Anahtarı Tablosu ve Gizli Kelime Kutusu -->
+            <div class="bg-purple-50 rounded-3xl p-5 border-2 border-purple-200 text-center">
+                <h3 class="text-sm font-extrabold text-purple-700 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-key mr-1"></i> Harf - Sonuç Eşleştirme Anahtarı
+                </h3>
+                <div id="cipher-key-bank" class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6">
+                    <!-- JS ile karıştırılmış harf-sayı kartları -->
+                </div>
+
+                <h3 class="text-base font-extrabold text-indigo-950 mb-3">GİZLİ ŞİFRE</h3>
+                <div id="cipher-slots" class="flex flex-wrap justify-center gap-2 sm:gap-3">
+                    <!-- JS ile şifre kutuları -->
+                </div>
+                <div id="cipher-celebration" class="hidden mt-4 p-4 bg-emerald-100 border-2 border-emerald-400 text-emerald-900 rounded-2xl font-bold text-lg animate-pop">
+                    🎉 Tebrikler! Gizli Şifreyi Başarıyla Çözdün ve +50 Puan Kazandın!
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. ETKİNLİK: KAYIP RAKAMLAR DEDEKTİFİ ==================== -->
+        <section id="section-act3" class="activity-section hidden bg-white rounded-3xl p-4 sm:p-8 shadow-xl border-4 border-emerald-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b-2 border-slate-100">
+                <div>
+                    <h2 class="text-2xl font-bold text-emerald-900 flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-emerald-600"></i> Kayıp Rakamlar Dedektifi
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-1">Toplama işleminde yıldız (<i class="fa-solid fa-star text-amber-500"></i>), üçgen (<i class="fa-solid fa-play fa-rotate-270 text-rose-500"></i>) ve kare (<i class="fa-solid fa-square text-blue-500"></i>) yerine gelmesi gereken rakamları bul!</p>
+                </div>
+                <button onclick="generateAct3Problem()" class="bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 btn-3d shrink-0">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Yeni Gizem
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <!-- Dedektif Tahtası -->
+                <div class="lg:col-span-7 bg-emerald-50/50 rounded-3xl p-6 border-2 border-emerald-200 flex flex-col items-center">
+                    <div id="act3-board" class="space-y-3 w-full max-w-sm">
+                        <!-- JS ile doldurulacak 4 basamaklı alt alta işlem -->
+                    </div>
+
+                    <div class="mt-6 flex flex-wrap gap-3 justify-center">
+                        <button onclick="checkAct3()" class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold px-6 py-3 rounded-2xl text-lg btn-3d flex items-center gap-2">
+                            <i class="fa-solid fa-check"></i> Rakamları Kontrol Et
+                        </button>
+                        <button onclick="solveAct3Hint()" class="bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-5 py-3 rounded-2xl text-base btn-3d flex items-center gap-2">
+                            <i class="fa-solid fa-paw"></i> Dedektif İpucu
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sembol Giriş Paneli -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="bg-white rounded-3xl p-5 border-2 border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-slate-800 text-lg mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-puzzle-piece text-emerald-600"></i> Sembollerin Değeri Kaçtır?
+                        </h3>
+                        <div id="act3-inputs" class="space-y-3">
+                            <!-- JS ile sembol inputları -->
+                        </div>
+                    </div>
+
+                    <div id="act3-feedback" class="bg-emerald-50 border-2 border-emerald-200 rounded-2xl p-4 text-emerald-950 text-sm sm:text-base font-semibold">
+                        💡 <strong>İpucu:</strong> Birler basamağından başlayarak hangi iki rakamın toplamının alttaki sonucu verdiğini düşün. Elde olup olmadığına dikkat et!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 4. ETKİNLİK: İKİ TOPLAMA İŞLEMİNDE VERİLMEYEN RAKAMLARI BULMA ==================== -->
+        <section id="section-act4" class="activity-section hidden bg-white rounded-3xl p-4 sm:p-8 shadow-xl border-4 border-amber-200">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b-2 border-slate-100">
+                <div>
+                    <h2 class="text-2xl font-bold text-amber-900 flex items-center gap-2">
+                        <i class="fa-solid fa-scale-balanced text-amber-500"></i> İki Toplama İşleminde Verilmeyen Rakamları Bulma
+                    </h2>
+                    <p class="text-slate-600 text-sm sm:text-base mt-1">
+                        Yan yana verilen <strong>1. İşlem</strong> ve <strong>2. İşlem</strong> içindeki verilmeyen rakamları kutucuklara yaz. Ardından alttaki <strong>Bonus Görevi</strong> tamamla!
+                    </p>
+                </div>
+                <button onclick="generateAct4Problem()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 btn-3d shrink-0">
+                    <i class="fa-solid fa-arrows-rotate"></i> Yeni İkili İşlem
+                </button>
+            </div>
+
+            <!-- İki İşlem Yan Yana Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- 1. Toplama İşlemi Kartı -->
+                <div class="bg-amber-50/70 rounded-3xl p-5 border-2 border-amber-200 flex flex-col items-center relative">
+                    <div class="w-full flex justify-between items-center mb-4">
+                        <span class="bg-amber-500 text-white font-extrabold px-3.5 py-1 rounded-full text-sm shadow-sm">
+                            1. Toplama İşlemi
+                        </span>
+                        <span class="text-xs font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-lg">
+                            Kayıp Rakamlar: A, B, C
+                        </span>
+                    </div>
+                    <div id="act4-board-1" class="space-y-2.5 w-full max-w-xs">
+                        <!-- JS ile doldurulacak -->
+                    </div>
+                </div>
+
+                <!-- 2. Toplama İşlemi Kartı -->
+                <div class="bg-sky-50/70 rounded-3xl p-5 border-2 border-sky-200 flex flex-col items-center relative">
+                    <div class="w-full flex justify-between items-center mb-4">
+                        <span class="bg-sky-500 text-white font-extrabold px-3.5 py-1 rounded-full text-sm shadow-sm">
+                            2. Toplama İşlemi
+                        </span>
+                        <span class="text-xs font-bold text-sky-800 bg-sky-100 px-3 py-1 rounded-lg">
+                            Kayıp Rakamlar: D, E, F
+                        </span>
+                    </div>
+                    <div id="act4-board-2" class="space-y-2.5 w-full max-w-xs">
+                        <!-- JS ile doldurulacak -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bonus Karşılaştırma Görevi ve Kontrol Paneli -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center bg-slate-50 p-4 sm:p-6 rounded-3xl border-2 border-slate-200">
+                <div class="lg:col-span-7 flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-4 rounded-2xl border-2 border-indigo-100 shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl shrink-0">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-extrabold uppercase text-indigo-500">Bonus Bağlantı Sorusu</div>
+                            <div id="act4-bonus-question" class="text-sm sm:text-base font-bold text-slate-800">
+                                1. ve 2. işlemde bulduğun tüm verilmeyen rakamların toplamı kaçtır?
+                            </div>
+                        </div>
+                    </div>
+                    <input type="number" id="act4-bonus-input" placeholder="?" class="w-24 h-12 rounded-xl border-3 border-indigo-400 bg-indigo-50/50 text-center text-2xl font-black text-indigo-900 focus:outline-none focus:ring-4 focus:ring-indigo-200 shrink-0">
+                </div>
+
+                <div class="lg:col-span-5 flex flex-wrap justify-center lg:justify-end gap-3">
+                    <button onclick="checkAct4()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-6 py-3.5 rounded-2xl text-base sm:text-lg btn-3d flex items-center gap-2">
+                        <i class="fa-solid fa-check-double"></i> İki İşlemi de Kontrol Et
+                    </button>
+                    <button onclick="giveAct4Hint()" class="bg-sky-500 hover:bg-sky-600 text-white font-bold px-4 py-3.5 rounded-2xl text-sm sm:text-base btn-3d flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb"></i> İpucu
+                    </button>
+                </div>
+            </div>
+
+            <!-- Geribildirim Kutusu -->
+            <div id="act4-feedback" class="mt-4 bg-amber-50 border-2 border-amber-200 rounded-2xl p-4 text-amber-950 text-sm sm:text-base font-semibold flex items-center gap-3">
+                <i class="fa-solid fa-circle-info text-amber-500 text-xl shrink-0"></i>
+                <span id="act4-feedback-text">
+                    Her iki toplama işleminde de <strong>Birler Basamağından (en sağdan)</strong> başlayarak renkli kutulara gelmesi gereken rakamları doğrudan kutuların içine yaz!
+                </span>
+            </div>
+        </section>
+
+        <!-- ==================== 4. BÖLÜM: SÜRELİ YARIŞMA ARENASI ==================== -->
+        <section id="section-quiz" class="activity-section hidden bg-white rounded-3xl p-4 sm:p-8 shadow-xl border-4 border-rose-200">
+            
+            <!-- Başlangıç Ekranı -->
+            <div id="quiz-start-screen" class="text-center py-8 max-w-xl mx-auto">
+                <div class="w-24 h-24 rounded-3xl bg-gradient-to-tr from-rose-500 to-amber-500 text-white text-5xl flex items-center justify-center mx-auto mb-6 shadow-xl animate-bounce">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-rose-950 mb-3">Süreli Toplama Şampiyonası!</h2>
+                <p class="text-slate-600 mb-6 text-base sm:text-lg">
+                    90 saniye içinde 4. sınıf seviyesinde dört basamaklı toplama işlemlerini, tahmin ve problem sorularını çöz! Arka arkaya doğru cevaplar vererek <strong>Kombo Çarpanı</strong> kazan!
+                </p>
+
+                <!-- Zorluk Seçimi -->
+                <div class="flex justify-center gap-3 mb-8">
+                    <button onclick="setQuizDifficulty(90, 'Normal')" id="diff-90" class="diff-btn bg-rose-600 text-white px-4 py-2 rounded-xl font-bold border-2 border-rose-700">⏱️ 90 Saniye (Normal)</button>
+                    <button onclick="setQuizDifficulty(60, 'Hızlı')" id="diff-60" class="diff-btn bg-slate-100 text-slate-700 px-4 py-2 rounded-xl font-bold border-2 border-slate-300">⚡ 60 Saniye (Hızlı)</button>
+                </div>
+
+                <button onclick="startTimedQuiz()" class="bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white text-xl font-bold px-10 py-4 rounded-2xl btn-3d shadow-lg">
+                    <i class="fa-solid fa-play mr-2"></i> Yarışmayı Başlat!
+                </button>
+            </div>
+
+            <!-- Aktif Yarışma Ekranı -->
+            <div id="quiz-play-screen" class="hidden">
+                <!-- Üst Bilgi Barı -->
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-3 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-clock text-rose-600 text-2xl"></i>
+                        <div>
+                            <div class="text-[11px] font-bold text-rose-800 uppercase">Kalan Süre</div>
+                            <div id="quiz-timer" class="text-2xl font-black text-rose-600 game-font">90 sn</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-3 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-fire text-amber-500 text-2xl"></i>
+                        <div>
+                            <div class="text-[11px] font-bold text-amber-800 uppercase">Seri (Kombo)</div>
+                            <div id="quiz-streak" class="text-2xl font-black text-amber-600 game-font">0x</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 border-2 border-indigo-200 rounded-2xl p-3 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-medal text-indigo-600 text-2xl"></i>
+                        <div>
+                            <div class="text-[11px] font-bold text-indigo-800 uppercase">Yarışma Skoru</div>
+                            <div id="quiz-score" class="text-2xl font-black text-indigo-600 game-font">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- İlerleme Çubuğu -->
+                <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden mb-6">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-emerald-400 via-amber-400 to-rose-500 h-full transition-all duration-500" style="width: 100%"></div>
+                </div>
+
+                <!-- Soru Kartı -->
+                <div id="quiz-card" class="bg-slate-50 border-2 border-slate-200 rounded-3xl p-6 sm:p-8 text-center mb-6">
+                    <span id="quiz-q-badge" class="bg-indigo-100 text-indigo-800 text-xs font-extrabold px-3 py-1 rounded-full uppercase">Soru #1 • Dört Basamaklı Toplama</span>
+                    <div id="quiz-q-text" class="text-2xl sm:text-4xl font-black text-slate-800 my-6 game-font tracking-wide">
+                        4582 + 3619 = ?
+                    </div>
+
+                    <!-- 4 Şıklı Cevap Butonları -->
+                    <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                        <!-- JS ile doldurulacak -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yarışma Sonuç Ekranı -->
+            <div id="quiz-end-screen" class="hidden text-center py-8 max-w-lg mx-auto">
+                <div id="quiz-end-badge" class="text-6xl mb-4">🏆</div>
+                <h2 class="text-3xl font-bold text-indigo-950 mb-2">Yarışma Tamamlandı!</h2>
+                <p id="quiz-end-title" class="text-lg font-bold text-rose-600 mb-6">Muhteşem Matematik Şampiyonu!</p>
+
+                <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="bg-slate-50 p-4 rounded-2xl border-2 border-slate-200">
+                        <div class="text-xs text-slate-500 font-bold">TOPLAM PUAN</div>
+                        <div id="end-score" class="text-2xl font-black text-indigo-600 mt-1">0</div>
+                    </div>
+                    <div class="bg-emerald-50 p-4 rounded-2xl border-2 border-emerald-200">
+                        <div class="text-xs text-emerald-700 font-bold">DOĞRU</div>
+                        <div id="end-correct" class="text-2xl font-black text-emerald-600 mt-1">0</div>
+                    </div>
+                    <div class="bg-rose-50 p-4 rounded-2xl border-2 border-rose-200">
+                        <div class="text-xs text-rose-700 font-bold">YANLIŞ</div>
+                        <div id="end-wrong" class="text-2xl font-black text-rose-600 mt-1">0</div>
+                    </div>
+                </div>
+
+                <button onclick="startTimedQuiz()" class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold px-8 py-4 rounded-2xl text-lg btn-3d">
+                    <i class="fa-solid fa-rotate-right mr-2"></i> Tekrar Yarış!
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ==================== SES SENTEZLEYİCİ (WEB AUDIO API) ====================
+        let soundEnabled = true;
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playTone(freq, type = 'sine', duration = 0.15, delay = 0) {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new AudioCtx();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime + delay);
+                gain.gain.setValueAtTime(0.18, audioCtx.currentTime + delay);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + delay + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(audioCtx.currentTime + delay);
+                osc.stop(audioCtx.currentTime + delay + duration);
+            } catch (e) {}
+        }
+
+        function playSuccessSound() {
+            playTone(523.25, 'triangle', 0.12, 0);
+            playTone(659.25, 'triangle', 0.12, 0.1);
+            playTone(783.99, 'triangle', 0.25, 0.2);
+        }
+
+        function playErrorSound() {
+            playTone(220, 'sawtooth', 0.18, 0);
+            playTone(180, 'sawtooth', 0.25, 0.15);
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            icon.className = soundEnabled ? 'fa-solid fa-volume-high text-indigo-600' : 'fa-solid fa-volume-xmark text-slate-400';
+        }
+
+        // ==================== GENEL PUAN VE SEKME YÖNETİMİ ====================
+        let globalScore = 0;
+
+        function addGlobalScore(points) {
+            globalScore += points;
+            const el = document.getElementById('globalScore');
+            el.textContent = globalScore;
+            el.classList.remove('animate-pop');
+            void el.offsetWidth;
+            el.classList.add('animate-pop');
+        }
+
+        function switchTab(tabId) {
+            // Yarışma çalışıyorsa durdur
+            if (tabId !== 'quiz' && quizInterval) {
+                clearInterval(quizInterval);
+            }
+
+            document.querySelectorAll('.activity-section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById(`section-${tabId}`).classList.remove('hidden');
+
+            const styles = {
+                act1: { active: 'bg-gradient-to-b from-blue-400 to-blue-600 text-white border-blue-700 tab-active', inactive: 'bg-white text-blue-900 border-blue-200' },
+                act2: { active: 'bg-gradient-to-b from-purple-500 to-purple-700 text-white border-purple-800 tab-active', inactive: 'bg-white text-purple-900 border-purple-200' },
+                act3: { active: 'bg-gradient-to-b from-emerald-500 to-emerald-700 text-white border-emerald-800 tab-active', inactive: 'bg-white text-emerald-900 border-emerald-200' },
+                act4: { active: 'bg-gradient-to-b from-amber-500 to-orange-500 text-white border-amber-700 tab-active', inactive: 'bg-white text-amber-900 border-amber-200' },
+                quiz: { active: 'bg-gradient-to-b from-rose-500 to-rose-700 text-white border-rose-800 tab-active', inactive: 'bg-white text-rose-900 border-rose-200' }
+            };
+
+            Object.keys(styles).forEach(k => {
+                const btn = document.getElementById(`tab-${k}`);
+                const spanClass = k === 'quiz' ? 'col-span-2 sm:col-span-1' : '';
+                btn.className = `${spanClass} tab-btn p-3 rounded-2xl font-bold flex flex-col sm:flex-row items-center justify-center gap-2 border-2 transition-all shadow-md ${k === tabId ? styles[k].active : styles[k].inactive}`;
+            });
+        }
+
+        // ==================== 1. ETKİNLİK: BASAMAK ATÖLYESİ MANTIĞI ====================
+        let act1Data = { n1: 0, n2: 0, sum: 0, carries: [0, 0, 0, 0, 0] };
+
+        function generateAct1Problem() {
+            // En az bir eldeli basamak içeren 4 basamaklı iki sayı üret
+            const n1 = Math.floor(1200 + Math.random() * 7800);
+            const n2 = Math.floor(1200 + Math.random() * 7800);
+            const sum = n1 + n2;
+
+            const d1 = String(n1).padStart(4, '0').split('').reverse().map(Number);
+            const d2 = String(n2).padStart(4, '0').split('').reverse().map(Number);
+
+            let carries = [0, 0, 0, 0, 0];
+            let c = 0;
+            for (let i = 0; i < 4; i++) {
+                const total = d1[i] + d2[i] + c;
+                c = Math.floor(total / 10);
+                carries[i + 1] = c;
+            }
+
+            act1Data = { n1, n2, sum, d1, d2, carries };
+
+            // Rakamları kutulara yerleştir
+            for (let i = 0; i < 4; i++) {
+                document.getElementById(`act1-n1-${i}`).textContent = d1[i];
+                document.getElementById(`act1-n2-${i}`).textContent = d2[i];
+            }
+
+            // Inputları temizle
+            for (let i = 0; i <= 4; i++) {
+                const ansInput = document.getElementById(`act1-ans-${i}`);
+                ansInput.value = '';
+                ansInput.classList.remove('bg-emerald-100', 'border-emerald-500', 'bg-rose-100', 'border-rose-500');
+                if (i === 4 && sum < 10000) {
+                    ansInput.classList.add('opacity-40');
+                    ansInput.placeholder = '0';
+                } else {
+                    ansInput.classList.remove('opacity-40');
+                    ansInput.placeholder = '?';
+                }
+            }
+
+            for (let i = 1; i <= 4; i++) {
+                const cInput = document.getElementById(`act1-carry-${i}`);
+                cInput.value = '';
+                cInput.classList.remove('bg-emerald-100', 'border-emerald-500', 'bg-rose-100', 'border-rose-500');
+            }
+
+            // Basamak çözümlemesi özeti
+            const breakdownEl = document.getElementById('act1-place-breakdown');
+            breakdownEl.innerHTML = `
+                <div class="flex justify-between bg-white p-2 rounded-xl border border-amber-200">
+                    <span>1. Toplanan (${n1}):</span>
+                    <span class="text-indigo-700">${d1[3]*1000} + ${d1[2]*100} + ${d1[1]*10} + ${d1[0]}</span>
+                </div>
+                <div class="flex justify-between bg-white p-2 rounded-xl border border-amber-200">
+                    <span>2. Toplanan (${n2}):</span>
+                    <span class="text-indigo-700">${d2[3]*1000} + ${d2[2]*100} + ${d2[1]*10} + ${d2[0]}</span>
+                </div>
+            `;
+
+            document.getElementById('act1-feedback-text').innerHTML = `
+                Haydi başlayalım! Önce <strong>Birler Basamağındaki</strong> <span class="text-blue-600 font-bold">${d1[0]} + ${d2[0]}</span> işlemini yap.
+            `;
+        }
+
+        function checkAct1() {
+            const sumStr = String(act1Data.sum).padStart(5, '0').split('').reverse();
+            let allCorrect = true;
+
+            for (let i = 0; i <= 4; i++) {
+                const ansInput = document.getElementById(`act1-ans-${i}`);
+                const userVal = ansInput.value.trim() === '' ? (i === 4 && act1Data.sum < 10000 ? '0' : '') : ansInput.value.trim();
+
+                if (userVal === sumStr[i]) {
+                    ansInput.classList.remove('bg-rose-100', 'border-rose-500');
+                    if ( !(i === 4 && act1Data.sum < 10000 && ansInput.value.trim() === '') ) {
+                        ansInput.classList.add('bg-emerald-100', 'border-emerald-500');
+                    }
+                } else {
+                    allCorrect = false;
+                    ansInput.classList.remove('bg-emerald-100', 'border-emerald-500');
+                    ansInput.classList.add('bg-rose-100', 'border-rose-500', 'animate-shake');
+                    setTimeout(() => ansInput.classList.remove('animate-shake'), 400);
+                }
+            }
+
+            // Eldeleri kontrol et
+            for (let i = 1; i <= 4; i++) {
+                const cInput = document.getElementById(`act1-carry-${i}`);
+                const expectedCarry = String(act1Data.carries[i]);
+                const userCarry = cInput.value.trim() === '' ? '0' : cInput.value.trim();
+                if (userCarry === expectedCarry) {
+                    cInput.classList.remove('bg-rose-100', 'border-rose-500');
+                    if (expectedCarry === '1') cInput.classList.add('bg-emerald-100', 'border-emerald-500');
+                } else {
+                    cInput.classList.add('bg-rose-100', 'border-rose-500');
+                }
+            }
+
+            const fbText = document.getElementById('act1-feedback-text');
+            if (allCorrect) {
+                playSuccessSound();
+                addGlobalScore(25);
+                fbText.innerHTML = `<span class="text-emerald-700 font-extrabold">🌟 Harika İş Çıkardın!</span> ${act1Data.n1} + ${act1Data.n2} = <strong>${act1Data.sum}</strong>. Eldeleri ve basamakları kusursuz topladın! (+25 Puan)`;
+            } else {
+                playErrorSound();
+                fbText.innerHTML = `<span class="text-rose-600 font-extrabold">Dikkat!</span> Kırmızı işaretli basamakları ve üstteki <strong>Elde</strong> kutucuklarını tekrar kontrol et.`;
+            }
+        }
+
+        function giveAct1Hint() {
+            const sumStr = String(act1Data.sum).padStart(5, '0').split('').reverse();
+            const names = ['Birler', 'Onlar', 'Yüzler', 'Binler', 'On Binler'];
+            for (let i = 0; i <= 4; i++) {
+                const ansInput = document.getElementById(`act1-ans-${i}`);
+                const userVal = ansInput.value.trim() === '' ? (i === 4 && act1Data.sum < 10000 ? '0' : '') : ansInput.value.trim();
+                if (userVal !== sumStr[i]) {
+                    ansInput.value = sumStr[i];
+                    if (i < 4 && act1Data.carries[i + 1] > 0) {
+                        document.getElementById(`act1-carry-${i + 1}`).value = act1Data.carries[i + 1];
+                    }
+                    document.getElementById('act1-feedback-text').innerHTML = `💡 <strong>${names[i]} Basamağı İpucu:</strong> Sonuç <strong>${sumStr[i]}</strong> olmalı. ${i < 4 && act1Data.carries[i+1] > 0 ? 'Komşu basamağa 1 elde gönderdik!' : ''}`;
+                    break;
+                }
+            }
+        }
+
+        // ==================== 2. ETKİNLİK: ŞİFRE BULMACA MANTIĞI ====================
+        const cipherBank = [
+            { word: 'KAŞİF', clue: 'Yeni yerler ve bilinmeyen ülkeler keşfeden maceracı kişi' },
+            { word: 'PUSULA', clue: 'Yönümüzü bulmamıza yarayan mıknatıslı araç' },
+            { word: 'GALAKSİ', clue: 'Milyarlarca yıldız ve gezegenden oluşan dev uzay sistemi' },
+            { word: 'ROKET', clue: 'Astronotları uzaya taşıyan güçlü hava aracı' },
+            { word: 'BİLGİN', clue: 'Çok okuyan, araştıran ve bilimle uğraşan bilge kişi' }
+        ];
+
+        let currentCipher = null;
+        let solvedLettersCount = 0;
+
+        function initCipherPuzzle() {
+            const pick = cipherBank[Math.floor(Math.random() * cipherBank.length)];
+            const letters = pick.word.split('');
+            solvedLettersCount = 0;
+            document.getElementById('cipher-celebration').classList.add('hidden');
+            document.getElementById('cipher-clue').textContent = pick.clue;
+            document.getElementById('cipher-progress').textContent = `0 / ${letters.length} Harf Çözüldü`;
+
+            const questions = [];
+            const usedSums = new Set();
+
+            letters.forEach((char, idx) => {
+                let a, b, sum;
+                do {
+                    a = Math.floor(1100 + Math.random() * 4500);
+                    b = Math.floor(1100 + Math.random() * 4200);
+                    sum = a + b;
+                } while (usedSums.has(sum));
+                usedSums.add(sum);
+                questions.push({ index: idx, char, a, b, sum, solved: false });
+            });
+
+            // Yanıltıcı ekstra 2 harf-sayı çifti ekle
+            const extraLetters = ['M', 'Z', 'Ç', 'Ü'].filter(l => !letters.includes(l)).slice(0, 2);
+            const keyItems = questions.map(q => ({ char: q.char, sum: q.sum }));
+            extraLetters.forEach(char => {
+                keyItems.push({ char, sum: Math.floor(2500 + Math.random() * 6500) });
+            });
+
+            // Karıştır
+            keyItems.sort(() => Math.random() - 0.5);
+            currentCipher = { word: pick.word, questions, keyItems };
+
+            // İşlem Kartlarını Çiz
+            const grid = document.getElementById('cipher-questions-grid');
+            grid.innerHTML = '';
+            questions.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.id = `cipher-card-${idx}`;
+                card.className = 'bg-slate-50 border-2 border-purple-200 rounded-2xl p-4 flex flex-col justify-between transition-all';
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="bg-purple-100 text-purple-800 text-xs font-extrabold px-2.5 py-1 rounded-lg">${idx + 1}. Harf İşlemi</span>
+                        <span id="cipher-status-${idx}" class="text-xs font-bold text-slate-400"><i class="fa-solid fa-lock"></i> Kilitli</span>
+                    </div>
+                    <div class="text-2xl font-black text-right font-mono text-slate-800 pr-4 my-2 leading-tight">
+                        <div>${q.a}</div>
+                        <div class="border-b-2 border-slate-700 pb-1">+ ${q.b}</div>
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        <input type="number" id="cipher-input-${idx}" placeholder="Toplamı yaz..." class="w-full px-3 py-2 rounded-xl border-2 border-purple-300 font-extrabold text-lg text-center focus:outline-none focus:ring-2 focus:ring-purple-400">
+                        <button onclick="checkCipherItem(${idx})" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2 rounded-xl btn-3d">
+                            Çöz
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Anahtar Tablosunu Çiz
+            const keyBankEl = document.getElementById('cipher-key-bank');
+            keyBankEl.innerHTML = '';
+            keyItems.forEach(item => {
+                const badge = document.createElement('div');
+                badge.className = 'bg-white border-2 border-purple-300 rounded-xl px-3 py-2 shadow-sm flex items-center gap-2';
+                badge.innerHTML = `
+                    <span class="w-8 h-8 rounded-lg bg-purple-600 text-white font-black flex items-center justify-center text-lg game-font">${item.char}</span>
+                    <span class="font-extrabold text-slate-700">${item.sum}</span>
+                `;
+                keyBankEl.appendChild(badge);
+            });
+
+            // Gizli Şifre Kutularını Çiz
+            const slotsEl = document.getElementById('cipher-slots');
+            slotsEl.innerHTML = '';
+            questions.forEach((q, idx) => {
+                const slot = document.createElement('div');
+                slot.className = 'flex flex-col items-center';
+                slot.innerHTML = `
+                    <div id="cipher-slot-${idx}" class="w-12 h-14 sm:w-14 sm:h-16 rounded-2xl bg-white border-4 border-dashed border-purple-400 flex items-center justify-center text-2xl sm:text-3xl font-black text-purple-900 game-font shadow-inner">
+                        ?
+                    </div>
+                    <span class="text-xs font-bold text-purple-700 mt-1">${idx + 1}. Harf</span>
+                `;
+                slotsEl.appendChild(slot);
+            });
+        }
+
+        function checkCipherItem(idx) {
+            const q = currentCipher.questions[idx];
+            if (q.solved) return;
+
+            const input = document.getElementById(`cipher-input-${idx}`);
+            const userVal = parseInt(input.value, 10);
+
+            if (userVal === q.sum) {
+                q.solved = true;
+                solvedLettersCount++;
+                playSuccessSound();
+                addGlobalScore(15);
+
+                const card = document.getElementById(`cipher-card-${idx}`);
+                card.className = 'bg-emerald-50 border-2 border-emerald-400 rounded-2xl p-4 flex flex-col justify-between transition-all';
+                document.getElementById(`cipher-status-${idx}`).innerHTML = `<span class="text-emerald-600 font-extrabold"><i class="fa-solid fa-unlock"></i> Harf: ${q.char}</span>`;
+                input.disabled = true;
+
+                const slot = document.getElementById(`cipher-slot-${idx}`);
+                slot.textContent = q.char;
+                slot.className = 'w-12 h-14 sm:w-14 sm:h-16 rounded-2xl bg-gradient-to-b from-amber-300 to-amber-400 border-4 border-amber-500 flex items-center justify-center text-2xl sm:text-3xl font-black text-amber-950 game-font shadow-md animate-pop';
+
+                document.getElementById('cipher-progress').textContent = `${solvedLettersCount} / ${currentCipher.questions.length} Harf Çözüldü`;
+
+                if (solvedLettersCount === currentCipher.questions.length) {
+                    addGlobalScore(50);
+                    document.getElementById('cipher-celebration').classList.remove('hidden');
+                }
+            } else {
+                playErrorSound();
+                input.classList.add('border-rose-500', 'bg-rose-50', 'animate-shake');
+                setTimeout(() => input.classList.remove('animate-shake'), 400);
+            }
+        }
+
+        // ==================== 3. ETKİNLİK: KAYIP RAKAMLAR DEDEKTİFİ MANTIĞI ====================
+        let act3State = null;
+
+        const symbolsMeta = [
+            { id: 'star', icon: '<i class="fa-solid fa-star text-amber-500"></i>', name: 'Yıldız', bg: 'bg-amber-50 border-amber-400' },
+            { id: 'tri', icon: '<i class="fa-solid fa-play fa-rotate-270 text-rose-500"></i>', name: 'Üçgen', bg: 'bg-rose-50 border-rose-400' },
+            { id: 'sq', icon: '<i class="fa-solid fa-square text-blue-500"></i>', name: 'Kare', bg: 'bg-blue-50 border-blue-400' }
+        ];
+
+        function generateAct3Problem() {
+            const n1 = Math.floor(1500 + Math.random() * 3900);
+            const n2 = Math.floor(1400 + Math.random() * 3900);
+            const sum = n1 + n2;
+
+            const s1 = String(n1).split('').map(Number);
+            const s2 = String(n2).split('').map(Number);
+            const sSum = String(sum).padStart(4, '0').split('').map(Number);
+
+            // 3 farklı sütunda birer rakamı gizle
+            // Sütun 3 (Birler): 1. toplananda gizle
+            // Sütun 2 (Onlar): 2. toplananda gizle
+            // Sütun 0 (Binler): Toplamda gizle
+            const hidden = [
+                { row: 1, col: 3, answer: s1[3], meta: symbolsMeta[0] },
+                { row: 2, col: 2, answer: s2[2], meta: symbolsMeta[1] },
+                { row: 3, col: 0, answer: sSum[0], meta: symbolsMeta[2] }
+            ];
+
+            act3State = { n1, n2, sum, s1, s2, sSum, hidden };
+
+            const board = document.getElementById('act3-board');
+            const renderCell = (row, col, val) => {
+                const found = hidden.find(h => h.row === row && h.col === col);
+                if (found) {
+                    return `<div class="digit-box ${found.meta.bg} border-4 flex items-center justify-center shadow-sm">${found.meta.icon}</div>`;
+                }
+                return `<div class="digit-box bg-white border-2 border-slate-200 text-slate-800 flex items-center justify-center shadow-sm">${val}</div>`;
+            };
+
+            board.innerHTML = `
+                <div class="grid grid-cols-5 gap-2 items-center justify-items-center">
+                    <div></div>
+                    ${s1.map((v, c) => renderCell(1, c, v)).join('')}
+                </div>
+                <div class="grid grid-cols-5 gap-2 items-center justify-items-center pb-3 border-b-4 border-slate-800">
+                    <div class="text-3xl font-black text-emerald-600">+</div>
+                    ${s2.map((v, c) => renderCell(2, c, v)).join('')}
+                </div>
+                <div class="grid grid-cols-5 gap-2 items-center justify-items-center pt-2">
+                    <div class="text-xs font-bold text-slate-400">TOPLAM</div>
+                    ${sSum.map((v, c) => renderCell(3, c, v)).join('')}
+                </div>
+            `;
+
+            const inputsDiv = document.getElementById('act3-inputs');
+            inputsDiv.innerHTML = hidden.map((h, i) => `
+                <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl border-2 border-slate-200">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl ${h.meta.bg} border-2 flex items-center justify-center text-xl">
+                            ${h.meta.icon}
+                        </div>
+                        <span class="font-bold text-slate-700">${h.meta.name} Rakamı:</span>
+                    </div>
+                    <input type="number" min="0" max="9" id="act3-inp-${i}" class="w-20 h-12 rounded-xl border-2 border-emerald-400 text-center text-2xl font-black focus:outline-none focus:ring-2 focus:ring-emerald-300" placeholder="?">
+                </div>
+            `).join('');
+
+            document.getElementById('act3-feedback').innerHTML = `
+                💡 <strong>Dedektif İpucu:</strong> Önce en sağdaki <strong>Birler basamağından</strong> Yıldız (<i class="fa-solid fa-star text-amber-500"></i>) sembolünü bularak başla!
+            `;
+        }
+
+        function checkAct3() {
+            let allOk = true;
+            act3State.hidden.forEach((h, i) => {
+                const inp = document.getElementById(`act3-inp-${i}`);
+                const val = parseInt(inp.value, 10);
+                if (val === h.answer) {
+                    inp.classList.remove('border-rose-500', 'bg-rose-50');
+                    inp.classList.add('border-emerald-500', 'bg-emerald-50');
+                } else {
+                    allOk = false;
+                    inp.classList.remove('border-emerald-500', 'bg-emerald-50');
+                    inp.classList.add('border-rose-500', 'bg-rose-50', 'animate-shake');
+                    setTimeout(() => inp.classList.remove('animate-shake'), 400);
+                }
+            });
+
+            const fb = document.getElementById('act3-feedback');
+            if (allOk) {
+                playSuccessSound();
+                addGlobalScore(30);
+                fb.innerHTML = `<span class="text-emerald-700 font-extrabold">🕵️‍♂️ Süper Dedektif!</span> Tüm gizli rakamları doğru buldun (${act3State.n1} + ${act3State.n2} = ${act3State.sum}). +30 Puan kazandın!`;
+            } else {
+                playErrorSound();
+                fb.innerHTML = `<span class="text-rose-600 font-extrabold">Bazı rakamlar hatalı!</span> Eldeli toplama kurallarına dikkat ederek tekrar dene.`;
+            }
+        }
+
+        function solveAct3Hint() {
+            for (let i = 0; i < act3State.hidden.length; i++) {
+                const inp = document.getElementById(`act3-inp-${i}`);
+                if (parseInt(inp.value, 10) !== act3State.hidden[i].answer) {
+                    inp.value = act3State.hidden[i].answer;
+                    document.getElementById('act3-feedback').innerHTML = `🔍 <strong>${act3State.hidden[i].meta.name}</strong> sembolünün değeri <strong>${act3State.hidden[i].answer}</strong> olarak açıldı!`;
+                    break;
+                }
+            }
+        }
+
+        // ==================== 4. ETKİNLİK: İKİ TOPLAMA İŞLEMİNDE VERİLMEYEN RAKAMLAR MANTIĞI ====================
+        let act4State = null;
+
+        function createSingleMissingDigitProblem(labels, colorTheme) {
+            // Toplamı 9999'u geçmeyen iki adet 4 basamaklı sayı üret
+            const n1 = Math.floor(1200 + Math.random() * 3600);
+            const n2 = Math.floor(1200 + Math.random() * 3600);
+            const sum = n1 + n2;
+
+            const s1 = String(n1).split('').map(Number);
+            const s2 = String(n2).split('').map(Number);
+            const sSum = String(sum).padStart(4, '0').split('').map(Number);
+
+            // 4 sütundan rastgele 3 farklı sütun seç ve her sütunda yalnızca 1 rakamı gizle
+            // Böylece her sütun tek tek kesin olarak çözülebilir
+            const cols = [0, 1, 2, 3].sort(() => Math.random() - 0.5).slice(0, 3).sort((a, b) => b - a);
+            const hiddenMap = {};
+
+            cols.forEach((colIdx, idx) => {
+                const rowChoice = Math.floor(Math.random() * 3) + 1; // 1: 1.Toplanan, 2: 2.Toplanan, 3: Toplam
+                const answer = rowChoice === 1 ? s1[colIdx] : (rowChoice === 2 ? s2[colIdx] : sSum[colIdx]);
+                const label = labels[idx];
+                hiddenMap[`${rowChoice}-${colIdx}`] = {
+                    label,
+                    row: rowChoice,
+                    col: colIdx,
+                    answer,
+                    colorTheme
+                };
+            });
+
+            return { n1, n2, sum, s1, s2, sSum, hiddenMap };
+        }
+
+        function renderAct4Board(boardId, probData, prefix) {
+            const boardEl = document.getElementById(boardId);
+            const placeLabels = ['Binler', 'Yüzler', 'Onlar', 'Birler'];
+
+            const renderCell = (row, col, val) => {
+                const key = `${row}-${col}`;
+                const hiddenInfo = probData.hiddenMap[key];
+                if (hiddenInfo) {
+                    const borderCol = prefix === 'p1' ? 'border-amber-500 bg-amber-100/90 text-amber-950 focus:ring-amber-300' : 'border-sky-500 bg-sky-100/90 text-sky-950 focus:ring-sky-300';
+                    const badgeCol = prefix === 'p1' ? 'bg-amber-600' : 'bg-sky-600';
+                    return `
+                        <div class="relative">
+                            <span class="absolute -top-2 -left-2 w-5 h-5 rounded-full ${badgeCol} text-white text-[11px] font-black flex items-center justify-center shadow">${hiddenInfo.label}</span>
+                            <input type="text" maxlength="1" id="act4-${prefix}-${hiddenInfo.label}" data-ans="${hiddenInfo.answer}" data-label="${hiddenInfo.label}"
+                                class="act4-digit-input digit-box border-4 ${borderCol} focus:outline-none focus:ring-4 shadow-sm" placeholder="${hiddenInfo.label}">
+                        </div>
+                    `;
+                }
+                return `<div class="digit-box bg-white border-2 border-slate-200 text-slate-800 flex items-center justify-center shadow-sm">${val}</div>`;
+            };
+
+            boardEl.innerHTML = `
+                <div class="grid grid-cols-5 gap-2 text-center mb-1">
+                    <div></div>
+                    ${placeLabels.map(pl => `<div class="text-[10px] font-extrabold text-slate-500 uppercase bg-white/80 py-0.5 rounded border border-slate-200">${pl}</div>`).join('')}
+                </div>
+                <div class="grid grid-cols-5 gap-2 items-center justify-items-center">
+                    <div></div>
+                    ${probData.s1.map((v, c) => renderCell(1, c, v)).join('')}
+                </div>
+                <div class="grid grid-cols-5 gap-2 items-center justify-items-center pb-3 border-b-4 border-slate-800">
+                    <div class="text-3xl font-black ${prefix === 'p1' ? 'text-amber-600' : 'text-sky-600'}">+</div>
+                    ${probData.s2.map((v, c) => renderCell(2, c, v)).join('')}
+                </div>
+                <div class="grid grid-cols-5 gap-2 items-center justify-items-center pt-2">
+                    <div class="text-[11px] font-extrabold text-slate-400">TOPLAM</div>
+                    ${probData.sSum.map((v, c) => renderCell(3, c, v)).join('')}
+                </div>
+            `;
+        }
+
+        function generateAct4Problem() {
+            const prob1 = createSingleMissingDigitProblem(['A', 'B', 'C'], 'amber');
+            const prob2 = createSingleMissingDigitProblem(['D', 'E', 'F'], 'sky');
+
+            // Bonus sorusu: A + D veya tüm gizli rakamların toplamı
+            const ansA = Object.values(prob1.hiddenMap).find(x => x.label === 'A').answer;
+            const ansB = Object.values(prob1.hiddenMap).find(x => x.label === 'B').answer;
+            const ansC = Object.values(prob1.hiddenMap).find(x => x.label === 'C').answer;
+            const ansD = Object.values(prob2.hiddenMap).find(x => x.label === 'D').answer;
+            const ansE = Object.values(prob2.hiddenMap).find(x => x.label === 'E').answer;
+            const ansF = Object.values(prob2.hiddenMap).find(x => x.label === 'F').answer;
+
+            const bonusMode = Math.random() > 0.5 ? 'sumAll' : 'pairSum';
+            let bonusExpected = 0;
+            let bonusText = '';
+
+            if (bonusMode === 'sumAll') {
+                bonusExpected = ansA + ansB + ansC + ansD + ansE + ansF;
+                bonusText = `İki işlemdeki tüm verilmeyen rakamların toplamı (<strong>A + B + C + D + E + F</strong>) kaçtır?`;
+            } else {
+                bonusExpected = (ansA + ansB) + (ansD + ansE);
+                bonusText = `Birler ve onlar tarafındaki dört gizli rakamın toplamı (<strong>A + B + D + E</strong>) kaçtır?`;
+            }
+
+            act4State = { prob1, prob2, bonusExpected };
+
+            renderAct4Board('act4-board-1', prob1, 'p1');
+            renderAct4Board('act4-board-2', prob2, 'p2');
+
+            document.getElementById('act4-bonus-question').innerHTML = bonusText;
+            const bonusInp = document.getElementById('act4-bonus-input');
+            bonusInp.value = '';
+            bonusInp.classList.remove('border-emerald-500', 'bg-emerald-50', 'border-rose-500', 'bg-rose-50');
+
+            document.getElementById('act4-feedback-text').innerHTML = `
+                Her iki toplama işleminde de <strong>Birler Basamağından (en sağdan)</strong> başlayarak A, B, C ve D, E, F kutularına gelmesi gereken rakamları yaz!
+            `;
+        }
+
+        function checkAct4() {
+            const inputs = document.querySelectorAll('.act4-digit-input');
+            let allDigitsCorrect = true;
+
+            inputs.forEach(inp => {
+                const expected = inp.getAttribute('data-ans');
+                const val = inp.value.trim();
+                if (val === expected) {
+                    inp.classList.remove('border-rose-500', 'bg-rose-100');
+                    inp.classList.add('border-emerald-500', 'bg-emerald-100');
+                } else {
+                    allDigitsCorrect = false;
+                    inp.classList.remove('border-emerald-500', 'bg-emerald-100');
+                    inp.classList.add('border-rose-500', 'bg-rose-100', 'animate-shake');
+                    setTimeout(() => inp.classList.remove('animate-shake'), 400);
+                }
+            });
+
+            const bonusInp = document.getElementById('act4-bonus-input');
+            const bonusVal = parseInt(bonusInp.value, 10);
+            let bonusCorrect = false;
+
+            if (bonusVal === act4State.bonusExpected) {
+                bonusCorrect = true;
+                bonusInp.classList.remove('border-rose-500', 'bg-rose-50');
+                bonusInp.classList.add('border-emerald-500', 'bg-emerald-50');
+            } else {
+                bonusInp.classList.remove('border-emerald-500', 'bg-emerald-50');
+                bonusInp.classList.add('border-rose-500', 'bg-rose-50', 'animate-shake');
+                setTimeout(() => bonusInp.classList.remove('animate-shake'), 400);
+            }
+
+            const fbText = document.getElementById('act4-feedback-text');
+            if (allDigitsCorrect && bonusCorrect) {
+                playSuccessSound();
+                addGlobalScore(40);
+                fbText.innerHTML = `<span class="text-emerald-700 font-extrabold">🏆 Muhteşem İkili Dedektif!</span> Hem 1. İşlem (${act4State.prob1.n1} + ${act4State.prob1.n2} = ${act4State.prob1.sum}) hem de 2. İşlem (${act4State.prob2.n1} + ${act4State.prob2.n2} = ${act4State.prob2.sum}) kusursuz çözüldü! (+40 Puan)`;
+            } else if (allDigitsCorrect && !bonusCorrect) {
+                playErrorSound();
+                fbText.innerHTML = `<span class="text-indigo-700 font-extrabold">Harika!</span> İki işlemdeki tüm verilmeyen rakamları doğru buldun, şimdi sadece <strong>Bonus Bağlantı Sorusundaki</strong> toplamı düzelt!`;
+            } else {
+                playErrorSound();
+                fbText.innerHTML = `<span class="text-rose-600 font-extrabold">Dikkat!</span> Kırmızı ile işaretlenen kutucukları kontrol et. Bir önceki basamaktan <strong>1 elde</strong> gelip gelmediğine dikkat etmelisin!`;
+            }
+        }
+
+        function giveAct4Hint() {
+            const inputs = document.querySelectorAll('.act4-digit-input');
+            for (let inp of inputs) {
+                const expected = inp.getAttribute('data-ans');
+                const label = inp.getAttribute('data-label');
+                if (inp.value.trim() !== expected) {
+                    inp.value = expected;
+                    inp.classList.remove('border-rose-500', 'bg-rose-100');
+                    inp.classList.add('border-emerald-500', 'bg-emerald-100');
+                    document.getElementById('act4-feedback-text').innerHTML = `💡 <strong>İpucu:</strong> <strong>${label}</strong> kutucuğuna gelmesi gereken rakam <strong>${expected}</strong> olarak yerleştirildi!`;
+                    return;
+                }
+            }
+
+            const bonusInp = document.getElementById('act4-bonus-input');
+            if (parseInt(bonusInp.value, 10) !== act4State.bonusExpected) {
+                bonusInp.value = act4State.bonusExpected;
+                document.getElementById('act4-feedback-text').innerHTML = `💡 <strong>Bonus İpucu:</strong> Bulduğun rakamların toplamı <strong>${act4State.bonusExpected}</strong> yapıyor!`;
+            }
+        }
+
+        // ==================== 4. BÖLÜM: SÜRELİ YARIŞMA MANTIĞI ====================
+        let quizDuration = 90;
+        let quizTimeLeft = 90;
+        let quizScore = 0;
+        let quizStreak = 0;
+        let quizCorrect = 0;
+        let quizWrong = 0;
+        let quizInterval = null;
+        let currentQuizAnswer = 0;
+        let questionCounter = 0;
+
+        function setQuizDifficulty(sec, label) {
+            quizDuration = sec;
+            document.getElementById('diff-90').className = sec === 90 ? 'diff-btn bg-rose-600 text-white px-4 py-2 rounded-xl font-bold border-2 border-rose-700' : 'diff-btn bg-slate-100 text-slate-700 px-4 py-2 rounded-xl font-bold border-2 border-slate-300';
+            document.getElementById('diff-60').className = sec === 60 ? 'diff-btn bg-rose-600 text-white px-4 py-2 rounded-xl font-bold border-2 border-rose-700' : 'diff-btn bg-slate-100 text-slate-700 px-4 py-2 rounded-xl font-bold border-2 border-slate-300';
+        }
+
+        function startTimedQuiz() {
+            quizTimeLeft = quizDuration;
+            quizScore = 0;
+            quizStreak = 0;
+            quizCorrect = 0;
+            quizWrong = 0;
+            questionCounter = 0;
+
+            document.getElementById('quiz-start-screen').classList.add('hidden');
+            document.getElementById('quiz-end-screen').classList.add('hidden');
+            document.getElementById('quiz-play-screen').classList.remove('hidden');
+
+            updateQuizHUD();
+            nextQuizQuestion();
+
+            if (quizInterval) clearInterval(quizInterval);
+            quizInterval = setInterval(() => {
+                quizTimeLeft--;
+                updateQuizHUD();
+                if (quizTimeLeft <= 0) {
+                    endTimedQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateQuizHUD() {
+            document.getElementById('quiz-timer').textContent = `${quizTimeLeft} sn`;
+            document.getElementById('quiz-streak').textContent = `${quizStreak}x`;
+            document.getElementById('quiz-score').textContent = quizScore;
+            const pct = Math.max(0, (quizTimeLeft / quizDuration) * 100);
+            document.getElementById('quiz-progress-bar').style.width = `${pct}%`;
+        }
+
+        function nextQuizQuestion() {
+            questionCounter++;
+            const qType = questionCounter % 3; // 0: Klasik 4 basamaklı, 1: Problem, 2: Zihinden 100'ün katları
+            const badgeEl = document.getElementById('quiz-q-badge');
+            const textEl = document.getElementById('quiz-q-text');
+
+            let ans = 0;
+            if (qType === 1) {
+                const a = Math.floor(1250 + Math.random() * 3500);
+                const b = Math.floor(1150 + Math.random() * 3200);
+                ans = a + b;
+                badgeEl.textContent = `Soru #${questionCounter} • Gerçek Hayat Problemi`;
+                textEl.innerHTML = `<span class="text-lg sm:text-2xl font-bold block leading-snug">Bir kütüphanede <strong>${a}</strong> hikaye kitabı ve <strong>${b}</strong> bilim kitabı vardır. Toplam kitap sayısı kaçtır?</span>`;
+            } else if (qType === 2) {
+                const a = Math.floor(2100 + Math.random() * 5000);
+                const hundreds = Math.floor(2 + Math.random() * 7) * 100;
+                ans = a + hundreds;
+                badgeEl.textContent = `Soru #${questionCounter} • Zihinden Hızlı Toplama`;
+                textEl.textContent = `${a} + ${hundreds} = ?`;
+            } else {
+                const a = Math.floor(1400 + Math.random() * 6500);
+                const b = Math.floor(1300 + Math.random() * 5500);
+                ans = a + b;
+                badgeEl.textContent = `Soru #${questionCounter} • Dört Basamaklı Toplama`;
+                textEl.textContent = `${a} + ${b} = ?`;
+            }
+
+            currentQuizAnswer = ans;
+
+            // Yanıltıcı şıklar üret (Eldeyi unutma hatası, 10 eksik/fazla vb.)
+            const distractors = new Set();
+            const offsets = [10, -10, 100, -100, 1, -1, 110, -90];
+            while (distractors.size < 3) {
+                const off = offsets[Math.floor(Math.random() * offsets.length)];
+                const candidate = ans + off;
+                if (candidate > 0 && candidate !== ans) {
+                    distractors.add(candidate);
+                }
+            }
+
+            const options = [ans, ...Array.from(distractors)].sort(() => Math.random() - 0.5);
+            const optContainer = document.getElementById('quiz-options');
+            optContainer.innerHTML = options.map(opt => `
+                <button onclick="submitQuizOption(${opt}, this)" class="bg-white hover:bg-indigo-50 text-indigo-950 border-4 border-indigo-200 hover:border-indigo-400 rounded-2xl py-4 px-6 text-2xl font-black game-font btn-3d transition-all">
+                    ${opt}
+                </button>
+            `).join('');
+        }
+
+        function submitQuizOption(selected, btnEl) {
+            if (selected === currentQuizAnswer) {
+                playSuccessSound();
+                quizCorrect++;
+                quizStreak++;
+                const earned = 10 + (quizStreak * 2);
+                quizScore += earned;
+                addGlobalScore(earned);
+                btnEl.className = 'bg-emerald-500 text-white border-4 border-emerald-700 rounded-2xl py-4 px-6 text-2xl font-black game-font';
+            } else {
+                playErrorSound();
+                quizWrong++;
+                quizStreak = 0;
+                btnEl.className = 'bg-rose-500 text-white border-4 border-rose-700 rounded-2xl py-4 px-6 text-2xl font-black game-font animate-shake';
+            }
+
+            updateQuizHUD();
+            setTimeout(() => {
+                if (quizTimeLeft > 0) nextQuizQuestion();
+            }, 320);
+        }
+
+        function endTimedQuiz() {
+            clearInterval(quizInterval);
+            quizInterval = null;
+            playSuccessSound();
+
+            document.getElementById('quiz-play-screen').classList.add('hidden');
+            document.getElementById('quiz-end-screen').classList.remove('hidden');
+
+            document.getElementById('end-score').textContent = quizScore;
+            document.getElementById('end-correct').textContent = quizCorrect;
+            document.getElementById('end-wrong').textContent = quizWrong;
+
+            const titleEl = document.getElementById('quiz-end-title');
+            if (quizCorrect >= 12) {
+                titleEl.textContent = '🌟 Efsanevi Matematik Dehası!';
+            } else if (quizCorrect >= 7) {
+                titleEl.textContent = '🚀 Harika Toplama Ustası!';
+            } else {
+                titleEl.textContent = '💪 Güzel Çaba! Tekrar Deneyerek Rekorunu Kır!';
+            }
+        }
+
+        // Başlangıçta tüm etkinlikleri hazırla
+        window.onload = function () {
+            generateAct1Problem();
+            initCipherPuzzle();
+            generateAct3Problem();
+            generateAct4Problem();
+        };
+    </script>
+</body>
+</html>

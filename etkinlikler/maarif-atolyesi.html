@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MAT-ATÖLYE: Maarif 5. Sınıf Simülasyon Üssü</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Fallback ve Temel Tasarım Kuralları (CDN gecikmesine karşı tam koruma) */
+        :root {
+            --bg-dark: #0b1120;
+            --panel-bg: rgba(22, 32, 54, 0.92);
+            --border-glow: rgba(56, 189, 248, 0.25);
+        }
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at 50% 0%, #1e293b 0%, #090d16 100%);
+            color: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .font-display {
+            font-family: 'Fredoka', system-ui, sans-serif;
+        }
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--border-glow);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+        .tactile-btn {
+            transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.15s ease;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+        }
+        .tactile-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+        }
+        .cargo-slot {
+            transition: all 0.25s ease;
+        }
+        .cargo-slot.active-slot {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.55);
+            border-color: #f59e0b !important;
+            transform: translateY(-2px);
+        }
+        .canvas-wrapper {
+            position: relative;
+            width: 100%;
+            height: 360px;
+            background: #090d16;
+            border-radius: 16px;
+            border: 2px solid #1e293b;
+            overflow: hidden;
+        }
+        @media (min-width: 1024px) {
+            .canvas-wrapper {
+                height: 410px;
+            }
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+            touch-action: none;
+        }
+        #confettiCanvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="flex flex-col justify-between p-2 sm:p-4 min-h-screen"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
+
+    <!-- Kutlama Konfeti Canvas -->
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- ÜST NAVİGASYON BAR (LUMO & ROBOTINKER TARZI AKILLI TAHTA MENÜSÜ) -->
+    <header class="w-full max-w-7xl mx-auto glass-panel rounded-2xl p-3 sm:p-4 mb-3">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-3">
+            <!-- Logo ve Müfredat Kodu -->
+            <div class="flex items-center justify-between w-full lg:w-auto gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg">
+                        🚀
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="font-display text-xl sm:text-2xl font-bold tracking-wide text-white">MAT-ATÖLYE</h1>
+                            <span class="text-[11px] bg-amber-500/20 text-amber-300 font-extrabold px-2.5 py-0.5 rounded-full border border-amber-400/40">
+                                TYMM 5. Sınıf 1. Dönem
+                            </span>
+                        </div>
+                        <p id="activeCurriculumCode" class="text-xs text-sky-300 font-bold">
+                            📐 MAT.5.3.1 & 5.3.4 • Geometrik Şekiller Simülasyonu
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mobil Puan & Ses -->
+                <div class="flex lg:hidden items-center gap-2">
+                    <div class="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                        <span>⭐</span>
+                        <span id="mobileScore" class="font-display font-bold text-amber-300">0</span>
+                    </div>
+                    <button onclick="toggleSound()" id="soundBtnMobile" class="tactile-btn w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 text-lg flex items-center justify-center">
+                        🔊
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3 ANA TEMA SEKMELERİ -->
+            <nav class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 bg-slate-950/90 p-1.5 rounded-2xl border border-slate-800 w-full lg:w-auto">
+                <button id="tabTheme1" onclick="switchTheme(1)" class="tactile-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-sky-400 text-slate-950">
+                    <span>📡</span> <span>1. Tema: Geometri & Açı</span>
+                </button>
+                <button id="tabTheme2" onclick="switchTheme(2)" class="tactile-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-slate-800 text-slate-200 hover:bg-slate-700">
+                    <span>🚢</span> <span>2. Tema: Sayı & Lojistik</span>
+                </button>
+                <button id="tabTheme3" onclick="switchTheme(3)" class="tactile-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-slate-800 text-slate-200 hover:bg-slate-700">
+                    <span>🧪</span> <span>3. Tema: Alan/Çevre & Kesir</span>
+                </button>
+            </nav>
+
+            <!-- Masaüstü Puan, Unvan & Ses -->
+            <div class="hidden lg:flex items-center gap-3">
+                <div class="bg-slate-900/95 border border-slate-700 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+                    <span class="text-xl">⭐</span>
+                    <div>
+                        <div class="text-[10px] text-slate-400 uppercase font-extrabold">Yıldız Puan</div>
+                        <div id="desktopScore" class="font-display text-lg font-bold text-amber-300 leading-none">0</div>
+                    </div>
+                </div>
+                <div class="bg-slate-900/95 border border-slate-700 px-3.5 py-1.5 rounded-xl flex items-center gap-2">
+                    <span class="text-xl">🏅</span>
+                    <div>
+                        <div class="text-[10px] text-slate-400 uppercase font-extrabold">Kariyer Unvanı</div>
+                        <div id="rankTitle" class="font-display text-xs font-bold text-emerald-300 leading-none">Keşif Uzmanı</div>
+                    </div>
+                </div>
+                <button onclick="toggleSound()" id="soundBtnDesktop" class="tactile-btn w-11 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xl flex items-center justify-center" title="Sesi Aç/Kapat">
+                    🔊
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===================================================================== -->
+    <!-- TEMA 1: GEOMETRİK ŞEKİLLER (SANAL İLETKİ RADAR KULESİ & LAZER AYNASI)  -->
+    <!-- ===================================================================== -->
+    <main id="theme1Section" class="w-full max-w-7xl mx-auto flex-1 flex flex-col gap-3">
+        <!-- Alt Oyun Seçici -->
+        <div class="glass-panel rounded-2xl p-3 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-2xl shrink-0">
+                    🛰️
+                </div>
+                <div>
+                    <div class="text-xs font-extrabold uppercase tracking-wider text-sky-400">1. TEMA • HAVA TRAFİK VE OPTİK MERKEZİ</div>
+                    <h2 id="geoMissionTitle" class="font-display text-base sm:text-lg font-bold text-white">
+                        Sanal İletkiyi (Açıölçeri) sürükleyip K köşesine oturt ve uydu sinyal açısını ölç!
+                    </h2>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-center">
+                <button id="btnGeoSubA" onclick="switchGeoSubMode('protractor')" class="tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-amber-400 text-slate-950">
+                    📐 A) Açı Kâşifi & Radar Kulesi
+                </button>
+                <button id="btnGeoSubB" onclick="switchGeoSubMode('laser')" class="tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-slate-800 text-slate-200 hover:bg-slate-700">
+                    ⚡ B) Lazer Aynaları (Tümler & Bütünler)
+                </button>
+            </div>
+        </div>
+
+        <!-- Sahne ve Kontrol Paneli -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1">
+            <!-- Sol: Geometri Canvas (8 Sütun) -->
+            <div class="lg:col-span-8 glass-panel rounded-2xl p-3 flex flex-col justify-between gap-2">
+                <!-- Akıllı Tahta Hızlı İletki Butonları -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800">
+                    <div id="geoToolInstructions" class="text-xs text-slate-300 font-bold flex items-center gap-1.5">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+                        <span>İletkiyi sürükle veya akıllı tahta butonlarıyla hizala:</span>
+                    </div>
+                    <div id="protractorQuickTools" class="flex flex-wrap items-center gap-1.5">
+                        <button onclick="snapProtractorToVertex()" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-sky-500 text-slate-950 text-xs font-extrabold">
+                            🎯 Köşeye Oturt
+                        </button>
+                        <button onclick="alignProtractorBase()" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-emerald-400 text-slate-950 text-xs font-extrabold">
+                            📏 0° Çizgisini Hizala
+                        </button>
+                        <button onclick="rotateProtractorBy(-5)" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-slate-700 text-white text-xs font-bold">
+                            ↺ -5° Döndür
+                        </button>
+                        <button onclick="rotateProtractorBy(5)" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-slate-700 text-white text-xs font-bold">
+                            ↻ +5° Döndür
+                        </button>
+                        <button onclick="newGeoMission()" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-bold">
+                            🎲 Yeni Açı
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Canvas Kutusu -->
+                <div class="canvas-wrapper" id="geoCanvasContainer">
+                    <canvas id="geoCanvas"></canvas>
+                </div>
+
+                <!-- Alt Durum Bandı -->
+                <div class="bg-slate-900/95 border border-slate-800 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-200 flex items-center justify-between">
+                    <span id="geoFeedbackText">İletkinin merkezini <b>K</b> köşesine oturtup <b>0°</b> çizgisini mavi ışınla çakıştırın.</span>
+                    <span id="protractorSnapBadge" class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-400 shrink-0">Serbest</span>
+                </div>
+            </div>
+
+            <!-- Sağ: Kontrol Paneli (4 Sütun) -->
+            <div class="lg:col-span-4 glass-panel rounded-2xl p-4 flex flex-col justify-between gap-4">
+                <!-- ALT MOD A: İLETKİ RADAR KONTROLÜ -->
+                <div id="geoPanelProtractor" class="flex flex-col justify-between h-full gap-4">
+                    <div>
+                        <div class="text-xs font-extrabold uppercase tracking-wider text-amber-400 mb-2">1. ADIM: AÇI TÜRÜNÜ SEÇ</div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="selectAngleType('dar')" id="typeBtn_dar" class="angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200">
+                                📐 Dar Açı (&lt;90°)
+                            </button>
+                            <button onclick="selectAngleType('dik')" id="typeBtn_dik" class="angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200">
+                                ∟ Dik Açı (90°)
+                            </button>
+                            <button onclick="selectAngleType('genis')" id="typeBtn_genis" class="angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200">
+                                 obtuse Geniş (&gt;90°)
+                            </button>
+                            <button onclick="selectAngleType('dogru')" id="typeBtn_dogru" class="angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200">
+                                ↔ Doğru Açı (180°)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-extrabold uppercase tracking-wider text-sky-400 mb-1">2. ADIM: ÖLÇÜLEN AÇI DERECESİ</div>
+                        <div class="flex items-center justify-center gap-2 my-2">
+                            <button onclick="adjustUserAngle(-5)" class="tactile-btn w-10 h-10 rounded-xl bg-slate-800 text-white font-bold">-5°</button>
+                            <button onclick="adjustUserAngle(-1)" class="tactile-btn w-10 h-10 rounded-xl bg-slate-800 text-sky-300 font-bold">-1°</button>
+                            <div id="userAngleReadout" class="font-display text-4xl font-black text-amber-300 w-24">50°</div>
+                            <button onclick="adjustUserAngle(1)" class="tactile-btn w-10 h-10 rounded-xl bg-slate-800 text-sky-300 font-bold">+1°</button>
+                            <button onclick="adjustUserAngle(5)" class="tactile-btn w-10 h-10 rounded-xl bg-slate-800 text-white font-bold">+5°</button>
+                        </div>
+                        <input id="angleRangeSlider" type="range" min="10" max="180" value="50" oninput="syncAngleSlider(this.value)" class="w-full accent-amber-400 cursor-pointer h-3 bg-slate-800 rounded-lg">
+                        <div class="flex justify-between text-[11px] text-slate-400 font-mono mt-1">
+                            <span>10°</span>
+                            <span>90°</span>
+                            <span>180°</span>
+                        </div>
+                    </div>
+
+                    <button onclick="fireRadarSignal()" class="tactile-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 text-slate-950 font-display font-bold text-base sm:text-lg shadow-xl">
+                        📡 RADAR SİNYALİNİ GÖNDER!
+                    </button>
+                </div>
+
+                <!-- ALT MOD B: LAZER AYNASI KONTROLÜ -->
+                <div id="geoPanelLaser" class="hidden flex-col justify-between h-full gap-4">
+                    <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-3.5">
+                        <div class="text-xs font-extrabold uppercase tracking-wider text-amber-400 mb-1">OPTİK AYNA DÜZENEĞİ</div>
+                        <p id="laserScenarioDesc" class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+                            Bu köşe <b>Dik Açı (90° - Tümler)</b> düzeneğidir.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 text-center">
+                        <div class="text-xs font-extrabold uppercase tracking-wider text-sky-400 mb-2">HEDEFİ VURACAK AÇIYI SEÇ</div>
+                        <div id="laserChoicesGrid" class="grid grid-cols-2 gap-2.5 my-2"></div>
+                    </div>
+
+                    <button onclick="fireLaserBeam()" class="tactile-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 to-amber-400 text-slate-950 font-display font-bold text-base sm:text-lg shadow-xl">
+                        ⚡ LAZERİ ATEŞLE!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- TEMA 2: SAYILAR VE NİCELİKLER (HABER MERKEZİ & LOJİSTİK VİNÇ)         -->
+    <!-- ===================================================================== -->
+    <main id="theme2Section" class="w-full max-w-7xl mx-auto flex-1 hidden flex-col gap-3">
+        <!-- Haber Merkezi Teleprompter -->
+        <div class="glass-panel rounded-2xl p-3 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-3 border-l-4 border-l-amber-400">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-2xl shrink-0">
+                    🎙️
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[11px] font-black uppercase bg-rose-500 text-white px-2 py-0.5 rounded">CANLI YAYIN TELEPROMPTER</span>
+                        <span id="cargoScenarioContext" class="text-xs text-amber-300 font-bold">Ulaştırma Raporu</span>
+                    </div>
+                    <p id="cargoSpokenNumber" class="font-display text-base sm:text-xl font-bold text-white mt-0.5">
+                        "Sekiz yüz kırk milyon üç yüz beş bin on iki"
+                    </p>
+                </div>
+            </div>
+            <button onclick="generateCargoMission()" class="tactile-btn px-4 py-2.5 rounded-xl bg-amber-400 text-slate-950 font-display font-bold text-xs sm:text-sm shrink-0">
+                🔄 Yeni Manşet / Sevkiyat
+            </button>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1">
+            <!-- Sol: Kargo Vinç Bölük Yuvaları (7 Sütun) -->
+            <div class="lg:col-span-7 glass-panel rounded-2xl p-4 flex flex-col justify-between gap-4">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                    <span class="text-xs sm:text-sm font-extrabold text-sky-300">
+                        🚢 1. AŞAMA: Bölük Yuvasını Seç ve Doğru 3'lü Konteyneri Vinçle İndir!
+                    </span>
+                    <span class="text-xs text-slate-400 font-mono">MAT.5.1.1</span>
+                </div>
+
+                <!-- 3 Bölük Yuvası -->
+                <div class="grid grid-cols-3 gap-2.5 sm:gap-4 my-1">
+                    <div id="slot_millions" onclick="selectPeriodSlot('millions')" class="cargo-slot active-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-amber-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
+                        <div class="text-[11px] font-extrabold uppercase text-amber-400">👑 MİLYONLAR BÖLÜĞÜ</div>
+                        <div id="slotVal_millions" class="font-display text-3xl sm:text-4xl font-black text-amber-300 tracking-widest my-2">???</div>
+                        <div class="text-[10px] text-slate-400">Yüz M. • On M. • Milyon</div>
+                    </div>
+
+                    <div id="slot_thousands" onclick="selectPeriodSlot('thousands')" class="cargo-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-sky-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
+                        <div class="text-[11px] font-extrabold uppercase text-sky-400">📦 BİNLER BÖLÜĞÜ</div>
+                        <div id="slotVal_thousands" class="font-display text-3xl sm:text-4xl font-black text-sky-300 tracking-widest my-2">???</div>
+                        <div class="text-[10px] text-slate-400">Yüz B. • On B. • Bin</div>
+                    </div>
+
+                    <div id="slot_ones" onclick="selectPeriodSlot('ones')" class="cargo-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-emerald-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
+                        <div class="text-[11px] font-extrabold uppercase text-emerald-400">🧱 BİRLER BÖLÜĞÜ</div>
+                        <div id="slotVal_ones" class="font-display text-3xl sm:text-4xl font-black text-emerald-300 tracking-widest my-2">???</div>
+                        <div class="text-[10px] text-slate-400">Yüzler • Onlar • Birler</div>
+                    </div>
+                </div>
+
+                <!-- Konteyner Havuzu -->
+                <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-3">
+                    <div class="text-xs font-bold text-slate-300 mb-2 flex items-center justify-between">
+                        <span>🏗️ Limandaki 3'lü Konteyner Blokları (Yüklemek İçin Dokun):</span>
+                        <span id="selectedSlotIndicator" class="text-amber-400 font-extrabold">Seçili: Milyonlar Bölüğü</span>
+                    </div>
+                    <div id="cargoContainersPool" class="grid grid-cols-3 sm:grid-cols-6 gap-2"></div>
+                </div>
+
+                <div class="flex items-center justify-between gap-3">
+                    <span class="text-xs text-slate-300">💡 <b>İpucu:</b> Okunmayan basamaklara yer tutucu olarak <b>0</b> konulur (Örn: "on iki" → <b>012</b>).</span>
+                    <button onclick="verifyCargoPeriods()" class="tactile-btn px-5 py-3 rounded-xl bg-emerald-400 text-slate-950 font-display font-bold text-sm shrink-0">
+                        ✅ Bölükleri Onayla
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sağ: Basamak Röntgeni & Kasa Şifresi (5 Sütun) -->
+            <div class="lg:col-span-5 glass-panel rounded-2xl p-4 flex flex-col justify-between gap-4">
+                <div>
+                    <div class="text-xs sm:text-sm font-extrabold text-amber-400 flex items-center justify-between border-b border-slate-800 pb-2">
+                        <span>🔍 2. AŞAMA: BASAMAK RÖNTGENİ</span>
+                        <span class="text-[11px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded">Rakama Dokun</span>
+                    </div>
+                    <p class="text-xs text-slate-300 mt-2">
+                        Aşağıdaki 9 rakamdan herhangi birine dokunarak <b>Basamak Adı, Sayı Değeri ve Basamak Değerini</b> incele:
+                    </p>
+
+                    <div id="xrayDigitsRow" class="grid grid-cols-9 gap-1 sm:gap-1.5 my-3"></div>
+
+                    <div class="bg-slate-950 border border-sky-500/30 rounded-xl p-3 text-center">
+                        <div id="xrayPlaceTitle" class="text-xs font-extrabold text-sky-400 uppercase">Basamak Analizi</div>
+                        <div id="xrayMathFormula" class="font-display text-base sm:text-lg font-bold text-white mt-1">
+                            Rakama dokunarak inceleyin
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kasa Şifresi Sorusu -->
+                <div class="bg-slate-950 border border-amber-500/30 rounded-2xl p-3.5">
+                    <div class="text-xs font-extrabold uppercase text-amber-400 mb-1">🔐 KASA ŞİFRESİ DOĞRULAMA SORUSU:</div>
+                    <p id="vaultQuestionText" class="text-xs sm:text-sm font-bold text-white mb-3"></p>
+                    <div id="vaultOptionsGrid" class="grid grid-cols-2 gap-2"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- TEMA 3: GEOMETRİK NİCELİKLER (ÇEVRE-ALAN) & KESİR İKSİR LABORATUVARI  -->
+    <!-- ===================================================================== -->
+    <main id="theme3Section" class="w-full max-w-7xl mx-auto flex-1 hidden flex-col gap-3">
+        <!-- Alt Oyun Seçici -->
+        <div class="glass-panel rounded-2xl p-3 sm:p-4 flex flex-col md:flex-row items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-2xl shrink-0">
+                    📐
+                </div>
+                <div>
+                    <div class="text-xs font-extrabold uppercase tracking-wider text-emerald-400">3. TEMA • MİMARLIK ATÖLYESİ VE SİMYA LABORATUVARI</div>
+                    <h2 id="theme3MissionTitle" class="font-display text-base sm:text-lg font-bold text-white">
+                        Sanal Mezurayı kullanarak halının kenarlarını ölç, çevre veya alan hesabıyla siparişi teslim et!
+                    </h2>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-center">
+                <button id="btnT3SubA" onclick="switchTheme3Sub('carpet')" class="tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-emerald-400 text-slate-950">
+                    🧶 A) Halı & Bahçe Ustası (Çevre ve Alan)
+                </button>
+                <button id="btnT3SubB" onclick="switchTheme3Sub('potion')" class="tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-slate-800 text-slate-200 hover:bg-slate-700">
+                    🧪 B) Simyacı İksir Laboratuvarı (Kesirler)
+                </button>
+            </div>
+        </div>
+
+        <!-- ALT OYUN 3A: HALI & BAHÇE USTASI -->
+        <div id="subGameCarpet" class="grid grid-cols-1 lg:grid-cols-12 gap-3 flex-1">
+            <div class="lg:col-span-8 glass-panel rounded-2xl p-3 flex flex-col justify-between gap-2">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800">
+                    <span class="text-xs text-slate-300 font-bold">📏 Araçları kullanarak şekli incele veya fare/parmakla mezura çek:</span>
+                    <div class="flex flex-wrap items-center gap-1.5">
+                        <button onclick="measureCarpetSides()" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-sky-400 text-slate-950 text-xs font-extrabold">
+                            📏 Mezura ile Kenarları Ölç
+                        </button>
+                        <button onclick="animateCarpetPerimeter()" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-amber-400 text-slate-950 text-xs font-extrabold">
+                            🟨 Çevreyi Işıklandır
+                        </button>
+                        <button onclick="animateCarpetArea()" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-emerald-400 text-slate-950 text-xs font-extrabold">
+                            🟩 Birim Kareleri Döşe (1 m²)
+                        </button>
+                        <button onclick="generateCarpetOrder()" class="tactile-btn px-2.5 py-1.5 rounded-lg bg-slate-700 text-white text-xs font-bold">
+                            🎲 Yeni Sipariş
+                        </button>
+                    </div>
+                </div>
+
+                <div class="canvas-wrapper" id="carpetCanvasContainer">
+                    <canvas id="carpetCanvas"></canvas>
+                </div>
+
+                <div class="bg-slate-900/95 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-300 flex items-center justify-between">
+                    <span><b>1 birim kare kenarı = 1 metre.</b> Çevre dört kenarın toplamı, Alan ise içteki <b>1 m²</b> kare sayısıdır.</span>
+                    <span id="measuredStatusText" class="text-amber-300 font-bold font-mono shrink-0">Hazır</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 glass-panel rounded-2xl p-4 flex flex-col justify-between gap-3">
+                <div class="bg-slate-950 border border-amber-500/40 rounded-2xl p-3.5">
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-[11px] font-extrabold uppercase bg-amber-400 text-slate-950 px-2 py-0.5 rounded">MÜŞTERİ SİPARİŞ FİŞİ</span>
+                        <span id="customerTypeBadge" class="text-xs font-bold text-sky-300">Overlok (Çevre)</span>
+                    </div>
+                    <p id="customerOrderDesc" class="text-xs sm:text-sm text-white font-semibold leading-relaxed mt-1"></p>
+                    <div id="unitPriceTag" class="mt-2 text-xs font-mono font-bold text-emerald-300 bg-emerald-950/70 border border-emerald-500/30 rounded-lg px-2.5 py-1 inline-block">
+                        Birim Fiyat: 1 Metre = 10 TL
+                    </div>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5 space-y-3">
+                    <div>
+                        <label class="text-xs font-bold text-slate-300 block mb-1">1. Hangi Hesaplama Yapılmalı?</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button id="calcMode_perim" onclick="setCarpetCalcChoice('perimeter')" class="tactile-btn py-2 rounded-xl bg-amber-400 text-slate-950 font-display font-bold text-xs">
+                                ÇEVRE (m)
+                            </button>
+                            <button id="calcMode_area" onclick="setCarpetCalcChoice('area')" class="tactile-btn py-2 rounded-xl bg-slate-800 text-slate-300 font-display font-bold text-xs">
+                                ALAN (m²)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex-1">
+                            <label class="text-[11px] font-bold text-slate-400 block">Ölçüm (m veya m²)</label>
+                            <div class="flex items-center gap-1 mt-1">
+                                <button onclick="stepCarpetAmount(-1)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">-</button>
+                                <input id="inputCarpetMeasure" type="number" value="20" class="w-full h-9 rounded-lg bg-slate-900 border border-slate-700 text-center font-display font-bold text-amber-300 text-lg">
+                                <button onclick="stepCarpetAmount(1)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">+</button>
+                            </div>
+                        </div>
+
+                        <div class="flex-1">
+                            <label class="text-[11px] font-bold text-slate-400 block">Toplam Tutar (TL)</label>
+                            <div class="flex items-center gap-1 mt-1">
+                                <button onclick="stepCarpetCost(-10)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">-</button>
+                                <input id="inputCarpetCost" type="number" value="200" class="w-full h-9 rounded-lg bg-slate-900 border border-slate-700 text-center font-display font-bold text-emerald-300 text-lg">
+                                <button onclick="stepCarpetCost(10)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="submitCarpetOrder()" class="tactile-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-emerald-400 text-slate-950 font-display font-bold text-base shadow-xl">
+                    🧾 SİPARİŞİ TESLİM ET!
+                </button>
+            </div>
+        </div>
+
+        <!-- ALT OYUN 3B: SİMYACI İKSİR LABORATUVARI -->
+        <div id="subGamePotion" class="hidden grid-cols-1 lg:grid-cols-12 gap-3 flex-1">
+            <div class="lg:col-span-8 glass-panel rounded-2xl p-3 flex flex-col justify-between gap-2">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-800">
+                    <span class="text-xs text-slate-300 font-bold">🧪 Doğru birim kesir ölçeğini seçip dereceli silindirlere dök:</span>
+                    <div class="flex items-center gap-2">
+                        <button onclick="emptyPotionBeakers()" class="tactile-btn px-3 py-1.5 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-bold">
+                            🗑️ Kapları Boşalt
+                        </button>
+                        <button onclick="generatePotionRecipe()" class="tactile-btn px-3 py-1.5 rounded-lg bg-slate-700 text-white text-xs font-bold">
+                            🎲 Yeni Reçete
+                        </button>
+                    </div>
+                </div>
+
+                <div class="canvas-wrapper" id="potionCanvasContainer">
+                    <canvas id="potionCanvas"></canvas>
+                </div>
+
+                <div class="bg-slate-900/95 border border-slate-800 rounded-xl px-3.5 py-2 text-xs text-slate-300 flex items-center justify-between">
+                    <span>İki dereceli silindir <b>0-1 Tam</b> ve <b>1-2 Tam</b> aralığını, sağdaki sayı doğrusu ise kesir konumunu gösterir.</span>
+                    <span id="currentPotionReadout" class="font-display font-bold text-sky-300 text-sm shrink-0">Dökülen: 0 L</span>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 glass-panel rounded-2xl p-4 flex flex-col justify-between gap-3">
+                <div class="bg-slate-950 border border-purple-500/40 rounded-2xl p-4 text-center">
+                    <div class="text-[11px] font-extrabold uppercase text-purple-300 mb-1">📜 SİMYACI İKSİR REÇETESİ</div>
+                    <div id="potionRecipeTitle" class="font-display text-2xl sm:text-3xl font-black text-amber-300 my-1">7 / 4 Litre</div>
+                    <p id="potionRecipeHint" class="text-xs text-slate-300"></p>
+                </div>
+
+                <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5">
+                    <div class="text-xs font-extrabold uppercase text-sky-400 mb-2">1. BİRİM KESİR ÖLÇÜ KABINI SEÇ:</div>
+                    <div class="grid grid-cols-5 gap-1.5">
+                        <button onclick="selectUnitCup(2)" id="cupBtn_2" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/2</button>
+                        <button onclick="selectUnitCup(3)" id="cupBtn_3" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/3</button>
+                        <button onclick="selectUnitCup(4)" id="cupBtn_4" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-sky-400 text-slate-950 font-display font-bold text-sm">1/4</button>
+                        <button onclick="selectUnitCup(5)" id="cupBtn_5" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/5</button>
+                        <button onclick="selectUnitCup(6)" id="cupBtn_6" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/6</button>
+                    </div>
+
+                    <div class="flex items-center gap-2 mt-3">
+                        <button onclick="pourPotionCup(1)" class="tactile-btn flex-1 py-3 rounded-xl bg-sky-400 text-slate-950 font-display font-bold text-sm">
+                            💧 Kaba Dök (+1 Birim)
+                        </button>
+                        <button onclick="pourPotionCup(-1)" class="tactile-btn px-3.5 py-3 rounded-xl bg-slate-800 text-rose-300 font-display font-bold text-sm">
+                            -1 Geri Al
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="verifyPotionMixture()" class="tactile-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-display font-bold text-base shadow-xl">
+                    ✨ İKSİRİ KAYNAT VE TEST ET!
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- YAPICI GERİ BİLDİRİM MODALI -->
+    <div id="feedbackOverlay" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="glass-panel max-w-md w-full rounded-3xl p-6 text-center border-2 border-sky-400/40">
+            <div id="fbIconBox" class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl mb-3 bg-emerald-500/20">
+                🏆
+            </div>
+            <h3 id="fbTitle" class="font-display text-2xl font-bold text-white mb-2">Harika İş!</h3>
+            <p id="fbMessage" class="text-sm text-slate-200 leading-relaxed mb-5"></p>
+            <button onclick="closeFeedbackOverlay()" class="tactile-btn w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-orange-400 text-slate-950 font-display font-bold text-base">
+                Devam Et ➔
+            </button>
+        </div>
+    </div>
+
+    <!-- ALT BİLGİ -->
+    <footer class="w-full max-w-7xl mx-auto mt-3 pt-2 border-t border-slate-800 text-slate-400 text-xs flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-2">
+            <span class="font-bold text-slate-300">TYMM Alan Becerileri:</span>
+            <span class="px-2 py-0.5 rounded bg-sky-950 text-sky-300 border border-sky-800">MAB1: Muhakeme</span>
+            <span class="px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800">MAB3: Temsil</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">MAB5: Araç Kullanımı</span>
+        </div>
+        <div>Lumo & Robotinker Etkileşimli Akıllı Tahta Mimarisi</div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- OYUN MOTORU (SAF VANILLA JS - SIFIR DIŞ BAĞIMLILIK HATASI)            -->
+    <!-- ===================================================================== -->
+    <script>
+        /* ---------------- 1. WEB AUDIO SES SENTEZLEYİCİ ---------------- */
+        let audioCtx = null;
+        let soundEnabled = true;
+
+        function getAudio() {
+            if (!audioCtx) {
+                const AC = window.AudioContext || window.webkitAudioContext;
+                if (AC) audioCtx = new AC();
+            }
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+            return audioCtx;
+        }
+
+        function sfx(type) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = getAudio();
+                if (!ctx) return;
+                const now = ctx.currentTime;
+                if (type === 'click') {
+                    const o = ctx.createOscillator();
+                    const g = ctx.createGain();
+                    o.frequency.setValueAtTime(650, now);
+                    g.gain.setValueAtTime(0.08, now);
+                    g.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                    o.connect(g); g.connect(ctx.destination);
+                    o.start(now); o.stop(now + 0.05);
+                } else if (type === 'snap') {
+                    const o = ctx.createOscillator();
+                    const g = ctx.createGain();
+                    o.type = 'triangle';
+                    o.frequency.setValueAtTime(880, now);
+                    g.gain.setValueAtTime(0.14, now);
+                    g.gain.exponentialRampToValueAtTime(0.001, now + 0.09);
+                    o.connect(g); g.connect(ctx.destination);
+                    o.start(now); o.stop(now + 0.09);
+                } else if (type === 'pour') {
+                    const o = ctx.createOscillator();
+                    const g = ctx.createGain();
+                    o.frequency.setValueAtTime(320, now);
+                    o.frequency.exponentialRampToValueAtTime(640, now + 0.18);
+                    g.gain.setValueAtTime(0.12, now);
+                    g.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+                    o.connect(g); g.connect(ctx.destination);
+                    o.start(now); o.stop(now + 0.2);
+                } else if (type === 'win') {
+                    [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+                        const o = ctx.createOscillator();
+                        const g = ctx.createGain();
+                        o.type = 'triangle';
+                        o.frequency.setValueAtTime(f, now + i * 0.08);
+                        g.gain.setValueAtTime(0.16, now + i * 0.08);
+                        g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.08 + 0.3);
+                        o.connect(g); g.connect(ctx.destination);
+                        o.start(now + i * 0.08); o.stop(now + i * 0.08 + 0.32);
+                    });
+                } else if (type === 'hint') {
+                    const o = ctx.createOscillator();
+                    const g = ctx.createGain();
+                    o.frequency.setValueAtTime(260, now);
+                    o.frequency.linearRampToValueAtTime(200, now + 0.22);
+                    g.gain.setValueAtTime(0.12, now);
+                    g.gain.exponentialRampToValueAtTime(0.001, now + 0.24);
+                    o.connect(g); g.connect(ctx.destination);
+                    o.start(now); o.stop(now + 0.24);
+                }
+            } catch (err) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = soundEnabled ? '🔊' : '🔇';
+            document.getElementById('soundBtnDesktop').innerText = icon;
+            document.getElementById('soundBtnMobile').innerText = icon;
+            if (soundEnabled) sfx('click');
+        }
+
+        /* ---------------- 2. KONFETİ & PUAN SİSTEMİ ---------------- */
+        const confCanvas = document.getElementById('confettiCanvas');
+        const confCtx = confCanvas.getContext('2d');
+        let confettiList = [];
+        let confettiAnimId = null;
+        let confettiTimeoutId = null;
+
+        function clearConfetti() {
+            if (confettiAnimId) {
+                cancelAnimationFrame(confettiAnimId);
+                confettiAnimId = null;
+            }
+            if (confettiTimeoutId) {
+                clearTimeout(confettiTimeoutId);
+                confettiTimeoutId = null;
+            }
+            confettiList = [];
+            confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+        }
+
+        function launchConfetti() {
+            clearConfetti();
+            confCanvas.width = window.innerWidth;
+            confCanvas.height = window.innerHeight;
+            const colors = ['#f59e0b', '#10b981', '#0ea5e9', '#f43f5e', '#a855f7'];
+            const startTime = performance.now();
+            for (let i = 0; i < 65; i++) {
+                confettiList.push({
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2,
+                    vx: (Math.random() - 0.5) * 15,
+                    vy: (Math.random() - 0.8) * 15,
+                    s: Math.random() * 8 + 5,
+                    c: colors[Math.floor(Math.random() * colors.length)],
+                    alpha: 1,
+                    born: startTime
+                });
+            }
+            confettiAnimId = requestAnimationFrame(stepConfetti);
+            confettiTimeoutId = setTimeout(clearConfetti, 2200);
+        }
+
+        function stepConfetti(now) {
+            confCtx.clearRect(0, 0, confCanvas.width, confCanvas.height);
+            confettiList.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.35;
+                const elapsed = now - p.born;
+                if (elapsed > 1400) {
+                    p.alpha = Math.max(0, 1 - (elapsed - 1400) / 800);
+                }
+                confCtx.save();
+                confCtx.globalAlpha = p.alpha;
+                confCtx.fillStyle = p.c;
+                confCtx.fillRect(p.x, p.y, p.s, p.s);
+                confCtx.restore();
+            });
+            confettiList = confettiList.filter(p => p.alpha > 0.02 && p.y < confCanvas.height + 40);
+            if (confettiList.length > 0) {
+                confettiAnimId = requestAnimationFrame(stepConfetti);
+            } else {
+                clearConfetti();
+            }
+        }
+
+        let totalStars = 0;
+        function addStars(pts) {
+            totalStars += pts;
+            document.getElementById('desktopScore').innerText = totalStars;
+            document.getElementById('mobileScore').innerText = totalStars;
+            const r = document.getElementById('rankTitle');
+            if (totalStars >= 300) r.innerText = 'Baş Mimar & Simyacı 👑';
+            else if (totalStars >= 150) r.innerText = 'Kıdemli Mühendis 🚀';
+            else if (totalStars >= 50) r.innerText = 'Usta Analist ⭐';
+        }
+
+        function showFeedback(isSuccess, title, htmlMsg, nextCallback) {
+            const ov = document.getElementById('feedbackOverlay');
+            const box = document.getElementById('fbIconBox');
+            document.getElementById('fbTitle').innerText = title;
+            document.getElementById('fbMessage').innerHTML = htmlMsg;
+
+            if (isSuccess) {
+                box.innerText = '🏆';
+                box.className = "w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl mb-3 bg-emerald-500/20 border border-emerald-400/40";
+                sfx('win');
+                launchConfetti();
+            } else {
+                box.innerText = '🧭';
+                box.className = "w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl mb-3 bg-amber-500/20 border border-amber-400/40";
+                sfx('hint');
+            }
+            ov.dataset.nextAction = nextCallback || '';
+            ov.classList.remove('hidden');
+            ov.classList.add('flex');
+        }
+
+        function closeFeedbackOverlay() {
+            sfx('click');
+            clearConfetti();
+            const ov = document.getElementById('feedbackOverlay');
+            ov.classList.add('hidden');
+            ov.classList.remove('flex');
+            const act = ov.dataset.nextAction;
+            if (act === 'nextGeo') newGeoMission();
+            else if (act === 'nextCargo') generateCargoMission();
+            else if (act === 'nextCarpet') generateCarpetOrder();
+            else if (act === 'nextPotion') generatePotionRecipe();
+        }
+
+        /* ---------------- 3. TEMA SEKME YÖNETİCİSİ ---------------- */
+        let activeTheme = 1;
+        function switchTheme(num) {
+            sfx('click');
+            clearConfetti();
+            activeTheme = num;
+            const s1 = document.getElementById('theme1Section');
+            const s2 = document.getElementById('theme2Section');
+            const s3 = document.getElementById('theme3Section');
+            const t1 = document.getElementById('tabTheme1');
+            const t2 = document.getElementById('tabTheme2');
+            const t3 = document.getElementById('tabTheme3');
+            const codeEl = document.getElementById('activeCurriculumCode');
+
+            [s1, s2, s3].forEach(s => { s.classList.add('hidden'); s.classList.remove('flex'); });
+            [t1, t2, t3].forEach(t => {
+                t.className = "tactile-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-slate-800 text-slate-200 hover:bg-slate-700";
+            });
+
+            if (num === 1) {
+                s1.classList.remove('hidden'); s1.classList.add('flex');
+                t1.className = "tactile-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-sky-400 text-slate-950";
+                codeEl.innerText = "📐 MAT.5.3.1 & 5.3.4 • Geometrik Şekiller (Sanal İletki & Lazer Aynaları)";
+                requestAnimationFrame(resizeGeoCanvas);
+            } else if (num === 2) {
+                s2.classList.remove('hidden'); s2.classList.add('flex');
+                t2.className = "tactile-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-amber-400 text-slate-950";
+                codeEl.innerText = "🚢 MAT.5.1.1 • Çok Basamaklı Sayılar, Bölükler ve Basamak Röntgeni";
+            } else {
+                s3.classList.remove('hidden'); s3.classList.add('flex');
+                t3.className = "tactile-btn flex-1 sm:flex-initial px-4 py-2.5 rounded-xl font-display font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-emerald-400 text-slate-950";
+                codeEl.innerText = "🧪 MAT.5.4.1 & 5.1.2 • Dikdörtgen Çevre/Alan ve Kesir Laboratuvarı";
+                requestAnimationFrame(() => { resizeCarpetCanvas(); resizePotionCanvas(); });
+            }
+        }
+
+        /* ===================================================================== */
+        /* TEMA 1: SANAL İLETKİ (AÇIÖLÇER) VE LAZER AYNASI MOTORU                */
+        /* ===================================================================== */
+        const geoCanvas = document.getElementById('geoCanvas');
+        const geoCtx = geoCanvas.getContext('2d');
+
+        const geoState = {
+            subMode: 'protractor',
+            vertex: { x: 260, y: 270 },
+            baseRayAngle: 0,
+            targetDegree: 60,
+            userDegree: 50,
+            userType: '',
+            showDiffArc: false,
+            radarPulse: 0,
+            protractor: {
+                x: 420,
+                y: 190,
+                rot: -0.2,
+                radius: 150,
+                draggingBody: false,
+                draggingHandle: false,
+                dragOffsetX: 0,
+                dragOffsetY: 0,
+                snapped: false
+            },
+            laser: {
+                mode: 'tumler',
+                givenAngle: 35,
+                missingAngle: 55,
+                selectedChoice: null
+            }
+        };
+
+        function resizeGeoCanvas() {
+            const box = document.getElementById('geoCanvasContainer');
+            const w = box.clientWidth || 680;
+            const h = box.clientHeight || 380;
+            geoCanvas.width = w;
+            geoCanvas.height = h;
+            geoState.vertex.x = w * 0.36;
+            geoState.vertex.y = h * 0.74;
+            geoState.protractor.radius = Math.min(160, w * 0.27);
+            if (geoState.protractor.snapped) {
+                geoState.protractor.x = geoState.vertex.x;
+                geoState.protractor.y = geoState.vertex.y;
+            }
+            drawGeoScene();
+        }
+
+        function switchGeoSubMode(sub) {
+            sfx('click');
+            clearConfetti();
+            geoState.subMode = sub;
+            const bA = document.getElementById('btnGeoSubA');
+            const bB = document.getElementById('btnGeoSubB');
+            const pA = document.getElementById('geoPanelProtractor');
+            const pB = document.getElementById('geoPanelLaser');
+            const tools = document.getElementById('protractorQuickTools');
+            const title = document.getElementById('geoMissionTitle');
+
+            if (sub === 'protractor') {
+                bA.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-amber-400 text-slate-950";
+                bB.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-slate-800 text-slate-200 hover:bg-slate-700";
+                pA.classList.remove('hidden'); pA.classList.add('flex');
+                pB.classList.add('hidden'); pB.classList.remove('flex');
+                tools.classList.remove('hidden');
+                title.innerText = "Sanal İletkiyi (Açıölçeri) sürükleyip K köşesine oturt ve uydu sinyal açısını ölç!";
+            } else {
+                bB.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-amber-400 text-slate-950";
+                bA.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-slate-800 text-slate-200 hover:bg-slate-700";
+                pB.classList.remove('hidden'); pB.classList.add('flex');
+                pA.classList.add('hidden'); pA.classList.remove('flex');
+                tools.classList.add('hidden');
+                title.innerText = "Tümler (90°) ve Bütünler (180°) lazer aynasında eksik açıyı bularak enerji kristalini şarj et!";
+            }
+            newGeoMission();
+        }
+
+        function newGeoMission() {
+            clearConfetti();
+            geoState.showDiffArc = false;
+            geoState.userType = '';
+            document.querySelectorAll('.angle-type-btn').forEach(b => {
+                b.className = "angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200";
+            });
+
+            if (geoState.subMode === 'protractor') {
+                const angles = [30, 35, 45, 50, 60, 70, 75, 90, 110, 120, 135, 150, 180];
+                geoState.targetDegree = angles[Math.floor(Math.random() * angles.length)];
+                const baseList = [0, -10, 10, -15];
+                geoState.baseRayAngle = (baseList[Math.floor(Math.random() * baseList.length)] * Math.PI) / 180;
+
+                geoState.protractor.x = (geoCanvas.width || 680) * 0.68;
+                geoState.protractor.y = (geoCanvas.height || 380) * 0.44;
+                geoState.protractor.rot = 0.18;
+                geoState.protractor.snapped = false;
+                updateSnapBadge();
+            } else {
+                geoState.laser.mode = Math.random() > 0.5 ? 'tumler' : 'butunler';
+                if (geoState.laser.mode === 'tumler') {
+                    geoState.laser.givenAngle = Math.floor(Math.random() * 13 + 3) * 5;
+                    geoState.laser.missingAngle = 90 - geoState.laser.givenAngle;
+                    document.getElementById('laserScenarioDesc').innerHTML = `Bu düzenek <b class="text-emerald-400">DİK AÇI (90° - Tümler Açılar)</b> aynasıdır. Gelen lazer <b>${geoState.laser.givenAngle}°</b> olduğuna göre, toplamın 90° olması için komşu tümler açı kaç derecedir?`;
+                } else {
+                    geoState.laser.givenAngle = Math.floor(Math.random() * 22 + 6) * 5;
+                    geoState.laser.missingAngle = 180 - geoState.laser.givenAngle;
+                    document.getElementById('laserScenarioDesc').innerHTML = `Bu düzenek <b class="text-amber-400">DOĞRU AÇI (180° - Bütünler Açılar)</b> aynasıdır. Gelen lazer <b>${geoState.laser.givenAngle}°</b> olduğuna göre, toplamın 180° olması için bütünler açı kaç derecedir?`;
+                }
+                geoState.laser.selectedChoice = null;
+                renderLaserChoices();
+            }
+            drawGeoScene();
+        }
+
+        function renderLaserChoices() {
+            const grid = document.getElementById('laserChoicesGrid');
+            grid.innerHTML = '';
+            const c = geoState.laser.missingAngle;
+            const set = new Set([c]);
+            if (geoState.laser.mode === 'tumler') set.add(180 - geoState.laser.givenAngle);
+            else set.add(Math.abs(90 - geoState.laser.givenAngle) || 40);
+            set.add(c + 10);
+            set.add(Math.max(5, c - 10));
+            while (set.size < 4) set.add(c + 15);
+
+            Array.from(set).sort((a, b) => a - b).forEach(val => {
+                const btn = document.createElement('button');
+                btn.className = "tactile-btn py-3 rounded-xl bg-slate-800 border-2 border-slate-700 font-display text-xl font-bold text-white";
+                btn.innerText = val + '°';
+                btn.onclick = () => {
+                    sfx('click');
+                    geoState.laser.selectedChoice = val;
+                    Array.from(grid.children).forEach(el => {
+                        el.className = "tactile-btn py-3 rounded-xl bg-slate-800 border-2 border-slate-700 font-display text-xl font-bold text-white";
+                    });
+                    btn.className = "tactile-btn py-3 rounded-xl bg-amber-500/20 border-2 border-amber-400 font-display text-xl font-bold text-amber-300";
+                    drawGeoScene();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function snapProtractorToVertex() {
+            sfx('snap');
+            geoState.protractor.x = geoState.vertex.x;
+            geoState.protractor.y = geoState.vertex.y;
+            geoState.protractor.snapped = true;
+            updateSnapBadge();
+            drawGeoScene();
+        }
+
+        function alignProtractorBase() {
+            sfx('snap');
+            geoState.protractor.x = geoState.vertex.x;
+            geoState.protractor.y = geoState.vertex.y;
+            geoState.protractor.rot = geoState.baseRayAngle;
+            geoState.protractor.snapped = true;
+            updateSnapBadge();
+            drawGeoScene();
+        }
+
+        function rotateProtractorBy(degDelta) {
+            sfx('click');
+            geoState.protractor.rot += (degDelta * Math.PI) / 180;
+            drawGeoScene();
+        }
+
+        function updateSnapBadge() {
+            const b = document.getElementById('protractorSnapBadge');
+            if (geoState.protractor.snapped) {
+                b.className = "text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 shrink-0";
+                b.innerText = "✓ Köşeye Hizalandı";
+            } else {
+                b.className = "text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-400 shrink-0";
+                b.innerText = "Serbest Konum";
+            }
+        }
+
+        function selectAngleType(t) {
+            sfx('click');
+            geoState.userType = t;
+            document.querySelectorAll('.angle-type-btn').forEach(b => {
+                b.className = "angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200";
+            });
+            document.getElementById('typeBtn_' + t).className = "angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-amber-500/20 border-2 border-amber-400 text-xs sm:text-sm font-bold text-amber-300";
+        }
+
+        function adjustUserAngle(d) {
+            sfx('click');
+            const v = Math.min(180, Math.max(10, geoState.userDegree + d));
+            geoState.userDegree = v;
+            document.getElementById('userAngleReadout').innerText = v + '°';
+            document.getElementById('angleRangeSlider').value = v;
+            drawGeoScene();
+        }
+
+        function syncAngleSlider(val) {
+            geoState.userDegree = parseInt(val, 10);
+            document.getElementById('userAngleReadout').innerText = val + '°';
+            drawGeoScene();
+        }
+
+        function fireRadarSignal() {
+            const target = geoState.targetDegree;
+            const user = geoState.userDegree;
+            const reqType = target < 90 ? 'dar' : (target === 90 ? 'dik' : (target < 180 ? 'genis' : 'dogru'));
+
+            if (!geoState.userType) {
+                showFeedback(false, "Açı Türünü Seçmelisin!", "Önce 1. Adımdan bu açının <b>Dar, Dik, Geniş veya Doğru Açı</b> olduğunu işaretle.");
+                return;
+            }
+            if (geoState.userType !== reqType) {
+                const map = { dar: 'Dar Açı (<90°)', dik: 'Dik Açı (90°)', genis: 'Geniş Açı (90°-180°)', dogru: 'Doğru Açı (180°)' };
+                showFeedback(false, "Açı Türüne Dikkat!", `Bu açının ölçüsü <b>${target}°</b> olduğu için bir <b>${map[reqType]}</b> olmalıdır.`);
+                return;
+            }
+            if (Math.abs(target - user) <= 3) {
+                addStars(50);
+                showFeedback(true, "Uydu Sinyali Kilitlendi! 🛰️", `Tebrikler! Sanal iletkiyle <b>${target}°</b> açıyı ve açı türünü hatasız ölçtün.`, 'nextGeo');
+            } else {
+                geoState.showDiffArc = true;
+                drawGeoScene();
+                showFeedback(false, "İletki Hizasını Kontrol Et!", `Girdiğin açı: <b>${user}°</b>. Üstteki <b>'Köşeye Oturt'</b> ve <b>'0° Çizgisini Hizala'</b> butonlarına basarak yeşil uydu ışınının kaç dereceden geçtiğini tekrar oku!`);
+            }
+        }
+
+        function fireLaserBeam() {
+            if (geoState.laser.selectedChoice === null) {
+                showFeedback(false, "Açı Seçilmedi!", "Lütfen sağdaki seçeneklerden eksik açıyı seçip lazeri ateşle!");
+                return;
+            }
+            const total = geoState.laser.mode === 'tumler' ? 90 : 180;
+            if (geoState.laser.selectedChoice === geoState.laser.missingAngle) {
+                addStars(50);
+                showFeedback(true, "Enerji Kristali Şarj Oldu! ⚡", `Harika! ${geoState.laser.givenAngle}° + <b>${geoState.laser.missingAngle}°</b> = <b>${total}°</b> bağıntısıyla hedefi tam on ikiden vurdun!`, 'nextGeo');
+            } else {
+                showFeedback(false, "Lazer Hedefi Iskaladı!", `Seçtiğin açı ile toplam: ${geoState.laser.givenAngle}° + ${geoState.laser.selectedChoice}° = <b>${geoState.laser.givenAngle + geoState.laser.selectedChoice}°</b> oldu. Oysa toplam <b>${total}°</b> olmalıdır!`);
+            }
+        }
+
+        function drawGeoScene() {
+            const w = geoCanvas.width;
+            const h = geoCanvas.height;
+            if (!w || !h) return;
+            geoCtx.clearRect(0, 0, w, h);
+
+            // Radar Kılavuz Izgarası
+            geoCtx.strokeStyle = 'rgba(56, 189, 248, 0.07)';
+            geoCtx.lineWidth = 1;
+            for (let x = 0; x < w; x += 32) {
+                geoCtx.beginPath(); geoCtx.moveTo(x, 0); geoCtx.lineTo(x, h); geoCtx.stroke();
+            }
+            for (let y = 0; y < h; y += 32) {
+                geoCtx.beginPath(); geoCtx.moveTo(0, y); geoCtx.lineTo(w, y); geoCtx.stroke();
+            }
+
+            if (geoState.subMode === 'protractor') {
+                const vx = geoState.vertex.x;
+                const vy = geoState.vertex.y;
+                const rayLen = Math.min(w, h) * 0.56;
+                const a1 = geoState.baseRayAngle;
+                const a2 = a1 - (geoState.targetDegree * Math.PI) / 180;
+
+                // Açı Dolgusu
+                geoCtx.beginPath();
+                geoCtx.moveTo(vx, vy);
+                geoCtx.arc(vx, vy, 50, a1, a2, true);
+                geoCtx.closePath();
+                geoCtx.fillStyle = 'rgba(16, 185, 129, 0.22)';
+                geoCtx.fill();
+
+                if (geoState.showDiffArc) {
+                    const uRad = a1 - (geoState.userDegree * Math.PI) / 180;
+                    geoCtx.save();
+                    geoCtx.beginPath();
+                    geoCtx.moveTo(vx, vy);
+                    geoCtx.lineTo(vx + Math.cos(uRad) * rayLen, vy + Math.sin(uRad) * rayLen);
+                    geoCtx.setLineDash([6, 5]);
+                    geoCtx.strokeStyle = '#f43f5e';
+                    geoCtx.lineWidth = 3;
+                    geoCtx.stroke();
+                    geoCtx.restore();
+                }
+
+                // Mavi Baz Işını (KL)
+                const x1 = vx + Math.cos(a1) * rayLen;
+                const y1 = vy + Math.sin(a1) * rayLen;
+                geoCtx.beginPath();
+                geoCtx.moveTo(vx, vy);
+                geoCtx.lineTo(x1, y1);
+                geoCtx.strokeStyle = '#38bdf8';
+                geoCtx.lineWidth = 5;
+                geoCtx.stroke();
+
+                // Yeşil Hedef Işını (KM)
+                const x2 = vx + Math.cos(a2) * rayLen;
+                const y2 = vy + Math.sin(a2) * rayLen;
+                geoCtx.beginPath();
+                geoCtx.moveTo(vx, vy);
+                geoCtx.lineTo(x2, y2);
+                geoCtx.strokeStyle = '#10b981';
+                geoCtx.lineWidth = 5;
+                geoCtx.stroke();
+
+                // Uydu Hedefi
+                geoCtx.beginPath();
+                geoCtx.arc(x2, y2, 11, 0, Math.PI * 2);
+                geoCtx.fillStyle = '#10b981';
+                geoCtx.fill();
+                geoCtx.fillStyle = '#ffffff';
+                geoCtx.font = 'bold 13px Nunito';
+                geoCtx.fillText('🛰️ Uydu M', x2 + 15, y2 + 4);
+                geoCtx.fillStyle = '#38bdf8';
+                geoCtx.fillText('Işın L (0°)', x1 - 30, y1 + 22);
+
+                // Köşe K
+                geoCtx.beginPath();
+                geoCtx.arc(vx, vy, 9, 0, Math.PI * 2);
+                geoCtx.fillStyle = '#f59e0b';
+                geoCtx.fill();
+                geoCtx.fillStyle = '#fde68a';
+                geoCtx.font = 'bold 14px Fredoka';
+                geoCtx.fillText('Köşe K', vx - 24, vy + 25);
+
+                // Sanal İletki Çizimi
+                drawVirtualProtractor();
+            } else {
+                // Lazer Aynası Sahnesi
+                const cx = w * 0.5;
+                const cy = h * 0.74;
+                const rLen = Math.min(w, h) * 0.52;
+
+                geoCtx.beginPath();
+                geoCtx.moveTo(cx - rLen, cy);
+                geoCtx.lineTo(cx + rLen, cy);
+                geoCtx.strokeStyle = '#64748b';
+                geoCtx.lineWidth = 6;
+                geoCtx.stroke();
+
+                if (geoState.laser.mode === 'tumler') {
+                    geoCtx.beginPath();
+                    geoCtx.moveTo(cx, cy);
+                    geoCtx.lineTo(cx, cy - rLen);
+                    geoCtx.strokeStyle = '#64748b';
+                    geoCtx.lineWidth = 6;
+                    geoCtx.stroke();
+                    geoCtx.strokeStyle = '#10b981';
+                    geoCtx.lineWidth = 2;
+                    geoCtx.strokeRect(cx, cy - 24, 24, 24);
+                }
+
+                const gRad = (-geoState.laser.givenAngle * Math.PI) / 180;
+                const gx = cx + Math.cos(gRad) * rLen;
+                const gy = cy + Math.sin(gRad) * rLen;
+
+                geoCtx.beginPath();
+                geoCtx.moveTo(cx, cy);
+                geoCtx.lineTo(gx, gy);
+                geoCtx.strokeStyle = '#f43f5e';
+                geoCtx.lineWidth = 5;
+                geoCtx.stroke();
+
+                geoCtx.fillStyle = '#fda4af';
+                geoCtx.font = 'bold 16px Fredoka';
+                geoCtx.fillText(geoState.laser.givenAngle + '°', cx + 58, cy - 16);
+
+                const endRad = geoState.laser.mode === 'tumler' ? -Math.PI / 2 : -Math.PI;
+                geoCtx.beginPath();
+                geoCtx.arc(cx, cy, 62, gRad, endRad, true);
+                geoCtx.strokeStyle = '#f59e0b';
+                geoCtx.setLineDash([5, 4]);
+                geoCtx.lineWidth = 3;
+                geoCtx.stroke();
+                geoCtx.setLineDash([]);
+
+                const mid = (gRad + endRad) / 2;
+                geoCtx.fillStyle = '#fcd34d';
+                geoCtx.font = 'bold 18px Fredoka';
+                const txt = geoState.laser.selectedChoice ? (geoState.laser.selectedChoice + '°') : '?°';
+                geoCtx.fillText(txt, cx + Math.cos(mid) * 88 - 14, cy + Math.sin(mid) * 88);
+
+                geoCtx.beginPath();
+                geoCtx.arc(cx, cy, 9, 0, Math.PI * 2);
+                geoCtx.fillStyle = '#38bdf8';
+                geoCtx.fill();
+            }
+        }
+
+        function drawVirtualProtractor() {
+            const p = geoState.protractor;
+            const R = p.radius;
+            geoCtx.save();
+            geoCtx.translate(p.x, p.y);
+            geoCtx.rotate(p.rot);
+
+            geoCtx.beginPath();
+            geoCtx.arc(0, 0, R, Math.PI, 0, false);
+            geoCtx.closePath();
+            geoCtx.fillStyle = p.snapped ? 'rgba(14, 165, 233, 0.22)' : 'rgba(248, 250, 252, 0.16)';
+            geoCtx.fill();
+            geoCtx.lineWidth = 3;
+            geoCtx.strokeStyle = p.snapped ? '#38bdf8' : '#94a3b8';
+            geoCtx.stroke();
+
+            for (let deg = 0; deg <= 180; deg += 5) {
+                const rad = (-deg * Math.PI) / 180;
+                const major = deg % 10 === 0;
+                const inner = major ? R - 18 : R - 10;
+                geoCtx.beginPath();
+                geoCtx.moveTo(Math.cos(rad) * inner, Math.sin(rad) * inner);
+                geoCtx.lineTo(Math.cos(rad) * R, Math.sin(rad) * R);
+                geoCtx.strokeStyle = deg === 90 ? '#f59e0b' : (major ? '#f8fafc' : '#94a3b8');
+                geoCtx.lineWidth = major ? 2 : 1;
+                geoCtx.stroke();
+
+                if (deg % 20 === 0 || deg === 90) {
+                    const tx = Math.cos(rad) * (R - 30);
+                    const ty = Math.sin(rad) * (R - 30);
+                    geoCtx.fillStyle = deg === 90 ? '#fbbf24' : '#f8fafc';
+                    geoCtx.font = 'bold 11px Nunito';
+                    geoCtx.textAlign = 'center';
+                    geoCtx.textBaseline = 'middle';
+                    geoCtx.fillText(String(deg), tx, ty);
+                }
+            }
+
+            // Merkez Noktası
+            geoCtx.beginPath();
+            geoCtx.arc(0, 0, 7, 0, Math.PI * 2);
+            geoCtx.strokeStyle = '#f59e0b';
+            geoCtx.lineWidth = 2.5;
+            geoCtx.stroke();
+
+            // Sağ Döndürme Tutamacı
+            const hx = R + 22;
+            geoCtx.beginPath();
+            geoCtx.moveTo(R, 0);
+            geoCtx.lineTo(hx, 0);
+            geoCtx.strokeStyle = '#f59e0b';
+            geoCtx.lineWidth = 3;
+            geoCtx.stroke();
+
+            geoCtx.beginPath();
+            geoCtx.arc(hx, 0, 14, 0, Math.PI * 2);
+            geoCtx.fillStyle = '#f59e0b';
+            geoCtx.fill();
+            geoCtx.fillStyle = '#0f172a';
+            geoCtx.font = 'bold 12px Nunito';
+            geoCtx.textAlign = 'center';
+            geoCtx.textBaseline = 'middle';
+            geoCtx.fillText('↻', hx, 0);
+
+            geoCtx.restore();
+        }
+
+        function getLocalPt(canvas, e) {
+            const r = canvas.getBoundingClientRect();
+            const cx = e.touches ? e.touches[0].clientX : e.clientX;
+            const cy = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: cx - r.left, y: cy - r.top };
+        }
+
+        geoCanvas.addEventListener('pointerdown', (e) => {
+            if (geoState.subMode !== 'protractor') return;
+            const pt = getLocalPt(geoCanvas, e);
+            const p = geoState.protractor;
+            const hx = p.x + Math.cos(p.rot) * (p.radius + 22);
+            const hy = p.y + Math.sin(p.rot) * (p.radius + 22);
+
+            if (Math.hypot(pt.x - hx, pt.y - hy) < 28) {
+                p.draggingHandle = true;
+                return;
+            }
+            if (Math.hypot(pt.x - p.x, pt.y - p.y) < p.radius) {
+                p.draggingBody = true;
+                p.dragOffsetX = pt.x - p.x;
+                p.dragOffsetY = pt.y - p.y;
+            }
+        });
+
+        geoCanvas.addEventListener('pointermove', (e) => {
+            const p = geoState.protractor;
+            if (!p.draggingBody && !p.draggingHandle) return;
+            const pt = getLocalPt(geoCanvas, e);
+            if (p.draggingHandle) {
+                p.rot = Math.atan2(pt.y - p.y, pt.x - p.x);
+                if (Math.abs(p.rot - geoState.baseRayAngle) < 0.08) p.rot = geoState.baseRayAngle;
+                drawGeoScene();
+            } else if (p.draggingBody) {
+                p.x = pt.x - p.dragOffsetX;
+                p.y = pt.y - p.dragOffsetY;
+                if (Math.hypot(p.x - geoState.vertex.x, p.y - geoState.vertex.y) < 26) {
+                    p.x = geoState.vertex.x;
+                    p.y = geoState.vertex.y;
+                    if (!p.snapped) sfx('snap');
+                    p.snapped = true;
+                } else {
+                    p.snapped = false;
+                }
+                updateSnapBadge();
+                drawGeoScene();
+            }
+        });
+
+        window.addEventListener('pointerup', () => {
+            geoState.protractor.draggingBody = false;
+            geoState.protractor.draggingHandle = false;
+        });
+
+        /* ===================================================================== */
+        /* TEMA 2: HABER MERKEZİ & LOJİSTİK KONTEYNER VİNCİ MOTORU               */
+        /* ===================================================================== */
+        const cargoMissions = [
+            {
+                context: "Ulaştırma Bakanlığı • Yıllık Yolcu Raporu",
+                millions: "840", thousands: "305", ones: "012",
+                distractors: ["084", "350", "120"],
+                askPlaceIdx: 7
+            },
+            {
+                context: "Uzay Ajansı • Uydu Mesafe Telemetrisi (km)",
+                millions: "602", thousands: "040", ones: "700",
+                distractors: ["620", "400", "007"],
+                askPlaceIdx: 8
+            },
+            {
+                context: "Merkez Bankası • Dijital İşlem Hacmi",
+                millions: "075", thousands: "809", ones: "004",
+                distractors: ["750", "890", "400"],
+                askPlaceIdx: 4
+            },
+            {
+                context: "Tarım Bakanlığı • Tohum Üretim Envanteri",
+                millions: "910", thousands: "006", ones: "085",
+                distractors: ["190", "060", "850"],
+                askPlaceIdx: 6
+            }
+        ];
+
+        const cargoState = {
+            current: null,
+            selectedSlot: 'millions',
+            placed: { millions: null, thousands: null, ones: null }
+        };
+
+        const PLACE_NAMES = [
+            "Birler Basamağı", "Onlar Basamağı", "Yüzler Basamağı",
+            "Binler Basamağı", "On Binler Basamağı", "Yüz Binler Basamağı",
+            "Milyonlar Basamağı", "On Milyonlar Basamağı", "Yüz Milyonlar Basamağı"
+        ];
+
+        function tripletToWords(str) {
+            const n = parseInt(str, 10);
+            if (n === 0) return "";
+            const b = ["", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"];
+            const o = ["", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"];
+            const h = Math.floor(n / 100);
+            const t = Math.floor((n % 100) / 10);
+            const u = n % 10;
+            let s = "";
+            if (h === 1) s += "yüz ";
+            else if (h > 1) s += b[h] + " yüz ";
+            if (t > 0) s += o[t] + " ";
+            if (u > 0) s += b[u] + " ";
+            return s.trim();
+        }
+
+        function generateCargoMission() {
+            clearConfetti();
+            const m = cargoMissions[Math.floor(Math.random() * cargoMissions.length)];
+            cargoState.current = m;
+            cargoState.placed = { millions: null, thousands: null, ones: null };
+
+            const wM = tripletToWords(m.millions);
+            const wT = tripletToWords(m.thousands);
+            const wO = tripletToWords(m.ones);
+            const spoken = `${wM ? wM + ' milyon ' : ''}${wT ? wT + ' bin ' : ''}${wO}`.trim();
+
+            document.getElementById('cargoScenarioContext').innerText = m.context;
+            document.getElementById('cargoSpokenNumber').innerText = `"${spoken.charAt(0).toUpperCase() + spoken.slice(1)}"`;
+
+            ['millions', 'thousands', 'ones'].forEach(k => {
+                document.getElementById('slotVal_' + k).innerText = '???';
+            });
+            selectPeriodSlot('millions');
+
+            const pool = [m.millions, m.thousands, m.ones, ...m.distractors].sort(() => Math.random() - 0.5);
+            const poolEl = document.getElementById('cargoContainersPool');
+            poolEl.innerHTML = '';
+            pool.forEach(code => {
+                const btn = document.createElement('button');
+                btn.className = "tactile-btn py-3 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border-2 border-slate-600 hover:border-amber-400 font-display text-xl font-black text-white flex flex-col items-center";
+                btn.innerHTML = `<span class="text-[9px] text-slate-400 font-sans">KONTEYNER</span><span>${code}</span>`;
+                btn.onclick = () => {
+                    sfx('snap');
+                    const sl = cargoState.selectedSlot;
+                    cargoState.placed[sl] = code;
+                    document.getElementById('slotVal_' + sl).innerText = code;
+                    if (sl === 'millions' && !cargoState.placed.thousands) selectPeriodSlot('thousands');
+                    else if (sl === 'thousands' && !cargoState.placed.ones) selectPeriodSlot('ones');
+                };
+                poolEl.appendChild(btn);
+            });
+
+            const fullStr = m.millions + m.thousands + m.ones;
+            renderXrayRow(fullStr);
+            renderVaultQuestion(fullStr, m.askPlaceIdx);
+        }
+
+        function selectPeriodSlot(slot) {
+            cargoState.selectedSlot = slot;
+            ['millions', 'thousands', 'ones'].forEach(s => {
+                document.getElementById('slot_' + s).classList.remove('active-slot');
+            });
+            document.getElementById('slot_' + slot).classList.add('active-slot');
+            const map = { millions: 'Milyonlar Bölüğü', thousands: 'Binler Bölüğü', ones: 'Birler Bölüğü' };
+            document.getElementById('selectedSlotIndicator').innerText = 'Seçili: ' + map[slot];
+        }
+
+        function verifyCargoPeriods() {
+            const c = cargoState.current;
+            const p = cargoState.placed;
+            if (!p.millions || !p.thousands || !p.ones) {
+                showFeedback(false, "Eksik Bölük Var!", "Lütfen Milyonlar, Binler ve Birler bölüğünün tamamına konteyner yerleştirin.");
+                return;
+            }
+            if (p.millions === c.millions && p.thousands === c.thousands && p.ones === c.ones) {
+                addStars(50);
+                showFeedback(true, "Konteynerler Doğru Yüklendi! 🚢", `Harika! <b>${c.millions} • ${c.thousands} • ${c.ones}</b> sayısını yer tutucu sıfırlara dikkat ederek doğru kurdun.`);
+            } else {
+                showFeedback(false, "Yer Tutucu Sıfırlara Dikkat!", `Senin dizilimin: <b>${p.millions} • ${p.thousands} • ${p.ones}</b>.<br>Okunmayan basamaklarda sıfırın yerine dikkat ederek tekrar dene!`);
+            }
+        }
+
+        function renderXrayRow(fullStr) {
+            const row = document.getElementById('xrayDigitsRow');
+            row.innerHTML = '';
+            fullStr.split('').forEach((ch, idx) => {
+                const placeIdx = 8 - idx;
+                const borderCol = idx < 3 ? 'border-amber-400 text-amber-300' : (idx < 6 ? 'border-sky-400 text-sky-300' : 'border-emerald-400 text-emerald-300');
+                const btn = document.createElement('button');
+                btn.className = `tactile-btn py-2.5 rounded-xl bg-slate-900 border-2 ${borderCol} font-display text-xl sm:text-2xl font-black`;
+                btn.innerText = ch;
+                btn.onclick = () => inspectDigitXray(parseInt(ch, 10), placeIdx);
+                row.appendChild(btn);
+            });
+            inspectDigitXray(parseInt(fullStr[0], 10), 8);
+        }
+
+        function inspectDigitXray(digit, placeIdx) {
+            sfx('click');
+            const mult = Math.pow(10, placeIdx);
+            const pv = digit * mult;
+            document.getElementById('xrayPlaceTitle').innerText = `${PLACE_NAMES[placeIdx]} (Sayı Değeri: ${digit})`;
+            document.getElementById('xrayMathFormula').innerHTML = `Basamak Değeri: <span class="text-amber-300">${digit}</span> × ${mult.toLocaleString('tr-TR')} = <span class="text-emerald-400">${pv.toLocaleString('tr-TR')}</span>`;
+        }
+
+        function renderVaultQuestion(fullStr, askPlaceIdx) {
+            const digit = parseInt(fullStr[8 - askPlaceIdx], 10);
+            const correctVal = digit * Math.pow(10, askPlaceIdx);
+            document.getElementById('vaultQuestionText').innerHTML = `Bu sayıdaki <b class="text-amber-300 underline">${PLACE_NAMES[askPlaceIdx]}</b>ndaki rakamın <b>basamak değeri</b> kaçtır?`;
+
+            const opts = new Set([correctVal, digit, digit * Math.pow(10, Math.max(1, askPlaceIdx - 1)), digit * Math.pow(10, Math.min(8, askPlaceIdx + 1))]);
+            while (opts.size < 4) opts.add((digit + 1) * Math.pow(10, askPlaceIdx));
+
+            const grid = document.getElementById('vaultOptionsGrid');
+            grid.innerHTML = '';
+            Array.from(opts).sort(() => Math.random() - 0.5).forEach(val => {
+                const b = document.createElement('button');
+                b.className = "tactile-btn py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 font-display font-bold text-xs sm:text-sm text-white";
+                b.innerText = val.toLocaleString('tr-TR');
+                b.onclick = () => {
+                    if (val === correctVal) {
+                        addStars(40);
+                        showFeedback(true, "Kasa Şifresi Kırıldı! 🔓", `Tebrikler! ${PLACE_NAMES[askPlaceIdx]}ndaki <b>${digit}</b> rakamının basamak değeri <b>${correctVal.toLocaleString('tr-TR')}</b>!`, 'nextCargo');
+                    } else {
+                        showFeedback(false, "Basamak Röntgenini İncele!", `Seçtiğin değer: <b>${val.toLocaleString('tr-TR')}</b>. Üstteki 9 rakamdan ilgili basamağa dokunarak basamak değerini görebilirsin!`);
+                    }
+                };
+                grid.appendChild(b);
+            });
+        }
+
+        /* ===================================================================== */
+        /* TEMA 3A: HALI & BAHÇE USTASI (ÇEVRE VE ALAN SİMÜLASYONU)              */
+        /* ===================================================================== */
+        const carpetCanvas = document.getElementById('carpetCanvas');
+        const carpetCtx = carpetCanvas.getContext('2d');
+
+        const carpetState = {
+            wMeters: 6,
+            hMeters: 4,
+            orderType: 'perimeter',
+            unitPrice: 10,
+            userModeChoice: 'perimeter',
+            showSidesRuler: false,
+            showPerimeterGlow: false,
+            showAreaTiles: false,
+            tape: { active: false, x1: 0, y1: 0, x2: 0, y2: 0 }
+        };
+
+        function switchTheme3Sub(sub) {
+            sfx('click');
+            clearConfetti();
+            const bA = document.getElementById('btnT3SubA');
+            const bB = document.getElementById('btnT3SubB');
+            const gA = document.getElementById('subGameCarpet');
+            const gB = document.getElementById('subGamePotion');
+
+            if (sub === 'carpet') {
+                bA.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-emerald-400 text-slate-950";
+                bB.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-slate-800 text-slate-200 hover:bg-slate-700";
+                gA.classList.remove('hidden'); gA.classList.add('grid');
+                gB.classList.add('hidden'); gB.classList.remove('grid');
+                requestAnimationFrame(resizeCarpetCanvas);
+            } else {
+                bB.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-emerald-400 text-slate-950";
+                bA.className = "tactile-btn px-3.5 py-2 rounded-xl font-display font-bold text-xs sm:text-sm bg-slate-800 text-slate-200 hover:bg-slate-700";
+                gB.classList.remove('hidden'); gB.classList.add('grid');
+                gA.classList.add('hidden'); gA.classList.remove('grid');
+                requestAnimationFrame(resizePotionCanvas);
+            }
+        }
+
+        function resizeCarpetCanvas() {
+            const box = document.getElementById('carpetCanvasContainer');
+            carpetCanvas.width = box.clientWidth || 680;
+            carpetCanvas.height = box.clientHeight || 380;
+            drawCarpetScene();
+        }
+
+        function generateCarpetOrder() {
+            clearConfetti();
+            carpetState.wMeters = Math.floor(Math.random() * 5) + 4;
+            carpetState.hMeters = Math.floor(Math.random() * 3) + 3;
+            carpetState.orderType = Math.random() > 0.5 ? 'perimeter' : 'area';
+            carpetState.showSidesRuler = false;
+            carpetState.showPerimeterGlow = false;
+            carpetState.showAreaTiles = false;
+
+            const badge = document.getElementById('customerTypeBadge');
+            const desc = document.getElementById('customerOrderDesc');
+            const price = document.getElementById('unitPriceTag');
+
+            if (carpetState.orderType === 'perimeter') {
+                carpetState.unitPrice = 10;
+                badge.innerText = "Overlok / Çit (Çevre)";
+                desc.innerHTML = `"Ustam merhaba! Dikdörtgen halımın <b>etrafına overlok şeridi (ÇEVRE)</b> dikilecek. Kaç metre şerit gider ve ücret ne tutar?"`;
+                price.innerText = "Birim Fiyat: 1 Metre = 10 TL";
+            } else {
+                carpetState.unitPrice = 20;
+                badge.innerText = "Halı Yıkama / Çim (Alan)";
+                desc.innerHTML = `"Ustam merhaba! Dikdörtgen halımın <b>tamamını (iç yüzeyini - ALAN)</b> yıkatmak istiyorum. Kaç metrekaredir (m²) ve ücret ne tutar?"`;
+                price.innerText = "Birim Fiyat: 1 m² = 20 TL";
+            }
+            document.getElementById('measuredStatusText').innerText = "Ölçüm Bekleniyor";
+            drawCarpetScene();
+        }
+
+        function measureCarpetSides() {
+            sfx('snap');
+            carpetState.showSidesRuler = true;
+            document.getElementById('measuredStatusText').innerText = `Uzun Kenar: ${carpetState.wMeters} m | Kısa Kenar: ${carpetState.hMeters} m`;
+            drawCarpetScene();
+        }
+
+        function animateCarpetPerimeter() {
+            sfx('snap');
+            carpetState.showSidesRuler = true;
+            carpetState.showPerimeterGlow = true;
+            carpetState.showAreaTiles = false;
+            const p = 2 * (carpetState.wMeters + carpetState.hMeters);
+            document.getElementById('measuredStatusText').innerText = `Çevre = 2 × (${carpetState.wMeters} + ${carpetState.hMeters}) = ${p} m`;
+            drawCarpetScene();
+        }
+
+        function animateCarpetArea() {
+            sfx('pour');
+            carpetState.showSidesRuler = true;
+            carpetState.showAreaTiles = true;
+            carpetState.showPerimeterGlow = false;
+            const a = carpetState.wMeters * carpetState.hMeters;
+            document.getElementById('measuredStatusText').innerText = `Alan = ${carpetState.wMeters} × ${carpetState.hMeters} = ${a} m²`;
+            drawCarpetScene();
+        }
+
+        function setCarpetCalcChoice(m) {
+            sfx('click');
+            carpetState.userModeChoice = m;
+            document.getElementById('calcMode_perim').className = m === 'perimeter'
+                ? "tactile-btn py-2 rounded-xl bg-amber-400 text-slate-950 font-display font-bold text-xs"
+                : "tactile-btn py-2 rounded-xl bg-slate-800 text-slate-300 font-display font-bold text-xs";
+            document.getElementById('calcMode_area').className = m === 'area'
+                ? "tactile-btn py-2 rounded-xl bg-emerald-400 text-slate-950 font-display font-bold text-xs"
+                : "tactile-btn py-2 rounded-xl bg-slate-800 text-slate-300 font-display font-bold text-xs";
+        }
+
+        function stepCarpetAmount(d) {
+            sfx('click');
+            const el = document.getElementById('inputCarpetMeasure');
+            el.value = Math.max(1, parseInt(el.value || 0, 10) + d);
+        }
+
+        function stepCarpetCost(d) {
+            sfx('click');
+            const el = document.getElementById('inputCarpetCost');
+            el.value = Math.max(10, parseInt(el.value || 0, 10) + d);
+        }
+
+        function submitCarpetOrder() {
+            const w = carpetState.wMeters;
+            const h = carpetState.hMeters;
+            const trueM = carpetState.orderType === 'perimeter' ? 2 * (w + h) : (w * h);
+            const trueC = trueM * carpetState.unitPrice;
+            const uM = parseInt(document.getElementById('inputCarpetMeasure').value, 10);
+            const uC = parseInt(document.getElementById('inputCarpetCost').value, 10);
+
+            if (carpetState.userModeChoice !== carpetState.orderType) {
+                showFeedback(false, "Çevre mi, Alan mı?", "Müşterinin sipariş fişinde kenar şeridi (Çevre) mi yoksa iç yüzey yıkama (Alan) mı istediğine dikkat et!");
+                return;
+            }
+            if (uM === trueM && uC === trueC) {
+                addStars(60);
+                showFeedback(true, "Sipariş Teslim Edildi! 🧶", `Harika! Kenarları <b>${w} m</b> ve <b>${h} m</b> olan halı için <b>${trueM} ${carpetState.orderType === 'perimeter' ? 'm' : 'm²'}</b> ve <b>${trueC} TL</b> hesabı tam doğru!`, 'nextCarpet');
+            } else {
+                showFeedback(false, "Hesaplamayı Kontrol Et!", `Doğru miktar <b>${trueM}</b> ve toplam tutar <b>${trueC} TL</b> olmalıdır. Üstteki mezura ve birim kare butonlarından yardım alabilirsin!`);
+            }
+        }
+
+        function drawCarpetScene() {
+            const cw = carpetCanvas.width;
+            const ch = carpetCanvas.height;
+            if (!cw || !ch) return;
+            carpetCtx.clearRect(0, 0, cw, ch);
+
+            const cell = Math.min(Math.floor((cw - 110) / carpetState.wMeters), Math.floor((ch - 90) / carpetState.hMeters), 46);
+            const rw = carpetState.wMeters * cell;
+            const rh = carpetState.hMeters * cell;
+            const sx = (cw - rw) / 2;
+            const sy = (ch - rh) / 2;
+
+            carpetCtx.fillStyle = '#1e293b';
+            carpetCtx.fillRect(sx, sy, rw, rh);
+
+            for (let r = 0; r < carpetState.hMeters; r++) {
+                for (let c = 0; c < carpetState.wMeters; c++) {
+                    const x = sx + c * cell;
+                    const y = sy + r * cell;
+                    if (carpetState.showAreaTiles) {
+                        carpetCtx.fillStyle = (r + c) % 2 === 0 ? 'rgba(16, 185, 129, 0.48)' : 'rgba(5, 150, 105, 0.32)';
+                        carpetCtx.fillRect(x + 2, y + 2, cell - 4, cell - 4);
+                        carpetCtx.fillStyle = '#a7f3d0';
+                        carpetCtx.font = 'bold 10px Nunito';
+                        carpetCtx.textAlign = 'center';
+                        carpetCtx.fillText('1m²', x + cell / 2, y + cell / 2 + 3);
+                    }
+                    carpetCtx.strokeStyle = 'rgba(148, 163, 184, 0.25)';
+                    carpetCtx.lineWidth = 1.5;
+                    carpetCtx.strokeRect(x, y, cell, cell);
+                }
+            }
+
+            carpetCtx.strokeStyle = carpetState.showPerimeterGlow ? '#f59e0b' : '#38bdf8';
+            carpetCtx.lineWidth = carpetState.showPerimeterGlow ? 7 : 4;
+            carpetCtx.strokeRect(sx, sy, rw, rh);
+
+            // Mezura Etiketleri
+            carpetCtx.fillStyle = '#fbbf24';
+            carpetCtx.font = 'bold 15px Fredoka';
+            carpetCtx.textAlign = 'center';
+            const topTxt = carpetState.showSidesRuler ? `📏 Uzun Kenar: ${carpetState.wMeters} metre` : `📏 Uzun Kenar: ${carpetState.wMeters} m`;
+            carpetCtx.fillText(topTxt, sx + rw / 2, sy - 14);
+
+            carpetCtx.save();
+            carpetCtx.translate(sx - 16, sy + rh / 2);
+            carpetCtx.rotate(-Math.PI / 2);
+            carpetCtx.fillText(`📏 Kısa Kenar: ${carpetState.hMeters} m`, 0, 0);
+            carpetCtx.restore();
+
+            if (carpetState.tape.active) {
+                const t = carpetState.tape;
+                carpetCtx.beginPath();
+                carpetCtx.moveTo(t.x1, t.y1);
+                carpetCtx.lineTo(t.x2, t.y2);
+                carpetCtx.strokeStyle = '#facc15';
+                carpetCtx.lineWidth = 4;
+                carpetCtx.stroke();
+                const m = Math.round(Math.hypot(t.x2 - t.x1, t.y2 - t.y1) / cell);
+                carpetCtx.fillStyle = '#fef08a';
+                carpetCtx.fillText(m + ' m', (t.x1 + t.x2) / 2, (t.y1 + t.y2) / 2 - 10);
+            }
+        }
+
+        carpetCanvas.addEventListener('pointerdown', (e) => {
+            const pt = getLocalPt(carpetCanvas, e);
+            carpetState.tape = { active: true, x1: pt.x, y1: pt.y, x2: pt.x, y2: pt.y };
+            drawCarpetScene();
+        });
+        carpetCanvas.addEventListener('pointermove', (e) => {
+            if (!carpetState.tape.active) return;
+            const pt = getLocalPt(carpetCanvas, e);
+            carpetState.tape.x2 = pt.x;
+            carpetState.tape.y2 = pt.y;
+            drawCarpetScene();
+        });
+        window.addEventListener('pointerup', () => {
+            if (carpetState.tape.active) {
+                carpetState.tape.active = false;
+                drawCarpetScene();
+            }
+        });
+
+        /* ===================================================================== */
+        /* TEMA 3B: SİMYACI İKSİR LABORATUVARI (KESİRLER VE SAYI DOĞRUSU)        */
+        /* ===================================================================== */
+        const potionCanvas = document.getElementById('potionCanvas');
+        const potionCtx = potionCanvas.getContext('2d');
+
+        const potionState = {
+            targetNumer: 7,
+            targetDenom: 4,
+            selectedCupDenom: 4,
+            pouredCount: 0
+        };
+
+        function resizePotionCanvas() {
+            const box = document.getElementById('potionCanvasContainer');
+            potionCanvas.width = box.clientWidth || 680;
+            potionCanvas.height = box.clientHeight || 380;
+            drawPotionScene();
+        }
+
+        function generatePotionRecipe() {
+            clearConfetti();
+            const denoms = [2, 3, 4, 5, 6];
+            const d = denoms[Math.floor(Math.random() * denoms.length)];
+            // 0 ile 2 tam arasında kesir üret (bazen basit, çoğunlukla bileşik)
+            const n = d + Math.floor(Math.random() * d);
+            potionState.targetDenom = d;
+            potionState.targetNumer = n;
+            potionState.pouredCount = 0;
+
+            const w = Math.floor(n / d);
+            const r = n % d;
+            const asMixed = Math.random() > 0.5 && r !== 0;
+
+            document.getElementById('potionRecipeTitle').innerText = asMixed ? `${w} Tam ${r}/${d} Litre` : `${n} / ${d} Litre`;
+            document.getElementById('potionRecipeHint').innerHTML = asMixed
+                ? `Tam sayılı kesir siparişi! (Bileşik kesir karşılığı: <b>${n}/${d} Litre</b>)`
+                : `Bileşik kesir siparişi! <b>1/${d}</b> birim kesir kabını seçip <b>${n} kez</b> dök.`;
+
+            updatePotionReadout();
+            drawPotionScene();
+        }
+
+        function selectUnitCup(denom) {
+            sfx('click');
+            potionState.selectedCupDenom = denom;
+            potionState.pouredCount = 0;
+            [2, 3, 4, 5, 6].forEach(d => {
+                document.getElementById('cupBtn_' + d).className = d === denom
+                    ? "unit-cup-btn tactile-btn py-2.5 rounded-xl bg-sky-400 text-slate-950 font-display font-bold text-sm"
+                    : "unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white";
+            });
+            updatePotionReadout();
+            drawPotionScene();
+        }
+
+        function pourPotionCup(delta) {
+            const max = potionState.selectedCupDenom * 2;
+            const next = potionState.pouredCount + delta;
+            if (next >= 0 && next <= max) {
+                sfx('pour');
+                potionState.pouredCount = next;
+                updatePotionReadout();
+                drawPotionScene();
+            }
+        }
+
+        function emptyPotionBeakers() {
+            sfx('click');
+            potionState.pouredCount = 0;
+            updatePotionReadout();
+            drawPotionScene();
+        }
+
+        function updatePotionReadout() {
+            const n = potionState.pouredCount;
+            const d = potionState.selectedCupDenom;
+            const w = Math.floor(n / d);
+            const r = n % d;
+            const mix = w > 0 ? (r > 0 ? ` (${w} Tam ${r}/${d})` : ` (${w} Tam)`) : '';
+            document.getElementById('currentPotionReadout').innerText = `Dökülen: ${n}/${d} L${mix}`;
+        }
+
+        function verifyPotionMixture() {
+            const tVal = potionState.targetNumer / potionState.targetDenom;
+            const uVal = potionState.pouredCount / potionState.selectedCupDenom;
+            if (Math.abs(tVal - uVal) < 0.001) {
+                addStars(60);
+                const w = Math.floor(potionState.targetNumer / potionState.targetDenom);
+                const r = potionState.targetNumer % potionState.targetDenom;
+                showFeedback(true, "İksir Tam Kıvamında! 🧪", `Harika! <b>${potionState.pouredCount}/${potionState.selectedCupDenom}</b> litre (${w} Tam ${r}/${potionState.targetDenom}) iksiri sayı doğrusunda doğrulayarak hazırladın!`, 'nextPotion');
+            } else {
+                showFeedback(false, "Ölçeği ve Miktarı Kontrol Et!", `Reçetede <b>${potionState.targetNumer}/${potionState.targetDenom}</b> litre isteniyor. Önce <b>1/${potionState.targetDenom}</b> kabını seçip <b>${potionState.targetNumer} birim</b> dökmelisin!`);
+            }
+        }
+
+        function drawPotionScene() {
+            const w = potionCanvas.width;
+            const h = potionCanvas.height;
+            if (!w || !h) return;
+            potionCtx.clearRect(0, 0, w, h);
+
+            const d = potionState.selectedCupDenom;
+            const poured = potionState.pouredCount;
+
+            // 2 Adet Dereceli Silindir (0-1 Tam ve 1-2 Tam)
+            const bw = Math.min(95, w * 0.2);
+            const bh = h * 0.68;
+            const topY = h * 0.14;
+            const gap = Math.min(50, w * 0.08);
+            const startX = w * 0.14;
+
+            for (let b = 0; b < 2; b++) {
+                const bx = startX + b * (bw + gap);
+                const units = Math.max(0, Math.min(d, poured - b * d));
+                const fillH = (units / d) * bh;
+
+                if (fillH > 0) {
+                    const grad = potionCtx.createLinearGradient(bx, topY + bh - fillH, bx, topY + bh);
+                    grad.addColorStop(0, '#38bdf8');
+                    grad.addColorStop(1, '#8b5cf6');
+                    potionCtx.fillStyle = grad;
+                    potionCtx.fillRect(bx + 3, topY + bh - fillH, bw - 6, fillH);
+                }
+
+                for (let k = 1; k < d; k++) {
+                    const ly = topY + bh - (k / d) * bh;
+                    potionCtx.beginPath();
+                    potionCtx.moveTo(bx, ly);
+                    potionCtx.lineTo(bx + bw, ly);
+                    potionCtx.strokeStyle = 'rgba(226, 232, 240, 0.35)';
+                    potionCtx.lineWidth = 1.5;
+                    potionCtx.stroke();
+                }
+
+                potionCtx.strokeStyle = '#94a3b8';
+                potionCtx.lineWidth = 3.5;
+                potionCtx.strokeRect(bx, topY, bw, bh);
+
+                potionCtx.fillStyle = '#f8fafc';
+                potionCtx.font = 'bold 13px Fredoka';
+                potionCtx.textAlign = 'center';
+                potionCtx.fillText(`${b + 1}. Silindir (1 Tam)`, bx + bw / 2, topY + bh + 24);
+            }
+
+            // Sağda Canlı Dikey Sayı Doğrusu (0'dan 2 Tam'a)
+            const lx = w * 0.76;
+            const lBot = topY + bh;
+            const lTop = topY;
+            const len = lBot - lTop;
+
+            potionCtx.beginPath();
+            potionCtx.moveTo(lx, lBot);
+            potionCtx.lineTo(lx, lTop);
+            potionCtx.strokeStyle = '#f59e0b';
+            potionCtx.lineWidth = 4;
+            potionCtx.stroke();
+
+            for (let whole = 0; whole <= 2; whole++) {
+                const wy = lBot - (whole / 2) * len;
+                potionCtx.beginPath();
+                potionCtx.moveTo(lx - 10, wy);
+                potionCtx.lineTo(lx + 10, wy);
+                potionCtx.strokeStyle = '#f59e0b';
+                potionCtx.lineWidth = 3;
+                potionCtx.stroke();
+
+                potionCtx.fillStyle = '#fde68a';
+                potionCtx.font = 'bold 14px Fredoka';
+                potionCtx.textAlign = 'left';
+                potionCtx.fillText(whole + ' Tam', lx + 16, wy + 4);
+            }
+
+            const ratio = Math.min(2, poured / d) / 2;
+            const my = lBot - ratio * len;
+            potionCtx.beginPath();
+            potionCtx.arc(lx, my, 8, 0, Math.PI * 2);
+            potionCtx.fillStyle = '#10b981';
+            potionCtx.fill();
+            potionCtx.fillStyle = '#6ee7b7';
+            potionCtx.font = 'bold 14px Fredoka';
+            potionCtx.textAlign = 'right';
+            potionCtx.fillText(`${poured}/${d}`, lx - 14, my + 4);
+        }
+
+        /* ---------------- 4. BAŞLATMA VE EKRAN BOYUTLANDIRMA ---------------- */
+        window.addEventListener('resize', () => {
+            if (activeTheme === 1) resizeGeoCanvas();
+            else if (activeTheme === 3) { resizeCarpetCanvas(); resizePotionCanvas(); }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            resizeGeoCanvas();
+            newGeoMission();
+            generateCargoMission();
+            generateCarpetOrder();
+            generatePotionRecipe();
+        });
+    </script>
+</body>
+</html>
