@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <title>MAT-ATÖLYE: Maarif 5. Sınıf Simülasyon Üssü</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,8 +83,8 @@
             z-index: 100;
         }
     </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"></head>
-<body class="flex flex-col justify-between p-2 sm:p-4 min-h-screen"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<body class="ufkora-activity activity-maarif-atolyesi flex flex-col justify-between p-2 sm:p-4 min-h-screen"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
 
     <!-- Kutlama Konfeti Canvas -->
     <canvas id="confettiCanvas"></canvas>
@@ -487,7 +487,7 @@
                             <label class="text-[11px] font-bold text-slate-400 block">Ölçüm (m veya m²)</label>
                             <div class="flex items-center gap-1 mt-1">
                                 <button onclick="stepCarpetAmount(-1)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">-</button>
-                                <input id="inputCarpetMeasure" type="number" value="20" class="w-full h-9 rounded-lg bg-slate-900 border border-slate-700 text-center font-display font-bold text-amber-300 text-lg">
+                                <input inputmode="decimal" id="inputCarpetMeasure" type="number" value="20" class="w-full h-9 rounded-lg bg-slate-900 border border-slate-700 text-center font-display font-bold text-amber-300 text-lg">
                                 <button onclick="stepCarpetAmount(1)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">+</button>
                             </div>
                         </div>
@@ -496,7 +496,7 @@
                             <label class="text-[11px] font-bold text-slate-400 block">Toplam Tutar (TL)</label>
                             <div class="flex items-center gap-1 mt-1">
                                 <button onclick="stepCarpetCost(-10)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">-</button>
-                                <input id="inputCarpetCost" type="number" value="200" class="w-full h-9 rounded-lg bg-slate-900 border border-slate-700 text-center font-display font-bold text-emerald-300 text-lg">
+                                <input inputmode="decimal" id="inputCarpetCost" type="number" value="200" class="w-full h-9 rounded-lg bg-slate-900 border border-slate-700 text-center font-display font-bold text-emerald-300 text-lg">
                                 <button onclick="stepCarpetCost(10)" class="w-8 h-9 rounded-lg bg-slate-800 text-white font-bold">+</button>
                             </div>
                         </div>

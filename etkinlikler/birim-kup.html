@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <title>Birim Küp Yapı & Farklı Yönlerden Görünüm Tuvali</title>
     <!-- Three.js & FontAwesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -445,8 +445,8 @@
         }
         .toast.show { opacity: 1; transform: translateY(0); }
     </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"></head>
-<body>
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<body class="ufkora-activity activity-birim-kup">
 
     <!-- HEADER -->
     <header>
@@ -454,7 +454,7 @@
             <i class="fa-solid fa-cubes"></i>
             <span>Birim Küp & Yön İzdüşüm Tuvali</span>
         </div>
-        <div class="header-actions">
+        <div class="header-actions"><a class="btn" href="/#atolye">← Atölye</a>
             <button class="btn btn-danger" id="btn-clear-all">
                 <i class="fa-solid fa-trash-can"></i> Temizle
             </button>
@@ -676,7 +676,7 @@
             scene = new THREE.Scene();
 
             // 2. Cameras
-            const aspect = canvas.clientWidth / canvas.clientHeight;
+            const aspect = canvas.parentElement.clientWidth / Math.max(1, canvas.parentElement.clientHeight);
             perspectiveCamera = new THREE.PerspectiveCamera(40, aspect, 0.1, 1000);
             perspectiveCamera.position.set(8, 7, 8);
 
@@ -700,7 +700,7 @@
                 preserveDrawingBuffer: true,
                 alpha: true
             });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight, false);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.shadowMap.enabled = true;
 
@@ -740,7 +740,9 @@
 
             // Event Listeners
             canvas.addEventListener('pointerdown', onCanvasPointerDown);
+            canvas.addEventListener('pointercancel',()=>{cubeMultiTouch=true;});
             window.addEventListener('resize', onResize);
+            if(window.ResizeObserver)new ResizeObserver(onResize).observe(canvas.parentElement);
             setupUI();
             updateBackground();
 
@@ -808,19 +810,24 @@
         }
 
         // CANVAS CLICK HANDLING
-        let pointerDownPos = { x: 0, y: 0 };
+        const cubePointers = new Set();
+        let cubeMultiTouch=false;
         function onCanvasPointerDown(event) {
-            pointerDownPos = { x: event.clientX, y: event.clientY };
-            
-            // Only trigger on click (not during long orbit drag)
-            const onPointerUp = (upEvent) => {
-                const dist = Math.hypot(upEvent.clientX - pointerDownPos.x, upEvent.clientY - pointerDownPos.y);
-                if (dist < 5) {
-                    handleVoxelClick(upEvent);
-                }
-                window.removeEventListener('pointerup', onPointerUp);
+            if(cubePointers.size===0)cubeMultiTouch=false;
+            cubePointers.add(event.pointerId);
+            if(cubePointers.size>1)cubeMultiTouch=true;
+            const point={x:event.clientX,y:event.clientY};
+            const finish=up=>{
+                if(up.pointerId!==event.pointerId)return;
+                const rect=canvas.getBoundingClientRect();
+                const inside=up.clientX>=rect.left&&up.clientX<=rect.right&&up.clientY>=rect.top&&up.clientY<=rect.bottom;
+                if(up.type==='pointerup'&&!cubeMultiTouch&&inside&&Math.hypot(up.clientX-point.x,up.clientY-point.y)<8)handleVoxelClick(up);
+                cubePointers.delete(event.pointerId);
+                window.removeEventListener('pointerup',finish);
+                window.removeEventListener('pointercancel',finish);
             };
-            window.addEventListener('pointerup', onPointerUp);
+            window.addEventListener('pointerup',finish);
+            window.addEventListener('pointercancel',finish);
         }
 
         function handleVoxelClick(event) {
@@ -1169,7 +1176,7 @@
         }
 
         function onResize() {
-            const aspect = canvas.clientWidth / canvas.clientHeight;
+            const aspect = canvas.parentElement.clientWidth / Math.max(1, canvas.parentElement.clientHeight);
             perspectiveCamera.aspect = aspect;
             perspectiveCamera.updateProjectionMatrix();
 
@@ -1180,7 +1187,7 @@
             orthographicCamera.bottom = frustumSize / -2;
             orthographicCamera.updateProjectionMatrix();
 
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.setSize(canvas.parentElement.clientWidth, canvas.parentElement.clientHeight, false);
             draw2DProjections();
         }
 
@@ -1199,6 +1206,5 @@
 
         window.onload = init;
     </script>
-<a href="/" style="position:fixed;bottom:12px;left:12px;z-index:99999;background:#285c4e;color:white;padding:10px 15px;border-radius:8px;font:13px Arial;text-decoration:none;box-shadow:0 2px 10px #0002">← Ufkora</a></body>
+</body>
 </html>
-```eof

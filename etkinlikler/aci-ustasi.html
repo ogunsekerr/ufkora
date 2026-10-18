@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
     <title>Açı Ustası - İnteraktif Matematik Etkinliği</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -45,8 +45,8 @@
         ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #64748b; }
     </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"></head>
-<body class="min-h-screen text-slate-800 flex flex-col"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<body class="ufkora-activity activity-aci-ustasi min-h-screen text-slate-800 flex flex-col"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
 
     <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
@@ -228,7 +228,7 @@
                             <label for="pAnswerInput" class="text-xs font-extrabold uppercase tracking-wider text-slate-500">2. Adım: Cevabını Yaz veya Seç</label>
                             <div class="flex gap-2">
                                 <div class="relative flex-1">
-                                    <input type="number" id="pAnswerInput" placeholder="Örn: 60" min="0" max="180" 
+                                    <input inputmode="decimal" type="number" id="pAnswerInput" placeholder="Örn: 60" min="0" max="180" 
                                         onkeydown="if(event.key==='Enter') checkProtractorAnswer()"
                                         class="w-full px-4 py-3 text-lg font-extrabold text-slate-800 bg-white border-2 border-slate-300 rounded-xl focus:outline-none focus:border-indigo-500 transition">
                                     <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xl font-bold text-slate-400">°</span>
@@ -372,7 +372,7 @@
                             <label for="aAnswerInput" class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Bilinmeyen Açı (<span class="text-rose-600">x</span>) Kaç Derecedir?</label>
                             <div class="flex gap-2">
                                 <div class="relative flex-1">
-                                    <input type="number" id="aAnswerInput" placeholder="x = ?" min="0" max="360"
+                                    <input inputmode="decimal" type="number" id="aAnswerInput" placeholder="x = ?" min="0" max="360"
                                         onkeydown="if(event.key==='Enter') checkAngleAnswer()"
                                         class="w-full px-4 py-3 text-lg font-extrabold text-slate-800 bg-white border-2 border-slate-300 rounded-xl focus:outline-none focus:border-indigo-500 transition">
                                     <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xl font-bold text-slate-400">°</span>
@@ -2049,9 +2049,8 @@
                 handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
             }, { passive: false });
 
-            wrapper.addEventListener('touchend', () => {
-                isDraggingBow = false;
-            });
+            wrapper.addEventListener('touchend', () => {isDraggingBow=false;});
+            wrapper.addEventListener('touchcancel', () => {isDraggingBow=false;});
         }
 
         function createBurstParticles(angleRight, colorHex) {

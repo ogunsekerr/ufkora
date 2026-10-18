@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>5. Sınıf Çokgen Dünyası: 15-Gen ve Ötesi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,8 +46,8 @@
       background-size: 20px 20px;
     }
   </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"></head>
-<body class="bg-gradient-to-br from-indigo-50 via-sky-50 to-amber-50 min-h-screen text-slate-800 flex flex-col antialiased">
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<body class="ufkora-activity activity-cokgen bg-gradient-to-br from-indigo-50 via-sky-50 to-amber-50 min-h-screen text-slate-800 flex flex-col antialiased">
 
   <header class="bg-white/90 backdrop-blur-md shadow-sm border-b border-indigo-100 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
@@ -265,7 +265,7 @@
           <!-- Giriş Kutusu ve Çiz Düğmesi -->
           <form onsubmit="handleCustomDraw(event)" class="flex items-center gap-2 w-full md:w-auto">
             <div class="relative flex-1 md:w-48">
-              <input id="custom-sides-input" type="number" min="3" max="200" placeholder="Örn: 24" 
+              <input inputmode="decimal" id="custom-sides-input" type="number" min="3" max="200" placeholder="Örn: 24" 
                      class="w-full pl-4 pr-10 py-3 rounded-2xl border-2 border-indigo-200 focus:border-indigo-600 focus:outline-none text-lg font-bold font-fun text-indigo-900 bg-indigo-50/40">
               <span class="absolute right-3 top-3.5 text-xs font-bold text-indigo-400 pointer-events-none">gen</span>
             </div>
@@ -717,35 +717,21 @@
       renderLabCanvas();
     }
 
-    // Fare / Dokunmatik İle Çevirme
-    labCanvas.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      lastMouseX = e.clientX;
+    // Pointer capture keeps touch dragging on the canvas.
+    let labPointer = null;
+    labCanvas.addEventListener('pointerdown', e => {
+      if (!e.isPrimary) return;
+      labPointer=e.pointerId; lastMouseX=e.clientX; isDragging=true;
+      labCanvas.setPointerCapture(e.pointerId);
     });
-    window.addEventListener('mouseup', () => isDragging = false);
-    window.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      const deltaX = e.clientX - lastMouseX;
-      labRotation += deltaX * 0.01;
-      lastMouseX = e.clientX;
-      renderLabCanvas();
+    labCanvas.addEventListener('pointermove', e => {
+      if (!isDragging || e.pointerId!==labPointer) return;
+      labRotation+=(e.clientX-lastMouseX)*0.01; lastMouseX=e.clientX; renderLabCanvas();
     });
-
-    // Dokunmatik (Tablet / Akıllı Tahta)
-    labCanvas.addEventListener('touchstart', (e) => {
-      if (e.touches.length === 1) {
-        isDragging = true;
-        lastMouseX = e.touches[0].clientX;
-      }
-    });
-    window.addEventListener('touchend', () => isDragging = false);
-    window.addEventListener('touchmove', (e) => {
-      if (!isDragging || e.touches.length !== 1) return;
-      const deltaX = e.touches[0].clientX - lastMouseX;
-      labRotation += deltaX * 0.01;
-      lastMouseX = e.touches[0].clientX;
-      renderLabCanvas();
-    });
+    const stopLabDrag=()=>{isDragging=false;labPointer=null;};
+    labCanvas.addEventListener('pointerup',stopLabDrag);
+    labCanvas.addEventListener('pointercancel',stopLabDrag);
+    labCanvas.addEventListener('lostpointercapture',stopLabDrag);
   </script>
 
   <script>

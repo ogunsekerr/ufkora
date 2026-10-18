@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>7. Sınıf Yansıma ve Simetri Laboratuvarı</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -34,8 +34,8 @@
       animation: pulse-ring 1.8s infinite ease-in-out;
     }
   </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"></head>
-<body class="bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col select-none font-sans">
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<body class="ufkora-activity activity-yansima bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col select-none font-sans">
 
   <!-- Ana Kapsayıcı -->
   <div id="mainContainer" class="flex-1 flex flex-col max-w-7xl w-full mx-auto p-2 sm:p-4 gap-3">
@@ -745,8 +745,8 @@
       if (!parent) return;
       const rect = parent.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
-      const w = Math.max(300, rect.width || 800);
-      const h = Math.max(380, rect.height || 500);
+      const w = Math.max(1, rect.width || 800);
+      const h = Math.max(1, rect.height || 500);
       
       canvas.width = w * dpr;
       canvas.height = h * dpr;

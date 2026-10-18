@@ -1,0 +1,119 @@
+/* Mobile and tablet layout shared by Ufkora activities. */
+html{ -webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-wrap:break-word}
+*,*::before,*::after{box-sizing:border-box}
+img{max-width:100%}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}button,input,select,textarea{max-width:100%}
+input[type=range]{min-height:44px;touch-action:pan-y}
+input[type=checkbox],input[type=radio]{flex-shrink:0}
+dialog{max-width:calc(100vw - 24px);max-height:calc(100svh - 32px);overflow:auto;overscroll-behavior:contain}
+@media(max-width:1024px){
+ body.ufkora-activity :is(main,section,aside,header,.grid,.flex,.panel,.scene,.shell)>*{min-width:0}
+ body.ufkora-activity header.sticky{position:relative}
+ body.ufkora-activity :is(button,[role=button],select){min-height:44px}
+ body.ufkora-activity :is(input[type=text],input[type=number],input[type=email],select,textarea){font-size:16px}
+ body.ufkora-activity button{white-space:normal;overflow-wrap:break-word}
+ body.ufkora-activity :is(.top-actions,.header-actions,.top .actions){display:flex;flex-wrap:wrap;gap:8px}
+ body.ufkora-activity :is(.canvas-container,.canvas-wrapper){max-width:100%}
+ body.ufkora-activity :is(.toast,.feedback){max-width:calc(100vw - 24px)}
+}
+@media(max-width:600px){
+ body.ufkora-activity :is(.top-actions,.header-actions,.top .actions){width:100%}
+ body.ufkora-activity :is(.top-actions,.header-actions,.top .actions)>button{flex:1 1 120px}
+ body.ufkora-activity :is(.top,.top header){gap:12px}
+ body.ufkora-activity :is(.top .brand,.logo-area){flex-wrap:wrap;line-height:1.5}
+ body.ufkora-activity :is(.shell,.app){max-width:100%;width:100%;padding-inline:12px}
+ body.ufkora-activity .scorebar{flex-wrap:wrap;max-width:100%}
+ body.ufkora-activity .team{flex-wrap:wrap}
+ body.ufkora-activity .answers{grid-template-columns:1fr}
+ body.ufkora-activity .level-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.ufkora-activity :is(.filters,.board-tools){flex-wrap:wrap}
+ body.ufkora-activity .summary{padding:22px 14px}
+ body.ufkora-activity :is(.summary h3,.summary .big){overflow-wrap:anywhere}
+}
+/* Unit cube studio: canvas first, tools and projections below, no fixed desktop sidebars. */
+@media(max-width:1100px){
+ body.activity-birim-kup{height:auto;min-height:100svh;overflow:auto}
+ .activity-birim-kup .main-container{display:flex;flex-direction:column;flex:none;overflow:visible;min-height:0}
+ .activity-birim-kup .canvas-area{order:0;flex:none;width:100%;height:clamp(340px,60svh,560px);min-height:340px}
+ .activity-birim-kup .panel{width:100%;max-width:none;overflow:visible;flex:none}
+ .activity-birim-kup .panel-left{order:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+ .activity-birim-kup .panel-right{order:2}
+ .activity-birim-kup .views-2d-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .activity-birim-kup #three-canvas{width:100%!important;height:100%!important;touch-action:none}
+ .activity-birim-kup .canvas-overlay-top{max-width:calc(100% - 16px);width:max-content;flex-wrap:wrap;justify-content:center;border-radius:16px;gap:2px}
+ .activity-birim-kup .canvas-instructions{max-width:calc(100% - 24px);font-size:12px;pointer-events:none}
+}
+@media(max-width:600px){
+ .activity-birim-kup header{padding:12px}
+ .activity-birim-kup .panel-left{display:flex}
+ .activity-birim-kup .views-2d-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .activity-birim-kup .view-btn{padding:8px 10px}
+ .activity-birim-kup .canvas-instructions{bottom:10px;left:10px}
+ .activity-birim-kup .canvas-overlay-top{top:10px}
+}
+/* Keep arithmetic columns aligned instead of overflowing the screen. */
+@media(max-width:639px){
+ .activity-toplama-adasi{padding:8px}
+ .activity-toplama-adasi header{padding:14px;border-width:2px}
+ .activity-toplama-adasi .activity-section{padding:14px 10px;border-width:2px}
+ .activity-toplama-adasi #section-act1 .grid-cols-6{grid-template-columns:16px repeat(5,minmax(0,1fr));gap:3px}
+ .activity-toplama-adasi #section-act1 .grid-cols-6>div{overflow-wrap:normal;font-size:11px}
+ .activity-toplama-adasi #section-act1 .digit-box{width:100%;height:48px;min-width:0;font-size:clamp(20px,6vw,28px)!important}
+ .activity-toplama-adasi #section-act1 .carry-box{width:100%;height:44px;min-width:0;font-size:18px!important}
+ .activity-toplama-adasi #section-act1 .grid-cols-6 .digit-box{font-size:24px}
+ .activity-toplama-adasi #section-act1 .lg\:col-span-7{padding:10px 6px}
+ .activity-toplama-adasi #cipher-slots{flex-wrap:wrap}
+}
+/* Lab tabs and canvas controls fit comfortably in portrait. */
+@media(max-width:600px){
+ .activity-aci-ustasi :is(#tabBtn1,#tabBtn2,#tabBtn3){flex:1 1 100%;justify-content:flex-start}
+ .activity-aci-ustasi :is(#protractorSvgContainer,#angleSvgContainer,#balloonGameSvgWrapper){width:100%;max-width:100%;min-width:0}
+ .activity-aci-ustasi :is(#protractorSvgContainer,#angleSvgContainer,#balloonGameSvgWrapper)>svg{width:100%;height:auto;display:block}
+ .activity-aci-ustasi #balloonGameSvgWrapper{touch-action:none}
+ .activity-cokgen #lab-canvas{touch-action:none}
+ .activity-yansima #mainContainer{width:100%;padding:10px}
+ .activity-yansima #mainContainer>main{min-height:360px;height:clamp(360px,65svh,520px);flex:none}
+ .activity-yansima :is(#objectButtons,#actShapeButtons){grid-template-columns:repeat(2,minmax(0,1fr))}
+ .activity-yansima :is(#axisButtons,#actAxisButtons){grid-template-columns:repeat(2,minmax(0,1fr))}
+ .activity-yansima #canvasTip{max-width:calc(100% - 16px);font-size:12px}
+ .activity-olasilik-laboratuvari :is(#coinSection,#diceSection){padding:18px}
+ .activity-olasilik-laboratuvari #bothActionBanner{flex-direction:column;align-items:stretch}
+ .activity-maarif-atolyesi .canvas-wrapper{height:320px}
+ .activity-maarif-atolyesi .cargo-slot{padding:8px;min-height:100px}
+ .activity-maarif-atolyesi #xrayDigitsRow{grid-template-columns:repeat(9,minmax(0,1fr));gap:2px}
+ .activity-maarif-atolyesi #xrayDigitsRow button{min-width:0;padding:4px 0;font-size:16px!important}
+ .activity-maarif-atolyesi :is(#vaultOptionsGrid,#laserChoicesGrid){grid-template-columns:1fr}
+ .activity-kesif canvas{min-height:0;height:auto;aspect-ratio:960/620}
+ .activity-kesif .panel{padding:20px}
+ .activity-kesif .cards button{min-width:64px;flex:1 1 64px}
+ .activity-etkinlikler .turn{width:100%}
+}
+/* Garden: mission and feedback stay in document flow instead of covering the board. */
+@media(max-width:850px){
+ .activity-bahce .scene:has(.cover:not(.hide)){min-height:420px}
+ .activity-bahce .cover{min-height:420px;padding:26px 22px}
+ .activity-bahce .cover h1{font-size:clamp(38px,9vw,56px)}
+ .activity-bahce .cover p{font-size:16px}
+ .activity-bahce .scene:has(.cover.hide){display:flex;flex-direction:column;padding-bottom:0}
+ .activity-bahce .scene:has(.cover.hide) .hud{position:relative;inset:auto;order:0;margin:12px;gap:8px}
+ .activity-bahce .scene:has(.cover.hide) canvas{order:1}
+ .activity-bahce .scene .mission{position:static;inset:auto!important;order:2;width:auto!important;height:auto;display:grid;grid-template-columns:1fr;gap:12px;margin:12px;pointer-events:auto}
+ .activity-bahce .scene .message{position:static;inset:auto!important;order:3;margin:0 12px 16px;pointer-events:auto}
+ .activity-bahce .mission .card p{font-size:16px}
+ .activity-bahce .modal{position:fixed;inset:0;z-index:100;padding:12px;overflow:auto}
+ .activity-bahce .sheet{max-height:calc(100svh - 24px);overflow:auto}
+ .activity-bahce .mobile-size{display:none}
+ .activity-bahce .top .brand{flex-wrap:wrap}
+ .activity-bahce .bottom-note{flex-wrap:wrap;gap:14px;font-size:13px}
+}
+@media(max-width:600px){
+ .activity-bahce .scene:has(.cover.hide) canvas{width:150%;max-width:none;margin-left:-10%;flex:none}
+ .activity-bahce .scene:has(.cover:not(.hide)) canvas{height:420px;object-fit:cover}
+ .activity-bahce .progress{min-width:0;flex:1}
+ .activity-bahce .hud .progress .name{font-size:14px}
+ .activity-bahce .hud .star{font-size:12px;min-width:60px}
+ .activity-bahce .target{flex-wrap:wrap}
+}
+@media(hover:none){button:hover{transform:none}}
