@@ -1204,7 +1204,23 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        window.onload = init;
+        window.onload = () => {
+            try { init(); }
+            catch (error) {
+                console.error('Cube studio initialization failed', error.name);
+                const area=document.querySelector('.canvas-area');
+                const notice=document.createElement('div');
+                notice.setAttribute('role','status');
+                notice.style.cssText='position:absolute;inset:0;z-index:20;display:grid;place-content:center;padding:24px;background:#0f172a;color:#e2e8f0;text-align:center;line-height:1.7';
+                const title=document.createElement('h2');
+                title.textContent='3B sahne açılamadı';
+                const text=document.createElement('p');
+                text.textContent='Bu tarayıcıda 3B görüntü desteği (WebGL) kullanılamıyor. Güncel bir tarayıcıda donanım hızlandırma açıkken yeniden deneyebilirsin.';
+                const back=document.createElement('a');
+                back.href='/#atolye';back.className='btn';back.textContent='Atölyeye dön';
+                notice.append(title,text,back);area.append(notice);
+            }
+        };
     </script>
 </body>
 </html>
