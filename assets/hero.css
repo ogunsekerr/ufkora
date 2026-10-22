@@ -113,3 +113,49 @@
 .entrance-motion .portal-section .portal-perspective{pointer-events:none}
 .entrance-motion .panel-ready .portal-section .portal-perspective{pointer-events:auto}
 @media(prefers-reduced-motion:reduce){.clay-gateway{display:none!important}}
+/* Each grade inhabits the same clay world with its own colour and object. */
+.entrance-motion .portal-section{background:radial-gradient(ellipse at 50% 25%,#fff6e6,var(--world-bg,#eee7c8) 80%);transition:background .45s}
+.workshop-preview{border-top:5px solid var(--world-color,#edca69);background:color-mix(in srgb,var(--world-bg,#eee7c8) 16%,#fff5e7)}
+.class-world{height:114px;position:relative;isolation:isolate;border-radius:15px;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:16px 26px;margin-bottom:22px;background:var(--world-bg,#eee7c8);box-shadow:inset 0 2px 4px #fff9,inset 0 -4px 12px #193d3010}
+.class-world:before,.class-world:after{content:'';position:absolute;z-index:-1;width:70%;height:120px;border-radius:50%;background:var(--world-color,#edca69);opacity:.25;bottom:-88px;left:-5%;rotate:7deg;box-shadow:inset 0 6px 10px #fff7}
+.class-world:after{left:45%;bottom:-76px;rotate:-10deg;opacity:.4}
+.class-world .eyebrow{font-size:9px;color:#35513e;letter-spacing:1px}.class-world p{font:600 23px 'Bricolage Grotesque',sans-serif;letter-spacing:-.5px;color:#244836;margin:10px 0;max-width:440px}
+#class-world-object{width:144px;height:125px;flex:none}.clay-motif{width:100%;height:100%;filter:drop-shadow(3px 7px 3px #173f302b)}.clay-motif svg{display:block;width:100%;height:100%;overflow:visible}
+.preview-visual{position:relative;overflow:hidden;isolation:isolate;height:135px}.preview-visual>img{height:100%;width:100%;object-fit:cover}.preview-visual>.clay-motif,.feature-visual>.clay-motif{position:absolute;bottom:8px;right:9px;width:70px;height:65px;padding:5px;border-radius:18px;background:#fff6e7eb;box-shadow:inset 0 2px 3px #fff,0 4px 10px #16372c20}
+.feature-visual{position:relative}
+.motif-angle{transform-origin:100px 144px}.motif-balance{transform-origin:100px 63px}.motif-geometry,.motif-cubes{transform-origin:100px 92px}
+@keyframes angle-discover{0%,100%{transform:rotate(0)}45%{transform:rotate(48deg)}}
+@keyframes balance-discover{0%{transform:rotate(-13deg)}45%{transform:rotate(9deg)}75%{transform:rotate(-4deg)}100%{transform:rotate(0)}}
+@keyframes shape-discover{0%,100%{transform:rotate(0) scale(1)}50%{transform:rotate(12deg) scale(.88)}}
+@keyframes half-discover{0%,100%{transform:translateX(0)}50%{transform:translateX(15px)}}
+@keyframes bead-discover{0%,100%{transform:translateX(0)}50%{transform:translateX(9px)}}
+@media(prefers-reduced-motion:no-preference){
+ #class-world-object .clay-motif{animation:hero-enter .5s both}
+ :is(.preview-card,.activity-launch):is(:hover,:focus-visible) .motif-angle,.feature:is(:hover,:focus-visible) .motif-angle{animation:angle-discover 1.6s ease-in-out}
+ :is(.preview-card,.activity-launch):is(:hover,:focus-visible) .motif-balance,.feature:is(:hover,:focus-visible) .motif-balance{animation:balance-discover 1.6s ease-in-out}
+ :is(.preview-card,.activity-launch):is(:hover,:focus-visible) :is(.motif-geometry,.motif-cubes),.feature:is(:hover,:focus-visible) :is(.motif-geometry,.motif-cubes){animation:shape-discover 1.6s ease-in-out}
+ :is(.preview-card,.activity-launch):is(:hover,:focus-visible) .motif-half,.feature:is(:hover,:focus-visible) .motif-half{animation:half-discover 1.6s ease-in-out}
+ :is(.preview-card,.activity-launch):is(:hover,:focus-visible) .motif-abacus,.feature:is(:hover,:focus-visible) .motif-abacus{animation:bead-discover 1.6s ease-in-out}
+}
+.fraction-demo{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:390px;padding:30px;background:radial-gradient(ellipse at 40% 20%,#f5edce,#d4dfbb);color:#244836;border-radius:25px;box-shadow:inset 0 3px 6px #fff9;overflow:hidden}
+.fraction-demo>.eyebrow{color:#405b39;font-size:11px}.fraction-stage{width:260px;height:205px;position:relative;display:grid;place-items:center;margin:12px 0}.fraction-symbol{font:600 140px 'Outfit',sans-serif;position:absolute;color:#31583f}
+.fraction-model{width:156px;height:156px;position:relative;display:flex;gap:4px;opacity:0;transform:scale(.4);filter:drop-shadow(6px 12px 6px #34523233)}
+.fraction-model>span{height:156px;width:76px;background:#e59577;border-radius:90px 0 0 90px;box-shadow:inset 8px 7px 9px #ffd6ac,inset -5px -6px 10px #a75c3e80}
+.fraction-model>span+span{border-radius:0 90px 90px 0;background:#eace77;box-shadow:inset 6px 7px 9px #fff1b4,inset -7px -7px 10px #b3933d80}
+.fraction-demo p{text-align:center;font-size:19px;line-height:1.6;margin:0 0 20px}.fraction-demo button{min-height:48px;padding:12px 20px;background:#fff6e6;border:1px solid #76916b;border-radius:12px;color:#244836;font:800 15px 'Nunito Sans',sans-serif;cursor:pointer;display:flex;gap:20px;align-items:center}
+@keyframes symbol-to-clay{0%,20%{opacity:1;transform:scale(1)}65%,100%{opacity:0;transform:scale(.4) rotate(-12deg)}}
+@keyframes clay-from-symbol{0%,25%{opacity:0;transform:scale(.4) rotate(12deg)}70%,100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes equal-halves{0%,60%{translate:0 0}100%{translate:18px 0}}
+@media(prefers-reduced-motion:no-preference){.is-demonstrating .fraction-symbol{animation:symbol-to-clay 2.4s both}.is-demonstrating .fraction-model{animation:clay-from-symbol 2.4s both}.is-demonstrating .fraction-model>span+span{animation:equal-halves 3s both}}
+@media(hover:none) and (prefers-reduced-motion:no-preference){.motif-seen .motif-angle{animation:angle-discover 1.6s ease-in-out}.motif-seen .motif-balance{animation:balance-discover 1.6s ease-in-out}.motif-seen :is(.motif-geometry,.motif-cubes){animation:shape-discover 1.6s ease-in-out}.motif-seen .motif-half{animation:half-discover 1.6s ease-in-out}.motif-seen .motif-abacus{animation:bead-discover 1.6s ease-in-out}}
+@media(max-width:1000px){.preview-visual{height:120px}}
+@media(max-width:700px){.class-world{height:104px;padding:14px;margin-bottom:18px}.class-world p{font-size:19px;max-width:175px}.class-world .eyebrow{font-size:7px;letter-spacing:.6px}#class-world-object{width:100px;height:104px}.preview-visual{height:100%;min-height:127px}.preview-visual>.clay-motif{width:48px;height:46px;right:4px;bottom:5px;padding:3px;border-radius:12px}.fraction-demo{min-height:370px;padding:24px 14px}.fraction-stage{width:220px;height:190px}}
+@media(prefers-reduced-motion:reduce){.fraction-symbol{display:none}.fraction-model{opacity:1;transform:none}.fraction-model>span+span{translate:18px 0}.clay-motif *{animation:none!important}.fraction-demo button{display:none}}
+
+.activity-visual{position:relative}.activity-visual>.clay-motif{position:absolute;right:12px;bottom:12px;width:76px;height:70px;background:#fff7e9ee;border-radius:18px;padding:7px;box-shadow:0 4px 12px #183c3020}
+.catalog-page{background:linear-gradient(180deg,var(--world-bg,#f9f2e5),#fff7e9 800px)}.catalog-world{margin:24px 0;height:150px}.catalog-world #class-world-object{height:145px;width:165px}.catalog-world p{font-size:28px}
+@keyframes mirror-discover{0%{opacity:.15;transform:translateX(-20px)}100%{opacity:1;transform:translateX(0)}}
+@media(prefers-reduced-motion:no-preference){:is(.preview-card,.activity-launch,.feature):is(:hover,:focus-visible) .motif-mirror{animation:mirror-discover 1.4s both}}
+@media(hover:none) and (prefers-reduced-motion:no-preference){.motif-seen .motif-mirror{animation:mirror-discover 1.4s both}}
+@media(max-width:700px){.catalog-world{height:120px}.catalog-world p{font-size:21px}.catalog-world #class-world-object{width:110px;height:115px}.activity-visual>.clay-motif{width:60px;height:56px}}
+.fraction-demo{aspect-ratio:auto;width:100%;min-width:0}.discovery-grid>*{min-width:0}

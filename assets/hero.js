@@ -3,8 +3,16 @@ const preview=document.getElementById('workshop-preview');if(!preview)return;
 const colors={4:'coral',5:'yellow',6:'green',7:'blue',8:'purple'};
 const grades=[...preview.querySelectorAll('[data-preview-grade]')],tabs=[...preview.querySelectorAll('[data-preview-type]')],cards=document.getElementById('preview-cards'),status=document.getElementById('preview-status'),all=document.getElementById('preview-all');
 let grade=5,type='activities';
+const worlds={4:{color:'#e59880',bg:'#f3ded0',kind:'abacus',caption:'Sayılarla yeni yollar bul.'},5:{color:'#edca69',bg:'#eee7c8',kind:'angle',caption:'Açıları ve şekilleri keşfet.'},6:{color:'#9dbb87',bg:'#dce8d5',kind:'balance',caption:'İlişkileri dengeye getir.'},7:{color:'#87b9d1',bg:'#d9e8eb',kind:'geometry',caption:'Matematiğe farklı açılardan bak.'},8:{color:'#baa0d0',bg:'#e5dcef',kind:'cubes',caption:'Parçaları birleştir, bütünü gör.'}};
+const world=document.getElementById('class-world'),worldObject=document.getElementById('class-world-object');
+
 const node=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n};
 function render(){
+ const theme=worlds[grade];
+ preview.style.setProperty('--world-color',theme.color);preview.style.setProperty('--world-bg',theme.bg);
+ document.getElementById('atolye-onizleme').style.setProperty('--world-bg',theme.bg);
+ document.getElementById('class-world-caption').textContent=theme.caption;
+ worldObject.replaceChildren(window.UfkoraClay.make(theme.kind));world.dataset.grade=grade;
  preview.classList.remove(...Object.values(colors));preview.classList.add(colors[grade]);
  document.getElementById('preview-title').textContent=grade+'. sınıf atölyesi';document.getElementById('preview-number').textContent=grade;
  grades.forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.previewGrade)===grade)));
@@ -18,7 +26,7 @@ function render(){
   const img=node('img');img.src=x.image;img.alt='';img.loading='lazy';img.width=768;img.height=512;
   const body=node('div','preview-card-body');body.append(node('span','',x.type.toLocaleUpperCase('tr-TR')+' · '+x.topic.toLocaleUpperCase('tr-TR')),node('h4','',x.title));
   const codes=(x.codes||[]).slice(0,2);body.append(node('span','preview-code',codes.length?codes.join(' · ')+(x.common?' · Ortak keşif':''):'Konu: '+x.topic));
-  const go=node('span','preview-card-go',type==='games'?'Oyuna git':'Keşfe başla');go.append(node('span','','↗'));body.append(go);a.append(img,body);cards.append(a);
+  const go=node('span','preview-card-go',type==='games'?'Oyuna git':'Keşfe başla');go.append(node('span','','↗'));body.append(go);const visual=node('div','preview-visual');visual.append(img,window.UfkoraClay.make(window.UfkoraClay.kind(x.title)));a.append(visual,body);cards.append(a);
  });
  if(!items.length){const empty=node('div','preview-empty');empty.append(node('h4','','Yeni oyunlara yer açıyoruz.'),node('p','','Bu sınıfın mevcut keşiflerini Etkinlikler sekmesinde bulabilirsin.'));const b=node('button','','Etkinlikleri göster');b.type='button';b.addEventListener('click',()=>{type='activities';render();tabs[0].focus()});empty.append(b);cards.append(empty)}
  all.href='atolye.html?sinif='+grade;all.replaceChildren(document.createTextNode(grade+'. sınıf atölyesini aç '),node('span','','↗'));
@@ -26,7 +34,15 @@ function render(){
 grades.forEach(b=>b.addEventListener('click',()=>{grade=Number(b.dataset.previewGrade);render();if(!matchMedia('(prefers-reduced-motion: reduce)').matches){preview.animate([{clipPath:'circle(16% at '+(10+(grade-4)*20)+'% 30%)',opacity:.6},{clipPath:'circle(150% at 50% 50%)',opacity:1}],{duration:500,easing:'cubic-bezier(.22,1,.36,1)'});}}));
 tabs.forEach((b,i)=>{b.addEventListener('click',()=>{type=b.dataset.previewType;render()});b.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-i;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();type=tabs[next].dataset.previewType;render();tabs[next].focus()})});
 render();
-const gateway=document.querySelector('.clay-gateway');
+const demo=document.getElementById('fraction-demo');
+const replay=()=>{demo.classList.remove('is-demonstrating');requestAnimationFrame(()=>requestAnimationFrame(()=>demo.classList.add('is-demonstrating')))};
+document.getElementById('fraction-replay').addEventListener('click',replay);
+const seen=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){if(e.target===demo)replay();else e.target.classList.add('motif-seen');seen.unobserve(e.target)}}),{threshold:.4});
+seen.observe(demo);document.querySelectorAll('.feature').forEach(card=>{card.querySelector('.feature-visual').append(window.UfkoraClay.make(window.UfkoraClay.kind(card.querySelector('h3').textContent)));seen.observe(card)});
+const cardObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('motif-seen');cardObserver.unobserve(e.target)}}),{threshold:.6});
+new MutationObserver(()=>cards.querySelectorAll('.preview-card:not(.motif-seen)').forEach(c=>cardObserver.observe(c))).observe(cards,{childList:true});
+cards.querySelectorAll('.preview-card').forEach(c=>cardObserver.observe(c));
+
 const motion=matchMedia('(prefers-reduced-motion: reduce)'),sequence=document.getElementById('entrance-sequence');let queued=false;
 const clamp=n=>Math.max(0,Math.min(1,n));
 function update(){
