@@ -4,6 +4,7 @@
 
 | Sorun / değişiklik | İlk bakılacak dosyalar |
 | --- | --- |
+| Fare ile su dalgası / yerel kırılma | `features/pointer/water-ripple.js`, `features/pointer/water-ripple.css` |
 | Kapıdan geçiş, kaydırma, mobil performans | `features/entrance/transition.js`, `features/entrance/transition.css` |
 | Ana sayfa atölye önizlemesi, sınıf / oyun sekmeleri | `features/home/workshop-preview.js` |
 | Ana sayfa görünümü, boyutlar, tipografi | `features/home/home.css`, `index.html` |
@@ -25,3 +26,5 @@
 6. Değişen CSS / JS sürümünü HTML bağlantılarında güncelle.
 
 Önizleme çıktıları `preview-public/` içindedir; kaynak veya yayın dosyası olarak commit edilmez.
+
+Fare efekti sadece ince işaretçili, hover destekleyen masaüstünde çalışır. En fazla iki adet 200×200 piksel yerel kırılma alanı, 850 ms ömür, boşta çizim yok. Geçiş/kaydırma, dokunmatik ve azaltılmış hareket tercihinde durur.
