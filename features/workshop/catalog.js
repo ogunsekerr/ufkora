@@ -15,8 +15,8 @@ function render(){
 const q=normalize(search.value.trim()),filtered=items.filter(x=>(!q||normalize([x.title,x.desc,x.topic,...x.codes].join(' ')).includes(q))&&(!topic.value||x.topic===topic.value)&&(!type.value||x.type===type.value));
 motifObserver.disconnect();catalog.replaceChildren();
 filtered.forEach(x=>{
-const card=el('article','activity-card'),a=el('a','activity-launch');a.href=x.url;
-const visual=el('div','activity-visual'),img=el('img');img.src=x.image;img.alt='';img.loading='lazy';img.width=768;img.height=512;visual.append(img,window.UfkoraClay.make(window.UfkoraClay.kind(x.title)));
+const card=el('article','activity-card'),a=el('a','activity-launch');a.href=x.url;if(x.preview)card.dataset.previewId=x.preview.id;
+const visual=el('div','activity-visual'),img=el('img');img.src=x.image;img.alt=x.preview?.imageAlt||'';img.loading='lazy';img.decoding='async';img.width=x.preview?.imageWidth||768;img.height=x.preview?.imageHeight||512;visual.append(img,window.UfkoraClay.make(window.UfkoraClay.kind(x.title)));
 const body=el('div','activity-body'),top=el('div','activity-top');top.append(el('span','activity-type',x.type),el('span','',x.topic));body.append(top,el('h2','',x.title),el('p','',x.desc));
 if(x.common)body.append(el('span','common-note','4–8. sınıflar için ortak keşif'));
 body.append(el('span','activity-go','Keşfetmeye başla ↗'));a.append(visual,body);card.append(a);
