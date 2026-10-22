@@ -1,0 +1,28 @@
+{
+  "baseline_files": 48,
+  "baseline_files_changed": [
+    "index.html"
+  ],
+  "outside_workshop_and_new_stylesheet_unchanged": true,
+  "new_runtime_JS_files": 0,
+  "new_dependencies": 0,
+  "browser_viewport": [
+    1363,
+    936
+  ],
+  "horizontal_overflow": false,
+  "keyboard_Enter_verified_grades": [
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "route_bottom": 564.40625,
+  "grade_text_top": 580.40625,
+  "T14_started": false,
+  "T04_mobile_visual_pending": true,
+  "published_to_production": false,
+  "without_application_scripts_fixture": "5th grade Enter navigates; only preview server live-reload script injected",
+  "preview_contact_error": "Existing crypto.randomUUID unavailable on HTTP preview; contact source unchanged, not a mail-send test"
+}
