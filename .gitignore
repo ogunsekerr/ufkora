@@ -1,0 +1,11 @@
+# Machine-local credentials and agent configuration
+.env
+.env.*
+!.env.example
+.codex/
+.mcp.json
+.mcp.local.json
+node_modules/
+.openai/
+preview-public/
+.DS_Store
