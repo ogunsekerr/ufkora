@@ -159,3 +159,16 @@
 @media(hover:none) and (prefers-reduced-motion:no-preference){.motif-seen .motif-mirror{animation:mirror-discover 1.4s both}}
 @media(max-width:700px){.catalog-world{height:120px}.catalog-world p{font-size:21px}.catalog-world #class-world-object{width:110px;height:115px}.activity-visual>.clay-motif{width:60px;height:56px}}
 .fraction-demo{aspect-ratio:auto;width:100%;min-width:0}.discovery-grid>*{min-width:0}
+/* Larger entrance typography and controls, balanced for each viewport. */
+.hero-immersive .hero-kicker{font-size:15px;letter-spacing:1.8px}.hero-kicker>span{font-size:30px}
+.hero-immersive h1{font-size:clamp(60px,6.4vw,98px);max-width:1260px}
+.hero-immersive .hero-description{font-size:24px;line-height:1.55;margin:26px 0 30px}
+.hero-immersive .btn{font-size:19px;min-height:64px;padding:18px 30px;gap:24px}.hero-immersive .btn>span{font-size:23px}
+.hero-grades{gap:12px;margin-top:32px}.hero-grades a{font-size:17px;min-height:50px;padding:12px 20px}
+.hero-scroll span:first-child{font-size:12px}.hero-scroll span:last-child{font-size:29px}
+@media(min-width:1001px){.clay-fraction{width:100px;height:110px;font-size:73px}.clay-ring{width:118px;height:118px;border-width:25px}.clay-plus{width:70px;height:70px;font-size:60px}}
+@media(max-width:1000px){.hero-immersive h1{font-size:clamp(54px,7.2vw,76px);letter-spacing:-2.8px}.hero-immersive .hero-kicker{font-size:12px}.hero-immersive .hero-description{font-size:22px}.hero-immersive .btn{font-size:18px;padding:17px 24px}.hero-grades a{font-size:16px;padding:11px 17px}}
+@media(max-width:700px){.hero-immersive .hero-kicker{font-size:10px;letter-spacing:1px;gap:7px}.hero-kicker>span{font-size:23px}.hero-immersive h1{font-size:clamp(37px,8.5vw,57px);letter-spacing:-1.6px}.hero-immersive .hero-description{font-size:19px;margin:22px 0 24px}.hero-immersive .hero-actions{gap:10px}.hero-immersive .hero-actions .btn{font-size:16px;min-height:56px;padding:15px 17px;gap:14px}.hero-immersive .btn>span{font-size:21px}.hero-grades{gap:7px}.hero-grades a{font-size:14px;min-height:46px;padding:10px 12px}.hero-scroll span:first-child{font-size:11px}.clay-fraction{width:55px;height:64px;font-size:42px}.clay-ring{width:67px;height:67px;border-width:15px}}
+@media(max-width:360px){.hero-immersive .hero-kicker{font-size:9px;letter-spacing:.7px}.hero-immersive .hero-actions .btn{font-size:15px;padding:13px 15px}.hero-grades{gap:6px}.hero-grades a{font-size:13px;padding:10px 9px}}
+@media(max-height:740px) and (min-width:701px){.entrance-motion .hero-immersive{padding-top:110px}.hero-immersive h1{font-size:clamp(54px,6vw,82px)}.hero-immersive .hero-kicker{margin-bottom:15px}.hero-immersive .hero-description{margin:18px 0 20px}.hero-grades{margin-top:22px}}
+@media(max-width:700px){.clay-fraction{bottom:7%;left:4%}.clay-ring{bottom:7%;right:4%}}
