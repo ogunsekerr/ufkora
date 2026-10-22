@@ -25,3 +25,10 @@
  #atolye .quiet-note{margin-top:24px}
 }
 @media(max-width:380px){#atolye .class-stations ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* T13: one static connection behind the desktop objects, never over labels. */
+#atolye .station-route{display:none;pointer-events:none}
+@media(min-width:1001px){
+ #atolye .station-route{display:block;position:absolute;inset:0 0 auto;width:100%;height:240px;color:color-mix(in srgb,var(--green) 55%,var(--cream));z-index:0}
+ #atolye .class-stations{position:relative;z-index:1}
+}
