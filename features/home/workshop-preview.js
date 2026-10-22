@@ -38,12 +38,12 @@ function render(animateTab=false){
   const codes=(x.codes||[]).slice(0,2);body.append(node('span','preview-code',codes.length?codes.join(' · ')+(x.common?' · Ortak keşif':''):'Konu: '+x.topic));
   const go=node('span','preview-card-go',type==='games'?'Oyuna git':'Keşfe başla');go.append(node('span','','↗'));body.append(go);const visual=node('div','preview-visual');visual.append(img,window.UfkoraClay.make(window.UfkoraClay.kind(x.title)));a.append(visual,body);cards.append(a);
  });
- if(!items.length){const empty=node('div','preview-empty');empty.append(node('h4','','Yeni oyunlara yer açıyoruz.'),node('p','','Bu sınıfın mevcut keşiflerini Etkinlikler sekmesinde bulabilirsin.'));const b=node('button','','Etkinlikleri göster');b.type='button';b.addEventListener('click',()=>{type='activities';render(true);tabs[0].focus()});empty.append(b);cards.append(empty)}
+ if(!items.length){const empty=node('div','preview-empty');empty.append(node('h4','','Yeni oyunlara yer açıyoruz.'),node('p','','Bu sınıfın mevcut keşiflerini Etkinlikler sekmesinde bulabilirsin.'));const b=node('button','','Etkinlikleri göster');b.type='button';b.addEventListener('click',()=>{type='activities';render(true);tabs[0].focus({preventScroll:true})});empty.append(b);cards.append(empty)}
  all.href='atolye.html?sinif='+grade;all.replaceChildren(document.createTextNode(grade+'. sınıf atölyesini aç '),node('span','','↗'));
  placeTabIndicator(animateTab);
 }
 grades.forEach(b=>b.addEventListener('click',()=>{grade=Number(b.dataset.previewGrade);render();if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const light=matchMedia('(max-width: 700px), (pointer: coarse)').matches;preview.animate(light?[{opacity:.75,transform:'translateY(6px)'},{opacity:1,transform:'none'}]:[{clipPath:'circle(16% at '+(10+(grade-4)*20)+'% 30%)',opacity:.6},{clipPath:'circle(150% at 50% 50%)',opacity:1}],{duration:light?220:500,easing:'cubic-bezier(.22,1,.36,1)'});}}));
-tabs.forEach((b,i)=>{b.addEventListener('click',()=>{type=b.dataset.previewType;render(true)});b.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-i;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();type=tabs[next].dataset.previewType;render(true);tabs[next].focus()})});
+tabs.forEach((b,i)=>{b.addEventListener('click',()=>{type=b.dataset.previewType;render(true)});b.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-i;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();type=tabs[next].dataset.previewType;render(true);tabs[next].focus({preventScroll:true})})});
 render();
 // Resize and late font loading only snap the decorative marker; content never waits.
 if(tablist&&typeof ResizeObserver!=='undefined'){
