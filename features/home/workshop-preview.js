@@ -32,8 +32,8 @@ function render(animateTab=false){
  status.textContent=items.length?grade+'. sınıf · '+(type==='games'?'Oyunlar':'Etkinlikler')+' · '+Math.min(3,items.length)+' içerik gösteriliyor':'Bu sınıfta henüz oyun bulunmuyor.';
  cards.replaceChildren();
  items.slice(0,3).forEach(x=>{
-  const a=node('a','preview-card');a.href=x.url;
-  const img=node('img');img.src=x.image;img.alt='';img.loading='lazy';img.width=768;img.height=512;
+  const a=node('a','preview-card');a.href=x.url;if(x.preview)a.dataset.previewId=x.preview.id;
+  const img=node('img');img.src=x.image;img.alt=x.preview?.imageAlt||'';img.loading='lazy';img.decoding='async';img.width=x.preview?.imageWidth||768;img.height=x.preview?.imageHeight||512;
   const body=node('div','preview-card-body');body.append(node('span','',x.type.toLocaleUpperCase('tr-TR')+' · '+x.topic.toLocaleUpperCase('tr-TR')),node('h4','',x.title));
   const codes=(x.codes||[]).slice(0,2);body.append(node('span','preview-code',codes.length?codes.join(' · ')+(x.common?' · Ortak keşif':''):'Konu: '+x.topic));
   const go=node('span','preview-card-go',type==='games'?'Oyuna git':'Keşfe başla');go.append(node('span','','↗'));body.append(go);const visual=node('div','preview-visual');visual.append(img,window.UfkoraClay.make(window.UfkoraClay.kind(x.title)));a.append(visual,body);cards.append(a);
