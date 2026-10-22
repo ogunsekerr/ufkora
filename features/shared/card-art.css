@@ -6,3 +6,14 @@
 .feature .feature-visual > .clay-motif {
   display: none;
 }
+
+/* T22 · Preserve the first pilot's full clay garden and its outer fence.
+   Home preview slots vary in height; contain prevents meaningful edge cropping. */
+.preview-card[data-preview-id="bahce-mimari"] .preview-visual,
+.activity-card[data-preview-id="bahce-mimari"] .activity-visual {
+  background: #f4e6d0;
+}
+.preview-card[data-preview-id="bahce-mimari"] .preview-visual > img,
+.activity-card[data-preview-id="bahce-mimari"] .activity-visual > img {
+  object-fit: contain;
+}
