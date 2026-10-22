@@ -1,0 +1,21 @@
+{
+  "task": "T02",
+  "baseline_commit": "006dc2b35bf07cd2fd316a3c779e68acd6b71f1b",
+  "checks": {
+    "catalog_has_16_cards": true,
+    "catalog_has_12_distinct_launch_urls": true,
+    "catalog_has_10_distinct_source_pages": true,
+    "all_catalog_page_paths_exist": true,
+    "all_catalog_images_exist": true,
+    "cube_repeated_for_5_grades_once_in_unique_routes": true,
+    "bank_13_distinct_outcome_modules": true,
+    "bank_26_unique_module_mode_keys": true,
+    "bank_activity_and_game_handlers_present": true,
+    "kesif_3_query_modes_present": true,
+    "every_content_html_accounted_for": true,
+    "source_48_hashes_unchanged": true,
+    "all_internal_mode_markers_found": true
+  },
+  "passed": 13,
+  "scope": "Literal veri çıkarma, kaynak yolları/varlıkları ve hash kontrolü. Oyun başlatma veya UI testi yapılmadı."
+}
