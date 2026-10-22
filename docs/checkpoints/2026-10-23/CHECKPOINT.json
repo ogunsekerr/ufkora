@@ -1,0 +1,14 @@
+{
+  "captured_at_utc": "2026-10-22T21:51:42.563681+00:00",
+  "timezone": "Europe/Istanbul",
+  "source_commit": "006dc2b35bf07cd2fd316a3c779e68acd6b71f1b",
+  "backup_branch": "backup/2026-10-23-pre-design",
+  "repository": "https://github.com/ogunsekerr/ufkora",
+  "deployment_id": "dpl_CvLUcwX99rXzyQ3PvbfvtHGnQggh",
+  "deployment_url": "https://ufkora-lprlp210b-ufkora.vercel.app",
+  "production_domain": "https://ufkora.com",
+  "production_git_sha": "006dc2b35bf07cd2fd316a3c779e68acd6b71f1b",
+  "local_source_matches_git": true,
+  "file_count": 48,
+  "excludes": "Vercel/Resend secret values, external service data, provider settings and domain DNS are not source-code backups."
+}
