@@ -23,3 +23,8 @@
  .catalog-page .catalog-primary{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
  .catalog-page .catalog-filter-drawer[open] .catalog-filter-body{margin-top:16px}
 }
+
+@media(min-width:701px) and (max-width:1000px){
+ .catalog-page .catalog-workbench{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .catalog-page .catalog-filter-drawer{grid-column:1/-1}
+}
