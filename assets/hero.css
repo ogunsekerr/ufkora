@@ -187,3 +187,23 @@
 @media(max-width:1000px){.entrance-motion .portal-section .portal-perspective{width:calc(100% - 32px)}.entrance-motion .preview-body{padding:22px}.entrance-motion .preview-card h4{font-size:22px}}
 @media(max-width:700px){.entrance-motion .portal-section .portal-perspective{width:calc(100% - 20px)}.entrance-motion .workshop-preview{max-height:calc(100svh - 24px)}.entrance-motion .preview-body{padding:16px 14px}.entrance-motion .preview-chrome{font-size:10px;padding:12px 14px}.entrance-motion .preview-live{font-size:10px}.entrance-motion .preview-heading h3{font-size:29px}.entrance-motion .preview-heading .eyebrow{font-size:8px}.entrance-motion .class-world p{font-size:20px}.entrance-motion .class-world .eyebrow{font-size:8px}.entrance-motion #class-world-object{width:95px}.entrance-motion .preview-grades button{font-size:13px;padding:9px 3px;min-height:46px}.entrance-motion .preview-tabs button{font-size:17px}.entrance-motion .preview-status{font-size:13px}.entrance-motion .preview-card h4{font-size:21px}.entrance-motion .preview-card-body>span:first-child{font-size:10px}.entrance-motion .preview-code{font-size:11px}.entrance-motion .preview-card-go{font-size:14px}.entrance-motion .preview-visual{height:100%;min-height:140px}.entrance-motion .preview-footer{font-size:13px}.entrance-motion .preview-footer a{font-size:15px}}
 .entrance-motion .entrance-stage{overflow:clip}
+
+/* Touch devices use composited fades and transforms instead of a viewport mask. */
+.entrance-lite .portal-section{clip-path:none!important;will-change:opacity;opacity:var(--lite-reveal,0);perspective:none;transition:none}
+.entrance-lite .portal-section:before{inset:0;filter:none;background:radial-gradient(ellipse at 15% 20%,#709a7caa,transparent 60%),radial-gradient(ellipse at 85% 75%,#285c46,transparent 65%),linear-gradient(135deg,#47735f,#315b47)}
+.entrance-lite .portal-section .portal-perspective{transform:translate3d(0,var(--lite-y,28px),0);will-change:transform;perspective:none}
+.entrance-lite .hero-immersive .hero-scene{animation:none!important}
+.entrance-lite .hero-immersive .hero-scene img{transform:none!important;filter:none!important;will-change:auto}
+.entrance-lite .hero-immersive .hero-copy{transform:translate3d(0,var(--copy-y,0px),0)}
+.entrance-lite .clay-gateway{width:200px;height:200px;transform:translate(-50%,-50%) scale(var(--lite-ring-scale,.25));opacity:var(--lite-ring-opacity,0);filter:none}
+.entrance-lite .clay-gateway svg{display:none}
+.entrance-lite .clay-gateway:after{content:'';position:absolute;inset:0;border:24px solid #ebc975;border-radius:48% 51% 49% 50%;box-shadow:inset 3px 4px 2px #ab874f,3px 4px 0 #c6a25d}
+.entrance-lite .workshop-preview{box-shadow:0 10px 28px #102f3033}
+.entrance-lite .hero-secondary{backdrop-filter:none}
+.entrance-lite .scene-ornaments,.entrance-lite .clay-motif{filter:none}
+.entrance-lite.entrance-motion .entrance-travelling :is(.clay-cloud,.clay-fraction,.clay-ring,.clay-plus,.hero-grades a){animation-play-state:paused}
+.entrance-lite .entrance-travelling .hero-shell{pointer-events:none}
+.entrance-lite .entrance-travelling .clay-fraction,.entrance-lite .entrance-travelling .clay-ring,.entrance-lite .entrance-travelling .clay-plus{margin:0}
+.entrance-lite .preview-visual .clay-motif{animation:none}
+.class-world>div:first-child{min-width:0;flex:1}
+@media(max-width:360px){.entrance-motion .class-world p{font-size:18px;line-height:1.25}.entrance-motion .class-world .eyebrow{font-size:7px;letter-spacing:.3px}.entrance-motion #class-world-object{width:80px}}
