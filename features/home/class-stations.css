@@ -34,3 +34,5 @@
 #atolye .class-stations{z-index:auto}
 #atolye .station-art{isolation:auto}
 #atolye .station-clay{mix-blend-mode:darken}
+#atolye .station-art:before{z-index:0}
+#atolye .station-clay{z-index:1}
