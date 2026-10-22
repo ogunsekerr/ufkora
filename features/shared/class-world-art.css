@@ -1,0 +1,19 @@
+/* Real clay class objects, shared by the home preview and class catalog header.
+   Uses the same cached scene as the class stations; no new image or JS payload. */
+.class-world{--world-clay-size:539.445% 224.723%;--world-clay-position:25.917% 46.771%}
+.class-world[data-grade="4"],.catalog-page.coral .class-world{--world-clay-position:1.264% 46.771%}
+.class-world[data-grade="5"],.catalog-page.yellow .class-world{--world-clay-position:25.917% 46.771%}
+.class-world[data-grade="6"],.catalog-page.green .class-world{--world-clay-position:49.937% 46.771%}
+.class-world[data-grade="7"],.catalog-page.blue .class-world{--world-clay-size:511.053% 212.895%;--world-clay-position:76.825% 48.951%}
+.class-world[data-grade="8"],.catalog-page.purple .class-world{--world-clay-position:99.874% 46.771%}
+.class-world #class-world-object{width:128px;height:auto;aspect-ratio:1;flex:none;position:relative}
+.class-world #class-world-object .clay-motif{width:100%;height:100%;filter:none;position:absolute;inset:0}
+.class-world #class-world-object .clay-motif svg{display:none}
+.class-world #class-world-object .clay-motif:before{content:'';display:block;width:100%;height:100%;background-image:url('../../assets/clay-journey.webp');background-size:var(--world-clay-size);background-position:var(--world-clay-position);background-repeat:no-repeat;mix-blend-mode:darken;mask-image:linear-gradient(to right,transparent,#000 8%,#000 92%,transparent),linear-gradient(to bottom,transparent,#000 8%,#000 91%,transparent);mask-composite:intersect}
+@media(max-width:700px){
+ .class-world #class-world-object{width:95px;height:auto;aspect-ratio:1}
+}
+@media(max-width:360px){.class-world #class-world-object{width:80px}}
+/* Blend the whole decorative layer, including its existing entrance transform. */
+.class-world #class-world-object .clay-motif{mix-blend-mode:darken}
+.class-world #class-world-object .clay-motif:before{mix-blend-mode:normal}
