@@ -98,3 +98,18 @@
 @keyframes erase-scribble{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 0 100%)}}
 @keyframes eraser-pass{0%{left:0;opacity:0;transform:translateX(-50%) translateY(-12%) rotate(14deg)}5%{opacity:1}15%,35%,55%,75%,95%{transform:translateX(-50%) translateY(17%) rotate(-12deg)}25%,45%,65%,85%{transform:translateX(-50%) translateY(-17%) rotate(14deg)}96%{opacity:1}100%{left:100%;opacity:0;transform:translateX(-50%) translateY(0) rotate(-8deg)}}
 @media(prefers-reduced-motion:no-preference){.word-scribble{display:block;animation:erase-scribble 2.3s 2s linear both}.word-eraser{display:block;animation:eraser-pass 2.3s 2s linear both}}
+
+/* A clay aperture reveals the workshop as the viewer travels through it. */
+.clay-gateway{display:none;pointer-events:none}
+.entrance-motion .clay-gateway{display:block;position:absolute;left:50%;top:55%;width:500px;height:500px;z-index:20;opacity:var(--gateway-opacity,0);transform:translate(-50%,-50%) scale(var(--gateway-scale,.1));will-change:transform,opacity}
+.clay-gateway svg{width:100%;height:100%;overflow:visible}
+.entrance-motion .portal-section{background:radial-gradient(ellipse at 50% 30%,#f8efd8,#e1e6cd 80%);clip-path:circle(var(--gateway-radius,18px) at 50% 55%);opacity:var(--gateway-opacity,0);will-change:clip-path}
+.entrance-motion .portal-perspective{transform:scale(var(--panel-scale,.82));opacity:1;perspective:none}
+.entrance-motion .scene-ornaments{opacity:1}
+.entrance-motion .clay-fraction{margin-left:calc(var(--ornament-spread,0px) * -1)}
+.entrance-motion .clay-ring{margin-right:calc(var(--ornament-spread,0px) * -1)}
+.entrance-motion .clay-plus{margin-right:calc(var(--ornament-spread,0px) * -1);margin-bottom:calc(var(--ornament-spread,0px) * -.5)}
+.entrance-motion .panel-ready .clay-gateway{visibility:hidden}
+.entrance-motion .portal-section .portal-perspective{pointer-events:none}
+.entrance-motion .panel-ready .portal-section .portal-perspective{pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.clay-gateway{display:none!important}}

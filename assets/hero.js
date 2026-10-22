@@ -23,26 +23,31 @@ function render(){
  if(!items.length){const empty=node('div','preview-empty');empty.append(node('h4','','Yeni oyunlara yer açıyoruz.'),node('p','','Bu sınıfın mevcut keşiflerini Etkinlikler sekmesinde bulabilirsin.'));const b=node('button','','Etkinlikleri göster');b.type='button';b.addEventListener('click',()=>{type='activities';render();tabs[0].focus()});empty.append(b);cards.append(empty)}
  all.href='atolye.html?sinif='+grade;all.replaceChildren(document.createTextNode(grade+'. sınıf atölyesini aç '),node('span','','↗'));
 }
-grades.forEach(b=>b.addEventListener('click',()=>{grade=Number(b.dataset.previewGrade);render()}));
+grades.forEach(b=>b.addEventListener('click',()=>{grade=Number(b.dataset.previewGrade);render();if(!matchMedia('(prefers-reduced-motion: reduce)').matches){preview.animate([{clipPath:'circle(16% at '+(10+(grade-4)*20)+'% 30%)',opacity:.6},{clipPath:'circle(150% at 50% 50%)',opacity:1}],{duration:500,easing:'cubic-bezier(.22,1,.36,1)'});}}));
 tabs.forEach((b,i)=>{b.addEventListener('click',()=>{type=b.dataset.previewType;render()});b.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-i;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();type=tabs[next].dataset.previewType;render();tabs[next].focus()})});
 render();
+const gateway=document.querySelector('.clay-gateway');
 const motion=matchMedia('(prefers-reduced-motion: reduce)'),sequence=document.getElementById('entrance-sequence');let queued=false;
 const clamp=n=>Math.max(0,Math.min(1,n));
 function update(){
  queued=false;const enabled=!motion.matches;document.body.classList.toggle('entrance-motion',enabled);
- if(!enabled){preview.removeAttribute('style');return}
- const rect=sequence.getBoundingClientRect(),range=sequence.offsetHeight-innerHeight,p=clamp(-rect.top/Math.max(1,range)),reveal=clamp((p-.12)/.58),fade=clamp((p-.05)/.42);
+ if(!enabled){preview.removeAttribute('style');preview.inert=false;return}
+ const rect=sequence.getBoundingClientRect(),range=sequence.offsetHeight-innerHeight,p=clamp(-rect.top/Math.max(1,range)),travel=clamp((p-.1)/.65),ease=travel*travel*(3-2*travel),fade=clamp((p-.03)/.25);
+ const radius=18+Math.hypot(innerWidth,innerHeight)*.7*Math.pow(ease,1.65);
  sequence.style.setProperty('--entrance-progress',p.toFixed(4));
  sequence.style.setProperty('--copy-opacity',(1-fade).toFixed(3));
- sequence.style.setProperty('--copy-y',(-150*fade).toFixed(1)+'px');
- sequence.style.setProperty('--copy-scale',(1-.18*fade).toFixed(3));
- sequence.style.setProperty('--scene-scale',(1.02+.16*p).toFixed(3));
- sequence.style.setProperty('--scene-blur',(4*p).toFixed(2)+'px');
- sequence.style.setProperty('--panel-y',((1-reveal)*110).toFixed(2)+'vh');
- sequence.style.setProperty('--panel-scale',(.55+.45*reveal).toFixed(3));
- sequence.style.setProperty('--panel-angle',(28*(1-reveal)).toFixed(2)+'deg');
- sequence.style.setProperty('--panel-opacity',clamp(reveal*4).toFixed(3));
- sequence.classList.toggle('panel-ready',p>=.7);
+ sequence.style.setProperty('--copy-y',(-100*fade).toFixed(1)+'px');
+ sequence.style.setProperty('--copy-scale',(1+.12*fade).toFixed(3));
+ sequence.style.setProperty('--scene-scale',(1.02+.65*ease).toFixed(3));
+ sequence.style.setProperty('--scene-blur',(2*ease).toFixed(2)+'px');
+ sequence.style.setProperty('--gateway-radius',radius.toFixed(2)+'px');
+ sequence.style.setProperty('--gateway-scale',(radius/176).toFixed(4));
+ sequence.style.setProperty('--gateway-opacity',clamp((p-.07)/.08).toFixed(3));
+ sequence.style.setProperty('--panel-scale',(.82+.18*ease).toFixed(3));
+ sequence.style.setProperty('--ornament-spread',(ease*170).toFixed(2)+'px');
+ sequence.classList.toggle('panel-ready',p>=.74);
+ preview.inert=p<.74;
+
 }
 function queue(){if(!queued){queued=true;requestAnimationFrame(update)}}
 document.querySelectorAll('a[href="#atolye-onizleme"]').forEach(a=>a.addEventListener('click',e=>{if(motion.matches)return;e.preventDefault();const top=scrollY+sequence.getBoundingClientRect().top+(sequence.offsetHeight-innerHeight)*.98;window.scrollTo({top,behavior:'smooth'})}));
