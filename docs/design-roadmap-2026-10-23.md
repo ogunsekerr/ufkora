@@ -1,6 +1,6 @@
 # UFKORA · Kontrollü tasarım uygulama planı
 
-Tarih: 23 Ekim 2026 (Türkiye). Bu belge plan ve takip listesidir; tasarım uygulaması başlamadı.
+Tarih: 23 Ekim 2026 (Türkiye). Bu belge plan ve takip listesidir; T01 koruma kaydı tamamlandı, görsel uygulama başlamadı.
 
 ## Güvenli başlangıç
 
@@ -27,9 +27,9 @@ Yedek dal geliştirme için kullanılmaz. Kaynak ZIP'i; API anahtarları, Vercel
 3. Görev kartı: amaç → ilgili dosyalar → değişiklik → kabul ölçütü → doğrulama → commit → varsa eksik.
 4. Bir iş yalnız kod yazıldığı için işaretlenmez. İlgili davranış kontrol edilince tamamlanır; gerçek cihaz testi yapılmadıysa ayrı bekleyen madde kalır.
 5. Tamamlanan görev geri bildirimi: `Txx tamamlandı · ne değişti · neyle doğrulandı · commit/preview · sıradaki görev`. Gerçek zamanlı arka plan çalışması varsayılmaz; çalışma aktif oturumda sürer.
-6. Her mikro görev ayrı commit; her görsel aşama ayrı preview/PR. Ana siteye yayın ancak ilgili kontrol kapısından sonra ve kullanıcı onayıyla.
+6. Kullanıcı talimatı: HER görev sonunda dur, kanıtları sun ve bir sonraki görev için açık onay bekle. Her mikro görev ayrı commit; her görsel aşama ayrı preview/PR. Ana siteye yayın ancak ilgili kontrol kapısından sonra ve kullanıcı onayıyla.
 7. Beğenilmeyen görev commit'i kendi dalında geri alınır; kabul edilmiş başka işleri geri almak gerekmez. Tam geri dönüşte sabit yedek commit'ten yeni restore dalı/PR açılır. Main'e force-push veya hard reset uygulanmaz.
-8. Tasarım yönü değişikliği, yeni ücretli araç veya yeni runtime kütüphanesi ayrı karardır. İlerlemek için her küçük kod adımında tekrar izin istenmez; kullanıcı tarafından onaylanan paket içinde devam edilir.
+8. Tasarım yönü değişikliği, yeni ücretli araç veya yeni runtime kütüphanesi ayrı karardır. Kullanıcının son talimatına göre her mikro görevden sonra onay beklenir; paket onayı sonraki görevlere otomatik geçiş izni sayılmaz.
 
 ## Token tüketimini azaltma
 
@@ -56,7 +56,7 @@ Altıgenin mevcut evreleri: yaklaşma/geçiş 0.08–0.62; panelin hareket edere
 
 Odak: `features/entrance/`, `features/home/`, `catalog.js`. Tasarım değişikliği yok.
 
-- [ ] T01 — Korunan davranışları tek referans dosyasına çıkar. **Bitti ölçütü:** logo/font/renk, giriş evreleri ve sınıf URL'leri kayıtta; yeniden tasarım yok.
+- [x] T01 — Korunan davranışları tek referans dosyasına çıkar. **Bitti ölçütü:** logo/font/renk, giriş evreleri ve sınıf URL'leri kayıtta; yeniden tasarım yok.
 - [ ] T02 — İçerik envanterini çıkar. **Bitti ölçütü:** katalog girdileri, ortak URL'ler, query ile açılan oyunlar ve banka içindeki alt oyunlar ayrı listeli; aynı oyun iki kez sayılmıyor.
 - [ ] T03 — Masaüstü altıgen akışını kaydet. **Bitti ölçütü:** yaklaşma, tam geçiş, kademeli panel, hızlı ve geri scroll ile buton yolu kontrol edildi.
 - [ ] T04 — Mobil ve reduced-motion başlangıcını kaydet. **Bitti ölçütü:** içerik erişilir, mobil hafif yol çalışır; ölçülmeyen FPS iddiası yok.
@@ -223,10 +223,10 @@ Bunlar şimdi yeni soru olarak çalışmayı durdurmaz; ilgili taslak hazır old
 
 ## Başlangıç ilerleme kaydı
 
-- Tamamlanan: B01–B04.
-- Bekleyen: T01–T68 ve T02'den sonra açılacak Yxx kartları.
-- Aktif uygulama: yok; bu tur yedekleme ve planlama.
-- Bir sonraki görev: T01; sonra T02–T05.
+- Tamamlanan: B01–B04 ve T01.
+- Bekleyen: T02–T68 ve T02'den sonra açılacak Yxx kartları.
+- Aktif uygulama: yok; T01 tamamlandı, kullanıcı onayı bekleniyor.
+- Bir sonraki görev: T02; kullanıcı onayı gelmeden başlamaz.
 - Son güvenli kaynak commit'i: `006dc2b35bf07cd2fd316a3c779e68acd6b71f1b`.
 - Araç durumu: UI UX Pro Max, Frontend Design, Design Taste ve dört ek skill kaydedildi; Motion Docs araması çalışıyor; 21st normal bileşen araması hatalı, diğer doğrulanan yollar kullanılabilir. Her görevde erişim varmış gibi varsayılmaz.
 
