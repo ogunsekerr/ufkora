@@ -231,7 +231,10 @@ window.UFKORA_CATALOG = [
     "title": "Işık Rotası",
     "preview": {
       "id": "isik-rotasi",
-      "goal": "Açıyı ölçüp bütünler açıyı hesaplayarak ışığı hedefe yönlendir."
+      "goal": "Açıyı ölçüp bütünler açıyı hesaplayarak ışığı hedefe yönlendir.",
+      "imageAlt": "Oyun hamurundan mavi ışık kaynağı, ortada sarı çerçeveli ayna ve sağda kırmızı hedef.",
+      "imageWidth": 768,
+      "imageHeight": 512
     },
     "desc": "Açıölçer okuma ve bütünler açı hesabıyla ışığı hedefe yönlendir.",
     "tag": "5. SINIF · OYUN",
@@ -297,7 +300,10 @@ window.UFKORA_CATALOG = [
     "title": "Sayı Kargo",
     "preview": {
       "id": "sayi-kargo",
-      "goal": "Sayıları milyonlar, binler ve birler bölüklerine ayırıp doğru bölüklere yerleştir."
+      "goal": "Sayıları milyonlar, binler ve birler bölüklerine ayırıp doğru bölüklere yerleştir.",
+      "imageAlt": "Oyun hamurundan bir kargo bandında kırmızı, mavi ve sarı kasalara ayrılmış küpler.",
+      "imageWidth": 768,
+      "imageHeight": 512
     },
     "desc": "Milyonlar, binler ve birler bölüklerini yerleştirerek sayıları oluştur.",
     "tag": "5. SINIF · OYUN",
