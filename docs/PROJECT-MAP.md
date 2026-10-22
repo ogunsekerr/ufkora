@@ -28,3 +28,5 @@
 Önizleme çıktıları `preview-public/` içindedir; kaynak veya yayın dosyası olarak commit edilmez.
 
 Fare efekti sadece ince işaretçili, hover destekleyen masaüstünde çalışır. `features/pointer/` içindeki tek deformasyon alanı fare hareketlerini birleştirir; yerel pikselleri özgün çözünürlükte yeniden örnekler. Önceden bulanıklaştırılmış kopyalar ve ayrı dairesel lekeler kullanılmaz. Iz 26 px aralıklı kuvvet alanında yumuşar ve sönümlenir. Etki bitince çizim durur. Kaydırmada ve dokunmatikte devre dışıdır.
+
+Hız tepkisi: hareket mesafesi / geçen süre (px/ms). Kuvvet ve etki yarıçapı bu hızla artar. Renkli yansımalar deformasyon alanının sıkışma eğiminden türetilir; düşük genliklidir ve alanla birlikte söner.
