@@ -26,8 +26,25 @@ function render(){
 grades.forEach(b=>b.addEventListener('click',()=>{grade=Number(b.dataset.previewGrade);render()}));
 tabs.forEach((b,i)=>{b.addEventListener('click',()=>{type=b.dataset.previewType;render()});b.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-i;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();type=tabs[next].dataset.previewType;render();tabs[next].focus()})});
 render();
-const motion=matchMedia('(prefers-reduced-motion: reduce)'),desktop=matchMedia('(min-width: 701px)'),section=document.getElementById('atolye-onizleme'),scene=document.querySelector('.hero-immersive .hero-scene');let queued=false;
-function update(){queued=false;const enabled=!motion.matches&&desktop.matches;document.body.classList.toggle('hero-motion',enabled);if(!enabled){scene.style.removeProperty('--landscape-shift');return}const r=section.getBoundingClientRect(),progress=Math.max(0,Math.min(1,(innerHeight-r.top)/(innerHeight*.85)));preview.style.setProperty('--panel-y',(45*(1-progress)).toFixed(1)+'px');preview.style.setProperty('--panel-angle',(7*(1-progress)).toFixed(2)+'deg');preview.style.setProperty('--panel-scale',(.92+.08*progress).toFixed(3));scene.style.setProperty('--landscape-shift',Math.min(scrollY*.08,65).toFixed(1)+'px')}
+const motion=matchMedia('(prefers-reduced-motion: reduce)'),sequence=document.getElementById('entrance-sequence');let queued=false;
+const clamp=n=>Math.max(0,Math.min(1,n));
+function update(){
+ queued=false;const enabled=!motion.matches;document.body.classList.toggle('entrance-motion',enabled);
+ if(!enabled){preview.removeAttribute('style');return}
+ const rect=sequence.getBoundingClientRect(),range=sequence.offsetHeight-innerHeight,p=clamp(-rect.top/Math.max(1,range)),reveal=clamp((p-.12)/.58),fade=clamp((p-.05)/.42);
+ sequence.style.setProperty('--entrance-progress',p.toFixed(4));
+ sequence.style.setProperty('--copy-opacity',(1-fade).toFixed(3));
+ sequence.style.setProperty('--copy-y',(-150*fade).toFixed(1)+'px');
+ sequence.style.setProperty('--copy-scale',(1-.18*fade).toFixed(3));
+ sequence.style.setProperty('--scene-scale',(1.02+.16*p).toFixed(3));
+ sequence.style.setProperty('--scene-blur',(4*p).toFixed(2)+'px');
+ sequence.style.setProperty('--panel-y',((1-reveal)*110).toFixed(2)+'vh');
+ sequence.style.setProperty('--panel-scale',(.55+.45*reveal).toFixed(3));
+ sequence.style.setProperty('--panel-angle',(28*(1-reveal)).toFixed(2)+'deg');
+ sequence.style.setProperty('--panel-opacity',clamp(reveal*4).toFixed(3));
+ sequence.classList.toggle('panel-ready',p>=.7);
+}
 function queue(){if(!queued){queued=true;requestAnimationFrame(update)}}
-addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue,{passive:true});motion.addEventListener('change',queue);desktop.addEventListener('change',queue);update();
+document.querySelectorAll('a[href="#atolye-onizleme"]').forEach(a=>a.addEventListener('click',e=>{if(motion.matches)return;e.preventDefault();const top=scrollY+sequence.getBoundingClientRect().top+(sequence.offsetHeight-innerHeight)*.98;window.scrollTo({top,behavior:'smooth'})}));
+addEventListener('scroll',queue,{passive:true});addEventListener('resize',queue,{passive:true});motion.addEventListener('change',queue);update();
 })();
