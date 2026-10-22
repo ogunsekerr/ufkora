@@ -7,3 +7,9 @@
 .entrance-lite .clay-gateway:after{display:none}
 .entrance-lite .clay-gateway path{filter:none}
 @media(prefers-reduced-motion:reduce){.clay-gateway{display:none!important}}
+
+/* Draw at the current viewport size: never enlarge a rasterized SVG layer. */
+.entrance-motion .clay-gateway,.entrance-lite .clay-gateway{inset:0;left:0;top:0;width:100%;height:100%;transform:none;will-change:opacity;filter:none}
+.entrance-motion .clay-gateway svg{display:block;width:100%;height:100%;overflow:hidden;transform:none}
+.entrance-motion:not(.entrance-lite) .portal-perspective{transform:none;will-change:auto}
+.entrance-motion .hero-immersive .hero-scene img{filter:none;will-change:transform}
