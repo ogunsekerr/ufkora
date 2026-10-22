@@ -4,7 +4,6 @@
 
 | Sorun / değişiklik | İlk bakılacak dosyalar |
 | --- | --- |
-| Fare ile su dalgası / yerel kırılma | `features/pointer/water-ripple.js`, `features/pointer/water-ripple.css` |
 | Kapıdan geçiş, kaydırma, mobil performans | `features/entrance/transition.js`, `features/entrance/transition.css` |
 | Ana sayfa atölye önizlemesi, sınıf / oyun sekmeleri | `features/home/workshop-preview.js` |
 | Ana sayfa görünümü, boyutlar, tipografi | `features/home/home.css`, `index.html` |
@@ -27,6 +26,5 @@
 
 Önizleme çıktıları `preview-public/` içindedir; kaynak veya yayın dosyası olarak commit edilmez.
 
-Fare efekti sadece ince işaretçili, hover destekleyen masaüstünde çalışır. `features/pointer/` içindeki tek deformasyon alanı fare hareketlerini birleştirir; yerel pikselleri özgün çözünürlükte yeniden örnekler. Önceden bulanıklaştırılmış kopyalar ve ayrı dairesel lekeler kullanılmaz. Iz 26 px aralıklı kuvvet alanında yumuşar ve sönümlenir. Etki bitince çizim durur. Kaydırmada ve dokunmatikte devre dışıdır.
 
-Hız tepkisi: hareket mesafesi / geçen süre (px/ms). Kuvvet ve etki yarıçapı bu hızla artar. Renkli yansımalar deformasyon alanının sıkışma eğiminden türetilir; düşük genliklidir ve alanla birlikte söner.
+Geçiş sırası: önce kapı yaklaşır (0.08–0.62), sonra panel hareket ederek belirir (0.68–0.94). Panel kapı geçilmeden gösterilmez.

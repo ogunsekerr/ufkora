@@ -1,15 +1,15 @@
-/* Polygon doorway: enlarge a six-sided clay opening, then enter the workshop. */
-.entrance-motion .portal-section{clip-path:var(--gateway-aperture,polygon(50% 50%,50% 50%,50% 50%));will-change:clip-path,opacity}
-.entrance-motion .clay-gateway{transform:translate(-50%,-50%) scale(var(--gateway-scale,.33));filter:none}
-.entrance-lite .portal-section{clip-path:none!important;will-change:opacity}
-.entrance-lite .clay-gateway{width:260px;height:260px;transform:translate(-50%,-50%) scale(var(--lite-ring-scale,.5));opacity:var(--lite-ring-opacity,0);will-change:transform,opacity}
-.entrance-lite .clay-gateway svg{display:block}
-.entrance-lite .clay-gateway:after{display:none}
-.entrance-lite .clay-gateway path{filter:none}
-@media(prefers-reduced-motion:reduce){.clay-gateway{display:none!important}}
-
-/* Draw at the current viewport size: never enlarge a rasterized SVG layer. */
-.entrance-motion .clay-gateway,.entrance-lite .clay-gateway{inset:0;left:0;top:0;width:100%;height:100%;transform:none;will-change:opacity;filter:none}
+/* Door approach and workshop arrival are separate scroll phases. */
+.entrance-motion .entrance-sequence{height:300svh}
+.entrance-motion .portal-section{clip-path:var(--gateway-aperture,polygon(50% 50%,50% 50%,50% 50%));will-change:clip-path;opacity:1}
+.entrance-motion .portal-perspective{transform:translate3d(0,var(--panel-y,130px),0) rotateX(var(--panel-angle,6deg));opacity:var(--panel-opacity,0);will-change:transform,opacity;transform-origin:center center}
+.entrance-motion .clay-gateway,.entrance-lite .clay-gateway{inset:0;left:0;top:0;width:100%;height:100%;transform:none;opacity:var(--gateway-opacity,0);will-change:opacity;filter:none}
 .entrance-motion .clay-gateway svg{display:block;width:100%;height:100%;overflow:hidden;transform:none}
-.entrance-motion:not(.entrance-lite) .portal-perspective{transform:none;will-change:auto}
+.entrance-motion .clay-gateway:after{display:none}
+.entrance-motion .clay-gateway path{filter:none}
+.entrance-motion .door-passed .clay-gateway{visibility:hidden}
 .entrance-motion .hero-immersive .hero-scene img{filter:none;will-change:transform}
+/* Touch devices keep a lightweight opacity/translation path. */
+.entrance-lite .entrance-sequence{height:280svh}
+.entrance-lite .portal-section{clip-path:none!important;opacity:var(--lite-reveal,0);will-change:opacity;perspective:none}
+.entrance-lite .portal-section .portal-perspective{transform:translate3d(0,var(--panel-y,64px),0);opacity:var(--panel-opacity,0)}
+@media(prefers-reduced-motion:reduce){.clay-gateway{display:none!important}}

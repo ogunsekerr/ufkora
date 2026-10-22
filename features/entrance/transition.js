@@ -11,33 +11,30 @@ function update(){
  if(!enabled){preview.inert=false;return}
  if(!metrics)metrics={top:scrollY+sequence.getBoundingClientRect().top,range:Math.max(1,sequence.offsetHeight-innerHeight),diagonal:Math.hypot(innerWidth,innerHeight)};
  const p=clamp((scrollY-metrics.top)/metrics.range);if(Math.abs(p-lastProgress)<.0008)return;lastProgress=p;
- const light=lightweight.matches,travel=clamp((p-.1)/.65),ease=travel*travel*(3-2*travel),fade=clamp((p-.03)/.25);
- const radius=60+metrics.diagonal*.8*Math.pow(ease,1.65);
- drawDoor(light?45+metrics.diagonal*.85*ease:radius);
+ const light=lightweight.matches,travel=clamp((p-.08)/.54),ease=travel*travel*(3-2*travel),fade=clamp((p-.03)/.2);
+ // Finish passing through the door before revealing any workshop content.
+ const cover=Math.max(innerWidth*.5,(innerWidth*.25+innerHeight*.55*Math.sqrt(3)/2))/(Math.sqrt(3)/2)+24;
+ const radius=60+(cover-60)*ease;
+ const reveal=clamp((p-.68)/.26),arrival=reveal*reveal*(3-2*reveal);
+ drawDoor(radius);
  sequence.classList.toggle('entrance-travelling',p>.04);
- if(light){
-  sequence.style.setProperty('--copy-opacity',(1-fade).toFixed(3));
-  sequence.style.setProperty('--copy-y',(-40*fade).toFixed(1)+'px');
-  sequence.style.setProperty('--lite-reveal',clamp((p-.2)/.45).toFixed(3));
-  sequence.style.setProperty('--lite-y',((1-ease)*28).toFixed(1)+'px');
-  sequence.style.setProperty('--lite-ring-scale',(.5+ease*7).toFixed(3));
-  sequence.style.setProperty('--lite-ring-opacity',(clamp((p-.06)/.12)*(1-clamp((p-.5)/.18))).toFixed(3));
-  sequence.classList.toggle('panel-ready',p>=.68);preview.inert=p<.68;return;
- }
- sequence.style.setProperty('--entrance-progress',p.toFixed(4));
+ sequence.classList.toggle('door-passed',p>=.66);
  sequence.style.setProperty('--copy-opacity',(1-fade).toFixed(3));
- sequence.style.setProperty('--copy-y',(-100*fade).toFixed(1)+'px');
+ sequence.style.setProperty('--copy-y',(-(light?40:100)*fade).toFixed(1)+'px');
  sequence.style.setProperty('--copy-scale',(1+.12*fade).toFixed(3));
  sequence.style.setProperty('--scene-scale',(1.02+.1*ease).toFixed(3));
- sequence.style.setProperty('--scene-blur',(0).toFixed(2)+'px');
- const cx=innerWidth*.5,cy=innerHeight*.55;const points=Array.from({length:6},(_,i)=>{const a=(-90+i*60)*Math.PI/180;return (cx+Math.cos(a)*radius).toFixed(1)+'px '+(cy+Math.sin(a)*radius).toFixed(1)+'px'});
+ sequence.style.setProperty('--scene-blur','0px');
+ sequence.style.setProperty('--panel-opacity',arrival.toFixed(3));
+ sequence.style.setProperty('--panel-y',((1-arrival)*(light?64:130)).toFixed(1)+'px');
+ sequence.style.setProperty('--panel-angle',((1-arrival)*(light?0:6)).toFixed(2)+'deg');
+ sequence.style.setProperty('--lite-reveal',clamp((p-.48)/.14).toFixed(3));
+ sequence.style.setProperty('--gateway-opacity',(clamp((p-.04)/.1)*(1-clamp((p-.62)/.04))).toFixed(3));
+ const cx=innerWidth*.5,cy=innerHeight*.55;
+ const points=Array.from({length:6},(_,i)=>{const a=(-90+i*60)*Math.PI/180;return (cx+Math.cos(a)*radius).toFixed(1)+'px '+(cy+Math.sin(a)*radius).toFixed(1)+'px'});
  sequence.style.setProperty('--gateway-aperture','polygon('+points.join(',')+')');
- sequence.style.setProperty('--gateway-scale',(radius/181).toFixed(4));
- sequence.style.setProperty('--gateway-opacity',clamp((p-.07)/.08).toFixed(3));
- sequence.style.setProperty('--panel-scale',(.82+.18*ease).toFixed(3));
  sequence.style.setProperty('--ornament-spread',(ease*170).toFixed(2)+'px');
- sequence.classList.toggle('panel-ready',p>=.74);
- preview.inert=p<.74;
+ sequence.classList.toggle('panel-ready',p>=.94);
+ preview.inert=p<.94;
 
 }
 function queue(){if(!queued){queued=true;requestAnimationFrame(update)}}
