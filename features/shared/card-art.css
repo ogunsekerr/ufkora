@@ -17,3 +17,18 @@
 .activity-card[data-preview-id="bahce-mimari"] .activity-visual > img {
   object-fit: contain;
 }
+
+/* T23–T24 · Keep the cargo compartments and the complete source–mirror–target
+   scene visible in short preview slots. Existing zoom remains in control. */
+.preview-card[data-preview-id="sayi-kargo"] .preview-visual,
+.activity-card[data-preview-id="sayi-kargo"] .activity-visual,
+.preview-card[data-preview-id="isik-rotasi"] .preview-visual,
+.activity-card[data-preview-id="isik-rotasi"] .activity-visual {
+  background: #f4e6d0;
+}
+.preview-card[data-preview-id="sayi-kargo"] .preview-visual > img,
+.activity-card[data-preview-id="sayi-kargo"] .activity-visual > img,
+.preview-card[data-preview-id="isik-rotasi"] .preview-visual > img,
+.activity-card[data-preview-id="isik-rotasi"] .activity-visual > img {
+  object-fit: contain;
+}
