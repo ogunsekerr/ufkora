@@ -27,4 +27,6 @@
 
 Önizleme çıktıları `preview-public/` içindedir; kaynak veya yayın dosyası olarak commit edilmez.
 
-Fare efekti sadece ince işaretçili, hover destekleyen masaüstünde çalışır. En fazla iki adet 420×420 piksel yerel kırılma alanı (200×200 örnekleme), 1150 ms ömür, boşta çizim yok. Geçiş/kaydırma, dokunmatik ve azaltılmış hareket tercihinde durur.
+Fare efekti sadece ince işaretçili, hover destekleyen masaüstünde çalışır. En fazla iki adet 520×520 piksel yerel kırılma alanı (200×200 örnekleme), 1250 ms ömür, boşta çizim yok. Geçiş/kaydırma, dokunmatik ve azaltılmış hareket tercihinde durur.
+
+Efekt eş merkezli halkalar çizmez: fare yönüne bağlı, yumuşak sınırlı düzensiz mercek deformasyonu ve yerel bulanıklık uygular.
