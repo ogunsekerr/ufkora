@@ -1,0 +1,9 @@
+/* Polygon doorway: enlarge a six-sided clay opening, then enter the workshop. */
+.entrance-motion .portal-section{clip-path:var(--gateway-aperture,polygon(50% 50%,50% 50%,50% 50%));will-change:clip-path,opacity}
+.entrance-motion .clay-gateway{transform:translate(-50%,-50%) scale(var(--gateway-scale,.33));filter:none}
+.entrance-lite .portal-section{clip-path:none!important;will-change:opacity}
+.entrance-lite .clay-gateway{width:260px;height:260px;transform:translate(-50%,-50%) scale(var(--lite-ring-scale,.5));opacity:var(--lite-ring-opacity,0);will-change:transform,opacity}
+.entrance-lite .clay-gateway svg{display:block}
+.entrance-lite .clay-gateway:after{display:none}
+.entrance-lite .clay-gateway path{filter:none}
+@media(prefers-reduced-motion:reduce){.clay-gateway{display:none!important}}

@@ -174,7 +174,7 @@
 @media(max-width:700px){.clay-fraction{bottom:7%;left:4%}.clay-ring{bottom:7%;right:4%}}
 /* Bring the workshop forward against a soft green landscape. */
 .entrance-motion .portal-section{background:#37634e;isolation:isolate}
-.entrance-motion .portal-section:before{content:'';position:absolute;inset:-45px;z-index:-1;background:linear-gradient(135deg,#204f42b8,#547b56c7),url('clay-hero.webp') center 65%/cover no-repeat;filter:blur(22px);pointer-events:none}
+.entrance-motion .portal-section:before{content:'';position:absolute;inset:-45px;z-index:-1;background:linear-gradient(135deg,#204f42b8,#547b56c7),url('../../assets/clay-hero.webp') center 65%/cover no-repeat;filter:blur(22px);pointer-events:none}
 .entrance-motion .portal-section .portal-perspective{width:min(1680px,calc(100% - 64px));max-width:none}
 .entrance-motion .workshop-preview{max-height:calc(100svh - 40px);box-shadow:0 22px 70px #102f3050,0 0 0 1px #fff8}
 .entrance-motion .preview-chrome{font-size:14px;padding:15px 28px}.entrance-motion .preview-live{font-size:13px}
