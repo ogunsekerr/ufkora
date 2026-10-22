@@ -1,0 +1,8 @@
+/* Clay photography already identifies each game/activity.
+   Suppress only duplicate flat-vector corner decorations inside card visuals.
+   Class-world objects, learning models, metadata and image zoom stay untouched. */
+.preview-card .preview-visual > .clay-motif,
+.activity-card .activity-visual > .clay-motif,
+.feature .feature-visual > .clay-motif {
+  display: none;
+}
