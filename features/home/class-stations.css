@@ -1,0 +1,27 @@
+/* Class navigation only. Mobile's existing scene stays until the T14 layout. */
+#atolye .class-stations-scene{position:relative;isolation:isolate;margin-block:24px 0}
+#atolye .class-stations-mobile-scene{display:block;width:100%;height:auto;aspect-ratio:1942/809;object-fit:contain}
+#atolye .class-stations ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#atolye .class-station{min-width:0}
+#atolye .class-station>a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:88px;padding:16px 8px;border-radius:12px;color:var(--ink);background:color-mix(in srgb,var(--class-bg) 35%,var(--cream));text-align:center}
+#atolye .station-art,#atolye .station-caption{display:none}
+#atolye .station-grade{font:600 22px/1.25 'Outfit',sans-serif}
+#atolye .station-action{font-size:15px;line-height:1.5;font-weight:800;min-height:24px}
+#atolye .class-station>a:focus-visible{outline:3px solid var(--forest);outline-offset:5px}
+@media(min-width:1001px){
+ #atolye .class-stations-mobile-scene{display:none}
+ #atolye .class-stations ol{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+ #atolye .class-station>a{justify-content:flex-start;gap:0;background:transparent;border-radius:18px;padding:0 8px 20px;min-height:380px}
+ #atolye .station-art{display:flex;align-items:center;justify-content:center;position:relative;height:240px;width:100%;margin-bottom:16px}
+ #atolye .station-art:after{content:'';position:absolute;z-index:-1;bottom:28px;left:18%;width:64%;height:16px;border-radius:50%;background:color-mix(in srgb,var(--ink) 9%,transparent)}
+ #atolye .station-art svg{display:block;width:min(100%,190px);height:176px;overflow:visible}
+ #atolye .class-station:nth-child(2) .station-art svg,#atolye .class-station:nth-child(4) .station-art svg{translate:0 -36px}
+ #atolye .class-station:nth-child(2) .station-art:after,#atolye .class-station:nth-child(4) .station-art:after{bottom:64px}
+ #atolye .station-grade{font-size:clamp(25px,2.1vw,31px)}
+ #atolye .station-grade:before{content:'';display:inline-block;width:9px;height:9px;margin-right:9px;border-radius:50%;background:var(--class-bg);vertical-align:middle}
+ #atolye .station-caption{display:block;font-size:16px;line-height:1.5;margin-top:12px;min-height:48px;max-width:220px;text-wrap:balance}
+ #atolye .station-action{margin-top:12px;display:inline-flex;gap:14px;align-items:center;min-height:48px}
+ #atolye .class-stations-scene{margin-top:0}
+ #atolye .quiet-note{margin-top:24px}
+}
+@media(max-width:380px){#atolye .class-stations ol{grid-template-columns:repeat(2,minmax(0,1fr))}}
