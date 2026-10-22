@@ -177,6 +177,13 @@ window.UFKORA_CATALOG = [
     "grade": 5,
     "url": "oyun-atolyesi/bahce.html",
     "title": "Bahçe Mimarı",
+    "preview": {
+      "id": "bahce-mimari",
+      "goal": "Dikdörtgen bir bahçenin kenarlarını değiştirerek alan ve çevre ilişkisini keşfet.",
+      "imageAlt": "Oyun hamurundan kare bölmeli bir bahçe; çevresinde kırmızı çit, içinde bitkiler ve küçük bir gölet.",
+      "imageWidth": 768,
+      "imageHeight": 512
+    },
     "desc": "Dikdörtgenlerde alan ve çevre ilişkilerini 8 görevle keşfet.",
     "tag": "5. SINIF · OYUN",
     "type": "Oyun",
@@ -222,6 +229,10 @@ window.UFKORA_CATALOG = [
     "grade": 5,
     "url": "oyun-atolyesi/kesif.html?oyun=isik",
     "title": "Işık Rotası",
+    "preview": {
+      "id": "isik-rotasi",
+      "goal": "Açıyı ölçüp bütünler açıyı hesaplayarak ışığı hedefe yönlendir."
+    },
     "desc": "Açıölçer okuma ve bütünler açı hesabıyla ışığı hedefe yönlendir.",
     "tag": "5. SINIF · OYUN",
     "type": "Oyun",
@@ -284,6 +295,10 @@ window.UFKORA_CATALOG = [
     "grade": 5,
     "url": "oyun-atolyesi/kesif.html?oyun=kargo",
     "title": "Sayı Kargo",
+    "preview": {
+      "id": "sayi-kargo",
+      "goal": "Sayıları milyonlar, binler ve birler bölüklerine ayırıp doğru bölüklere yerleştir."
+    },
     "desc": "Milyonlar, binler ve birler bölüklerini yerleştirerek sayıları oluştur.",
     "tag": "5. SINIF · OYUN",
     "type": "Oyun",
