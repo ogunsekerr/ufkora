@@ -90,3 +90,11 @@
 }
 @media(max-width:1000px){.clay-fraction{left:3%;width:64px;height:74px;font-size:48px;bottom:18%}.clay-ring{right:3%;width:75px;height:75px;border-width:17px;bottom:19%}.clay-plus{right:18%;bottom:9%}.cloud-left{left:-50px;top:27%;scale:.7}.cloud-right{right:-55px;top:19%;scale:.6}}
 @media(max-width:700px){.clay-cloud{opacity:.8}.cloud-left{top:16%;left:-80px;scale:.5}.cloud-right{top:13%;right:-75px;scale:.5}.clay-fraction{width:47px;height:55px;font-size:36px;bottom:16%;left:5%;border-radius:16px}.clay-ring{width:58px;height:58px;border-width:13px;right:6%;bottom:18%}.clay-plus{display:none}}
+/* Hand-drawn cover on “keşfet”, wiped away once the heading settles. */
+.reveal-word{position:relative;display:inline-block;white-space:nowrap}
+.word-scribble{display:none;position:absolute;inset:-.04em -.035em -.02em;z-index:1;pointer-events:none;clip-path:inset(0 0 0 0)}
+.word-scribble svg{display:block;width:100%;height:100%;overflow:visible}
+.word-eraser{display:none;position:absolute;z-index:2;top:22%;left:0;width:.25em;height:.62em;border-radius:.06em;background:linear-gradient(180deg,#f7edda 0 67%,#d9cdb9 67%);border:1px solid #fff6;box-shadow:.025em .04em .06em #142d2c40;transform:translateX(-50%) rotate(12deg);pointer-events:none;opacity:0}
+@keyframes erase-scribble{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 0 100%)}}
+@keyframes eraser-pass{0%{left:0;opacity:0;transform:translateX(-50%) translateY(-12%) rotate(14deg)}5%{opacity:1}15%,35%,55%,75%,95%{transform:translateX(-50%) translateY(17%) rotate(-12deg)}25%,45%,65%,85%{transform:translateX(-50%) translateY(-17%) rotate(14deg)}96%{opacity:1}100%{left:100%;opacity:0;transform:translateX(-50%) translateY(0) rotate(-8deg)}}
+@media(prefers-reduced-motion:no-preference){.word-scribble{display:block;animation:erase-scribble 2.3s 2s linear both}.word-eraser{display:block;animation:eraser-pass 2.3s 2s linear both}}
