@@ -1,0 +1,41 @@
+/* T14: the same five links become readable vertical stops, without scroll pinning. */
+@media(max-width:1000px){
+ #atolye .class-stations-mobile-scene{display:none}
+ #atolye .class-stations ol{grid-template-columns:minmax(0,1fr);gap:16px}
+ #atolye .class-station>a{display:grid;grid-template-columns:clamp(112px,25vw,144px) minmax(0,1fr);grid-template-areas:'art grade' 'art caption' 'art action';align-items:start;justify-content:normal;gap:8px 16px;padding:20px 16px;min-height:192px;text-align:left;background:transparent;border-radius:18px}
+ #atolye .station-art{grid-area:art;display:flex;align-items:center;justify-content:center;align-self:center;position:relative;min-width:0;width:100%;aspect-ratio:1/1}
+ #atolye .station-art>.station-clay{display:block;width:100%;height:100%}
+ #atolye .station-art>svg,#atolye .station-art>img,#atolye .station-art>picture{display:block;max-width:100%;width:100%;height:100%;object-fit:contain}
+ #atolye .station-art>picture>img{display:block;width:100%;height:100%;object-fit:contain}
+ #atolye .station-grade{grid-area:grade;min-width:0;font-size:28px;line-height:1.2;align-self:end}
+ #atolye .station-caption{grid-area:caption;display:block;min-width:0;margin:0;font-size:16px;line-height:1.5;overflow-wrap:break-word}
+ #atolye .station-action{grid-area:action;display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0;min-height:48px;margin-top:4px;padding:10px 14px;font-size:16px;line-height:1.5;border-radius:10px;background:color-mix(in srgb,var(--class-bg) 32%,var(--cream));border:1px solid color-mix(in srgb,var(--ink) 15%,transparent)}
+ #atolye .class-station>a:focus-visible{outline-offset:2px}
+}
+@media(max-width:380px){
+ #atolye .class-station>a{grid-template-columns:112px minmax(0,1fr);gap:8px 12px;padding:16px 8px;min-height:192px}
+ #atolye .station-grade{font-size:26px}
+ #atolye .station-action{padding-inline:10px;font-size:15px}
+}
+
+/* T15: responsive feedback stays inside the stable native-link hit area. */
+#atolye .station-art{transform-origin:50% 70%;transition:transform 160ms ease}
+#atolye .station-action{transition:background-color 140ms ease,transform 90ms ease-out}
+#atolye .class-station>a:focus-visible .station-action{text-decoration:underline;text-underline-offset:4px;background:color-mix(in srgb,var(--class-bg) 48%,var(--cream))}
+#atolye .class-station>a:active .station-action{transform:scale(.98);background:color-mix(in srgb,var(--class-bg) 60%,var(--cream))}
+@media(hover:hover) and (pointer:fine){
+ #atolye .class-station>a:hover .station-art{transform:translateY(-3px) scale(1.025)}
+ #atolye .class-station>a:hover .station-action{text-decoration:underline;text-underline-offset:4px;background:color-mix(in srgb,var(--class-bg) 48%,var(--cream))}
+}
+@media(prefers-reduced-motion:reduce){
+ #atolye .station-art,#atolye .station-action{transition:none}
+ #atolye .class-station>a:is(:hover,:focus-visible,:active) .station-art,#atolye .class-station>a:active .station-action{transform:none}
+}
+/* Integration: keep square clay crops; desktop's 300px art slot must not leak here. */
+@media(max-width:1000px){
+ #atolye .station-art{height:auto;margin-bottom:0}
+ #atolye .station-caption{min-height:0}
+ #atolye .class-stations ol{position:relative}
+ #atolye .class-stations ol:before{content:'';position:absolute;top:90px;bottom:90px;left:calc(clamp(56px,12.5vw,72px) + 16px);width:5px;border-radius:50%;background:#e8dbc1;box-shadow:inset 1px 0 #fff8;z-index:-1;pointer-events:none}
+}
+@media(max-width:380px){#atolye .class-stations ol:before{left:64px}}
