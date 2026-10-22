@@ -32,5 +32,6 @@ card.append(curriculum);catalog.append(card);motifObserver.observe(card);
 });
 status.textContent=filtered.length+' içerik gösteriliyor'+(grade===5?' · Çalışma bankasında ayrıca 26 kısa etkinlik var.':'.');document.getElementById('empty').hidden=filtered.length!==0;
 }
+document.getElementById('reset-filters').addEventListener('click',()=>{search.value='';topic.value='';type.value='';render()});
 search.addEventListener('input',render);topic.addEventListener('change',render);type.addEventListener('change',render);render();
 })();
