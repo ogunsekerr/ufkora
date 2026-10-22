@@ -1,6 +1,6 @@
 # UFKORA · Kontrollü tasarım uygulama planı
 
-Tarih: 23 Ekim 2026 (Türkiye). Bu belge plan ve takip listesidir; T01 koruma kaydı tamamlandı, görsel uygulama başlamadı.
+Tarih: 23 Ekim 2026 (Türkiye). Bu belge plan ve takip listesidir; T01 koruma kaydı ve T02 içerik envanteri tamamlandı, görsel uygulama başlamadı.
 
 ## Güvenli başlangıç
 
@@ -57,7 +57,7 @@ Altıgenin mevcut evreleri: yaklaşma/geçiş 0.08–0.62; panelin hareket edere
 Odak: `features/entrance/`, `features/home/`, `catalog.js`. Tasarım değişikliği yok.
 
 - [x] T01 — Korunan davranışları tek referans dosyasına çıkar. **Bitti ölçütü:** logo/font/renk, giriş evreleri ve sınıf URL'leri kayıtta; yeniden tasarım yok.
-- [ ] T02 — İçerik envanterini çıkar. **Bitti ölçütü:** katalog girdileri, ortak URL'ler, query ile açılan oyunlar ve banka içindeki alt oyunlar ayrı listeli; aynı oyun iki kez sayılmıyor.
+- [x] T02 — İçerik envanterini çıkar. **Bitti ölçütü:** katalog girdileri, ortak URL'ler, query ile açılan oyunlar ve banka içindeki alt oyunlar ayrı listeli; aynı oyun iki kez sayılmıyor.
 - [ ] T03 — Masaüstü altıgen akışını kaydet. **Bitti ölçütü:** yaklaşma, tam geçiş, kademeli panel, hızlı ve geri scroll ile buton yolu kontrol edildi.
 - [ ] T04 — Mobil ve reduced-motion başlangıcını kaydet. **Bitti ölçütü:** içerik erişilir, mobil hafif yol çalışır; ölçülmeyen FPS iddiası yok.
 - [ ] T05 — Pilot kapsamını sabitle. **Öneri:** 5. sınıf; Bahçe Mimarı, Sayı Kargo ve Işık Rotası. **Bitti ölçütü:** üçü envanterden doğrulandı; mevcut girişleri ve kazanımları listeli.
@@ -223,10 +223,10 @@ Bunlar şimdi yeni soru olarak çalışmayı durdurmaz; ilgili taslak hazır old
 
 ## Başlangıç ilerleme kaydı
 
-- Tamamlanan: B01–B04 ve T01.
-- Bekleyen: T02–T68 ve T02'den sonra açılacak Yxx kartları.
-- Aktif uygulama: yok; T01 tamamlandı, kullanıcı onayı bekleniyor.
-- Bir sonraki görev: T02; kullanıcı onayı gelmeden başlamaz.
+- Tamamlanan: B01–B04, T01 ve T02.
+- Bekleyen: T03–T68 ve T02'den sonra açılacak Yxx kartları.
+- Aktif uygulama: yok; T02 tamamlandı, kullanıcı onayı bekleniyor.
+- Bir sonraki görev: T03; kullanıcı onayı gelmeden başlamaz.
 - Son güvenli kaynak commit'i: `006dc2b35bf07cd2fd316a3c779e68acd6b71f1b`.
 - Araç durumu: UI UX Pro Max, Frontend Design, Design Taste ve dört ek skill kaydedildi; Motion Docs araması çalışıyor; 21st normal bileşen araması hatalı, diğer doğrulanan yollar kullanılabilir. Her görevde erişim varmış gibi varsayılmaz.
 
