@@ -2,10 +2,10 @@
 const mini=document.getElementById('hero-mini'),button=document.getElementById('mini-try'),result=document.getElementById('mini-result');
 if(!mini||!button||!result)return;
 const quiet=matchMedia('(prefers-reduced-motion: reduce), (max-width: 700px), (pointer: coarse)');
-const groups=new Map();
+const groups=new Map(),visible=new Set();
 function cancel(key){(groups.get(key)||[]).forEach(a=>a.cancel());groups.delete(key)}
 function play(key,element,frames,duration=180){
- if(quiet.matches||document.hidden||!element.animate)return;
+ if(quiet.matches||document.hidden||!visible.has(key)||!element.animate)return;
  const a=element.animate(frames,{duration,easing:'cubic-bezier(.22,1,.36,1)'});
  const running=groups.get(key)||[];running.push(a);groups.set(key,running);
  a.finished.then(()=>{const rest=(groups.get(key)||[]).filter(x=>x!==a);if(rest.length)groups.set(key,rest);else groups.delete(key)},()=>{});
@@ -21,5 +21,11 @@ button.addEventListener('click',event=>{
  mini.querySelectorAll('.mini-quarter,.mini-three-quarter').forEach(cut=>play('mini',cut,quarters?[{transform:'scaleY(0)',opacity:0},{transform:'scaleY(1)',opacity:1}]:[{transform:'scaleY(1)',opacity:1},{transform:'scaleY(0)',opacity:0}]));
 });
 const preview=document.getElementById('workshop-preview'),worldObject=document.getElementById('class-world-object');
-if(preview&&worldObject)preview.addEventListener('ufkora:grade-change',()=>{cancel('world');play('world',worldObject,[{transform:'translateY(6px)',opacity:.85},{transform:'translateY(0)',opacity:1}]);});
+if(preview&&worldObject)preview.addEventListener('ufkora:grade-change',event=>{cancel('world');if(!event.detail?.animate)return;play('world',worldObject,[{transform:'translateY(6px)',opacity:.85},{transform:'translateY(0)',opacity:1}]);});
+function stop(){[...groups.keys()].forEach(cancel)}
+const visibility=new IntersectionObserver(entries=>{for(const entry of entries){const key=entry.target===mini?'mini':entry.target===worldObject?'world':'hero';if(entry.isIntersecting)visible.add(key);else{visible.delete(key);cancel(key);}if(key==='hero')entry.target.classList.toggle('motion-outside',!entry.isIntersecting);}}, {threshold:0});
+visibility.observe(mini);if(worldObject)visibility.observe(worldObject);
+const hero=document.querySelector('.hero-immersive');if(hero)visibility.observe(hero);
+function pageVisibility(){document.body.classList.toggle('discovery-page-hidden',document.hidden);if(document.hidden)stop()}
+document.addEventListener('visibilitychange',pageVisibility);addEventListener('pagehide',stop);quiet.addEventListener('change',stop);pageVisibility();
 })();

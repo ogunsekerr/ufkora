@@ -42,7 +42,7 @@ function render(animateTab=false){
  all.href='atolye.html?sinif='+grade;all.replaceChildren(document.createTextNode(grade+'. sınıf atölyesini aç '),node('span','','↗'));
  placeTabIndicator(animateTab);
 }
-grades.forEach(b=>b.addEventListener('click',()=>{const next=Number(b.dataset.previewGrade),changed=next!==grade;grade=next;render();if(changed)preview.dispatchEvent(new CustomEvent('ufkora:grade-change'));}));
+grades.forEach(b=>b.addEventListener('click',event=>{const next=Number(b.dataset.previewGrade),changed=next!==grade;grade=next;render();if(changed)preview.dispatchEvent(new CustomEvent('ufkora:grade-change',{detail:{animate:event.detail!==0}}));}));
 tabs.forEach((b,i)=>{b.addEventListener('click',()=>{type=b.dataset.previewType;render(true)});b.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-i;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();type=tabs[next].dataset.previewType;render(true);tabs[next].focus({preventScroll:true})})});
 render();
 // Resize and late font loading only snap the decorative marker; content never waits.
@@ -51,11 +51,8 @@ if(tablist&&typeof ResizeObserver!=='undefined'){
 }else addEventListener('resize',()=>placeTabIndicator(),{passive:true});
 if(document.fonts)document.fonts.ready.then(()=>placeTabIndicator());
 tabMotion.addEventListener('change',()=>placeTabIndicator());
-const demo=document.getElementById('fraction-demo');
-const replay=()=>{demo.classList.remove('is-demonstrating');requestAnimationFrame(()=>requestAnimationFrame(()=>demo.classList.add('is-demonstrating')))};
-document.getElementById('fraction-replay').addEventListener('click',replay);
-const seen=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){if(e.target===demo)replay();else e.target.classList.add('motif-seen');seen.unobserve(e.target)}}),{threshold:.4});
-seen.observe(demo);document.querySelectorAll('.feature').forEach(card=>{card.querySelector('.feature-visual').append(window.UfkoraClay.make(window.UfkoraClay.kind(card.querySelector('h3').textContent)));seen.observe(card)});
+const seen=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('motif-seen');seen.unobserve(e.target)}}),{threshold:.4});
+document.querySelectorAll('.feature').forEach(card=>{card.querySelector('.feature-visual').append(window.UfkoraClay.make(window.UfkoraClay.kind(card.querySelector('h3').textContent)));seen.observe(card)});
 const cardObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('motif-seen');cardObserver.unobserve(e.target)}}),{threshold:.6});
 new MutationObserver(()=>cards.querySelectorAll('.preview-card:not(.motif-seen)').forEach(c=>cardObserver.observe(c))).observe(cards,{childList:true});
 cards.querySelectorAll('.preview-card').forEach(c=>cardObserver.observe(c));
