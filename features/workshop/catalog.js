@@ -9,9 +9,10 @@ document.getElementById('class-world-caption').textContent=theme[3];document.get
 const motifObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('motif-seen');motifObserver.unobserve(e.target)}}),{threshold:.5});
 const items=window.UFKORA_CATALOG.filter(x=>x.grade===grade);
 [...new Set(items.map(x=>x.topic))].forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;topic.append(o)});
-// T38–T40 pilot: a reversible presentation of the existing grade-five data.
+// Each rollout package can be disabled independently; missing packages retain cards.
+const topicGrades=new Set([5,...(window.UfkoraCatalogTopicGrades||[])]),enhanced=topicGrades.has(grade);
 const viewLabel=el('label','catalog-view-label'),view=el('select');
-if(grade===5){view.id='catalog-view';const caption=el('span','','Görünüm');viewLabel.append(caption,view);[['topics','Konu sıraları'],['cards','Kartlar']].forEach(([value,text])=>{const o=el('option','',text);o.value=value;view.append(o)});document.querySelector('.catalog-primary').append(viewLabel);view.addEventListener('change',render);}
+if(enhanced){view.id='catalog-view';const caption=el('span','','Görünüm');viewLabel.append(caption,view);[['topics','Konu sıraları'],['cards','Kartlar']].forEach(([value,text])=>{const o=el('option','',text);o.value=value;view.append(o)});document.querySelector('.catalog-primary').append(viewLabel);view.addEventListener('change',render);}
 let announcementTimer;
 status.setAttribute('aria-atomic','true');status.tabIndex=-1;
 const normalize=s=>s.toLocaleLowerCase('tr-TR');
@@ -20,11 +21,11 @@ function render(reason='filter'){
 const focusWasInResults=catalog.contains(document.activeElement);
 const q=normalize(search.value.trim()),filtered=items.filter(x=>(!q||normalize([x.title,x.desc,x.topic,...x.codes].join(' ')).includes(q))&&(!topic.value||x.topic===topic.value)&&(!type.value||x.type===type.value));
 motifObserver.disconnect();catalog.replaceChildren();
-const topicMode=grade===5&&view.value==='topics';
+const topicMode=enhanced&&view.value==='topics';
 catalog.classList.toggle('catalog-topics',topicMode);
 const rows=new Map();
 // Only occupied rows are rendered, in the catalog's existing topic order.
-const topicOrder=['Geometri','Sayılar','Karma konular'];
+const topicOrder=[...new Set(['Geometri','Sayılar','Karma konular',...items.map(x=>x.topic)])];
 const ordered=topicMode?[...filtered].sort((a,b)=>topicOrder.indexOf(a.topic)-topicOrder.indexOf(b.topic)||Number(b.title==='Bahçe Mimarı')-Number(a.title==='Bahçe Mimarı')):filtered;
 ordered.forEach(x=>{
 let destination=catalog;

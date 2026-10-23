@@ -1,4 +1,4 @@
-/* Grade-five pilot only. Existing cards remain a selectable view. */
+/* Accepted catalog presentation. Grade packages opt in independently; cards remain selectable. */
 .catalog-topics{display:block}
 .topic-row{margin-block:0 3rem;min-width:0}
 .topic-row-title{font:700 clamp(1.5rem,3vw,2rem)/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;margin:0 0 1.25rem;color:var(--ink)}
