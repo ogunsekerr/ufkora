@@ -1,0 +1,85 @@
+{
+  "commit": "25e9456d16bb3ed65759a398b4325cac8c150375",
+  "url": "https://www.ufkora.com",
+  "checks": [
+    {
+      "path": "etkinlikler/toplama-adasi.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "etkinlikler/birim-kup.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "etkinlikler/cokgen.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "etkinlikler/aci-ustasi.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "etkinlikler/maarif-atolyesi.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "oyun-atolyesi/bahce.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "oyun-atolyesi/kesif.html?oyun=isik",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "oyun-atolyesi/kesif.html?oyun=cember",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "oyun-atolyesi/kesif.html?oyun=kargo",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "etkinlikler/olasilik-laboratuvari.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "etkinlikler/yansima.html",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "match_local": true
+    },
+    {
+      "path": "api/contact",
+      "status": 200,
+      "ready": true
+    }
+  ],
+  "scope": "Public HTTP source/readiness smoke only, no browser/physical-device test; no messages sent",
+  "vercel_github_status": "success",
+  "deployment_status_url": "https://vercel.com/ufkora/ufkora/B7MW5vHGdn4X9vqMxXAcLU8CcB8B",
+  "authorization": "User explicitly requested publication after open device/browser checks and API scope403 were disclosed.",
+  "open_checks": [
+    "physical-device/touch/Safari",
+    "native zoom/final rendered screen matrix",
+    "runtime performance profile"
+  ]
+}
