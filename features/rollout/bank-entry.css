@@ -1,0 +1,9 @@
+/* Scoped to the 26-flow bank; no new motion or dependencies. */
+.bank-session{display:flex;gap:12px;flex-wrap:wrap;align-items:center;background:#fff8eb;padding:12px;border-radius:16px;margin-bottom:18px;color:#204b3b}
+.bank-session[hidden]{display:none}.bank-session button{min-height:48px}
+.bank-support{padding:12px 18px;margin:10px 22px;background:#fff8da;border-radius:12px;color:#384e3a;font-size:16px;line-height:1.5}
+.bank-support[hidden]{display:none}.bank-entry{margin-inline:auto}.bank-entry h2{font-size:clamp(26px,4vw,40px)}
+.bank-entry[hidden]{display:none}.bank-keyboard{font-size:14px;color:#405849;line-height:1.5}
+.activity-etkinlikler #canvas:focus-visible{outline:3px solid #6845ca;outline-offset:-4px}
+@media(max-width:700px){.bank-support{margin:10px 12px}.bank-session{gap:8px}.bank-session button{flex:1 1 130px}}
+@media(prefers-reduced-motion:reduce){.activity-etkinlikler *, .activity-etkinlikler *::before,.activity-etkinlikler *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
