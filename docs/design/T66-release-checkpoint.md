@@ -15,3 +15,5 @@ Açıklar: gerçek ekran matrisi, native zoom, fiziksel touch/Safari, OS reduced
 Geri dönüş: GitHub `backup/2026-10-23-pre-design` ve main, ikisi de `006dc2b35bf07cd2fd316a3c779e68acd6b71f1b`; aynen korundu. Bu Git kaynak referansıdır, doğrulanmamış Vercel deployment kimliği yerine kullanılamaz.
 
 Kullanıcının T61–T68/K7 yetkisi T67'de kayıtlı. İzin eksikliğiyle teknik doğrulama/erişim engeli birbirine karıştırılmaz; erişim ve kabul koşulları sağlanınca aynı yetkili kapsam sürdürülebilir.
+
+GitHub aktarımı doğrulanan uygulama commit'i: `3ba6d58b51e8a001775e12466c14aec91225c09b`. Bu kod kontrol noktası yayınlanmış deployment değildir. İnceleme dalına sonraki rapor commit'leri eklenebilir; uygulama kaynak referansı bu SHA ile sabittir.
