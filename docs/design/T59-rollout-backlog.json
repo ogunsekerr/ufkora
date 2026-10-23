@@ -1,0 +1,1887 @@
+{
+  "inventory": "T02-inventory.json",
+  "units": [
+    {
+      "source_id": "P01-act1",
+      "title": "Basamak Atölyesi",
+      "path": "etkinlikler/toplama-adasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTab('act1')",
+      "id": "Y01",
+      "tasks": [
+        {
+          "id": "Y01-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y01-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y01-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y01-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y01-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y01-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P01-act2",
+      "title": "Şifre Bulmaca",
+      "path": "etkinlikler/toplama-adasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTab('act2')",
+      "id": "Y02",
+      "tasks": [
+        {
+          "id": "Y02-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y02-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y02-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y02-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y02-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y02-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P01-act3",
+      "title": "Kayıp Semboller",
+      "path": "etkinlikler/toplama-adasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTab('act3')",
+      "id": "Y03",
+      "tasks": [
+        {
+          "id": "Y03-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y03-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y03-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y03-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y03-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y03-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P01-act4",
+      "title": "İkili İşlem Dedektifi",
+      "path": "etkinlikler/toplama-adasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTab('act4')",
+      "id": "Y04",
+      "tasks": [
+        {
+          "id": "Y04-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y04-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y04-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y04-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y04-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y04-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P01-quiz",
+      "title": "Süreli Toplama Şampiyonası",
+      "path": "etkinlikler/toplama-adasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTab('quiz')",
+      "id": "Y05",
+      "tasks": [
+        {
+          "id": "Y05-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y05-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y05-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y05-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y05-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y05-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P02-sandbox",
+      "title": "Küp oluşturma ve görünüş inceleme",
+      "path": "etkinlikler/birim-kup.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "mode-add",
+      "id": "Y06",
+      "tasks": [
+        {
+          "id": "Y06-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y06-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y06-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y06-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y06-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y06-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P03-explore",
+      "title": "Keşif ve Laboratuvar",
+      "path": "etkinlikler/cokgen.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTab('explore')",
+      "id": "Y07",
+      "tasks": [
+        {
+          "id": "Y07-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y07-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y07-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y07-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y07-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y07-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P03-game",
+      "title": "İste Çizdir ve Çokgen Oyunu",
+      "path": "etkinlikler/cokgen.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTab('game')",
+      "id": "Y08",
+      "tasks": [
+        {
+          "id": "Y08-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y08-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y08-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y08-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y08-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y08-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P04-1",
+      "title": "İletki Okuma",
+      "path": "etkinlikler/aci-ustasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchActivity(1)",
+      "id": "Y09",
+      "tasks": [
+        {
+          "id": "Y09-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y09-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y09-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y09-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y09-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y09-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P04-2",
+      "title": "Özdeş ve Bilinmeyen Açılar",
+      "path": "etkinlikler/aci-ustasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchActivity(2)",
+      "id": "Y10",
+      "tasks": [
+        {
+          "id": "Y10-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y10-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y10-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y10-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y10-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y10-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P04-3",
+      "title": "Açı Okçusu / Balon Avı",
+      "path": "etkinlikler/aci-ustasi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchActivity(3)",
+      "id": "Y11",
+      "tasks": [
+        {
+          "id": "Y11-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y11-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y11-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y11-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y11-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y11-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P05-protractor",
+      "title": "Açı Kâşifi ve Radar Kulesi",
+      "path": "etkinlikler/maarif-atolyesi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchGeoSubMode('protractor')",
+      "id": "Y12",
+      "tasks": [
+        {
+          "id": "Y12-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y12-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y12-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y12-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y12-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y12-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P05-laser",
+      "title": "Lazer Aynaları",
+      "path": "etkinlikler/maarif-atolyesi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchGeoSubMode('laser')",
+      "id": "Y13",
+      "tasks": [
+        {
+          "id": "Y13-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y13-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y13-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y13-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y13-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y13-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P05-cargo",
+      "title": "Sayı ve Lojistik / Bölükler ve Basamak Röntgeni",
+      "path": "etkinlikler/maarif-atolyesi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTheme(2)",
+      "id": "Y14",
+      "tasks": [
+        {
+          "id": "Y14-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y14-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y14-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y14-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y14-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y14-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P05-carpet",
+      "title": "Halı ve Bahçe Ustası",
+      "path": "etkinlikler/maarif-atolyesi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTheme3Sub('carpet')",
+      "id": "Y15",
+      "tasks": [
+        {
+          "id": "Y15-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y15-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y15-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y15-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y15-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y15-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P05-potion",
+      "title": "Simyacı İksir Laboratuvarı",
+      "path": "etkinlikler/maarif-atolyesi.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "switchTheme3Sub('potion')",
+      "id": "Y16",
+      "tasks": [
+        {
+          "id": "Y16-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y16-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y16-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y16-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y16-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y16-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P07-cember",
+      "title": "Çember Tamircisi",
+      "path": "oyun-atolyesi/kesif.html",
+      "access": "URL query oyun=cember",
+      "control": "cember:{title:'Çember Tamircisi'",
+      "id": "Y17",
+      "tasks": [
+        {
+          "id": "Y17-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y17-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y17-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y17-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y17-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y17-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P09-coin",
+      "title": "Madeni Para Deneyi",
+      "path": "etkinlikler/olasilik-laboratuvari.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "setMode('coin')",
+      "id": "Y18",
+      "tasks": [
+        {
+          "id": "Y18-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y18-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y18-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y18-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y18-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y18-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P09-dice",
+      "title": "Zar Deneyi",
+      "path": "etkinlikler/olasilik-laboratuvari.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "setMode('dice')",
+      "id": "Y19",
+      "tasks": [
+        {
+          "id": "Y19-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y19-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y19-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y19-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y19-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y19-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P10-lab",
+      "title": "Keşif Laboratuvarı",
+      "path": "etkinlikler/yansima.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "tabBtnLab",
+      "id": "Y20",
+      "tasks": [
+        {
+          "id": "Y20-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y20-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y20-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y20-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y20-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y20-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "P10-activity",
+      "title": "Kendin Taşı ve Çiz",
+      "path": "etkinlikler/yansima.html",
+      "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı",
+      "control": "tabBtnActivity",
+      "id": "Y21",
+      "tasks": [
+        {
+          "id": "Y21-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y21-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y21-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y21-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y21-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y21-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B01-A",
+      "title": "Geometri takım çantası",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"0,activity\"",
+      "control": "0,activity",
+      "id": "Y22",
+      "tasks": [
+        {
+          "id": "Y22-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y22-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y22-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y22-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y22-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y22-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B01-G",
+      "title": "Yanlış Usta",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"0,game\"",
+      "control": "0,game",
+      "id": "Y23",
+      "tasks": [
+        {
+          "id": "Y23-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y23-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y23-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y23-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y23-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y23-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B02-A",
+      "title": "Rayları Kur",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"1,activity\"",
+      "control": "1,activity",
+      "id": "Y24",
+      "tasks": [
+        {
+          "id": "Y24-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y24-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y24-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y24-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y24-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y24-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B02-G",
+      "title": "İddiayı Sına",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"1,game\"",
+      "control": "1,game",
+      "id": "Y25",
+      "tasks": [
+        {
+          "id": "Y25-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y25-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y25-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y25-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y25-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y25-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B03-A",
+      "title": "Tahmin Et, Ölç",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"2,activity\"",
+      "control": "2,activity",
+      "id": "Y26",
+      "tasks": [
+        {
+          "id": "Y26-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y26-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y26-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y26-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y26-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y26-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B03-G",
+      "title": "Açıölçer Dedektifi",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"2,game\"",
+      "control": "2,game",
+      "id": "Y27",
+      "tasks": [
+        {
+          "id": "Y27-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y27-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y27-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y27-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y27-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y27-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B04-A",
+      "title": "Kavşak Laboratuvarı",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"3,activity\"",
+      "control": "3,activity",
+      "id": "Y28",
+      "tasks": [
+        {
+          "id": "Y28-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y28-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y28-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y28-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y28-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y28-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B04-G",
+      "title": "Açı Akrabaları",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"3,game\"",
+      "control": "3,game",
+      "id": "Y29",
+      "tasks": [
+        {
+          "id": "Y29-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y29-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y29-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y29-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y29-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y29-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B05-A",
+      "title": "Doğrulardan Şekle",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"4,activity\"",
+      "control": "4,activity",
+      "id": "Y30",
+      "tasks": [
+        {
+          "id": "Y30-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y30-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y30-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y30-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y30-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y30-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B05-G",
+      "title": "Çokgen Kapısı",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"4,game\"",
+      "control": "4,game",
+      "id": "Y31",
+      "tasks": [
+        {
+          "id": "Y31-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y31-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y31-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y31-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y31-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y31-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B06-A",
+      "title": "Şekil Kimliği",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"5,activity\"",
+      "control": "5,activity",
+      "id": "Y32",
+      "tasks": [
+        {
+          "id": "Y32-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y32-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y32-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y32-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y32-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y32-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B06-G",
+      "title": "Mümkün mü?",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"5,game\"",
+      "control": "5,game",
+      "id": "Y33",
+      "tasks": [
+        {
+          "id": "Y33-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y33-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y33-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y33-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y33-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y33-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B07-A",
+      "title": "Çemberden Üçgen",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"6,activity\"",
+      "control": "6,activity",
+      "id": "Y34",
+      "tasks": [
+        {
+          "id": "Y34-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y34-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y34-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y34-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y34-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y34-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B07-G",
+      "title": "Eşkenar Kilidi",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"6,game\"",
+      "control": "6,game",
+      "id": "Y35",
+      "tasks": [
+        {
+          "id": "Y35-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y35-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y35-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y35-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y35-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y35-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B08-A",
+      "title": "Bölük Atölyesi",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"7,activity\"",
+      "control": "7,activity",
+      "id": "Y36",
+      "tasks": [
+        {
+          "id": "Y36-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y36-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y36-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y36-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y36-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y36-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B08-G",
+      "title": "Sayı Spikeri",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"7,game\"",
+      "control": "7,game",
+      "id": "Y37",
+      "tasks": [
+        {
+          "id": "Y37-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y37-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y37-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y37-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y37-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y37-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B09-A",
+      "title": "Mini Grubun Alışverişi",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"8,activity\"",
+      "control": "8,activity",
+      "id": "Y38",
+      "tasks": [
+        {
+          "id": "Y38-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y38-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y38-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y38-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y38-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y38-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B09-G",
+      "title": "Kalan Ne Olacak?",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"8,game\"",
+      "control": "8,game",
+      "id": "Y39",
+      "tasks": [
+        {
+          "id": "Y39-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y39-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y39-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y39-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y39-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y39-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B10-A",
+      "title": "20 Birimlik Çit",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"9,activity\"",
+      "control": "9,activity",
+      "id": "Y40",
+      "tasks": [
+        {
+          "id": "Y40-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y40-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y40-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y40-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y40-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y40-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B10-G",
+      "title": "Eksik Bahçe",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"9,game\"",
+      "control": "9,game",
+      "id": "Y41",
+      "tasks": [
+        {
+          "id": "Y41-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y41-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y41-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y41-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y41-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y41-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B11-A",
+      "title": "Fayans Ustası",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"10,activity\"",
+      "control": "10,activity",
+      "id": "Y42",
+      "tasks": [
+        {
+          "id": "Y42-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y42-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y42-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y42-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y42-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y42-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B11-G",
+      "title": "Örtünün Altında",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"10,game\"",
+      "control": "10,game",
+      "id": "Y43",
+      "tasks": [
+        {
+          "id": "Y43-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y43-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y43-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y43-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y43-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y43-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B12-A",
+      "title": "Aynı Alan, Başka Çevre",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"11,activity\"",
+      "control": "11,activity",
+      "id": "Y44",
+      "tasks": [
+        {
+          "id": "Y44-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y44-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y44-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y44-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y44-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y44-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B12-G",
+      "title": "İddiayı Çürüt",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"11,game\"",
+      "control": "11,game",
+      "id": "Y45",
+      "tasks": [
+        {
+          "id": "Y45-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y45-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y45-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y45-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y45-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y45-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B13-A",
+      "title": "Bahçeyi Hazırla",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"12,activity\"",
+      "control": "12,activity",
+      "id": "Y46",
+      "tasks": [
+        {
+          "id": "Y46-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y46-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y46-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y46-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y46-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y46-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    },
+    {
+      "source_id": "B13-G",
+      "title": "Ustanın Faturasını Denetle",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "access": "data-open=\"12,game\"",
+      "control": "12,game",
+      "id": "Y47",
+      "tasks": [
+        {
+          "id": "Y47-01",
+          "status": "open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+        },
+        {
+          "id": "Y47-02",
+          "status": "open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+        },
+        {
+          "id": "Y47-03",
+          "status": "open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+        },
+        {
+          "id": "Y47-04",
+          "status": "open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+        },
+        {
+          "id": "Y47-05",
+          "status": "open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+        },
+        {
+          "id": "Y47-06",
+          "status": "open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+        }
+      ]
+    }
+  ],
+  "unit_count": 47,
+  "open_task_count": 282
+}
