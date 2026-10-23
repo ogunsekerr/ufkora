@@ -34,7 +34,7 @@
       animation: pulse-ring 1.8s infinite ease-in-out;
     }
   </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"><link rel="stylesheet" href="../features/rollout/content-entry.css?v=20261023-y20"><link rel="stylesheet" href="../features/rollout/spatial-entry.css?v=20261023-y20"><script src="../features/rollout/active-clock.js?v=20261023-y20"></script><script src="../features/rollout/spatial-entry.js?v=20261023-y20"></script></head>
 <body class="ufkora-activity activity-yansima bg-slate-100 text-slate-800 antialiased min-h-screen flex flex-col select-none font-sans">
 
   <!-- Ana Kapsayıcı -->
@@ -435,6 +435,7 @@
     let activityShape = 'KARE';
     let activityAxis = 'vertical';
     let activityScore = 0;
+    let activityAwarded = false;
     let showActivityHint = false;
     let activityChecked = false;
     let activityResults = []; // Her noktanın doğruluğu (boolean)
@@ -1206,6 +1207,7 @@
     }
 
     function generateActivityQuestion() {
+      activityAwarded = false;
       activityChecked = false;
       showActivityHint = false;
       actFeedback.classList.add('hidden');
@@ -1256,6 +1258,10 @@
         offsetX = pick.ox - minTx;
         offsetY = pick.oy - minTy;
       }
+
+      // Keep the whole shape within the same reachable grid as the student points.
+      offsetX = Math.max(-GRID_EXTENT + 1 - minTx, Math.min(GRID_EXTENT - 1 - maxTx, offsetX));
+      offsetY = Math.max(-GRID_EXTENT + 1 - minTy, Math.min(GRID_EXTENT - 1 - maxTy, offsetY));
 
       // Orijinal şeklin köşe noktaları
       actOrigPoints = template.map(p => ({
@@ -1327,10 +1333,11 @@
       actFeedback.classList.remove('hidden');
 
       if (allCorrect) {
-        activityScore++;
+        if (!activityAwarded) { activityScore++; activityAwarded = true; }
         activityScoreText.textContent = `${activityScore} Doğru`;
         actFeedback.className = 'text-xs font-bold rounded-xl p-2.5 bg-emerald-100 border border-emerald-300 text-emerald-950 flex items-center gap-2';
-        actFeedback.innerHTML = '🎉 <strong>MÜKEMMEL!</strong> Tüm köşe noktalarını simetri doğrusuna dik ve tam eşit uzaklığa (|AB| = |BC|) yerleştirdin!';
+        window.UfkoraReflectionSession?.completed();
+        actFeedback.innerHTML = '✓ <strong>MÜKEMMEL!</strong> Tüm köşe noktalarını simetri doğrusuna dik ve tam eşit uzaklığa (|AB| = |BC|) yerleştirdin!';
       } else {
         const wrongCount = activityResults.filter(r => !r).length;
         actFeedback.className = 'text-xs font-bold rounded-xl p-2.5 bg-rose-50 border border-rose-300 text-rose-950 flex items-center gap-2';
@@ -1434,6 +1441,8 @@
     }
 
     function startAnimation() {
+      if (document.hidden) return;
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { setProgress(1); stopAnimation(); return; }
       if (progress >= 1) progress = 0;
       isPlaying = true;
       playIcon.classList.add('hidden');
@@ -1693,5 +1702,5 @@
       document.addEventListener('DOMContentLoaded', init);
     }
   </script>
-<a href="/" style="position:fixed;bottom:12px;left:12px;z-index:99999;background:#285c4e;color:white;padding:10px 15px;border-radius:8px;font:13px Arial;text-decoration:none;box-shadow:0 2px 10px #0002">← Ufkora</a></body>
+<a href="/" style="position:fixed;bottom:12px;left:12px;z-index:99999;background:#285c4e;color:white;padding:10px 15px;border-radius:8px;font:13px Arial;text-decoration:none;box-shadow:0 2px 10px #0002">← Ufkora</a><script src="../features/rollout/spatial-reflection.js?v=20261023-y20"></script></body>
 </html>
