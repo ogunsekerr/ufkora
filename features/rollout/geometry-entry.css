@@ -1,0 +1,7 @@
+.geometry-entry[hidden],.geometry-session[hidden]{display:none}
+body[data-geometry-stage=entry] :is(#tab-explore,#tab-game,#activity1,#activity2,#activity3){display:none!important}
+body:is(.activity-cokgen,.activity-aci-ustasi) .hidden{display:none!important}
+.geometry-entry h2{font-family:'Bricolage Grotesque',sans-serif}
+.geometry-entry img{height:auto;max-height:360px}
+body:is(.activity-cokgen,.activity-aci-ustasi) :is(button,input,select){touch-action:manipulation}
+@media(prefers-reduced-motion:reduce){body:is(.activity-cokgen,.activity-aci-ustasi) *,body:is(.activity-cokgen,.activity-aci-ustasi) *::before,body:is(.activity-cokgen,.activity-aci-ustasi) *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
