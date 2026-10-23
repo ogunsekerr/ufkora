@@ -1,0 +1,28 @@
+/* Three-pilot interaction vocabulary. Native controls remain native. */
+:is(.activity-bahce,.activity-kesif:has(#entry h1)){
+ --pilot-press-duration:120ms;--pilot-feedback-duration:180ms;
+ --pilot-ease:cubic-bezier(.22,1,.36,1);--pilot-press-scale:.98;
+}
+:is(.activity-bahce,.activity-kesif:has(#entry h1)) button{
+ transition:transform var(--pilot-press-duration) var(--pilot-ease),background-color var(--pilot-press-duration) ease;
+}
+:is(.activity-bahce,.activity-kesif:has(#entry h1)) button:hover{transform:none}
+:is(.activity-bahce,.activity-kesif:has(#entry h1)) button:active:not(:disabled):not(:focus-visible){transform:scale(var(--pilot-press-scale))}
+:is(.activity-bahce,.activity-kesif:has(#entry h1)) button:disabled{transform:none}
+:is(.activity-bahce,.activity-kesif:has(#entry h1)) :is(button.selected,button.chosen,label:has(input:checked)){
+ outline:2px solid #075a44;outline-offset:2px;
+}
+:is(.activity-bahce,.activity-kesif:has(#entry h1)) .clay-stamp,
+.activity-kesif:has(#entry h1) .status.good::before{
+ display:inline-block;padding:7px 12px;border:2px solid #216c56;border-radius:13px 10px 14px 9px;
+ background:#e2f4df;color:#174b37;font-weight:800;box-shadow:0 2px 0 #216c5626;
+ animation:pilot-stamp var(--pilot-feedback-duration) var(--pilot-ease) both;
+}
+.activity-kesif:has(#entry h1) .status.good::before{content:'✓';margin-right:8px}
+@keyframes pilot-stamp{from{transform:scale(.96);opacity:.5}to{transform:scale(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){
+ :is(.activity-bahce,.activity-kesif:has(#entry h1)) button{transition:none}
+ :is(.activity-bahce,.activity-kesif:has(#entry h1)) button:active:not(:disabled):not(:focus-visible){transform:none}
+ :is(.activity-bahce,.activity-kesif:has(#entry h1)) .clay-stamp,
+ .activity-kesif:has(#entry h1) .status.good::before{animation:none}
+}
