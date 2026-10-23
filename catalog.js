@@ -185,7 +185,7 @@ window.UFKORA_CATALOG = [
       "imageHeight": 512,
       "howTo": "İki köşe seçerek dikdörtgenini çiz. Çiti kur, birim kareleri çimle kapla ve son soruyu yanıtla.",
       "example": "4 m × 3 m bahçede 12 birim kareyi kapla: alan 12 m², çevre 14 m.",
-      "durationLabel": "Süre sınırı yok · 8 görev"
+      "durationLabel": "Süre seçilebilir · 8 görev"
     },
     "desc": "Dikdörtgenlerde alan ve çevre ilişkilerini 8 görevle keşfet.",
     "tag": "5. SINIF · OYUN",
@@ -240,7 +240,7 @@ window.UFKORA_CATALOG = [
       "imageHeight": 512,
       "howTo": "Hedef yönünü açıölçerden oku. Kaydırıcı veya +/− düğmeleriyle vericiyi çevir, ardından ışığı gönder.",
       "example": "İlk hedef 40° yönünde. Vericiyi 40° yapıp ışığı gönder. Son görevlerde bütünler açıları kullan.",
-      "durationLabel": "Süre sınırı yok · 5 görev"
+      "durationLabel": "Süre seçilebilir · 5 görev"
     },
     "desc": "Açıölçer okuma ve bütünler açı hesabıyla ışığı hedefe yönlendir.",
     "tag": "5. SINIF · OYUN",
@@ -312,7 +312,7 @@ window.UFKORA_CATALOG = [
       "imageHeight": 512,
       "howTo": "Önce bir kasayı seç, sonra milyonlar, binler veya birler yuvasına yerleştir. Kargoyu göndererek kontrol et.",
       "example": "24 006 305 için 24 → Milyonlar, 006 → Binler, 305 → Birler. Sıfırları koru.",
-      "durationLabel": "Süre sınırı yok · 5 görev"
+      "durationLabel": "Süre seçilebilir · 5 görev"
     },
     "desc": "Milyonlar, binler ve birler bölüklerini yerleştirerek sayıları oluştur.",
     "tag": "5. SINIF · OYUN",
