@@ -19,6 +19,8 @@ function update(){
  drawDoor(radius);
  sequence.classList.toggle('entrance-travelling',p>.04);
  sequence.classList.toggle('door-passed',p>=.66);
+ // The clipped background must not paint a solid hexagon over the resting hero.
+ sequence.style.setProperty('--aperture-opacity',clamp((p-.04)/.1).toFixed(3));
  sequence.style.setProperty('--copy-opacity',(1-fade).toFixed(3));
  sequence.style.setProperty('--copy-y',(-(light?40:100)*fade).toFixed(1)+'px');
  sequence.style.setProperty('--copy-scale',(1+.12*fade).toFixed(3));
