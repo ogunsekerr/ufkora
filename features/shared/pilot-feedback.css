@@ -26,3 +26,7 @@
  :is(.activity-bahce,.activity-kesif:has(#entry h1)) .clay-stamp,
  .activity-kesif:has(#entry h1) .status.good::before{animation:none}
 }
+/* Honor the game's explicit quiet setting as well as the OS preference. */
+.activity-bahce:has(#slow:checked) button{transition:none}
+.activity-bahce:has(#slow:checked) button:active:not(:disabled):not(:focus-visible){transform:none}
+.activity-bahce:has(#slow:checked) .clay-stamp{animation:none}

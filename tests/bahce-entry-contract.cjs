@@ -22,3 +22,7 @@ for(const mode of ['easy','medium','hard']){t=boot(`?difficulty=${mode}&duration
 t=boot();t.run('start()');t.advance(999999);assert.equal(t.run('phase'),'build');assert.equal(t.run('clockRunning'),false);t.run("cv.onkeydown({key:'Enter',preventDefault(){}});cv.onkeydown({key:'ArrowRight',preventDefault(){}});cv.onkeydown({key:'ArrowDown',preventDefault(){}});cv.onkeydown({key:'Enter',preventDefault(){}})");assert.equal(t.run('rect.w'),1);assert.equal(t.run('rect.h'),1);
 for(const seconds of [60,120,180]){t=boot('?duration='+seconds);t.run('start()');assert.equal(t.run('remaining'),seconds*1000);t.node('teacher').onclick();t.advance(10000);assert.equal(t.run('remaining'),seconds*1000);t.node('closeTeacher').onclick();t.advance(1000);assert.equal(t.run('remaining'),seconds*1000-1000);t.run('start(1)');assert.equal(t.run('remaining'),seconds*1000)}
 console.log('PASS: URL fallback/duplicates; no autostart; three real support levels; timed/untimed; pause/background; expiry/retry; keyboard corners; all 8 tasks × 3 modes; stars preserved. Browser/layout not tested.');
+
+assert.ok(!html.includes('reduce?0:65'),'No completion confetti');
+assert.ok(html.includes('class="clay-stamp"'),'Completion stamp exists');
+assert.ok(html.includes('↻ Yeniden dene.'),'Retry includes text and sign');
