@@ -1,0 +1,9 @@
+/* Default off: only the explicit, supported desktop pilot opts in via head JS. */
+@view-transition{navigation:none}
+:root{view-transition-name:none}
+::view-transition-group(ufkora-bahce-art),::view-transition-group(ufkora-bahce-title){animation-duration:180ms;animation-timing-function:cubic-bezier(.22,1,.36,1)}
+::view-transition-old(ufkora-bahce-art),::view-transition-new(ufkora-bahce-art),::view-transition-old(ufkora-bahce-title),::view-transition-new(ufkora-bahce-title){animation-duration:180ms;mix-blend-mode:normal}
+@media(prefers-reduced-motion:reduce),(max-width:1000px),(pointer:coarse){
+ @view-transition{navigation:none}
+ ::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}
+}
