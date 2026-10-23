@@ -114,7 +114,7 @@ Odak: önce üç pilot oyun. Sonradan diğer içeriklere yayılır.
 
 İlk olarak ortak UI, sonra her oyunun gerçek davranışına bağlama. “Bölünebilme Tenceresi” erişilebilen dosyası bulunursa referans; bulunamazsa bulunduğu iddia edilmez.
 
-- [ ] T28 — Mevcut oyun girişlerini ve ayarlarını karşılaştır. **Bitti ölçütü:** desteklenen zorluk/süre ve yeniden başlatma davranışı oyun bazında listeli.
+- [x] T28 — Mevcut oyun girişlerini ve ayarlarını karşılaştır. **Bitti ölçütü:** desteklenen zorluk/süre ve yeniden başlatma davranışı oyun bazında listeli.
 - [ ] T29 — Başlangıç panelinin küçük taslağını sun. **Bitti ölçütü:** amaç, kazanım, zorluk, süre ve Başlat sırası anlaşılır.
 - [ ] T30 — Zorluk seçiciyi oluştur. **Aday:** Kolay / Orta / Zor; alternatif adlar ayrı karar. **Bitti ölçütü:** açıklamalı native seçim, yalnız renkle anlatılmıyor.
 - [ ] T31 — Süre seçiciyi oluştur. **Aday:** 60 / 120 / 180 saniye / Süresiz. **Bitti ölçütü:** gerçek süre ile saat karışmıyor; sürükleme zorunlu değil.
@@ -231,3 +231,15 @@ Bunlar şimdi yeni soru olarak çalışmayı durdurmaz; ilgili taslak hazır old
 - Araç durumu: UI UX Pro Max, Frontend Design, Design Taste ve dört ek skill kaydedildi; Motion Docs araması çalışıyor; 21st normal bileşen araması hatalı, diğer doğrulanan yollar kullanılabilir. Her görevde erişim varmış gibi varsayılmaz.
 
 Kaynak rapor: UFKORA_Tasarim_Arastirma_Karar_Raporu.docx, sürüm 1; öneriler s.6–9, strateji s.14, kararlar s.15. Bu plan üçüncü bir tasarım yönünü gizlice uygulamaya sokmaz; rapordaki alternatifler karar çerçevesi olarak korunur.
+
+
+## 23 Ekim 2026 · Kullanıcı ek talebi — kısa ve sınıfa uygun oyun ekranları
+
+- [x] T28-S0 — Katalogdaki 12 farklı rotanın kaynak metinlerini tara; üç pilotun giriş/zorluk/süre/tekrar davranışını incele. Tam oyun bitirme testi değildir.
+- [ ] T29 taslağı kısa öğrenci yönergeleriyle hazırlanacak; uzun öğretmen, kazanım ve teknik açıklamalar yardım/öğretmen alanına taşınacak.
+- [ ] T33–T35 entegrasyonlarına metin sadeleştirme kabul ölçütü eklendi: tekrarları azalt, tek ana görev ve ana eylem göster, matematiksel şartları/birimleri koru.
+- [ ] Diğer dokuz rotaya pilotlardan sonra küçük görevlerle yayılacak. Sınıfla ilgisiz içerik hedef/kaynak kontrolünden sonra kaldırılacak; ortak 4–8 etkinlikleri silinmeyecek.
+
+Gereksiz metinler azaltılacak; yazıyı küçültmek veya gerekli yönergeleri açıklamasız ikonlara çevirmek çözüm sayılmayacak. Bu ek analiz/plan kaydıdır; oyun içi metinler henüz değiştirilmedi.
+
+[Ayrıntılı T28 incelemesi ve sadeleştirme listesi](https://github.com/ogunsekerr/ufkora/blob/task/t28-entry-content-audit/docs/design/T28-entry-content-audit.md)
