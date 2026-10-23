@@ -9,3 +9,5 @@ Gerçek bulut Chromium, sites-preview ve terminal.local üzerinde çalıştı. F
 Işık Rotası'nda native zorluk radyolarında ArrowRight seçimi, Tab ile süre grubuna ve Başlat'a geçiş; süre radyolarında ArrowRight; Başlat üzerinde 3 px solid klavye odağı ve Enter ile gerçek oyuna geçiş doğrulandı. Sayaç girişte Süresiz, başlatınca seçilen 60 sn oldu; odak canvas'a taşındı.
 
 Sınır: CSS belge ölçeği tarayıcı arayüzündeki native %200 zoom değildir. T37'nin bu kabul maddesi açık tutulur. Fiziksel iPhone/Safari, gerçek dokunma ve ekran okuyucu testi yapılmadı. Diğer pilotların klavye akışları sonraki kayıtlarla tamamlanacak. T37 tamamen kapanmış sayılmaz; doğrulanabilen kısımlar tamamlandı.
+
+Tamamlayıcı kontrol: Sayı Kargo ve Bahçe Mimarı'nda da ArrowRight ile Orta ve 60 saniye seçildi; Tab ile Başlat'a geçildi. Her ikisinde odak çerçevesi 3 px ve Enter sonrası oyun alanı odaktaydı. Sayaç 60 sn ile açıldı. Üç pilotun native seçim/başlat klavye akışı doğrulandı; yalnız native tarayıcı zoom ve fiziksel cihaz maddeleri açık kalır.

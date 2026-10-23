@@ -21,20 +21,21 @@ const topicMode=grade===5&&view.value==='topics';
 catalog.classList.toggle('catalog-topics',topicMode);
 const rows=new Map();
 // Only occupied rows are rendered, in the catalog's existing topic order.
-const ordered=topicMode?[...filtered].sort((a,b)=>Number(b.title==='Bahçe Mimarı')-Number(a.title==='Bahçe Mimarı')):filtered;
+const topicOrder=['Geometri','Sayılar','Karma konular'];
+const ordered=topicMode?[...filtered].sort((a,b)=>topicOrder.indexOf(a.topic)-topicOrder.indexOf(b.topic)||Number(b.title==='Bahçe Mimarı')-Number(a.title==='Bahçe Mimarı')):filtered;
 ordered.forEach(x=>{
 let destination=catalog;
 if(topicMode){
  if(!rows.has(x.topic)){
  const section=el('section','topic-row'),heading=el('h2','topic-row-title',x.topic),list=el('ul','topic-list');
- heading.id='topic-row-'+rows.size;section.setAttribute('aria-labelledby',heading.id);section.append(heading,list);catalog.append(section);rows.set(x.topic,list);
+ list.setAttribute('role','list');heading.id='topic-row-'+rows.size;section.setAttribute('aria-labelledby',heading.id);section.append(heading,list);catalog.append(section);rows.set(x.topic,list);
  }
  const item=el('li','topic-item');rows.get(x.topic).append(item);destination=item;
 }
 
 const card=el('article','activity-card'),a=el(x.preview||topicMode?'div':'a','activity-launch');if(!x.preview&&!topicMode)a.href=x.url;if(x.preview)card.dataset.previewId=x.preview.id;
 const visual=el('div','activity-visual'),img=el('img');img.src=x.image;img.alt=x.preview?.imageAlt||'';img.loading='lazy';img.decoding='async';img.width=x.preview?.imageWidth||768;img.height=x.preview?.imageHeight||512;visual.append(img,window.UfkoraClay.make(window.UfkoraClay.kind(x.title)));
-const body=el('div','activity-body'),top=el('div','activity-top');top.append(el('span','activity-type',x.type),el('span','',x.topic));body.append(top,el(topicMode?'h3':'h2','',x.title));if(!topicMode)body.append(el('p','',x.desc));if(topicMode&&x.title==='Bahçe Mimarı'){card.classList.add('topic-featured');body.prepend(el('span','topic-featured-label','Öne çıkan oyun'));}
+const body=el('div','activity-body'),top=el('div','activity-top');top.append(el('span','activity-type',x.type));if(!topicMode)top.append(el('span','',x.topic));body.append(top,el(topicMode?'h3':'h2','',x.title));if(!topicMode)body.append(el('p','',x.desc));if(topicMode&&x.title==='Bahçe Mimarı'){card.classList.add('topic-featured');body.prepend(el('span','topic-featured-label','Öne çıkan oyun'));}
 if(x.common)body.append(el('span','common-note','4–8. sınıflar için ortak keşif'));
 if(!x.preview&&!topicMode)body.append(el('span','activity-go','Keşfetmeye başla ↗'));a.append(visual,body);card.append(a);
 if(x.preview)card.append(window.UfkoraPilotPreview.create(x));
