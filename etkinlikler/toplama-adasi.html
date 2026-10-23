@@ -87,7 +87,7 @@
             -moz-appearance: textfield;
         }
     </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"><link rel="stylesheet" href="../features/rollout/content-entry.css?v=20261023-y01"><script src="../features/rollout/addition-model.js?v=20261023-y01"></script><script src="../features/rollout/active-clock.js?v=20261023-y01"></script></head>
 <body class="ufkora-activity activity-toplama-adasi text-slate-800 p-3 sm:p-6 select-none"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
 
     <div class="max-w-5xl mx-auto">
@@ -461,13 +461,13 @@
                 </div>
                 <h2 class="text-3xl font-bold text-rose-950 mb-3">Süreli Toplama Şampiyonası!</h2>
                 <p class="text-slate-600 mb-6 text-base sm:text-lg">
-                    90 saniye içinde 4. sınıf seviyesinde dört basamaklı toplama işlemlerini, tahmin ve problem sorularını çöz! Arka arkaya doğru cevaplar vererek <strong>Kombo Çarpanı</strong> kazan!
+                    Seçtiğin süreyle veya süresiz olarak 4. sınıf seviyesinde dört basamaklı toplama işlemlerini, tahmin ve problem sorularını çöz! Arka arkaya doğru cevaplar vererek <strong>Kombo Çarpanı</strong> kazan!
                 </p>
 
                 <!-- Zorluk Seçimi -->
                 <div class="flex justify-center gap-3 mb-8">
-                    <button onclick="setQuizDifficulty(90, 'Normal')" id="diff-90" class="diff-btn bg-rose-600 text-white px-4 py-2 rounded-xl font-bold border-2 border-rose-700">⏱️ 90 Saniye (Normal)</button>
-                    <button onclick="setQuizDifficulty(60, 'Hızlı')" id="diff-60" class="diff-btn bg-slate-100 text-slate-700 px-4 py-2 rounded-xl font-bold border-2 border-slate-300">⚡ 60 Saniye (Hızlı)</button>
+                    <button onclick="setQuizDifficulty(90, 'Normal')" id="diff-90" class="diff-btn bg-rose-600 text-white px-4 py-2 rounded-xl font-bold border-2 border-rose-700">90 saniye</button>
+                    <button onclick="setQuizDifficulty(60, 'Hızlı')" id="diff-60" class="diff-btn bg-slate-100 text-slate-700 px-4 py-2 rounded-xl font-bold border-2 border-slate-300">60 saniye</button>
                 </div>
 
                 <button onclick="startTimedQuiz()" class="bg-gradient-to-r from-rose-500 to-orange-500 hover:from-rose-600 hover:to-orange-600 text-white text-xl font-bold px-10 py-4 rounded-2xl btn-3d shadow-lg">
@@ -593,6 +593,8 @@
 
         // ==================== GENEL PUAN VE SEKME YÖNETİMİ ====================
         let globalScore = 0;
+        let additionLevel="easy";
+        let act1Solved=false,act3Solved=false,act4Solved=false,quizLocked=false,quizRunning=false,quizSession=0;
 
         function addGlobalScore(points) {
             globalScore += points;
@@ -631,9 +633,9 @@
         let act1Data = { n1: 0, n2: 0, sum: 0, carries: [0, 0, 0, 0, 0] };
 
         function generateAct1Problem() {
+            act1Solved=false;
             // En az bir eldeli basamak içeren 4 basamaklı iki sayı üret
-            const n1 = Math.floor(1200 + Math.random() * 7800);
-            const n2 = Math.floor(1200 + Math.random() * 7800);
+            const [n1,n2] = window.UfkoraAddition.pair(additionLevel,true);
             const sum = n1 + n2;
 
             const d1 = String(n1).padStart(4, '0').split('').reverse().map(Number);
@@ -694,6 +696,7 @@
         }
 
         function checkAct1() {
+            if(act1Solved)return;
             const sumStr = String(act1Data.sum).padStart(5, '0').split('').reverse();
             let allCorrect = true;
 
@@ -723,6 +726,7 @@
                     cInput.classList.remove('bg-rose-100', 'border-rose-500');
                     if (expectedCarry === '1') cInput.classList.add('bg-emerald-100', 'border-emerald-500');
                 } else {
+                    allCorrect=false;
                     cInput.classList.add('bg-rose-100', 'border-rose-500');
                 }
             }
@@ -730,7 +734,7 @@
             const fbText = document.getElementById('act1-feedback-text');
             if (allCorrect) {
                 playSuccessSound();
-                addGlobalScore(25);
+                act1Solved=true;addGlobalScore(25);
                 fbText.innerHTML = `<span class="text-emerald-700 font-extrabold">🌟 Harika İş Çıkardın!</span> ${act1Data.n1} + ${act1Data.n2} = <strong>${act1Data.sum}</strong>. Eldeleri ve basamakları kusursuz topladın! (+25 Puan)`;
             } else {
                 playErrorSound();
@@ -781,8 +785,7 @@
             letters.forEach((char, idx) => {
                 let a, b, sum;
                 do {
-                    a = Math.floor(1100 + Math.random() * 4500);
-                    b = Math.floor(1100 + Math.random() * 4200);
+                    [a,b] = window.UfkoraAddition.pair(additionLevel);
                     sum = a + b;
                 } while (usedSums.has(sum));
                 usedSums.add(sum);
@@ -900,8 +903,8 @@
         ];
 
         function generateAct3Problem() {
-            const n1 = Math.floor(1500 + Math.random() * 3900);
-            const n2 = Math.floor(1400 + Math.random() * 3900);
+            act3Solved=false;
+            const [n1,n2] = window.UfkoraAddition.pair(additionLevel,false);
             const sum = n1 + n2;
 
             const s1 = String(n1).split('').map(Number);
@@ -963,6 +966,7 @@
         }
 
         function checkAct3() {
+            if(act3Solved)return;
             let allOk = true;
             act3State.hidden.forEach((h, i) => {
                 const inp = document.getElementById(`act3-inp-${i}`);
@@ -981,7 +985,7 @@
             const fb = document.getElementById('act3-feedback');
             if (allOk) {
                 playSuccessSound();
-                addGlobalScore(30);
+                act3Solved=true;addGlobalScore(30);
                 fb.innerHTML = `<span class="text-emerald-700 font-extrabold">🕵️‍♂️ Süper Dedektif!</span> Tüm gizli rakamları doğru buldun (${act3State.n1} + ${act3State.n2} = ${act3State.sum}). +30 Puan kazandın!`;
             } else {
                 playErrorSound();
@@ -1005,8 +1009,7 @@
 
         function createSingleMissingDigitProblem(labels, colorTheme) {
             // Toplamı 9999'u geçmeyen iki adet 4 basamaklı sayı üret
-            const n1 = Math.floor(1200 + Math.random() * 3600);
-            const n2 = Math.floor(1200 + Math.random() * 3600);
+            const [n1,n2] = window.UfkoraAddition.pair(additionLevel,false);
             const sum = n1 + n2;
 
             const s1 = String(n1).split('').map(Number);
@@ -1076,6 +1079,7 @@
         }
 
         function generateAct4Problem() {
+            act4Solved=false;
             const prob1 = createSingleMissingDigitProblem(['A', 'B', 'C'], 'amber');
             const prob2 = createSingleMissingDigitProblem(['D', 'E', 'F'], 'sky');
 
@@ -1115,6 +1119,7 @@
         }
 
         function checkAct4() {
+            if(act4Solved)return;
             const inputs = document.querySelectorAll('.act4-digit-input');
             let allDigitsCorrect = true;
 
@@ -1149,7 +1154,7 @@
             const fbText = document.getElementById('act4-feedback-text');
             if (allDigitsCorrect && bonusCorrect) {
                 playSuccessSound();
-                addGlobalScore(40);
+                act4Solved=true;addGlobalScore(40);
                 fbText.innerHTML = `<span class="text-emerald-700 font-extrabold">🏆 Muhteşem İkili Dedektif!</span> Hem 1. İşlem (${act4State.prob1.n1} + ${act4State.prob1.n2} = ${act4State.prob1.sum}) hem de 2. İşlem (${act4State.prob2.n1} + ${act4State.prob2.n2} = ${act4State.prob2.sum}) kusursuz çözüldü! (+40 Puan)`;
             } else if (allDigitsCorrect && !bonusCorrect) {
                 playErrorSound();
@@ -1199,6 +1204,7 @@
         }
 
         function startTimedQuiz() {
+            quizRunning=true;quizLocked=false;quizSession++;
             quizTimeLeft = quizDuration;
             quizScore = 0;
             quizStreak = 0;
@@ -1224,14 +1230,15 @@
         }
 
         function updateQuizHUD() {
-            document.getElementById('quiz-timer').textContent = `${quizTimeLeft} sn`;
+            document.getElementById('quiz-timer').textContent = quizTimeLeft===Infinity?'Süresiz':`${quizTimeLeft} sn`;
             document.getElementById('quiz-streak').textContent = `${quizStreak}x`;
             document.getElementById('quiz-score').textContent = quizScore;
-            const pct = Math.max(0, (quizTimeLeft / quizDuration) * 100);
+            const pct = quizDuration ? Math.max(0, (quizTimeLeft / quizDuration) * 100) : 100;
             document.getElementById('quiz-progress-bar').style.width = `${pct}%`;
         }
 
         function nextQuizQuestion() {
+            quizLocked=false;
             questionCounter++;
             const qType = questionCounter % 3; // 0: Klasik 4 basamaklı, 1: Problem, 2: Zihinden 100'ün katları
             const badgeEl = document.getElementById('quiz-q-badge');
@@ -1239,8 +1246,7 @@
 
             let ans = 0;
             if (qType === 1) {
-                const a = Math.floor(1250 + Math.random() * 3500);
-                const b = Math.floor(1150 + Math.random() * 3200);
+                const [a,b] = window.UfkoraAddition.pair(additionLevel,true);
                 ans = a + b;
                 badgeEl.textContent = `Soru #${questionCounter} • Gerçek Hayat Problemi`;
                 textEl.innerHTML = `<span class="text-lg sm:text-2xl font-bold block leading-snug">Bir kütüphanede <strong>${a}</strong> hikaye kitabı ve <strong>${b}</strong> bilim kitabı vardır. Toplam kitap sayısı kaçtır?</span>`;
@@ -1251,8 +1257,7 @@
                 badgeEl.textContent = `Soru #${questionCounter} • Zihinden Hızlı Toplama`;
                 textEl.textContent = `${a} + ${hundreds} = ?`;
             } else {
-                const a = Math.floor(1400 + Math.random() * 6500);
-                const b = Math.floor(1300 + Math.random() * 5500);
+                const [a,b] = window.UfkoraAddition.pair(additionLevel,true);
                 ans = a + b;
                 badgeEl.textContent = `Soru #${questionCounter} • Dört Basamaklı Toplama`;
                 textEl.textContent = `${a} + ${b} = ?`;
@@ -1281,6 +1286,8 @@
         }
 
         function submitQuizOption(selected, btnEl) {
+            if(!quizRunning||quizLocked)return;quizLocked=true;
+            document.querySelectorAll("#quiz-options button").forEach(b=>b.disabled=true);
             if (selected === currentQuizAnswer) {
                 playSuccessSound();
                 quizCorrect++;
@@ -1297,12 +1304,14 @@
             }
 
             updateQuizHUD();
+            const submittedSession=quizSession;
             setTimeout(() => {
-                if (quizTimeLeft > 0) nextQuizQuestion();
+                if (quizRunning && submittedSession===quizSession && quizTimeLeft > 0) nextQuizQuestion();
             }, 320);
         }
 
         function endTimedQuiz() {
+            quizRunning=false;quizLocked=true;quizSession++;
             clearInterval(quizInterval);
             quizInterval = null;
             playSuccessSound();
@@ -1332,5 +1341,5 @@
             generateAct4Problem();
         };
     </script>
-</body>
+<script src="../features/rollout/toplama-entry.js?v=20261023-y01"></script></body>
 </html>
