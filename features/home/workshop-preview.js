@@ -22,7 +22,7 @@ function render(animateTab=false){
  preview.style.setProperty('--world-color',theme.color);preview.style.setProperty('--world-bg',theme.bg);
  document.getElementById('atolye-onizleme').style.setProperty('--world-bg',theme.bg);
  document.getElementById('class-world-caption').textContent=theme.caption;
- worldObject.replaceChildren(window.UfkoraClay.make(theme.kind));world.dataset.grade=grade;
+ if(world.dataset.grade!==String(grade)){worldObject.replaceChildren(window.UfkoraClay.make(theme.kind));world.dataset.grade=grade;}
  preview.classList.remove(...Object.values(colors));preview.classList.add(colors[grade]);
  document.getElementById('preview-title').textContent=grade+'. sınıf atölyesi';document.getElementById('preview-number').textContent=grade;
  grades.forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.previewGrade)===grade)));
@@ -42,7 +42,7 @@ function render(animateTab=false){
  all.href='atolye.html?sinif='+grade;all.replaceChildren(document.createTextNode(grade+'. sınıf atölyesini aç '),node('span','','↗'));
  placeTabIndicator(animateTab);
 }
-grades.forEach(b=>b.addEventListener('click',()=>{grade=Number(b.dataset.previewGrade);render();if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const light=matchMedia('(max-width: 700px), (pointer: coarse)').matches;preview.animate(light?[{opacity:.75,transform:'translateY(6px)'},{opacity:1,transform:'none'}]:[{clipPath:'circle(16% at '+(10+(grade-4)*20)+'% 30%)',opacity:.6},{clipPath:'circle(150% at 50% 50%)',opacity:1}],{duration:light?220:500,easing:'cubic-bezier(.22,1,.36,1)'});}}));
+grades.forEach(b=>b.addEventListener('click',()=>{const next=Number(b.dataset.previewGrade),changed=next!==grade;grade=next;render();if(changed)preview.dispatchEvent(new CustomEvent('ufkora:grade-change'));}));
 tabs.forEach((b,i)=>{b.addEventListener('click',()=>{type=b.dataset.previewType;render(true)});b.addEventListener('keydown',e=>{let next;if(e.key==='ArrowRight'||e.key==='ArrowLeft')next=1-i;else if(e.key==='Home')next=0;else if(e.key==='End')next=1;else return;e.preventDefault();type=tabs[next].dataset.previewType;render(true);tabs[next].focus({preventScroll:true})})});
 render();
 // Resize and late font loading only snap the decorative marker; content never waits.

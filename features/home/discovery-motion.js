@@ -20,4 +20,6 @@ button.addEventListener('click',event=>{
  if(event.detail===0)return;
  mini.querySelectorAll('.mini-quarter,.mini-three-quarter').forEach(cut=>play('mini',cut,quarters?[{transform:'scaleY(0)',opacity:0},{transform:'scaleY(1)',opacity:1}]:[{transform:'scaleY(1)',opacity:1},{transform:'scaleY(0)',opacity:0}]));
 });
+const preview=document.getElementById('workshop-preview'),worldObject=document.getElementById('class-world-object');
+if(preview&&worldObject)preview.addEventListener('ufkora:grade-change',()=>{cancel('world');play('world',worldObject,[{transform:'translateY(6px)',opacity:.85},{transform:'translateY(0)',opacity:1}]);});
 })();

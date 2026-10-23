@@ -15,3 +15,6 @@
 .hero-mini [hidden]{display:none!important}
 @media(max-width:700px){.hero-immersive .hero-mini{gap:10px;padding:10px;width:min(100%,380px);margin-top:14px}.hero-immersive .hero-mini h2{font-size:14px}.hero-immersive .mini-equation{font-size:17px}.hero-immersive #mini-result{font-size:11px}.hero-mini button{min-width:54px}.mini-whole{height:32px}}
 @media(max-height:740px){.hero-immersive .hero-mini{padding:8px 12px;margin-top:12px;gap:10px}.hero-immersive .hero-mini h2,.hero-immersive #mini-result{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.mini-whole{height:32px}}
+
+/* The real clay object is the sole class-selection motion target. */
+.home-page #class-world-object .clay-motif{animation:none!important}
