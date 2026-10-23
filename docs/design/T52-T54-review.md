@@ -24,3 +24,7 @@ Normal Bahçe çit animasyonu bu tarayıcı oturumunda 'Çitler kuruluyor' aşam
 OS reduced-motion CSS yolu tüm yeni hareketleri kapatır; Bahçe'nin Hareketleri azalt kutusu da ortak press ve damgayı kapatır. OS ayarı ve fiziksel dokunmatik cihaz bu oturumda denenmedi. Yeni hover hareketi yok; pointer gerektiren kontrol eklenmedi. Fiziksel telefon, ekran okuyucu ve Safari kabulü yapılmadı; FPS veya öğrenme/kazanım başarısı artışı iddiası yok.
 
 Ana sayfa, entrance, puan kuralları ve canlı yayın değiştirilmedi. T55–T60 bu görevin kapsamı değildir.
+
+## Canlıya geçiş öncesi zorunlu kontrol · kullanıcı kararı
+
+Bahçe Mimarı'nın normal hareket yolunda çit kurulumu → kaplama → soru → sonuç → tekrar/sonraki görev akışı canlıya alınmadan önce yeniden doğrulanacak. Sorun sürerse kök neden incelenip çalışması için gerekli düzeltmeler yapılacak ve akış tekrar test edilecek. Yalnız hareket azaltma yolunun çalışması bu maddeyi kapatmaz. Normal akışın geçtiğine ilişkin kanıt kaydedilmeden bu açık sorun çözülmüş sayılmayacak ve ilgili sürüm canlıya alınmayacak. Bu kayıt canlı yayın onayı değildir.
