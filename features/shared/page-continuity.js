@@ -21,14 +21,15 @@ function apply(event,activation){
  try{from=activation?.from?.url?new URL(activation.from.url):null;to=activation?.entry?.url?new URL(activation.entry.url):null;}catch{}
  const nodes=endpoints();
  // Missing/unpainted/hidden endpoints use ordinary navigation, never wait for assets.
- if(quiet.matches||!pair(from,to)||nodes.some(n=>!n||!n.getClientRects().length)||(here==='garden'&&document.getElementById('cover').classList.contains('hide'))){root.dataset.vtLast='skipped';vt.skipTransition();return;}
+ if(quiet.matches||!pair(from,to)||nodes.some(n=>!n||!n.getClientRects().length)||!nodes[0].complete||!nodes[0].naturalWidth||(here==='garden'&&document.getElementById('cover').classList.contains('hide'))){root.dataset.vtLast='skipped';vt.skipTransition();return;}
  nodes.forEach((n,i)=>{n.dataset.vtPart=i?'title':'art';n.style.setProperty('view-transition-name',i?'ufkora-bahce-title':'ufkora-bahce-art')});
  root.dataset.vtLast='matched';active=vt;
- vt.finished.then(()=>{clearNames();if(active===vt)active=null},()=>{clearNames();if(active===vt)active=null});
+ const cleanup=()=>{if(active===vt){clearNames();active=null}};
+ vt.finished.then(cleanup,cleanup);
 }
 addEventListener('pageswap',event=>apply(event,event.activation));
 addEventListener('pagereveal',event=>apply(event,window.navigation.activation));
-addEventListener('pageshow',clearNames);quiet.addEventListener('change',configure);configure();
+addEventListener('pageshow',()=>{if(!active)clearNames()});quiet.addEventListener('change',configure);configure();
 // Carry the explicit QA opt-in only on this pilot's existing real anchors.
 function decorate(){if(here!=='catalog')return;document.querySelectorAll('#catalog a[href]').forEach(a=>{const url=new URL(a.href,current);if(route(url)==='garden'&&!url.searchParams.has('vt')){url.searchParams.set('vt','clay');a.href=url.pathname+url.search+url.hash;}})}
 addEventListener('DOMContentLoaded',()=>{decorate();const catalog=document.getElementById('catalog');if(catalog)new MutationObserver(decorate).observe(catalog,{childList:true})},{once:true});
