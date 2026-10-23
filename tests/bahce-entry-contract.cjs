@@ -26,3 +26,11 @@ console.log('PASS: URL fallback/duplicates; no autostart; three real support lev
 assert.ok(!html.includes('reduce?0:65'),'No completion confetti');
 assert.ok(html.includes('class="clay-stamp"'),'Completion stamp exists');
 assert.ok(html.includes('↻ Yeniden dene.'),'Retry includes text and sign');
+
+// Normal fence completion must not depend on requestAnimationFrame delivery.
+t=boot('?duration=60');t.run("reduce=false;start(0);rect={x:0,y:0,w:4,h:3};build()");
+assert.equal(t.run('phase'),'fence');t.advance(800);assert.equal(t.run('phase'),'fence');
+t.run('pauseGame()');t.advance(5000);assert.equal(t.run('phase'),'fence');t.run('resumeGame()');
+t.visibility(true);t.advance(5000);assert.equal(t.run('phase'),'fence');t.visibility(false);
+t.advance(800);assert.equal(t.run('phase'),'paint');assert.equal(t.run('remaining'),60000);
+console.log('PASS normal fence without render frames; help/background pause; task time preserved');

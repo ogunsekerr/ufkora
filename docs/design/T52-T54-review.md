@@ -28,3 +28,5 @@ Ana sayfa, entrance, puan kuralları ve canlı yayın değiştirilmedi. T55–T6
 ## Canlıya geçiş öncesi zorunlu kontrol · kullanıcı kararı
 
 Bahçe Mimarı'nın normal hareket yolunda çit kurulumu → kaplama → soru → sonuç → tekrar/sonraki görev akışı canlıya alınmadan önce yeniden doğrulanacak. Sorun sürerse kök neden incelenip çalışması için gerekli düzeltmeler yapılacak ve akış tekrar test edilecek. Yalnız hareket azaltma yolunun çalışması bu maddeyi kapatmaz. Normal akışın geçtiğine ilişkin kanıt kaydedilmeden bu açık sorun çözülmüş sayılmayacak ve ilgili sürüm canlıya alınmayacak. Bu kayıt canlı yayın onayı değildir.
+
+Güncelleme (T55): normal çit süresi aktif-zaman saatine bağlandı; normal hareket açıkken görev → sonuç → sonraki görev → tekrar → menü akışı gerçek Chromium'da geçti. Bu dal için açık madde kapandı. Kanıt: [T55 incelemesi](T55-student-flow-review.md). Son yayın adayında smoke kontrolü ve ayrı yayın onayı gerekliliği korunur.
