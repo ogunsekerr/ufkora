@@ -83,7 +83,7 @@
             z-index: 100;
         }
     </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"><link rel="stylesheet" href="../features/rollout/content-entry.css?v=20261023-y12"><link rel="stylesheet" href="../features/rollout/maarif-entry.css?v=20261023-y12"><script src="../features/rollout/active-clock.js?v=20261023-y12"></script><script src="../features/rollout/maarif-model.js?v=20261023-y12"></script></head>
 <body class="ufkora-activity activity-maarif-atolyesi flex flex-col justify-between p-2 sm:p-4 min-h-screen"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
 
     <!-- Kutlama Konfeti Canvas -->
@@ -331,23 +331,23 @@
 
                 <!-- 3 Bölük Yuvası -->
                 <div class="grid grid-cols-3 gap-2.5 sm:gap-4 my-1">
-                    <div id="slot_millions" onclick="selectPeriodSlot('millions')" class="cargo-slot active-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-amber-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
-                        <div class="text-[11px] font-extrabold uppercase text-amber-400">👑 MİLYONLAR BÖLÜĞÜ</div>
-                        <div id="slotVal_millions" class="font-display text-3xl sm:text-4xl font-black text-amber-300 tracking-widest my-2">???</div>
-                        <div class="text-[10px] text-slate-400">Yüz M. • On M. • Milyon</div>
-                    </div>
+                    <button type="button" aria-pressed="false" id="slot_millions" onclick="selectPeriodSlot('millions')" class="cargo-slot active-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-amber-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
+                        <span class="text-[11px] font-extrabold uppercase text-amber-400">👑 MİLYONLAR BÖLÜĞÜ</span>
+                        <span id="slotVal_millions" class="font-display text-3xl sm:text-4xl font-black text-amber-300 tracking-widest my-2">???</span>
+                        <span class="text-[10px] text-slate-400">Yüz M. • On M. • Milyon</span>
+                    </button>
 
-                    <div id="slot_thousands" onclick="selectPeriodSlot('thousands')" class="cargo-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-sky-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
-                        <div class="text-[11px] font-extrabold uppercase text-sky-400">📦 BİNLER BÖLÜĞÜ</div>
-                        <div id="slotVal_thousands" class="font-display text-3xl sm:text-4xl font-black text-sky-300 tracking-widest my-2">???</div>
-                        <div class="text-[10px] text-slate-400">Yüz B. • On B. • Bin</div>
-                    </div>
+                    <button type="button" aria-pressed="false" id="slot_thousands" onclick="selectPeriodSlot('thousands')" class="cargo-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-sky-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
+                        <span class="text-[11px] font-extrabold uppercase text-sky-400">📦 BİNLER BÖLÜĞÜ</span>
+                        <span id="slotVal_thousands" class="font-display text-3xl sm:text-4xl font-black text-sky-300 tracking-widest my-2">???</span>
+                        <span class="text-[10px] text-slate-400">Yüz B. • On B. • Bin</span>
+                    </button>
 
-                    <div id="slot_ones" onclick="selectPeriodSlot('ones')" class="cargo-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-emerald-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
-                        <div class="text-[11px] font-extrabold uppercase text-emerald-400">🧱 BİRLER BÖLÜĞÜ</div>
-                        <div id="slotVal_ones" class="font-display text-3xl sm:text-4xl font-black text-emerald-300 tracking-widest my-2">???</div>
-                        <div class="text-[10px] text-slate-400">Yüzler • Onlar • Birler</div>
-                    </div>
+                    <button type="button" aria-pressed="false" id="slot_ones" onclick="selectPeriodSlot('ones')" class="cargo-slot cursor-pointer rounded-2xl bg-slate-950 border-2 border-emerald-500/40 p-3 text-center flex flex-col justify-between min-h-[120px]">
+                        <span class="text-[11px] font-extrabold uppercase text-emerald-400">🧱 BİRLER BÖLÜĞÜ</span>
+                        <span id="slotVal_ones" class="font-display text-3xl sm:text-4xl font-black text-emerald-300 tracking-widest my-2">???</span>
+                        <span class="text-[10px] text-slate-400">Yüzler • Onlar • Birler</span>
+                    </button>
                 </div>
 
                 <!-- Konteyner Havuzu -->
@@ -544,11 +544,11 @@
                 <div class="bg-slate-950 border border-slate-800 rounded-2xl p-3.5">
                     <div class="text-xs font-extrabold uppercase text-sky-400 mb-2">1. BİRİM KESİR ÖLÇÜ KABINI SEÇ:</div>
                     <div class="grid grid-cols-5 gap-1.5">
-                        <button onclick="selectUnitCup(2)" id="cupBtn_2" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/2</button>
-                        <button onclick="selectUnitCup(3)" id="cupBtn_3" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/3</button>
-                        <button onclick="selectUnitCup(4)" id="cupBtn_4" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-sky-400 text-slate-950 font-display font-bold text-sm">1/4</button>
-                        <button onclick="selectUnitCup(5)" id="cupBtn_5" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/5</button>
-                        <button onclick="selectUnitCup(6)" id="cupBtn_6" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white">1/6</button>
+                        <button onclick="selectUnitCup(2)" id="cupBtn_2" aria-pressed="false" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white"><span class="maarif-fraction" role="math" aria-label="1 bölü 2"><span aria-hidden="true">1</span><span aria-hidden="true">2</span></span></button>
+                        <button onclick="selectUnitCup(3)" id="cupBtn_3" aria-pressed="false" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white"><span class="maarif-fraction" role="math" aria-label="1 bölü 3"><span aria-hidden="true">1</span><span aria-hidden="true">3</span></span></button>
+                        <button onclick="selectUnitCup(4)" id="cupBtn_4" aria-pressed="true" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-sky-400 text-slate-950 font-display font-bold text-sm"><span class="maarif-fraction" role="math" aria-label="1 bölü 4"><span aria-hidden="true">1</span><span aria-hidden="true">4</span></span></button>
+                        <button onclick="selectUnitCup(5)" id="cupBtn_5" aria-pressed="false" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white"><span class="maarif-fraction" role="math" aria-label="1 bölü 5"><span aria-hidden="true">1</span><span aria-hidden="true">5</span></span></button>
+                        <button onclick="selectUnitCup(6)" id="cupBtn_6" aria-pressed="false" class="unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white"><span class="maarif-fraction" role="math" aria-label="1 bölü 6"><span aria-hidden="true">1</span><span aria-hidden="true">6</span></span></button>
                     </div>
 
                     <div class="flex items-center gap-2 mt-3">
@@ -569,7 +569,7 @@
     </main>
 
     <!-- YAPICI GERİ BİLDİRİM MODALI -->
-    <div id="feedbackOverlay" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div id="feedbackOverlay" role="dialog" aria-modal="true" aria-labelledby="fbTitle" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="glass-panel max-w-md w-full rounded-3xl p-6 text-center border-2 border-sky-400/40">
             <div id="fbIconBox" class="w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl mb-3 bg-emerald-500/20">
                 🏆
@@ -761,7 +761,7 @@
                 box.innerText = '🏆';
                 box.className = "w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl mb-3 bg-emerald-500/20 border border-emerald-400/40";
                 sfx('win');
-                launchConfetti();
+                clearConfetti();
             } else {
                 box.innerText = '🧭';
                 box.className = "w-16 h-16 mx-auto rounded-2xl flex items-center justify-center text-3xl mb-3 bg-amber-500/20 border border-amber-400/40";
@@ -787,6 +787,8 @@
 
         /* ---------------- 3. TEMA SEKME YÖNETİCİSİ ---------------- */
         let activeTheme = 1;
+        let maarifLevel="easy";
+        const missionAwards=new Set();
         function switchTheme(num) {
             sfx('click');
             clearConfetti();
@@ -901,32 +903,33 @@
         }
 
         function newGeoMission() {
+            missionAwards.delete("radar");missionAwards.delete("laser");
             clearConfetti();
             geoState.showDiffArc = false;
             geoState.userType = '';
+            ['dar','dik','genis','dogru'].forEach(k=>document.getElementById('typeBtn_'+k).setAttribute('aria-pressed','false'));
             document.querySelectorAll('.angle-type-btn').forEach(b => {
                 b.className = "angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200";
             });
 
             if (geoState.subMode === 'protractor') {
-                const angles = [30, 35, 45, 50, 60, 70, 75, 90, 110, 120, 135, 150, 180];
-                geoState.targetDegree = angles[Math.floor(Math.random() * angles.length)];
-                const baseList = [0, -10, 10, -15];
-                geoState.baseRayAngle = (baseList[Math.floor(Math.random() * baseList.length)] * Math.PI) / 180;
-
-                geoState.protractor.x = (geoCanvas.width || 680) * 0.68;
-                geoState.protractor.y = (geoCanvas.height || 380) * 0.44;
-                geoState.protractor.rot = 0.18;
-                geoState.protractor.snapped = false;
+                const task=window.UfkoraMaarifModel.radar(maarifLevel);
+                geoState.targetDegree=task.angle;
+                geoState.baseRayAngle=task.base*Math.PI/180;
+                geoState.protractor.x=task.snap?geoState.vertex.x:(geoCanvas.width||680)*.68;
+                geoState.protractor.y=task.snap?geoState.vertex.y:(geoCanvas.height||380)*.44;
+                geoState.protractor.rot=task.align?geoState.baseRayAngle:.18;
+                geoState.protractor.snapped=task.snap;
                 updateSnapBadge();
             } else {
-                geoState.laser.mode = Math.random() > 0.5 ? 'tumler' : 'butunler';
+                const laserTask=window.UfkoraMaarifModel.laser(maarifLevel);
+                geoState.laser.mode=laserTask.mode;
                 if (geoState.laser.mode === 'tumler') {
-                    geoState.laser.givenAngle = Math.floor(Math.random() * 13 + 3) * 5;
+                    geoState.laser.givenAngle=laserTask.given;
                     geoState.laser.missingAngle = 90 - geoState.laser.givenAngle;
                     document.getElementById('laserScenarioDesc').innerHTML = `Bu düzenek <b class="text-emerald-400">DİK AÇI (90° - Tümler Açılar)</b> aynasıdır. Gelen lazer <b>${geoState.laser.givenAngle}°</b> olduğuna göre, toplamın 90° olması için komşu tümler açı kaç derecedir?`;
                 } else {
-                    geoState.laser.givenAngle = Math.floor(Math.random() * 22 + 6) * 5;
+                    geoState.laser.givenAngle=laserTask.given;
                     geoState.laser.missingAngle = 180 - geoState.laser.givenAngle;
                     document.getElementById('laserScenarioDesc').innerHTML = `Bu düzenek <b class="text-amber-400">DOĞRU AÇI (180° - Bütünler Açılar)</b> aynasıdır. Gelen lazer <b>${geoState.laser.givenAngle}°</b> olduğuna göre, toplamın 180° olması için bütünler açı kaç derecedir?`;
                 }
@@ -950,10 +953,11 @@
             Array.from(set).sort((a, b) => a - b).forEach(val => {
                 const btn = document.createElement('button');
                 btn.className = "tactile-btn py-3 rounded-xl bg-slate-800 border-2 border-slate-700 font-display text-xl font-bold text-white";
-                btn.innerText = val + '°';
+                btn.innerText = val + '°';btn.setAttribute('aria-pressed','false');
                 btn.onclick = () => {
                     sfx('click');
                     geoState.laser.selectedChoice = val;
+                    Array.from(grid.children).forEach(el=>el.setAttribute('aria-pressed',String(el===btn)));
                     Array.from(grid.children).forEach(el => {
                         el.className = "tactile-btn py-3 rounded-xl bg-slate-800 border-2 border-slate-700 font-display text-xl font-bold text-white";
                     });
@@ -1003,6 +1007,7 @@
         function selectAngleType(t) {
             sfx('click');
             geoState.userType = t;
+            ['dar','dik','genis','dogru'].forEach(k=>document.getElementById('typeBtn_'+k).setAttribute('aria-pressed',String(k===t)));
             document.querySelectorAll('.angle-type-btn').forEach(b => {
                 b.className = "angle-type-btn tactile-btn py-2.5 px-3 rounded-xl bg-slate-800 border-2 border-slate-700 text-xs sm:text-sm font-bold text-slate-200";
             });
@@ -1025,6 +1030,7 @@
         }
 
         function fireRadarSignal() {
+            if(missionAwards.has("radar"))return;
             const target = geoState.targetDegree;
             const user = geoState.userDegree;
             const reqType = target < 90 ? 'dar' : (target === 90 ? 'dik' : (target < 180 ? 'genis' : 'dogru'));
@@ -1039,7 +1045,7 @@
                 return;
             }
             if (Math.abs(target - user) <= 3) {
-                addStars(50);
+                missionAwards.add("radar");addStars(50);
                 showFeedback(true, "Uydu Sinyali Kilitlendi! 🛰️", `Tebrikler! Sanal iletkiyle <b>${target}°</b> açıyı ve açı türünü hatasız ölçtün.`, 'nextGeo');
             } else {
                 geoState.showDiffArc = true;
@@ -1049,13 +1055,14 @@
         }
 
         function fireLaserBeam() {
+            if(missionAwards.has("laser"))return;
             if (geoState.laser.selectedChoice === null) {
                 showFeedback(false, "Açı Seçilmedi!", "Lütfen sağdaki seçeneklerden eksik açıyı seçip lazeri ateşle!");
                 return;
             }
             const total = geoState.laser.mode === 'tumler' ? 90 : 180;
             if (geoState.laser.selectedChoice === geoState.laser.missingAngle) {
-                addStars(50);
+                missionAwards.add("laser");addStars(50);
                 showFeedback(true, "Enerji Kristali Şarj Oldu! ⚡", `Harika! ${geoState.laser.givenAngle}° + <b>${geoState.laser.missingAngle}°</b> = <b>${total}°</b> bağıntısıyla hedefi tam on ikiden vurdun!`, 'nextGeo');
             } else {
                 showFeedback(false, "Lazer Hedefi Iskaladı!", `Seçtiğin açı ile toplam: ${geoState.laser.givenAngle}° + ${geoState.laser.selectedChoice}° = <b>${geoState.laser.givenAngle + geoState.laser.selectedChoice}°</b> oldu. Oysa toplam <b>${total}°</b> olmalıdır!`);
@@ -1390,6 +1397,7 @@
         }
 
         function generateCargoMission() {
+            missionAwards.delete("cargo-period");missionAwards.delete("cargo-vault");
             clearConfetti();
             const m = cargoMissions[Math.floor(Math.random() * cargoMissions.length)];
             cargoState.current = m;
@@ -1408,7 +1416,7 @@
             });
             selectPeriodSlot('millions');
 
-            const pool = [m.millions, m.thousands, m.ones, ...m.distractors].sort(() => Math.random() - 0.5);
+            const pool=window.UfkoraMaarifModel.cargo(m,maarifLevel).sort(()=>Math.random()-.5);
             const poolEl = document.getElementById('cargoContainersPool');
             poolEl.innerHTML = '';
             pool.forEach(code => {
@@ -1434,7 +1442,7 @@
         function selectPeriodSlot(slot) {
             cargoState.selectedSlot = slot;
             ['millions', 'thousands', 'ones'].forEach(s => {
-                document.getElementById('slot_' + s).classList.remove('active-slot');
+                document.getElementById('slot_' + s).classList.remove('active-slot');document.getElementById('slot_'+s).setAttribute('aria-pressed',String(s===slot));
             });
             document.getElementById('slot_' + slot).classList.add('active-slot');
             const map = { millions: 'Milyonlar Bölüğü', thousands: 'Binler Bölüğü', ones: 'Birler Bölüğü' };
@@ -1442,6 +1450,7 @@
         }
 
         function verifyCargoPeriods() {
+            if(missionAwards.has("cargo-period"))return;
             const c = cargoState.current;
             const p = cargoState.placed;
             if (!p.millions || !p.thousands || !p.ones) {
@@ -1449,7 +1458,7 @@
                 return;
             }
             if (p.millions === c.millions && p.thousands === c.thousands && p.ones === c.ones) {
-                addStars(50);
+                missionAwards.add("cargo-period");addStars(50);
                 showFeedback(true, "Konteynerler Doğru Yüklendi! 🚢", `Harika! <b>${c.millions} • ${c.thousands} • ${c.ones}</b> sayısını yer tutucu sıfırlara dikkat ederek doğru kurdun.`);
             } else {
                 showFeedback(false, "Yer Tutucu Sıfırlara Dikkat!", `Senin dizilimin: <b>${p.millions} • ${p.thousands} • ${p.ones}</b>.<br>Okunmayan basamaklarda sıfırın yerine dikkat ederek tekrar dene!`);
@@ -1485,7 +1494,7 @@
             document.getElementById('vaultQuestionText').innerHTML = `Bu sayıdaki <b class="text-amber-300 underline">${PLACE_NAMES[askPlaceIdx]}</b>ndaki rakamın <b>basamak değeri</b> kaçtır?`;
 
             const opts = new Set([correctVal, digit, digit * Math.pow(10, Math.max(1, askPlaceIdx - 1)), digit * Math.pow(10, Math.min(8, askPlaceIdx + 1))]);
-            while (opts.size < 4) opts.add((digit + 1) * Math.pow(10, askPlaceIdx));
+            for(let delta=1;opts.size<4;delta++)opts.add(correctVal+delta*Math.pow(10,askPlaceIdx));
 
             const grid = document.getElementById('vaultOptionsGrid');
             grid.innerHTML = '';
@@ -1494,8 +1503,9 @@
                 b.className = "tactile-btn py-2.5 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 font-display font-bold text-xs sm:text-sm text-white";
                 b.innerText = val.toLocaleString('tr-TR');
                 b.onclick = () => {
+                    if(missionAwards.has("cargo-vault"))return;
                     if (val === correctVal) {
-                        addStars(40);
+                        missionAwards.add("cargo-vault");addStars(40);
                         showFeedback(true, "Kasa Şifresi Kırıldı! 🔓", `Tebrikler! ${PLACE_NAMES[askPlaceIdx]}ndaki <b>${digit}</b> rakamının basamak değeri <b>${correctVal.toLocaleString('tr-TR')}</b>!`, 'nextCargo');
                     } else {
                         showFeedback(false, "Basamak Röntgenini İncele!", `Seçtiğin değer: <b>${val.toLocaleString('tr-TR')}</b>. Üstteki 9 rakamdan ilgili basamağa dokunarak basamak değerini görebilirsin!`);
@@ -1554,9 +1564,10 @@
         }
 
         function generateCarpetOrder() {
+            missionAwards.delete("carpet");
             clearConfetti();
-            carpetState.wMeters = Math.floor(Math.random() * 5) + 4;
-            carpetState.hMeters = Math.floor(Math.random() * 3) + 3;
+            const task=window.UfkoraMaarifModel.carpet(maarifLevel);
+            carpetState.wMeters=task.w;carpetState.hMeters=task.h;
             carpetState.orderType = Math.random() > 0.5 ? 'perimeter' : 'area';
             carpetState.showSidesRuler = false;
             carpetState.showPerimeterGlow = false;
@@ -1632,6 +1643,7 @@
         }
 
         function submitCarpetOrder() {
+            if(missionAwards.has("carpet"))return;
             const w = carpetState.wMeters;
             const h = carpetState.hMeters;
             const trueM = carpetState.orderType === 'perimeter' ? 2 * (w + h) : (w * h);
@@ -1644,7 +1656,7 @@
                 return;
             }
             if (uM === trueM && uC === trueC) {
-                addStars(60);
+                missionAwards.add("carpet");addStars(60);
                 showFeedback(true, "Sipariş Teslim Edildi! 🧶", `Harika! Kenarları <b>${w} m</b> ve <b>${h} m</b> olan halı için <b>${trueM} ${carpetState.orderType === 'perimeter' ? 'm' : 'm²'}</b> ve <b>${trueC} TL</b> hesabı tam doğru!`, 'nextCarpet');
             } else {
                 showFeedback(false, "Hesaplamayı Kontrol Et!", `Doğru miktar <b>${trueM}</b> ve toplam tutar <b>${trueC} TL</b> olmalıdır. Üstteki mezura ve birim kare butonlarından yardım alabilirsin!`);
@@ -1755,11 +1767,9 @@
         }
 
         function generatePotionRecipe() {
+            missionAwards.delete("potion");
             clearConfetti();
-            const denoms = [2, 3, 4, 5, 6];
-            const d = denoms[Math.floor(Math.random() * denoms.length)];
-            // 0 ile 2 tam arasında kesir üret (bazen basit, çoğunlukla bileşik)
-            const n = d + Math.floor(Math.random() * d);
+            const task=window.UfkoraMaarifModel.potion(maarifLevel),d=task.d,n=task.n;
             potionState.targetDenom = d;
             potionState.targetNumer = n;
             potionState.pouredCount = 0;
@@ -1768,10 +1778,10 @@
             const r = n % d;
             const asMixed = Math.random() > 0.5 && r !== 0;
 
-            document.getElementById('potionRecipeTitle').innerText = asMixed ? `${w} Tam ${r}/${d} Litre` : `${n} / ${d} Litre`;
+            document.getElementById('potionRecipeTitle').innerHTML = asMixed ? `${w} Tam ${window.UfkoraMaarifModel.fraction(r,d)} Litre` : `${window.UfkoraMaarifModel.fraction(n,d)} Litre`;
             document.getElementById('potionRecipeHint').innerHTML = asMixed
-                ? `Tam sayılı kesir siparişi! (Bileşik kesir karşılığı: <b>${n}/${d} Litre</b>)`
-                : `Bileşik kesir siparişi! <b>1/${d}</b> birim kesir kabını seçip <b>${n} kez</b> dök.`;
+                ? `Tam sayılı kesir siparişi! (Bileşik kesir karşılığı: <b>${window.UfkoraMaarifModel.fraction(n,d)} Litre</b>)`
+                : `Bileşik kesir siparişi! <b>${window.UfkoraMaarifModel.fraction(1,d)}</b> birim kesir kabını seçip <b>${n} kez</b> dök.`;
 
             updatePotionReadout();
             drawPotionScene();
@@ -1782,6 +1792,7 @@
             potionState.selectedCupDenom = denom;
             potionState.pouredCount = 0;
             [2, 3, 4, 5, 6].forEach(d => {
+                document.getElementById('cupBtn_'+d).setAttribute('aria-pressed',String(d===denom));
                 document.getElementById('cupBtn_' + d).className = d === denom
                     ? "unit-cup-btn tactile-btn py-2.5 rounded-xl bg-sky-400 text-slate-950 font-display font-bold text-sm"
                     : "unit-cup-btn tactile-btn py-2.5 rounded-xl bg-slate-800 border border-slate-700 font-display font-bold text-sm text-white";
@@ -1813,20 +1824,21 @@
             const d = potionState.selectedCupDenom;
             const w = Math.floor(n / d);
             const r = n % d;
-            const mix = w > 0 ? (r > 0 ? ` (${w} Tam ${r}/${d})` : ` (${w} Tam)`) : '';
-            document.getElementById('currentPotionReadout').innerText = `Dökülen: ${n}/${d} L${mix}`;
+            const mix = w > 0 ? (r > 0 ? ` (${w} Tam ${window.UfkoraMaarifModel.fraction(r,d)})` : ` (${w} Tam)`) : '';
+            document.getElementById('currentPotionReadout').innerHTML = `Dökülen: ${window.UfkoraMaarifModel.fraction(n,d)} L${mix}`;
         }
 
         function verifyPotionMixture() {
+            if(missionAwards.has("potion"))return;
             const tVal = potionState.targetNumer / potionState.targetDenom;
             const uVal = potionState.pouredCount / potionState.selectedCupDenom;
-            if (Math.abs(tVal - uVal) < 0.001) {
-                addStars(60);
+            if (window.UfkoraMaarifModel.equalFraction(potionState.targetNumer,potionState.targetDenom,potionState.pouredCount,potionState.selectedCupDenom)) {
+                missionAwards.add("potion");addStars(60);
                 const w = Math.floor(potionState.targetNumer / potionState.targetDenom);
                 const r = potionState.targetNumer % potionState.targetDenom;
-                showFeedback(true, "İksir Tam Kıvamında! 🧪", `Harika! <b>${potionState.pouredCount}/${potionState.selectedCupDenom}</b> litre (${w} Tam ${r}/${potionState.targetDenom}) iksiri sayı doğrusunda doğrulayarak hazırladın!`, 'nextPotion');
+                showFeedback(true, "İksir Tam Kıvamında! 🧪", `Harika! <b>${window.UfkoraMaarifModel.fraction(potionState.pouredCount,potionState.selectedCupDenom)}</b> litre (${w} Tam ${window.UfkoraMaarifModel.fraction(r,potionState.targetDenom)}) iksiri sayı doğrusunda doğrulayarak hazırladın!`, 'nextPotion');
             } else {
-                showFeedback(false, "Ölçeği ve Miktarı Kontrol Et!", `Reçetede <b>${potionState.targetNumer}/${potionState.targetDenom}</b> litre isteniyor. Önce <b>1/${potionState.targetDenom}</b> kabını seçip <b>${potionState.targetNumer} birim</b> dökmelisin!`);
+                showFeedback(false, "Ölçeği ve Miktarı Kontrol Et!", `Reçetede <b>${window.UfkoraMaarifModel.fraction(potionState.targetNumer,potionState.targetDenom)}</b> litre isteniyor. Önce <b>${window.UfkoraMaarifModel.fraction(1,potionState.targetDenom)}</b> kabını seçip <b>${potionState.targetNumer} birim</b> dökmelisin!`);
             }
         }
 
@@ -1916,7 +1928,7 @@
             potionCtx.fillStyle = '#6ee7b7';
             potionCtx.font = 'bold 14px Fredoka';
             potionCtx.textAlign = 'right';
-            potionCtx.fillText(`${poured}/${d}`, lx - 14, my + 4);
+            potionCtx.textAlign='center';potionCtx.fillText(String(poured),lx-28,my-6);potionCtx.fillText(String(d),lx-28,my+13);potionCtx.beginPath();potionCtx.moveTo(lx-41,my-1);potionCtx.lineTo(lx-15,my-1);potionCtx.stroke();
         }
 
         /* ---------------- 4. BAŞLATMA VE EKRAN BOYUTLANDIRMA ---------------- */
@@ -1933,5 +1945,5 @@
             generatePotionRecipe();
         });
     </script>
-</body>
+<script src="../features/rollout/maarif-entry.js?v=20261023-y12"></script></body>
 </html>
