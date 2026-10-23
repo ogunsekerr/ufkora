@@ -1,0 +1,20 @@
+/* Existing clay assets, native form controls; no framework dependency. */
+.content-entry{max-width:1120px;margin:24px auto;padding:24px;background:#fff8eb;color:#204b3b;border-radius:24px;font-family:'Nunito Sans',sans-serif;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px}
+.content-entry[hidden]{display:none}
+.content-entry img{width:100%;height:auto;object-fit:contain;align-self:center;border-radius:18px}
+.content-entry h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,44px);line-height:1.1;margin:12px 0}
+.content-entry p{font-size:17px;line-height:1.5}
+.content-entry label,.content-entry summary{display:block;padding:10px 0;font-weight:800}
+.content-entry select,.content-entry button{font:inherit;padding:12px;min-height:48px;border:2px solid #597561;border-radius:12px;background:#fff;color:#204b3b;width:100%}
+.content-entry button{background:#075a44;color:#fff;cursor:pointer;margin-top:16px;font-weight:800}
+.content-entry :focus-visible,.content-session :focus-visible{outline:3px solid #6642c0;outline-offset:3px}
+.content-session{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#fff8eb;color:#204b3b;padding:12px;margin:16px auto;max-width:1120px;border-radius:16px}
+.content-session button{min-height:48px;padding:10px 16px;border-radius:10px;border:2px solid #597561;background:#fff;cursor:pointer;color:#204b3b}
+body[data-content-stage=entry] .activity-section,body[data-content-stage=entry] #content-session{display:none}
+body.activity-toplama-adasi .animate-shake{animation:none}
+@media(max-width:700px){.content-entry{grid-template-columns:minmax(0,1fr);padding:18px;gap:12px;margin:16px 0}.content-entry img{max-width:240px;margin:auto}.content-entry :is(select,button){max-width:100%}}
+@media(prefers-reduced-motion:reduce){body.activity-toplama-adasi *,body.activity-toplama-adasi *::before,body.activity-toplama-adasi *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+body.activity-toplama-adasi .diff-btn{display:none}
+
+body.activity-toplama-adasi .hidden{display:none!important}

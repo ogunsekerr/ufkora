@@ -1,0 +1,24 @@
+{
+  "baseline": "006dc2b35bf07cd2fd316a3c779e68acd6b71f1b",
+  "method": "Source declaration inventory; not a browser CSS cascade or accessibility audit. Media conditions and source order retained.",
+  "source_sha256": {
+    "assets/site.css": "e17e9eba76a195abbae47c3d7cda696e4dc13d305293da8a7ddb85ca14aa83fb",
+    "assets/typography.css": "ab61bac1c7f483be9f16164c8c3640f2aba0939c2b57d3ae9d026340e969cb12",
+    "assets/mobile.css": "83cbb0f9e6cf189e9fb73b2b5344e7cad1fc7623d6618ef35a9d6fc75f7b1d00",
+    "features/home/home.css": "7e34c3bc19e67c3c6a9baee97cc7ddba73b7f373121c577892a27a882fcaa6f8",
+    "features/entrance/transition.css": "0df61988c145f4de72634dcad1d1b159c24d33614fdd4322439b0fa118c66abe"
+  },
+  "last_unconditional_root_values": {
+    "--ink": "#204b3b",
+    "--muted": "#4f624b",
+    "--cream": "#f3e9d8",
+    "--forest": "#075a44",
+    "--lime": "#dedb70",
+    "--coral": "#e98d71",
+    "--yellow": "#edc85f",
+    "--green": "#a5bd77",
+    "--blue": "#8dbcc7",
+    "--purple": "#b39acb"
+  },
+  "extracted_leaf_rule_count": 784
+}

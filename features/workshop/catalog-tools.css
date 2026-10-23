@@ -1,0 +1,30 @@
+/* T18: one labelled workbench; existing catalog/filter data stays unchanged. */
+.catalog-page .catalog-workbench{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.9fr) minmax(0,1.1fr);gap:22px 20px;margin:28px 0 24px;padding:26px;background:#fff5e6;border:1px solid #d6ceb7;border-radius:22px;box-shadow:inset 0 2px 2px #fff9,0 5px 15px #57422208}
+.catalog-page .workbench-heading{grid-column:1/-1}
+.catalog-page .workbench-heading h2{font-size:30px;line-height:1.2;letter-spacing:-1px;margin:0}
+.catalog-page .workbench-heading p{font-size:16px;line-height:1.6;color:var(--muted);margin:8px 0 0}
+.catalog-page .catalog-workbench .grade-tabs{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;border:0}
+.catalog-page .catalog-workbench .grade-tabs a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 18px;border-radius:12px;border:1px solid #b9bca0;background:color-mix(in srgb,var(--class-bg) 22%,#fff5e6);font:600 17px/1.4 'Outfit',sans-serif;color:var(--ink)}
+.catalog-page .catalog-workbench .grade-tabs a[aria-current=page]{background:var(--class-bg);border-color:var(--ink);box-shadow:inset 0 2px 2px #fff7,0 2px 0 #204b3b18;text-decoration:underline;text-underline-offset:5px}
+.catalog-page .catalog-primary{display:contents}
+.catalog-page .catalog-workbench label{display:flex;flex-direction:column;gap:8px;font-size:16px;line-height:1.5;font-weight:700;min-width:0}
+.catalog-page .catalog-workbench input,.catalog-page .catalog-workbench select{width:100%;min-width:0;min-height:52px;font:400 16px/1.5 'Nunito Sans',sans-serif;padding:12px 14px;border:1px solid #b6bda5;border-radius:10px;background:#fffbf3;color:var(--ink)}
+.catalog-page .catalog-filter-drawer{min-width:0;margin:0}
+.catalog-page .catalog-filter-drawer>summary{min-height:48px;font-size:16px;font-weight:700;cursor:pointer;padding:12px 14px;border:1px solid #b6bda5;border-radius:10px;background:#f1ead5;color:var(--ink)}
+.catalog-page .catalog-filter-body{display:flex;flex-direction:column;gap:12px}
+.catalog-page #reset-filters{min-height:48px;font:700 15px/1.5 'Nunito Sans',sans-serif;border:1px solid #b6bda5;border-radius:10px;padding:10px 14px;color:var(--ink);background:#f0ead8;cursor:pointer}
+.catalog-page .catalog-workbench :is(input,select,button,a,summary):focus-visible{outline:3px solid var(--forest);outline-offset:3px}
+@media(min-width:701px){.catalog-page .catalog-filter-drawer>summary{display:none}}
+@media(max-width:700px){
+ .catalog-page .catalog-workbench{grid-template-columns:minmax(0,1fr);gap:20px;padding:20px 16px;border-radius:18px}
+ .catalog-page .workbench-heading h2{font-size:27px}
+ .catalog-page .catalog-workbench .grade-tabs{gap:8px}
+ .catalog-page .catalog-workbench .grade-tabs a{font-size:16px;min-width:76px;padding:10px 14px}
+ .catalog-page .catalog-primary{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+ .catalog-page .catalog-filter-drawer[open] .catalog-filter-body{margin-top:16px}
+}
+
+@media(min-width:701px) and (max-width:1000px){
+ .catalog-page .catalog-workbench{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .catalog-page .catalog-filter-drawer{grid-column:1/-1}
+}

@@ -1,0 +1,1566 @@
+{
+  "task": "T02",
+  "baseline_commit": "006dc2b35bf07cd2fd316a3c779e68acd6b71f1b",
+  "captured_at_utc": "2026-10-22T22:05:57.962796+00:00",
+  "scope": "Statik kaynak envanteri; tarayıcı, oyun doğruluğu ve resmî müfredat denetimi değildir.",
+  "summary": {
+    "catalog_cards": 16,
+    "unique_launch_urls": 12,
+    "unique_content_html_files": 10,
+    "legacy_redirect_html_files": 1,
+    "bank_modules": 13,
+    "bank_activity_modes": 13,
+    "bank_game_modes": 13,
+    "bank_total_modes": 26,
+    "grade_card_counts": {
+      "4": 2,
+      "5": 9,
+      "6": 2,
+      "7": 2,
+      "8": 1
+    },
+    "catalog_types": {
+      "Oyun": 5,
+      "Laboratuvar": 9,
+      "Çalışma bankası": 2
+    },
+    "note": "Bu sayılar farklı sayım birimleridir; toplanarak toplam benzersiz oyun sayısı oluşturulamaz."
+  },
+  "catalog_cards": [
+    {
+      "grade": 4,
+      "url": "etkinlikler/toplama-adasi.html",
+      "title": "Toplama Macera Adası",
+      "desc": "Basamak değeri, eldeli toplama, eksik semboller ve işlem ilişkileri.",
+      "tag": "4. SINIF · DOĞAL SAYILARLA TOPLAMA",
+      "type": "Oyun",
+      "topic": "Sayılar",
+      "common": false,
+      "image": "assets/activities/toplama.webp",
+      "codes": [],
+      "outcomes": [],
+      "curriculumNote": "Doğal sayılarla toplama ve basamak değeri. 4. sınıf kodu kaynak taslakta yer almıyor.",
+      "curriculumSource": null
+    },
+    {
+      "grade": 4,
+      "url": "etkinlikler/birim-kup.html",
+      "title": "Birim küp stüdyosu",
+      "desc": "Tüm sınıflar için ortak keşif. Küplerle bir yapı kur; ön, üst ve yan görünümlerini karşılaştır.",
+      "tag": "4–8. SINIF · ORTAK KEŞİF",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": true,
+      "image": "assets/activities/kup.webp",
+      "codes": [
+        "MAT.7.4.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.7.4.1",
+          "text": "Eş küplerle oluşturulan yapılar ile görünümleri arasındaki ilişkiyi çözümleyebilme",
+          "sheet": "7.Sınıf",
+          "cell": "F13"
+        }
+      ],
+      "curriculumNote": "7. sınıf kazanımı · Bu sınıfta ortak uzamsal beceri çalışması.",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "etkinlikler/cokgen.html",
+      "title": "Çokgen laboratuvarı",
+      "desc": "Kenar sayısını değiştir; köşeleri, kenarları ve çokgenlerin nasıl değiştiğini incele. Çizim oyunuyla keşfini pekiştir.",
+      "tag": "5. SINIF · GEOMETRİ",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": false,
+      "image": "assets/activities/cokgen.webp",
+      "codes": [
+        "MAT.5.3.5",
+        "MAT.5.3.6"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.3.5",
+          "text": "Çokgenleri düzlemde ardışık olarak kesişen doğruların oluşturduğu kapalı şekiller olarak yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F9"
+        },
+        {
+          "code": "MAT.5.3.6",
+          "text": "Çokgenlerin özellikleri ile ilgili edindiği deneyimleri yansıtabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F10"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "etkinlikler/aci-ustasi.html",
+      "title": "Açı Ustası",
+      "desc": "İletki okuma, özdeş ve bilinmeyen açılar; balon oyunu ile pratik.",
+      "tag": "5. SINIF · AÇI ÖLÇME",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": false,
+      "image": "assets/activities/aci.webp",
+      "codes": [
+        "MAT.5.3.3",
+        "MAT.5.3.4"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.3.3",
+          "text": "Açıları ölçmek için matematiksel araç ve teknolojiden yararlanabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F6"
+        },
+        {
+          "code": "MAT.5.3.4",
+          "text": "Düzlemde iki veya üç doğrunun birbirine göre durumuna bağlı olarak oluşabilecek açılara dair çıkarım yapabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F7"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "etkinlikler/maarif-atolyesi.html",
+      "title": "Maarif Simülasyon Üssü",
+      "desc": "Geometrik çizimler ve açılar, sayı çalışmaları, alan–çevre ve kesir etkinlikleri.",
+      "tag": "5. SINIF · MATEMATİK",
+      "type": "Çalışma bankası",
+      "topic": "Karma konular",
+      "common": false,
+      "image": "assets/activities/maarif.webp",
+      "codes": [
+        "MAT.5.3.3",
+        "MAT.5.3.4",
+        "MAT.5.1.1",
+        "MAT.5.4.1",
+        "MAT.5.4.2",
+        "MAT.5.4.3",
+        "MAT.5.4.4",
+        "MAT.5.1.3"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.3.3",
+          "text": "Açıları ölçmek için matematiksel araç ve teknolojiden yararlanabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F6"
+        },
+        {
+          "code": "MAT.5.3.4",
+          "text": "Düzlemde iki veya üç doğrunun birbirine göre durumuna bağlı olarak oluşabilecek açılara dair çıkarım yapabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F7"
+        },
+        {
+          "code": "MAT.5.1.1",
+          "text": "Altı basamaklı sayıları okuma ve yazmayı çok basamaklı sayılara genelleyebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F15"
+        },
+        {
+          "code": "MAT.5.4.1",
+          "text": "Kenar uzunlukları doğal sayı olan bir dikdörtgenin çevre uzunluğu verildiğinde kenar uzunluklarını yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F23"
+        },
+        {
+          "code": "MAT.5.4.2",
+          "text": "Birim karelerden yola çıkarak dikdörtgenin alanını değerlendirebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F25"
+        },
+        {
+          "code": "MAT.5.4.3",
+          "text": "Kenar uzunlukları doğal sayı olan bir dikdörtgenin alanının ölçüsü verildiğinde çevre uzunluğunu, çevre uzunluğu verildiğinde alanını yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F26"
+        },
+        {
+          "code": "MAT.5.4.4",
+          "text": "Dikdörtgenin çevre uzunluğu ve alanı ile ilgili problemleri çözebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F27"
+        },
+        {
+          "code": "MAT.5.1.3",
+          "text": "Gerçek yaşam durumlarına karşılık gelen kesirleri farklı biçimlerde temsil edebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F30"
+        }
+      ],
+      "curriculumNote": "Çok konulu içerik; her kod ilgili modülün desteklediği beceriyi gösterir.",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "oyun-atolyesi/bahce.html",
+      "title": "Bahçe Mimarı",
+      "desc": "Dikdörtgenlerde alan ve çevre ilişkilerini 8 görevle keşfet.",
+      "tag": "5. SINIF · OYUN",
+      "type": "Oyun",
+      "topic": "Geometri",
+      "common": false,
+      "image": "assets/activities/bahce.webp",
+      "codes": [
+        "MAT.5.4.1",
+        "MAT.5.4.2",
+        "MAT.5.4.3",
+        "MAT.5.4.4"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.4.1",
+          "text": "Kenar uzunlukları doğal sayı olan bir dikdörtgenin çevre uzunluğu verildiğinde kenar uzunluklarını yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F23"
+        },
+        {
+          "code": "MAT.5.4.2",
+          "text": "Birim karelerden yola çıkarak dikdörtgenin alanını değerlendirebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F25"
+        },
+        {
+          "code": "MAT.5.4.3",
+          "text": "Kenar uzunlukları doğal sayı olan bir dikdörtgenin alanının ölçüsü verildiğinde çevre uzunluğunu, çevre uzunluğu verildiğinde alanını yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F26"
+        },
+        {
+          "code": "MAT.5.4.4",
+          "text": "Dikdörtgenin çevre uzunluğu ve alanı ile ilgili problemleri çözebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F27"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "oyun-atolyesi/kesif.html?oyun=isik",
+      "title": "Işık Rotası",
+      "desc": "Açıölçer okuma ve bütünler açı hesabıyla ışığı hedefe yönlendir.",
+      "tag": "5. SINIF · OYUN",
+      "type": "Oyun",
+      "topic": "Geometri",
+      "common": false,
+      "image": "assets/activities/isik.webp",
+      "codes": [
+        "MAT.5.3.3",
+        "MAT.5.3.4"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.3.3",
+          "text": "Açıları ölçmek için matematiksel araç ve teknolojiden yararlanabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F6"
+        },
+        {
+          "code": "MAT.5.3.4",
+          "text": "Düzlemde iki veya üç doğrunun birbirine göre durumuna bağlı olarak oluşabilecek açılara dair çıkarım yapabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F7"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "oyun-atolyesi/kesif.html?oyun=cember",
+      "title": "Çember Tamircisi",
+      "desc": "Merkez, yarıçap ve sabit pergel açıklığını deneyerek öğren.",
+      "tag": "5. SINIF · OYUN",
+      "type": "Oyun",
+      "topic": "Geometri",
+      "common": false,
+      "image": "assets/activities/cember.webp",
+      "codes": [
+        "MAT.5.3.1",
+        "MAT.5.3.2"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.3.1",
+          "text": "Temel geometrik çizimler için matematiksel araç ve teknolojiden yararlanabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F4"
+        },
+        {
+          "code": "MAT.5.3.2",
+          "text": "Temel geometrik çizimlere dayalı deneyimlerini yansıtabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F5"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "oyun-atolyesi/kesif.html?oyun=kargo",
+      "title": "Sayı Kargo",
+      "desc": "Milyonlar, binler ve birler bölüklerini yerleştirerek sayıları oluştur.",
+      "tag": "5. SINIF · OYUN",
+      "type": "Oyun",
+      "topic": "Sayılar",
+      "common": false,
+      "image": "assets/activities/kargo.webp",
+      "codes": [
+        "MAT.5.1.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.1.1",
+          "text": "Altı basamaklı sayıları okuma ve yazmayı çok basamaklı sayılara genelleyebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F15"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "title": "26 Etkinliklik Çalışma Bankası",
+      "desc": "Geometrik şekiller, sayılar ve nicelikler, alan–çevre üzerine kısa çalışmalar. Kazanımlar her çalışmada yer alır.",
+      "tag": "5. SINIF · ETKİNLİK BANKASI",
+      "type": "Çalışma bankası",
+      "topic": "Karma konular",
+      "common": false,
+      "image": "assets/activities/banka.webp",
+      "codes": [
+        "MAT.5.3.1",
+        "MAT.5.3.2",
+        "MAT.5.3.3",
+        "MAT.5.3.4",
+        "MAT.5.3.5",
+        "MAT.5.3.6",
+        "MAT.5.3.7",
+        "MAT.5.1.1",
+        "MAT.5.1.2",
+        "MAT.5.4.1",
+        "MAT.5.4.2",
+        "MAT.5.4.3",
+        "MAT.5.4.4"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.5.3.1",
+          "text": "Temel geometrik çizimler için matematiksel araç ve teknolojiden yararlanabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F4"
+        },
+        {
+          "code": "MAT.5.3.2",
+          "text": "Temel geometrik çizimlere dayalı deneyimlerini yansıtabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F5"
+        },
+        {
+          "code": "MAT.5.3.3",
+          "text": "Açıları ölçmek için matematiksel araç ve teknolojiden yararlanabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F6"
+        },
+        {
+          "code": "MAT.5.3.4",
+          "text": "Düzlemde iki veya üç doğrunun birbirine göre durumuna bağlı olarak oluşabilecek açılara dair çıkarım yapabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F7"
+        },
+        {
+          "code": "MAT.5.3.5",
+          "text": "Çokgenleri düzlemde ardışık olarak kesişen doğruların oluşturduğu kapalı şekiller olarak yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F9"
+        },
+        {
+          "code": "MAT.5.3.6",
+          "text": "Çokgenlerin özellikleri ile ilgili edindiği deneyimleri yansıtabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F10"
+        },
+        {
+          "code": "MAT.5.3.7",
+          "text": "Matematiksel araç ve teknoloji yardımıyla düzlemde iki noktada kesişen çember çiftinin merkezleri ve kesişim noktalarından biri ile inşa edilen üçgenlerin kenar özelliklerine yönelik çıkarım yapabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F12"
+        },
+        {
+          "code": "MAT.5.1.1",
+          "text": "Altı basamaklı sayıları okuma ve yazmayı çok basamaklı sayılara genelleyebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F15"
+        },
+        {
+          "code": "MAT.5.1.2",
+          "text": "Doğal sayılar ve işlemler içeren gerçek yaşam problemlerini çözebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F19"
+        },
+        {
+          "code": "MAT.5.4.1",
+          "text": "Kenar uzunlukları doğal sayı olan bir dikdörtgenin çevre uzunluğu verildiğinde kenar uzunluklarını yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F23"
+        },
+        {
+          "code": "MAT.5.4.2",
+          "text": "Birim karelerden yola çıkarak dikdörtgenin alanını değerlendirebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F25"
+        },
+        {
+          "code": "MAT.5.4.3",
+          "text": "Kenar uzunlukları doğal sayı olan bir dikdörtgenin alanının ölçüsü verildiğinde çevre uzunluğunu, çevre uzunluğu verildiğinde alanını yorumlayabilme",
+          "sheet": "5.Sınıf",
+          "cell": "F26"
+        },
+        {
+          "code": "MAT.5.4.4",
+          "text": "Dikdörtgenin çevre uzunluğu ve alanı ile ilgili problemleri çözebilme",
+          "sheet": "5.Sınıf",
+          "cell": "F27"
+        }
+      ],
+      "curriculumNote": "26 çalışmanın her biri ilgili öğrenme çıktısının belirli bir becerisini destekler.",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 5,
+      "url": "etkinlikler/birim-kup.html",
+      "title": "Birim küp stüdyosu",
+      "desc": "Tüm sınıflar için ortak keşif. Küplerle bir yapı kur; ön, üst ve yan görünümlerini karşılaştır.",
+      "tag": "4–8. SINIF · ORTAK KEŞİF",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": true,
+      "image": "assets/activities/kup.webp",
+      "codes": [
+        "MAT.7.4.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.7.4.1",
+          "text": "Eş küplerle oluşturulan yapılar ile görünümleri arasındaki ilişkiyi çözümleyebilme",
+          "sheet": "7.Sınıf",
+          "cell": "F13"
+        }
+      ],
+      "curriculumNote": "7. sınıf kazanımı · Bu sınıfta ortak uzamsal beceri çalışması.",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 6,
+      "url": "etkinlikler/olasilik-laboratuvari.html",
+      "title": "Para ve Zar Laboratuvarı",
+      "desc": "Deney sonuçlarını topla; sıklıkları, deneysel ve teorik olasılığı karşılaştır.",
+      "tag": "6. SINIF · VERİDEN OLASILIĞA",
+      "type": "Laboratuvar",
+      "topic": "Veri ve olasılık",
+      "common": false,
+      "image": "assets/activities/olasilik.webp",
+      "codes": [
+        "MAT.6.6.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.6.6.1",
+          "text": "Bir olayın olasılığını gözleme dayalı tahmin edebilme",
+          "sheet": "6.Sınıf",
+          "cell": "F7"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 6,
+      "url": "etkinlikler/birim-kup.html",
+      "title": "Birim küp stüdyosu",
+      "desc": "Tüm sınıflar için ortak keşif. Küplerle bir yapı kur; ön, üst ve yan görünümlerini karşılaştır.",
+      "tag": "4–8. SINIF · ORTAK KEŞİF",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": true,
+      "image": "assets/activities/kup.webp",
+      "codes": [
+        "MAT.7.4.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.7.4.1",
+          "text": "Eş küplerle oluşturulan yapılar ile görünümleri arasındaki ilişkiyi çözümleyebilme",
+          "sheet": "7.Sınıf",
+          "cell": "F13"
+        }
+      ],
+      "curriculumNote": "7. sınıf kazanımı · Bu sınıfta ortak uzamsal beceri çalışması.",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 7,
+      "url": "etkinlikler/yansima.html",
+      "title": "Aynanın diğer tarafı",
+      "desc": "Şekillerin yansımasını incele, simetri doğrusuna uzaklıklarını karşılaştır ve kendi yansımanı oluştur.",
+      "tag": "7. SINIF · YANSIMA VE SİMETRİ",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": false,
+      "image": "assets/activities/yansima.webp",
+      "codes": [
+        "MAT.7.3.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.7.3.1",
+          "text": "Şekillerin yansıma dönüşümü altındaki görüntülerinin oluşturulmasına dair çıkarım yapabilme",
+          "sheet": "7.Sınıf",
+          "cell": "F27"
+        }
+      ],
+      "curriculumNote": "",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 7,
+      "url": "etkinlikler/birim-kup.html",
+      "title": "Birim küp stüdyosu",
+      "desc": "Tüm sınıflar için ortak keşif. Küplerle bir yapı kur; ön, üst ve yan görünümlerini karşılaştır.",
+      "tag": "4–8. SINIF · ORTAK KEŞİF",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": true,
+      "image": "assets/activities/kup.webp",
+      "codes": [
+        "MAT.7.4.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.7.4.1",
+          "text": "Eş küplerle oluşturulan yapılar ile görünümleri arasındaki ilişkiyi çözümleyebilme",
+          "sheet": "7.Sınıf",
+          "cell": "F13"
+        }
+      ],
+      "curriculumNote": "Bu sınıfın öğrenme çıktısıyla doğrudan ilişkili.",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    },
+    {
+      "grade": 8,
+      "url": "etkinlikler/birim-kup.html",
+      "title": "Birim küp stüdyosu",
+      "desc": "Tüm sınıflar için ortak keşif. Küplerle bir yapı kur; ön, üst ve yan görünümlerini karşılaştır.",
+      "tag": "4–8. SINIF · ORTAK KEŞİF",
+      "type": "Laboratuvar",
+      "topic": "Geometri",
+      "common": true,
+      "image": "assets/activities/kup.webp",
+      "codes": [
+        "MAT.7.4.1"
+      ],
+      "outcomes": [
+        {
+          "code": "MAT.7.4.1",
+          "text": "Eş küplerle oluşturulan yapılar ile görünümleri arasındaki ilişkiyi çözümleyebilme",
+          "sheet": "7.Sınıf",
+          "cell": "F13"
+        }
+      ],
+      "curriculumNote": "7. sınıf kazanımı · Bu sınıfta ortak uzamsal beceri çalışması.",
+      "curriculumSource": "Taslak çerçeve yıllık plan"
+    }
+  ],
+  "distinct_routes": [
+    {
+      "id": "R01",
+      "parent_id": "P01",
+      "url": "etkinlikler/toplama-adasi.html",
+      "title": "Toplama Macera Adası",
+      "grades": [
+        4
+      ],
+      "type": "Oyun",
+      "codes": [],
+      "topic": "Sayılar",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/toplama.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogda kod yok; uydurulmadı"
+    },
+    {
+      "id": "R02",
+      "parent_id": "P02",
+      "url": "etkinlikler/birim-kup.html",
+      "title": "Birim küp stüdyosu",
+      "grades": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "type": "Laboratuvar",
+      "codes": [
+        "MAT.7.4.1"
+      ],
+      "topic": "Geometri",
+      "common": true,
+      "source_file_exists": true,
+      "image": "assets/activities/kup.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R03",
+      "parent_id": "P03",
+      "url": "etkinlikler/cokgen.html",
+      "title": "Çokgen laboratuvarı",
+      "grades": [
+        5
+      ],
+      "type": "Laboratuvar",
+      "codes": [
+        "MAT.5.3.5",
+        "MAT.5.3.6"
+      ],
+      "topic": "Geometri",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/cokgen.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R04",
+      "parent_id": "P04",
+      "url": "etkinlikler/aci-ustasi.html",
+      "title": "Açı Ustası",
+      "grades": [
+        5
+      ],
+      "type": "Laboratuvar",
+      "codes": [
+        "MAT.5.3.3",
+        "MAT.5.3.4"
+      ],
+      "topic": "Geometri",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/aci.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R05",
+      "parent_id": "P05",
+      "url": "etkinlikler/maarif-atolyesi.html",
+      "title": "Maarif Simülasyon Üssü",
+      "grades": [
+        5
+      ],
+      "type": "Çalışma bankası",
+      "codes": [
+        "MAT.5.3.3",
+        "MAT.5.3.4",
+        "MAT.5.1.1",
+        "MAT.5.4.1",
+        "MAT.5.4.2",
+        "MAT.5.4.3",
+        "MAT.5.4.4",
+        "MAT.5.1.3"
+      ],
+      "topic": "Karma konular",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/maarif.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R06",
+      "parent_id": "P06",
+      "url": "oyun-atolyesi/bahce.html",
+      "title": "Bahçe Mimarı",
+      "grades": [
+        5
+      ],
+      "type": "Oyun",
+      "codes": [
+        "MAT.5.4.1",
+        "MAT.5.4.2",
+        "MAT.5.4.3",
+        "MAT.5.4.4"
+      ],
+      "topic": "Geometri",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/bahce.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R07",
+      "parent_id": "P07",
+      "url": "oyun-atolyesi/kesif.html?oyun=isik",
+      "title": "Işık Rotası",
+      "grades": [
+        5
+      ],
+      "type": "Oyun",
+      "codes": [
+        "MAT.5.3.3",
+        "MAT.5.3.4"
+      ],
+      "topic": "Geometri",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/isik.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R08",
+      "parent_id": "P07",
+      "url": "oyun-atolyesi/kesif.html?oyun=cember",
+      "title": "Çember Tamircisi",
+      "grades": [
+        5
+      ],
+      "type": "Oyun",
+      "codes": [
+        "MAT.5.3.1",
+        "MAT.5.3.2"
+      ],
+      "topic": "Geometri",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/cember.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R09",
+      "parent_id": "P07",
+      "url": "oyun-atolyesi/kesif.html?oyun=kargo",
+      "title": "Sayı Kargo",
+      "grades": [
+        5
+      ],
+      "type": "Oyun",
+      "codes": [
+        "MAT.5.1.1"
+      ],
+      "topic": "Sayılar",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/kargo.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R10",
+      "parent_id": "P08",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "title": "26 Etkinliklik Çalışma Bankası",
+      "grades": [
+        5
+      ],
+      "type": "Çalışma bankası",
+      "codes": [
+        "MAT.5.3.1",
+        "MAT.5.3.2",
+        "MAT.5.3.3",
+        "MAT.5.3.4",
+        "MAT.5.3.5",
+        "MAT.5.3.6",
+        "MAT.5.3.7",
+        "MAT.5.1.1",
+        "MAT.5.1.2",
+        "MAT.5.4.1",
+        "MAT.5.4.2",
+        "MAT.5.4.3",
+        "MAT.5.4.4"
+      ],
+      "topic": "Karma konular",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/banka.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R11",
+      "parent_id": "P09",
+      "url": "etkinlikler/olasilik-laboratuvari.html",
+      "title": "Para ve Zar Laboratuvarı",
+      "grades": [
+        6
+      ],
+      "type": "Laboratuvar",
+      "codes": [
+        "MAT.6.6.1"
+      ],
+      "topic": "Veri ve olasılık",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/olasilik.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    },
+    {
+      "id": "R12",
+      "parent_id": "P10",
+      "url": "etkinlikler/yansima.html",
+      "title": "Aynanın diğer tarafı",
+      "grades": [
+        7
+      ],
+      "type": "Laboratuvar",
+      "codes": [
+        "MAT.7.3.1"
+      ],
+      "topic": "Geometri",
+      "common": false,
+      "source_file_exists": true,
+      "image": "assets/activities/yansima.webp",
+      "image_exists": true,
+      "code_status": "Kaynak katalogdan alındı; güncel resmî müfredatla bu görevde doğrulanmadı"
+    }
+  ],
+  "page_groups": [
+    {
+      "id": "P01",
+      "path": "etkinlikler/toplama-adasi.html",
+      "title": "Toplama Macera Adası",
+      "grades": [
+        4
+      ],
+      "catalog_cards": 1,
+      "modes": [
+        {
+          "id": "P01-act1",
+          "key": "act1",
+          "title": "Basamak Atölyesi",
+          "source_line": 123,
+          "source_marker": "switchTab('act1')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P01-act2",
+          "key": "act2",
+          "title": "Şifre Bulmaca",
+          "source_line": 131,
+          "source_marker": "switchTab('act2')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P01-act3",
+          "key": "act3",
+          "title": "Kayıp Semboller",
+          "source_line": 139,
+          "source_marker": "switchTab('act3')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P01-act4",
+          "key": "act4",
+          "title": "İkili İşlem Dedektifi",
+          "source_line": 147,
+          "source_marker": "switchTab('act4')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P01-quiz",
+          "key": "quiz",
+          "title": "Süreli Toplama Şampiyonası",
+          "source_line": 155,
+          "source_marker": "switchTab('quiz')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "path": "etkinlikler/birim-kup.html",
+      "title": "Birim Küp Stüdyosu",
+      "grades": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "catalog_cards": 5,
+      "modes": [
+        {
+          "id": "P02-sandbox",
+          "key": "sandbox",
+          "title": "Küp oluşturma ve görünüş inceleme",
+          "source_line": 478,
+          "source_marker": "mode-add",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "path": "etkinlikler/cokgen.html",
+      "title": "Çokgen Laboratuvarı",
+      "grades": [
+        5
+      ],
+      "catalog_cards": 1,
+      "modes": [
+        {
+          "id": "P03-explore",
+          "key": "explore",
+          "title": "Keşif ve Laboratuvar",
+          "source_line": 71,
+          "source_marker": "switchTab('explore')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P03-game",
+          "key": "game",
+          "title": "İste Çizdir ve Çokgen Oyunu",
+          "source_line": 74,
+          "source_marker": "switchTab('game')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "path": "etkinlikler/aci-ustasi.html",
+      "title": "Açı Ustası",
+      "grades": [
+        5
+      ],
+      "catalog_cards": 1,
+      "modes": [
+        {
+          "id": "P04-1",
+          "key": "1",
+          "title": "İletki Okuma",
+          "source_line": 65,
+          "source_marker": "switchActivity(1)",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P04-2",
+          "key": "2",
+          "title": "Özdeş ve Bilinmeyen Açılar",
+          "source_line": 69,
+          "source_marker": "switchActivity(2)",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P04-3",
+          "key": "3",
+          "title": "Açı Okçusu / Balon Avı",
+          "source_line": 73,
+          "source_marker": "switchActivity(3)",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    },
+    {
+      "id": "P05",
+      "path": "etkinlikler/maarif-atolyesi.html",
+      "title": "Maarif Simülasyon Üssü",
+      "grades": [
+        5
+      ],
+      "catalog_cards": 1,
+      "modes": [
+        {
+          "id": "P05-protractor",
+          "key": "protractor",
+          "title": "Açı Kâşifi ve Radar Kulesi",
+          "source_line": 181,
+          "source_marker": "switchGeoSubMode('protractor')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P05-laser",
+          "key": "laser",
+          "title": "Lazer Aynaları",
+          "source_line": 184,
+          "source_marker": "switchGeoSubMode('laser')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P05-cargo",
+          "key": "cargo",
+          "title": "Sayı ve Lojistik / Bölükler ve Basamak Röntgeni",
+          "source_line": 131,
+          "source_marker": "switchTheme(2)",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P05-carpet",
+          "key": "carpet",
+          "title": "Halı ve Bahçe Ustası",
+          "source_line": 420,
+          "source_marker": "switchTheme3Sub('carpet')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P05-potion",
+          "key": "potion",
+          "title": "Simyacı İksir Laboratuvarı",
+          "source_line": 423,
+          "source_marker": "switchTheme3Sub('potion')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    },
+    {
+      "id": "P06",
+      "path": "oyun-atolyesi/bahce.html",
+      "title": "Bahçe Mimarı",
+      "grades": [
+        5
+      ],
+      "catalog_cards": 1,
+      "modes": [
+        {
+          "id": "P06-main",
+          "key": "main",
+          "title": "Sekiz bölümlü bahçe oyunu",
+          "source_line": 25,
+          "source_marker": "const LEVELS=",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    },
+    {
+      "id": "P07",
+      "path": "oyun-atolyesi/kesif.html",
+      "title": "Keşif oyunları",
+      "grades": [
+        5
+      ],
+      "catalog_cards": 3,
+      "modes": [
+        {
+          "id": "P07-isik",
+          "key": "isik",
+          "title": "Işık Rotası",
+          "source_line": 10,
+          "source_marker": "isik:{title:'Işık Rotası'",
+          "access": "URL query oyun=isik"
+        },
+        {
+          "id": "P07-cember",
+          "key": "cember",
+          "title": "Çember Tamircisi",
+          "source_line": 10,
+          "source_marker": "cember:{title:'Çember Tamircisi'",
+          "access": "URL query oyun=cember"
+        },
+        {
+          "id": "P07-kargo",
+          "key": "kargo",
+          "title": "Sayı Kargo",
+          "source_line": 10,
+          "source_marker": "kargo:{title:'Sayı Kargo'",
+          "access": "URL query oyun=kargo"
+        }
+      ]
+    },
+    {
+      "id": "P08",
+      "path": "oyun-atolyesi/etkinlikler.html",
+      "title": "26 Etkinliklik Çalışma Bankası",
+      "grades": [
+        5
+      ],
+      "catalog_cards": 1,
+      "modes": []
+    },
+    {
+      "id": "P09",
+      "path": "etkinlikler/olasilik-laboratuvari.html",
+      "title": "Para ve Zar Laboratuvarı",
+      "grades": [
+        6
+      ],
+      "catalog_cards": 1,
+      "modes": [
+        {
+          "id": "P09-coin",
+          "key": "coin",
+          "title": "Madeni Para Deneyi",
+          "source_line": 231,
+          "source_marker": "setMode('coin')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P09-dice",
+          "key": "dice",
+          "title": "Zar Deneyi",
+          "source_line": 234,
+          "source_marker": "setMode('dice')",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    },
+    {
+      "id": "P10",
+      "path": "etkinlikler/yansima.html",
+      "title": "Aynanın Diğer Tarafı",
+      "grades": [
+        7
+      ],
+      "catalog_cards": 1,
+      "modes": [
+        {
+          "id": "P10-lab",
+          "key": "lab",
+          "title": "Keşif Laboratuvarı",
+          "source_line": 63,
+          "source_marker": "tabBtnLab",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        },
+        {
+          "id": "P10-activity",
+          "key": "activity",
+          "title": "Kendin Taşı ve Çiz",
+          "source_line": 66,
+          "source_marker": "tabBtnActivity",
+          "access": "Sayfa içi kontrol; bu adımda bağımsız deep-link desteği doğrulanmadı"
+        }
+      ]
+    }
+  ],
+  "bank_subflows": [
+    {
+      "id": "B01-A",
+      "parent_id": "P08",
+      "module_index": 0,
+      "mode": "activity",
+      "title": "Geometri takım çantası",
+      "code": "MAT.5.3.1",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"0,activity\"",
+      "source_line": 14,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B01-G",
+      "parent_id": "P08",
+      "module_index": 0,
+      "mode": "game",
+      "title": "Yanlış Usta",
+      "code": "MAT.5.3.1",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"0,game\"",
+      "source_line": 14,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B02-A",
+      "parent_id": "P08",
+      "module_index": 1,
+      "mode": "activity",
+      "title": "Rayları Kur",
+      "code": "MAT.5.3.2",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"1,activity\"",
+      "source_line": 15,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B02-G",
+      "parent_id": "P08",
+      "module_index": 1,
+      "mode": "game",
+      "title": "İddiayı Sına",
+      "code": "MAT.5.3.2",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"1,game\"",
+      "source_line": 15,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B03-A",
+      "parent_id": "P08",
+      "module_index": 2,
+      "mode": "activity",
+      "title": "Tahmin Et, Ölç",
+      "code": "MAT.5.3.3",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"2,activity\"",
+      "source_line": 16,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B03-G",
+      "parent_id": "P08",
+      "module_index": 2,
+      "mode": "game",
+      "title": "Açıölçer Dedektifi",
+      "code": "MAT.5.3.3",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"2,game\"",
+      "source_line": 16,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B04-A",
+      "parent_id": "P08",
+      "module_index": 3,
+      "mode": "activity",
+      "title": "Kavşak Laboratuvarı",
+      "code": "MAT.5.3.4",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"3,activity\"",
+      "source_line": 17,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B04-G",
+      "parent_id": "P08",
+      "module_index": 3,
+      "mode": "game",
+      "title": "Açı Akrabaları",
+      "code": "MAT.5.3.4",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"3,game\"",
+      "source_line": 17,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B05-A",
+      "parent_id": "P08",
+      "module_index": 4,
+      "mode": "activity",
+      "title": "Doğrulardan Şekle",
+      "code": "MAT.5.3.5",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"4,activity\"",
+      "source_line": 18,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B05-G",
+      "parent_id": "P08",
+      "module_index": 4,
+      "mode": "game",
+      "title": "Çokgen Kapısı",
+      "code": "MAT.5.3.5",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"4,game\"",
+      "source_line": 18,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B06-A",
+      "parent_id": "P08",
+      "module_index": 5,
+      "mode": "activity",
+      "title": "Şekil Kimliği",
+      "code": "MAT.5.3.6",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"5,activity\"",
+      "source_line": 19,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B06-G",
+      "parent_id": "P08",
+      "module_index": 5,
+      "mode": "game",
+      "title": "Mümkün mü?",
+      "code": "MAT.5.3.6",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"5,game\"",
+      "source_line": 19,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B07-A",
+      "parent_id": "P08",
+      "module_index": 6,
+      "mode": "activity",
+      "title": "Çemberden Üçgen",
+      "code": "MAT.5.3.7",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"6,activity\"",
+      "source_line": 20,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B07-G",
+      "parent_id": "P08",
+      "module_index": 6,
+      "mode": "game",
+      "title": "Eşkenar Kilidi",
+      "code": "MAT.5.3.7",
+      "category": "geo",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"6,game\"",
+      "source_line": 20,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B08-A",
+      "parent_id": "P08",
+      "module_index": 7,
+      "mode": "activity",
+      "title": "Bölük Atölyesi",
+      "code": "MAT.5.1.1",
+      "category": "num",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"7,activity\"",
+      "source_line": 21,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B08-G",
+      "parent_id": "P08",
+      "module_index": 7,
+      "mode": "game",
+      "title": "Sayı Spikeri",
+      "code": "MAT.5.1.1",
+      "category": "num",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"7,game\"",
+      "source_line": 21,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B09-A",
+      "parent_id": "P08",
+      "module_index": 8,
+      "mode": "activity",
+      "title": "Mini Grubun Alışverişi",
+      "code": "MAT.5.1.2",
+      "category": "num",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"8,activity\"",
+      "source_line": 22,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B09-G",
+      "parent_id": "P08",
+      "module_index": 8,
+      "mode": "game",
+      "title": "Kalan Ne Olacak?",
+      "code": "MAT.5.1.2",
+      "category": "num",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"8,game\"",
+      "source_line": 22,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B10-A",
+      "parent_id": "P08",
+      "module_index": 9,
+      "mode": "activity",
+      "title": "20 Birimlik Çit",
+      "code": "MAT.5.4.1",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"9,activity\"",
+      "source_line": 23,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B10-G",
+      "parent_id": "P08",
+      "module_index": 9,
+      "mode": "game",
+      "title": "Eksik Bahçe",
+      "code": "MAT.5.4.1",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"9,game\"",
+      "source_line": 23,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B11-A",
+      "parent_id": "P08",
+      "module_index": 10,
+      "mode": "activity",
+      "title": "Fayans Ustası",
+      "code": "MAT.5.4.2",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"10,activity\"",
+      "source_line": 24,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B11-G",
+      "parent_id": "P08",
+      "module_index": 10,
+      "mode": "game",
+      "title": "Örtünün Altında",
+      "code": "MAT.5.4.2",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"10,game\"",
+      "source_line": 24,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B12-A",
+      "parent_id": "P08",
+      "module_index": 11,
+      "mode": "activity",
+      "title": "Aynı Alan, Başka Çevre",
+      "code": "MAT.5.4.3",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"11,activity\"",
+      "source_line": 25,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B12-G",
+      "parent_id": "P08",
+      "module_index": 11,
+      "mode": "game",
+      "title": "İddiayı Çürüt",
+      "code": "MAT.5.4.3",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"11,game\"",
+      "source_line": 25,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B13-A",
+      "parent_id": "P08",
+      "module_index": 12,
+      "mode": "activity",
+      "title": "Bahçeyi Hazırla",
+      "code": "MAT.5.4.4",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"12,activity\"",
+      "source_line": 26,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    },
+    {
+      "id": "B13-G",
+      "parent_id": "P08",
+      "module_index": 12,
+      "mode": "game",
+      "title": "Ustanın Faturasını Denetle",
+      "code": "MAT.5.4.4",
+      "category": "area",
+      "url": "oyun-atolyesi/etkinlikler.html",
+      "launch_control": "data-open=\"12,game\"",
+      "source_line": 26,
+      "rounds": 3,
+      "notes": "Sayfa içi start(index,mode); ayrı HTML/URL değildir. Kod eşlemesi kaynak beyanı, resmî doğrulama yapılmadı."
+    }
+  ],
+  "legacy_redirect": {
+    "path": "oyun-atolyesi/index.html",
+    "destination": "/atolye.html?sinif=5",
+    "count_as_game": false
+  },
+  "findings": [
+    {
+      "id": "F01",
+      "finding": "Birim Küp beş sınıfta aynı URL ile kullanılıyor.",
+      "action_later": "UI/ayar adaptörü bir kez, sınıf bağlantı kontrolleri beş kez; beş farklı oyun olarak geliştirilmez."
+    },
+    {
+      "id": "F02",
+      "finding": "26 çalışma 26 HTML dosyası değil: 13 modül × etkinlik/oyun modu.",
+      "action_later": "Her module_index+mode ayrı alt görev kimliğiyle izlenir."
+    },
+    {
+      "id": "F03",
+      "finding": "Işık, Çember ve Kargo aynı kesif.html dosyasını oyun query parametresiyle paylaşıyor.",
+      "action_later": "Ortak dosya değiştiğinde üç modun regresyonu birlikte kontrol edilir."
+    },
+    {
+      "id": "F04",
+      "finding": "Toplama Macera Adası katalogda kazanım kodu içermiyor.",
+      "action_later": "Yetkili kazanım kaynağından doğrulanacak; bu adımda kod eklenmedi."
+    },
+    {
+      "id": "F05",
+      "finding": "Bölünebilme Tenceresi adı bu snapshot HTML dosyalarında bulunmadı.",
+      "action_later": "Gerekirse ayrı kaynak istenecek; eksik dosya mevcutmuş gibi kullanılmayacak. Başka bir adla var olması dışlanmıyor."
+    },
+    {
+      "id": "F06",
+      "finding": "Toplama yarışmasında Normal/Hızlı etiketli kontrol yalnız quizDuration değerini değiştiriyor.",
+      "action_later": "Gerçek soru zorluğu ile süre seçimi T28–T37 sırasında ayrılacak; henüz davranış değiştirilmedi."
+    },
+    {
+      "id": "F07",
+      "finding": "Banka zamanlayıcısı 60 saniye başlangıçlı ve elle başlatılabilir; süre bitince cevap vermeye devam edilebiliyor.",
+      "action_later": "Otomatik oyun sonu varsayılmayacak; yeni süre politikası ayrı kararla."
+    },
+    {
+      "id": "F08",
+      "finding": "Olasılıkta iki deney var; both üçüncü oyun değil, iki deneyi birlikte gösteren görünüm.",
+      "action_later": "Aynı deneyi tekrar saymadan üç görünüm kontrol edilecek."
+    }
+  ]
+}

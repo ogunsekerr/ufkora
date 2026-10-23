@@ -1,0 +1,36 @@
+// Dependency-free VM contract checks. This is not a browser/layout test.
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync('oyun-atolyesi/bahce.html','utf8');
+function boot(query=''){
+ let now=0;const nodes=new Map(),listeners={};
+ function node(id){if(nodes.has(id))return nodes.get(id);const classes=new Set();const n={id,value:'',checked:false,disabled:false,open:false,textContent:'',className:'',dataset:{},classList:{add(...c){c.forEach(x=>classes.add(x))},remove(...c){c.forEach(x=>classes.delete(x))},contains(c){return classes.has(c)},toggle(c,v){if(v??!classes.has(c))classes.add(c);else classes.delete(c)}},focus(){doc.activeElement=n},events:{},addEventListener(k,fn){n.events[k]=fn},showModal(){n.open=true},close(){n.open=false;n.events.close?.()},querySelector(){return null},querySelectorAll(){return []},getContext(){return {}},set innerHTML(v){this._html=v;for(const m of v.matchAll(/id="([^"]+)"/g))node(m[1])},get innerHTML(){return this._html||''}};nodes.set(id,n);return n}
+ for(const m of html.matchAll(/id="([^"]+)"/g))node(m[1]);
+ const radios={difficulty:['easy','medium','hard'],duration:['0','60','120','180']};for(const [name,vals]of Object.entries(radios))for(const val of vals){const n=node(name+val);n.value=val;let checked=val===vals[0];Object.defineProperty(n,'checked',{get(){return checked},set(v){if(v)for(const peer of vals)if(peer!==val)node(name+peer).checked=false;checked=v}})}
+ const doc={hidden:false,documentElement:{outerHTML:html},body:{classList:{toggle(){},contains(){return false}}},getElementById:node,addEventListener(k,f){listeners[k]=f},querySelector(selector){const m=selector.match(/\[name=(\w+)\](?:\[value="(\w+)"\]|:checked)/);if(m)return m[2]?node(m[1]+m[2]):radios[m[1]].map(x=>node(m[1]+x)).find(x=>x.checked);return null},querySelectorAll(){return []}};
+ const ctx=vm.createContext({document:doc,location:{search:query},URLSearchParams,performance:{now:()=>now},matchMedia:()=>({matches:true}),localStorage:{getItem:()=>null,setItem(){}},requestAnimationFrame(){},setInterval(){},setTimeout(){},clearTimeout(){},MutationObserver:class{observe(){}},window:{},console});
+ vm.runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1],ctx);
+ function run(code){return vm.runInContext(code,ctx)}
+ function select(name,value){for(const val of radios[name])node(name+val).checked=val===String(value)}
+ return {run,node,doc,select,advance(ms){now+=ms;run('syncClock()')},visibility(hidden){doc.hidden=hidden;listeners.visibilitychange()},ctx};
+}
+let t=boot('?difficulty=invalid&duration=60x&level=99');assert.equal(t.run('difficulty'), 'easy');assert.equal(t.run('duration'),0);assert.equal(t.run('pendingLevel'),0);assert.equal(t.run('clockRunning'),false);
+t=boot('?difficulty=hard&difficulty=easy&duration=60&duration=120');assert.equal(t.run('difficulty'),'easy');assert.equal(t.run('duration'),0);
+for(const mode of ['easy','medium','hard']){t=boot(`?difficulty=${mode}&duration=60&level=2`);t.advance(5000);assert.equal(t.run('phase'),'menu');assert.equal(t.run('clockRunning'),false);t.run('start(pendingLevel)');assert.equal(t.run('level'),1);assert.equal(t.run('showMeasure'),mode==='easy');t.run('rect={x:0,y:0,w:4,h:6};update()');const before=t.node('counters').innerHTML;assert.equal(before.includes('20 m'),mode==='easy');assert.equal(before.includes('4 × 6'),mode!=='hard');t.run('build()');assert.equal(t.run('phase'),'paint');assert(t.node('counters').innerHTML.includes('20 m'));}
+t=boot('?duration=60');t.run('start()');t.advance(2000);assert.equal(t.run('remaining'),58000);t.run('pauseGame()');t.advance(9000);assert.equal(t.run('remaining'),58000);t.run('resumeGame()');t.advance(1000);assert.equal(t.run('remaining'),57000);t.visibility(true);t.advance(120000);assert.equal(t.run('remaining'),57000);t.visibility(false);t.advance(1000);assert.equal(t.run('remaining'),56000);t.run('best[0]=3');t.advance(56000);assert.equal(t.run('phase'),'expired');assert.equal(t.run('clockRunning'),false);assert.equal(t.run('best[0]'),3);t.node('timedRetry').onclick();assert.equal(t.run('remaining'),60000);assert.equal(t.run('rect'),null);assert.equal(t.run('painted.size'),0);t.run('menu()');assert.equal(t.run('clockRunning'),false);
+// Every original mathematical task remains solvable in all difficulty modes.
+for(const mode of ['easy','medium','hard']){t=boot(`?difficulty=${mode}&duration=120`);for(let level=0;level<8;level++){t.run(`start(${level})`);const valid=t.run(`(()=>{for(let w=1;w<=12;w++)for(let h=1;h<=7;h++){let r={x:0,y:0,w,h};if(!validate(r,LEVELS[level]))return r}return null})()`);assert(valid,`task ${level}`);t.run(`rect=${JSON.stringify(valid)};build();for(let y=0;y<rect.h;y++)for(let x=0;x<rect.w;x++)paint({x,y});complete()`);assert.equal(t.run('phase'),'question');t.run(`if(LEVELS[level].options)selected=LEVELS[level].correct;else $('answer').value=String(LEVELS[level].answer);verify()`);assert.equal(t.run('phase'),'won');assert.equal(t.run('clockRunning'),false);assert.equal(t.run('best[level]'),3)}assert.equal(t.run('total()'),24);t.run('start(0)');t.advance(120000);assert.equal(t.run('total()'),24)}
+t=boot();t.run('start()');t.advance(999999);assert.equal(t.run('phase'),'build');assert.equal(t.run('clockRunning'),false);t.run("cv.onkeydown({key:'Enter',preventDefault(){}});cv.onkeydown({key:'ArrowRight',preventDefault(){}});cv.onkeydown({key:'ArrowDown',preventDefault(){}});cv.onkeydown({key:'Enter',preventDefault(){}})");assert.equal(t.run('rect.w'),1);assert.equal(t.run('rect.h'),1);
+for(const seconds of [60,120,180]){t=boot('?duration='+seconds);t.run('start()');assert.equal(t.run('remaining'),seconds*1000);t.node('teacher').onclick();t.advance(10000);assert.equal(t.run('remaining'),seconds*1000);t.node('closeTeacher').onclick();t.advance(1000);assert.equal(t.run('remaining'),seconds*1000-1000);t.run('start(1)');assert.equal(t.run('remaining'),seconds*1000)}
+console.log('PASS: URL fallback/duplicates; no autostart; three real support levels; timed/untimed; pause/background; expiry/retry; keyboard corners; all 8 tasks × 3 modes; stars preserved. Browser/layout not tested.');
+
+assert.ok(!html.includes('reduce?0:65'),'No completion confetti');
+assert.ok(html.includes('class="clay-stamp"'),'Completion stamp exists');
+assert.ok(html.includes('↻ Yeniden dene.'),'Retry includes text and sign');
+
+// Normal fence completion must not depend on requestAnimationFrame delivery.
+t=boot('?duration=60');t.run("reduce=false;start(0);rect={x:0,y:0,w:4,h:3};build()");
+assert.equal(t.run('phase'),'fence');t.advance(800);assert.equal(t.run('phase'),'fence');
+t.run('pauseGame()');t.advance(5000);assert.equal(t.run('phase'),'fence');t.run('resumeGame()');
+t.visibility(true);t.advance(5000);assert.equal(t.run('phase'),'fence');t.visibility(false);
+t.advance(800);assert.equal(t.run('phase'),'paint');assert.equal(t.run('remaining'),60000);
+console.log('PASS normal fence without render frames; help/background pause; task time preserved');

@@ -1,0 +1,8 @@
+body[data-maarif-stage=entry] :is(#theme1Section,#theme2Section,#theme3Section,#maarif-session){display:none!important}
+.maarif-fraction{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.1;margin:0 .18em;min-width:1.3em}
+.maarif-fraction>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .16em .12em}
+.maarif-fraction>span:last-child{padding-top:.12em}
+body.activity-maarif-atolyesi .content-entry h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,4vw,44px);line-height:1.1}
+body.activity-maarif-atolyesi :focus-visible{outline:3px solid #ffcf53;outline-offset:3px}
+body.activity-maarif-atolyesi #fbIconBox{border-radius:12px;border:2px solid #216c56;background:#e2f4df;color:#174b37}
+@media(prefers-reduced-motion:reduce){body.activity-maarif-atolyesi *,body.activity-maarif-atolyesi *::before,body.activity-maarif-atolyesi *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

@@ -445,8 +445,8 @@
         }
         .toast.show { opacity: 1; transform: translateY(0); }
     </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
-<body class="ufkora-activity activity-birim-kup">
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"><link rel="stylesheet" href="../features/rollout/content-entry.css?v=20261023-y06"><link rel="stylesheet" href="../features/rollout/spatial-entry.css?v=20261023-y06"><script src="../features/rollout/active-clock.js?v=20261023-y06"></script><script src="../features/rollout/spatial-entry.js?v=20261023-y06"></script></head>
+<body class="ufkora-activity activity-birim-kup"><div id="spatial-workspace">
 
     <!-- HEADER -->
     <header>
@@ -647,6 +647,7 @@
         <span id="toast-msg">İşlem yapıldı</span>
     </div>
 
+</div>
     <!-- SCRIPT -->
     <script>
         // GRID & VOXEL DATA
@@ -831,6 +832,7 @@
         }
 
         function handleVoxelClick(event) {
+            if (window.UfkoraCubeSession && !window.UfkoraCubeSession.mayEdit()) return;
             const rect = canvas.getBoundingClientRect();
             mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
             mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -1204,13 +1206,14 @@
             setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
-        window.onload = () => {
-            try { init(); }
+        window.UfkoraCubeStart = () => {
+            document.querySelectorAll('.cube-initialization-notice').forEach(n=>n.remove());
+            try { init(); return true; }
             catch (error) {
                 console.error('Cube studio initialization failed', error.name);
                 const area=document.querySelector('.canvas-area');
                 const notice=document.createElement('div');
-                notice.setAttribute('role','status');
+                notice.setAttribute('role','status');notice.className='cube-initialization-notice';
                 notice.style.cssText='position:absolute;inset:0;z-index:20;display:grid;place-content:center;padding:24px;background:#0f172a;color:#e2e8f0;text-align:center;line-height:1.7';
                 const title=document.createElement('h2');
                 title.textContent='3B sahne açılamadı';
@@ -1218,9 +1221,9 @@
                 text.textContent='Bu tarayıcıda 3B görüntü desteği (WebGL) kullanılamıyor. Güncel bir tarayıcıda donanım hızlandırma açıkken yeniden deneyebilirsin.';
                 const back=document.createElement('a');
                 back.href='/#atolye';back.className='btn';back.textContent='Atölyeye dön';
-                notice.append(title,text,back);area.append(notice);
+                notice.append(title,text,back);area.append(notice); return false;
             }
         };
     </script>
-</body>
+<script src="../features/rollout/spatial-cube.js?v=20261023-y06"></script></body>
 </html>

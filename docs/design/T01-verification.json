@@ -1,0 +1,26 @@
+{
+  "task": "T01",
+  "checked_at_utc": "2026-10-22T22:00:01.073617+00:00",
+  "baseline_commit": "006dc2b35bf07cd2fd316a3c779e68acd6b71f1b",
+  "source_files": 48,
+  "checks": {
+    "all_48_source_hashes_unchanged": true,
+    "baseline_logo_asset_referenced": true,
+    "font_families_present": true,
+    "grade_links_4_through_8": true,
+    "entrance_travel_008_to_062": true,
+    "panel_reveal_068_to_094": true,
+    "ready_and_inert_at_094": true,
+    "lightweight_touch_or_700px": true,
+    "lightweight_mask_disabled": true,
+    "reduced_motion_branch": true,
+    "class_color_mapping": true,
+    "class_palette_values_present": true,
+    "activity_game_tabs_present": true,
+    "scribble_reveal_markup_present": true,
+    "pointer_distortion_not_loaded": true
+  },
+  "checks_passed": 15,
+  "logo_sha256": "d53dfc84f1c5bccacf343ef8c9c74207e7cff13dc031fb6d37a28846c7d8a4c3",
+  "verification_scope": "Static source and byte comparison only. No browser, real-device, visual quality, FPS or rendered font-loading test performed in T01."
+}

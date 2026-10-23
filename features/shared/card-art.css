@@ -1,0 +1,34 @@
+/* Clay photography already identifies each game/activity.
+   Suppress only duplicate flat-vector corner decorations inside card visuals.
+   Class-world objects, learning models, metadata and image zoom stay untouched. */
+.preview-card .preview-visual > .clay-motif,
+.activity-card .activity-visual > .clay-motif,
+.feature .feature-visual > .clay-motif {
+  display: none;
+}
+
+/* T22 · Preserve the first pilot's full clay garden and its outer fence.
+   Home preview slots vary in height; contain prevents meaningful edge cropping. */
+.preview-card[data-preview-id="bahce-mimari"] .preview-visual,
+.activity-card[data-preview-id="bahce-mimari"] .activity-visual {
+  background: #f4e6d0;
+}
+.preview-card[data-preview-id="bahce-mimari"] .preview-visual > img,
+.activity-card[data-preview-id="bahce-mimari"] .activity-visual > img {
+  object-fit: contain;
+}
+
+/* T23–T24 · Keep the cargo compartments and the complete source–mirror–target
+   scene visible in short preview slots. Existing zoom remains in control. */
+.preview-card[data-preview-id="sayi-kargo"] .preview-visual,
+.activity-card[data-preview-id="sayi-kargo"] .activity-visual,
+.preview-card[data-preview-id="isik-rotasi"] .preview-visual,
+.activity-card[data-preview-id="isik-rotasi"] .activity-visual {
+  background: #f4e6d0;
+}
+.preview-card[data-preview-id="sayi-kargo"] .preview-visual > img,
+.activity-card[data-preview-id="sayi-kargo"] .activity-visual > img,
+.preview-card[data-preview-id="isik-rotasi"] .preview-visual > img,
+.activity-card[data-preview-id="isik-rotasi"] .activity-visual > img {
+  object-fit: contain;
+}

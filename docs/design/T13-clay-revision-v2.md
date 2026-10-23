@@ -1,0 +1,5 @@
+# T13 clay revizyonu — yalnız taslak
+23 Ekim 2026. Kullanıcı önceki vektör uygulamasını marka dilinden uzak buldu; T13 onaylanmadı ve T14 başlamadı.
+Bu görsel mevcut assets/clay-journey.webp ve onaylı logoyu temel alır; sahnenin gerçek oyun hamuru dokusu, hacmi ve ışığı korunur. Metinler Bricolage Grotesque / Nunito Sans / Outfit rolleriyle yerleştirilmiştir. Beş sınıf numarası ve büyük giriş butonları nesnelerin altındadır. Sarı buton öneri vurgusudur; işlevsel seçim durumu değildir.
+Görsel üretim aracı HTTP400 Unknown parameter reasoning hatası verdi; API/CLI, ücretli kredi veya alternatif üretim servisi kullanılmadı. Taslak mevcut raster sahnenin kod ile oluşturulmuş UI düzenine yerleştirilmesiyle hazırlandı; yeni üretilmiş clay varlığı değildir. Kaynak SVG'de orijinal WebP varlıklar gömülüdür; PNG önizleme aynı görsellerin render uyumluluğu için kayıpsız PNG biçimiyle oluşturuldu.
+Canlı site ve mevcut uygulama kodu değiştirilmedi. Önceki T11–T13 uygulama dalı henüz yayımlanmadı ve bu taslakla düzeltilmiş sayılmaz. Onay gelmeden uygulama veya T14 yapılmaz.

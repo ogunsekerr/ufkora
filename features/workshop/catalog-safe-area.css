@@ -1,0 +1,22 @@
+/* T20: the catalog tools stay in document flow, so no bar covers a card/action. */
+.catalog-page .catalog-workbench{position:static;min-width:0;max-height:none;scroll-margin-block-start:calc(16px + env(safe-area-inset-top,0px))}
+.catalog-page .catalog-workbench .grade-tabs,
+.catalog-page .catalog-filter-drawer{position:static;inset:auto;max-height:none}
+.catalog-page .catalog-filter-body{max-height:none;overflow:visible}
+.catalog-page .catalog-workbench :is(label,.catalog-primary,.catalog-filter-body){min-width:0}
+.catalog-page .catalog-workbench :is(input,select){font-size:16px;min-width:0;max-width:100%;min-height:44px}
+.catalog-page .catalog-workbench :is(button,summary,.grade-tabs a){min-height:44px}
+.catalog-page .catalog-workbench :is(input,select,button,summary,a){scroll-margin-block:24px calc(24px + env(safe-area-inset-bottom,0px))}
+.catalog-page #catalog-main{padding-bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+.catalog-page .site-header{margin-top:max(22px,env(safe-area-inset-top,0px))}
+@media(max-width:700px){
+ .catalog-page #catalog-main{width:calc(100% - max(20px,env(safe-area-inset-left,0px)) - max(20px,env(safe-area-inset-right,0px)));padding-bottom:calc(40px + env(safe-area-inset-bottom,0px))}
+ .catalog-page .site-header{margin-top:max(14px,env(safe-area-inset-top,0px));margin-left:max(14px,env(safe-area-inset-left,0px));margin-right:max(14px,env(safe-area-inset-right,0px))}
+}
+@media(orientation:landscape) and (max-height:500px){
+ /* Keyboard/short viewports can scroll the whole page; no nested drawer trap. */
+ .catalog-page .catalog-workbench,
+ .catalog-page .catalog-workbench .grade-tabs,
+ .catalog-page .catalog-filter-drawer{position:static;inset:auto;height:auto;max-height:none}
+ .catalog-page .catalog-filter-body{max-height:none;overflow:visible}
+}

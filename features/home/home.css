@@ -207,3 +207,10 @@
 .entrance-lite .preview-visual .clay-motif{animation:none}
 .class-world>div:first-child{min-width:0;flex:1}
 @media(max-width:360px){.entrance-motion .class-world p{font-size:18px;line-height:1.25}.entrance-motion .class-world .eyebrow{font-size:7px;letter-spacing:.3px}.entrance-motion #class-world-object{width:80px}}
+
+/* T16: a small clay strand follows the active tab; text/content remains immediate. */
+.preview-tabs{position:relative}
+.preview-tabs.has-clay-indicator:before{content:'';position:absolute;left:0;bottom:-2px;width:var(--tab-indicator-width,0px);height:6px;border-radius:48% 42% 45% 40% / 55% 45% 55% 45%;background:var(--world-color,var(--yellow));box-shadow:inset 0 1px 1px #fff8,0 2px 1px #204b3b25;transform:translateX(var(--tab-indicator-x,0px));transition:transform var(--tab-indicator-duration,0ms) cubic-bezier(.22,1,.36,1);pointer-events:none}
+.preview-tabs.has-clay-indicator button[aria-selected=true]{border-bottom-color:transparent}
+.preview-tabs button:focus-visible{outline:3px solid var(--forest);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.preview-tabs.has-clay-indicator:before{transition:none}}

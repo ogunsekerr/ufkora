@@ -1,0 +1,19 @@
+/* Accepted catalog presentation. Grade packages opt in independently; cards remain selectable. */
+.catalog-topics{display:block}
+.topic-row{margin-block:0 3rem;min-width:0}
+.topic-row-title{font:700 clamp(1.5rem,3vw,2rem)/1.2 'Bricolage Grotesque',sans-serif;letter-spacing:-.04em;margin:0 0 1.25rem;color:var(--ink)}
+.topic-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;align-items:start}
+.topic-item{min-width:0}
+.topic-item .activity-card{height:100%;min-width:0}
+.topic-item .activity-card h3{font:700 1.75rem/1.25 'Bricolage Grotesque',sans-serif;letter-spacing:-.025em;margin:1.25rem 0 .5rem;overflow-wrap:anywhere}
+.topic-featured{border:2px solid var(--ink)}
+.topic-featured-label{display:block;font-weight:800;font-size:.875rem;color:var(--ink);margin-bottom:.75rem}
+.topic-content-details{margin-top:auto;border-top:1px solid #d5dbcc}
+.topic-content-details>summary{cursor:pointer;padding:1rem 1.5rem;min-height:48px;font-weight:700;line-height:1.5}
+.topic-content-details .activity-curriculum{border:0;padding-top:0}
+.topic-content-details .topic-description{margin:0 0 1rem;font-size:1rem}
+.topic-start{display:flex;align-items:center;min-height:48px;margin:0 1.5rem 1rem;padding:.75rem 1rem;background:var(--class-bg);color:var(--ink);font-weight:800;border-radius:.5rem}
+.topic-content-details summary:focus-visible,.topic-start:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.catalog-primary:has(.catalog-view-label){grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}
+@media(max-width:1000px){.topic-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.topic-list{grid-template-columns:minmax(0,1fr)}.catalog-primary:has(.catalog-view-label){grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-primary:has(.catalog-view-label) .search{grid-column:1/-1}.topic-item .activity-card h3{font-size:1.5rem}}

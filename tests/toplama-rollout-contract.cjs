@@ -1,0 +1,33 @@
+// Production Toplama code in a minimal DOM. Not a visual/browser test.
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync('etkinlikler/toplama-adasi.html','utf8');
+let now=0;const nodes=new Map(),timers=[];
+function node(id){if(nodes.has(id))return nodes.get(id);const classes=new Set();const n={querySelector(){return null},focus(){},after(){},id,value:'',textContent:'',style:{},dataset:{},children:[],attrs:{},classList:{add(...a){a.forEach(x=>classes.add(x))},remove(...a){a.forEach(x=>classes.delete(x))},contains:x=>classes.has(x)},offsetWidth:10,appendChild(x){this.children.push(x)},setAttribute(k,v){this.attrs[k]=v},getAttribute(k){return this.attrs[k]},set innerHTML(s){this._html=s;for(const tag of s.matchAll(/<(input|button|div|span)[^>]*>/g)){const m=tag[0].match(/id="([^"]+)"/);if(!m)continue;const x=node(m[1]);for(const a of tag[0].matchAll(/([\w-]+)="([^"]*)"/g))x.attrs[a[1]]=a[2];}},get innerHTML(){return this._html||''}};nodes.set(id,n);return n}
+const doc={getElementById:node,createElement:()=>node('generated'+nodes.size),querySelectorAll:s=>s==='.act4-digit-input'?[...nodes.values()].filter(x=>x.attrs.class?.includes('act4-digit-input')):[]};
+const sandbox={document:doc,console,Math,setTimeout:f=>timers.push(f),clearTimeout(){},setInterval:f=>{timers.push(f);return timers.length},clearInterval(){}};sandbox.window=sandbox;
+const ctx=vm.createContext(sandbox),run=s=>vm.runInContext(s,ctx);
+run(fs.readFileSync('features/rollout/addition-model.js','utf8'));run(html.match(/<script>([\s\S]*?)<\/script>/)[1]);run('soundEnabled=false');
+for(const d of ['easy','medium','hard']){
+ run('additionLevel='+JSON.stringify(d)+';generateAct1Problem()');
+ const a=run('act1Data');for(let i=0;i<5;i++)node('act1-ans-'+i).value=String(Math.floor(a.sum/10**i)%10);for(let i=1;i<5;i++)node('act1-carry-'+i).value=String(a.carries[i]);
+ node('act1-carry-1').value=String(1-a.carries[1]);const before=run('globalScore');run('checkAct1()');assert.equal(run('globalScore'),before,'wrong carry cannot earn');node('act1-carry-1').value=String(a.carries[1]);run('checkAct1();checkAct1()');assert.equal(run('globalScore'),before+25,'no repeated award');
+ run('generateAct3Problem()');const state=run('act3State');assert(state.sum<10000);state.hidden.forEach((h,i)=>node('act3-inp-'+i).value=String(h.answer));const score=run('globalScore');node('act3-inp-0').value=String(state.hidden[0].answer)+'.9';run('checkAct3()');assert.equal(run('globalScore'),score);node('act3-inp-0').value=String(state.hidden[0].answer);run('checkAct3();checkAct3()');assert.equal(run('globalScore'),score+30);
+ run('generateAct4Problem()');for(const x of doc.querySelectorAll('.act4-digit-input'))x.value=x.attrs['data-ans'];node('act4-bonus-input').value=String(run('act4State.bonusExpected'));const prev=run('globalScore');node('act4-bonus-input').value+=''+'.9';run('checkAct4()');assert.equal(run('globalScore'),prev);node('act4-bonus-input').value=String(run('act4State.bonusExpected'));run('checkAct4();checkAct4()');assert.equal(run('globalScore'),prev+40);
+ run('initCipherPuzzle()');const qs=run('currentCipher.questions');assert.equal(new Set(qs.map(q=>q.sum)).size,qs.length);for(const q of qs){const score=run('globalScore');node('cipher-input-'+q.index).value=String(q.sum)+'.9';run('checkCipherItem('+q.index+')');assert.equal(run('globalScore'),score);node('cipher-input-'+q.index).value=String(q.sum);run('checkCipherItem('+q.index+')')}assert.equal(run('solvedLettersCount'),qs.length);
+}
+run('quizDuration=60;startTimedQuiz()');const button=node('quiz-answer'),before=run('globalScore');run('submitQuizOption(currentQuizAnswer,document.getElementById("quiz-answer"));submitQuizOption(currentQuizAnswer,document.getElementById("quiz-answer"))');assert.equal(run('quizCorrect'),1);assert.equal(run('globalScore'),before+12);run('endTimedQuiz();submitQuizOption(currentQuizAnswer,document.getElementById("quiz-answer"))');assert.equal(run('globalScore'),before+12);
+console.log('PASS five production flows × three levels; carries, four-column safety, cipher uniqueness, single scoring and post-expiry quiz guard.');
+// Entry adapter: execute the actual adapter and active-time module with the same production globals.
+const intervals=[],events={};sandbox.location={search:'?difficulty=hard&duration=60&akis=act3'};sandbox.URLSearchParams=URLSearchParams;sandbox.performance={now:()=>now};sandbox.setInterval=f=>{intervals.push(f);return intervals.length};
+doc.body={dataset:{}};doc.hidden=false;doc.querySelector=()=>node('nav');doc.addEventListener=(k,f)=>events[k]=f;
+const oldNode=node;for(const n of nodes.values()){n.focus=()=>doc.activeElement=n;n.after=()=>{};n.querySelector=()=>null}
+const originalCreate=doc.createElement;doc.createElement=()=>{const n=originalCreate();n.focus=()=>doc.activeElement=n;n.after=()=>{};n.querySelector=()=>null;return n};node('nav').after=()=>{};
+for(const id of ['content-retry','content-start','content-settings'])node(id).focus=()=>{};
+run(fs.readFileSync('features/rollout/active-clock.js','utf8'));run(fs.readFileSync('features/rollout/toplama-entry.js','utf8'));const entryTick=intervals[0];
+assert.equal(doc.body.dataset.contentStage,'entry');assert.equal(run('additionLevel'),'hard');node('content-start').onclick();assert.equal(doc.body.dataset.contentStage,'play');assert.equal(run('act3State.sum<10000'),true);
+now=10000;entryTick();doc.hidden=true;events.visibilitychange();now=999999;entryTick();assert.equal(node('section-act3').inert,false);doc.hidden=false;events.visibilitychange();now+=50000;entryTick();assert.equal(node('section-act3').inert,true);assert.match(node('content-state').textContent,/Süre doldu/);
+node('content-retry').onclick();assert.equal(node('section-act3').inert,false);node('content-settings').onclick();assert.equal(doc.body.dataset.contentStage,'entry');
+console.log('PASS production entry: exact deep-link settings, no autostart, expiry lock, hidden pause, retry and settings. DOM simulation only.');
+
+run("switchTab('quiz')");node('content-duration').value='60';node('quiz-options').querySelector=()=>{const n=node('first-quiz-option');n.focus=()=>doc.activeElement=n;return n};node('content-start').onclick();assert.equal(doc.activeElement.id,'first-quiz-option');now+=60001;entryTick();assert.equal(node('section-quiz').inert,false,'quiz result remains accessible');assert.equal(run('quizRunning'),false);assert.match(node('content-state').textContent,/Süre doldu/);
+console.log('PASS quiz begins on a visible answer and expiry leaves results accessible without accepting more answers.');
