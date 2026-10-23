@@ -12,9 +12,12 @@ const items=window.UFKORA_CATALOG.filter(x=>x.grade===grade);
 // T38–T40 pilot: a reversible presentation of the existing grade-five data.
 const viewLabel=el('label','catalog-view-label'),view=el('select');
 if(grade===5){view.id='catalog-view';const caption=el('span','','Görünüm');viewLabel.append(caption,view);[['topics','Konu sıraları'],['cards','Kartlar']].forEach(([value,text])=>{const o=el('option','',text);o.value=value;view.append(o)});document.querySelector('.catalog-primary').append(viewLabel);view.addEventListener('change',render);}
+let announcementTimer;
+status.setAttribute('aria-atomic','true');status.tabIndex=-1;
 const normalize=s=>s.toLocaleLowerCase('tr-TR');
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n}
-function render(){
+function render(reason='filter'){
+const focusWasInResults=catalog.contains(document.activeElement);
 const q=normalize(search.value.trim()),filtered=items.filter(x=>(!q||normalize([x.title,x.desc,x.topic,...x.codes].join(' ')).includes(q))&&(!topic.value||x.topic===topic.value)&&(!type.value||x.type===type.value));
 motifObserver.disconnect();catalog.replaceChildren();
 const topicMode=grade===5&&view.value==='topics';
@@ -51,8 +54,15 @@ const list=el('ul');x.outcomes.forEach(outcome=>{const li=el('li');li.append(el(
 if(x.curriculumNote)curriculum.append(el('p','curriculum-note',x.curriculumNote));
 if(topicMode){const detail=el('details','topic-content-details');detail.append(el('summary','','İçerik ve kazanımlar'));const nested=curriculum.querySelector('.outcome-details');if(nested){const summary=nested.querySelector('summary');summary.remove();nested.replaceWith(...nested.childNodes);}detail.append(curriculum);card.append(detail);}else card.append(curriculum);destination.append(card);motifObserver.observe(card);
 });
-status.textContent=filtered.length+' içerik gösteriliyor'+(grade===5?' · Çalışma bankasında ayrıca 26 kısa etkinlik var.':'.');document.getElementById('empty').hidden=filtered.length!==0;
+const scope=[grade+'. sınıf',type.value||'Tüm içerikler',topic.value||'Tüm konular'];
+if(search.value.trim())scope.push('“'+search.value.trim()+'”');
+const resultText=scope.join(' · ')+' · '+filtered.length+' içerik'+(filtered.length?' gösteriliyor.':' bulundu.');
+clearTimeout(announcementTimer);
+if(reason==='search')announcementTimer=setTimeout(()=>{status.textContent=resultText},180);else status.textContent=resultText;
+document.getElementById('empty').hidden=filtered.length!==0;
+// User filters retain focus. Only an already-removed result needs a safe fallback.
+if(focusWasInResults)status.focus({preventScroll:true});
 }
 document.getElementById('reset-filters').addEventListener('click',()=>{search.value='';topic.value='';type.value='';render()});
-search.addEventListener('input',render);topic.addEventListener('change',render);type.addEventListener('change',render);render();
+search.addEventListener('input',()=>render('search'));topic.addEventListener('change',render);type.addEventListener('change',render);render();
 })();
