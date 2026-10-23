@@ -11,35 +11,43 @@
       "tasks": [
         {
           "id": "Y01-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y01-review.md"
         },
         {
           "id": "Y01-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y01-review.md"
         },
         {
           "id": "Y01-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y01-review.md"
         },
         {
           "id": "Y01-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y01-review.md"
         },
         {
           "id": "Y01-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y01-review.md"
         },
         {
           "id": "Y01-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y01-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y01-review.md"
     },
     {
       "source_id": "P01-act2",
@@ -51,35 +59,43 @@
       "tasks": [
         {
           "id": "Y02-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y02-review.md"
         },
         {
           "id": "Y02-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y02-review.md"
         },
         {
           "id": "Y02-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y02-review.md"
         },
         {
           "id": "Y02-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y02-review.md"
         },
         {
           "id": "Y02-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y02-review.md"
         },
         {
           "id": "Y02-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y02-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y02-review.md"
     },
     {
       "source_id": "P01-act3",
@@ -91,35 +107,43 @@
       "tasks": [
         {
           "id": "Y03-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y03-review.md"
         },
         {
           "id": "Y03-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y03-review.md"
         },
         {
           "id": "Y03-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y03-review.md"
         },
         {
           "id": "Y03-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y03-review.md"
         },
         {
           "id": "Y03-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y03-review.md"
         },
         {
           "id": "Y03-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y03-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y03-review.md"
     },
     {
       "source_id": "P01-act4",
@@ -131,35 +155,43 @@
       "tasks": [
         {
           "id": "Y04-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y04-review.md"
         },
         {
           "id": "Y04-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y04-review.md"
         },
         {
           "id": "Y04-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y04-review.md"
         },
         {
           "id": "Y04-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y04-review.md"
         },
         {
           "id": "Y04-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y04-review.md"
         },
         {
           "id": "Y04-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y04-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y04-review.md"
     },
     {
       "source_id": "P01-quiz",
@@ -171,35 +203,43 @@
       "tasks": [
         {
           "id": "Y05-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y05-review.md"
         },
         {
           "id": "Y05-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y05-review.md"
         },
         {
           "id": "Y05-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y05-review.md"
         },
         {
           "id": "Y05-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y05-review.md"
         },
         {
           "id": "Y05-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y05-review.md"
         },
         {
           "id": "Y05-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y05-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y05-review.md"
     },
     {
       "source_id": "P02-sandbox",
@@ -211,35 +251,43 @@
       "tasks": [
         {
           "id": "Y06-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y06-review.md"
         },
         {
           "id": "Y06-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y06-review.md"
         },
         {
           "id": "Y06-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y06-review.md"
         },
         {
           "id": "Y06-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y06-review.md"
         },
         {
           "id": "Y06-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y06-review.md"
         },
         {
           "id": "Y06-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y06-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y06-review.md"
     },
     {
       "source_id": "P03-explore",
@@ -251,35 +299,43 @@
       "tasks": [
         {
           "id": "Y07-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y07-review.md"
         },
         {
           "id": "Y07-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y07-review.md"
         },
         {
           "id": "Y07-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y07-review.md"
         },
         {
           "id": "Y07-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y07-review.md"
         },
         {
           "id": "Y07-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y07-review.md"
         },
         {
           "id": "Y07-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y07-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y07-review.md"
     },
     {
       "source_id": "P03-game",
@@ -291,35 +347,43 @@
       "tasks": [
         {
           "id": "Y08-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y08-review.md"
         },
         {
           "id": "Y08-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y08-review.md"
         },
         {
           "id": "Y08-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y08-review.md"
         },
         {
           "id": "Y08-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y08-review.md"
         },
         {
           "id": "Y08-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y08-review.md"
         },
         {
           "id": "Y08-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y08-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y08-review.md"
     },
     {
       "source_id": "P04-1",
@@ -331,35 +395,43 @@
       "tasks": [
         {
           "id": "Y09-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y09-review.md"
         },
         {
           "id": "Y09-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y09-review.md"
         },
         {
           "id": "Y09-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y09-review.md"
         },
         {
           "id": "Y09-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y09-review.md"
         },
         {
           "id": "Y09-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y09-review.md"
         },
         {
           "id": "Y09-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y09-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y09-review.md"
     },
     {
       "source_id": "P04-2",
@@ -371,35 +443,43 @@
       "tasks": [
         {
           "id": "Y10-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y10-review.md"
         },
         {
           "id": "Y10-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y10-review.md"
         },
         {
           "id": "Y10-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y10-review.md"
         },
         {
           "id": "Y10-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y10-review.md"
         },
         {
           "id": "Y10-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y10-review.md"
         },
         {
           "id": "Y10-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y10-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y10-review.md"
     },
     {
       "source_id": "P04-3",
@@ -411,35 +491,43 @@
       "tasks": [
         {
           "id": "Y11-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y11-review.md"
         },
         {
           "id": "Y11-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y11-review.md"
         },
         {
           "id": "Y11-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y11-review.md"
         },
         {
           "id": "Y11-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y11-review.md"
         },
         {
           "id": "Y11-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y11-review.md"
         },
         {
           "id": "Y11-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y11-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y11-review.md"
     },
     {
       "source_id": "P05-protractor",
@@ -451,35 +539,43 @@
       "tasks": [
         {
           "id": "Y12-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y12-review.md"
         },
         {
           "id": "Y12-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y12-review.md"
         },
         {
           "id": "Y12-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y12-review.md"
         },
         {
           "id": "Y12-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y12-review.md"
         },
         {
           "id": "Y12-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y12-review.md"
         },
         {
           "id": "Y12-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y12-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y12-review.md"
     },
     {
       "source_id": "P05-laser",
@@ -491,35 +587,43 @@
       "tasks": [
         {
           "id": "Y13-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y13-review.md"
         },
         {
           "id": "Y13-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y13-review.md"
         },
         {
           "id": "Y13-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y13-review.md"
         },
         {
           "id": "Y13-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y13-review.md"
         },
         {
           "id": "Y13-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y13-review.md"
         },
         {
           "id": "Y13-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y13-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y13-review.md"
     },
     {
       "source_id": "P05-cargo",
@@ -531,35 +635,43 @@
       "tasks": [
         {
           "id": "Y14-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y14-review.md"
         },
         {
           "id": "Y14-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y14-review.md"
         },
         {
           "id": "Y14-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y14-review.md"
         },
         {
           "id": "Y14-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y14-review.md"
         },
         {
           "id": "Y14-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y14-review.md"
         },
         {
           "id": "Y14-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y14-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y14-review.md"
     },
     {
       "source_id": "P05-carpet",
@@ -571,35 +683,43 @@
       "tasks": [
         {
           "id": "Y15-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y15-review.md"
         },
         {
           "id": "Y15-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y15-review.md"
         },
         {
           "id": "Y15-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y15-review.md"
         },
         {
           "id": "Y15-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y15-review.md"
         },
         {
           "id": "Y15-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y15-review.md"
         },
         {
           "id": "Y15-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y15-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y15-review.md"
     },
     {
       "source_id": "P05-potion",
@@ -611,35 +731,43 @@
       "tasks": [
         {
           "id": "Y16-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y16-review.md"
         },
         {
           "id": "Y16-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y16-review.md"
         },
         {
           "id": "Y16-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y16-review.md"
         },
         {
           "id": "Y16-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y16-review.md"
         },
         {
           "id": "Y16-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y16-review.md"
         },
         {
           "id": "Y16-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y16-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y16-review.md"
     },
     {
       "source_id": "P07-cember",
@@ -651,35 +779,43 @@
       "tasks": [
         {
           "id": "Y17-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y17-review.md"
         },
         {
           "id": "Y17-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y17-review.md"
         },
         {
           "id": "Y17-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y17-review.md"
         },
         {
           "id": "Y17-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y17-review.md"
         },
         {
           "id": "Y17-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y17-review.md"
         },
         {
           "id": "Y17-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y17-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y17-review.md"
     },
     {
       "source_id": "P09-coin",
@@ -691,35 +827,43 @@
       "tasks": [
         {
           "id": "Y18-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y18-review.md"
         },
         {
           "id": "Y18-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y18-review.md"
         },
         {
           "id": "Y18-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y18-review.md"
         },
         {
           "id": "Y18-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y18-review.md"
         },
         {
           "id": "Y18-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y18-review.md"
         },
         {
           "id": "Y18-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y18-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y18-review.md"
     },
     {
       "source_id": "P09-dice",
@@ -731,35 +875,43 @@
       "tasks": [
         {
           "id": "Y19-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y19-review.md"
         },
         {
           "id": "Y19-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y19-review.md"
         },
         {
           "id": "Y19-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y19-review.md"
         },
         {
           "id": "Y19-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y19-review.md"
         },
         {
           "id": "Y19-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y19-review.md"
         },
         {
           "id": "Y19-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y19-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y19-review.md"
     },
     {
       "source_id": "P10-lab",
@@ -771,35 +923,43 @@
       "tasks": [
         {
           "id": "Y20-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y20-review.md"
         },
         {
           "id": "Y20-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y20-review.md"
         },
         {
           "id": "Y20-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y20-review.md"
         },
         {
           "id": "Y20-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y20-review.md"
         },
         {
           "id": "Y20-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y20-review.md"
         },
         {
           "id": "Y20-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y20-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y20-review.md"
     },
     {
       "source_id": "P10-activity",
@@ -811,35 +971,43 @@
       "tasks": [
         {
           "id": "Y21-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y21-review.md"
         },
         {
           "id": "Y21-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y21-review.md"
         },
         {
           "id": "Y21-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y21-review.md"
         },
         {
           "id": "Y21-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y21-review.md"
         },
         {
           "id": "Y21-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y21-review.md"
         },
         {
           "id": "Y21-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y21-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y21-review.md"
     },
     {
       "source_id": "B01-A",
@@ -851,35 +1019,43 @@
       "tasks": [
         {
           "id": "Y22-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y22-review.md"
         },
         {
           "id": "Y22-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y22-review.md"
         },
         {
           "id": "Y22-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y22-review.md"
         },
         {
           "id": "Y22-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y22-review.md"
         },
         {
           "id": "Y22-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y22-review.md"
         },
         {
           "id": "Y22-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y22-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y22-review.md"
     },
     {
       "source_id": "B01-G",
@@ -891,35 +1067,43 @@
       "tasks": [
         {
           "id": "Y23-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y23-review.md"
         },
         {
           "id": "Y23-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y23-review.md"
         },
         {
           "id": "Y23-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y23-review.md"
         },
         {
           "id": "Y23-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y23-review.md"
         },
         {
           "id": "Y23-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y23-review.md"
         },
         {
           "id": "Y23-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y23-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y23-review.md"
     },
     {
       "source_id": "B02-A",
@@ -931,35 +1115,43 @@
       "tasks": [
         {
           "id": "Y24-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y24-review.md"
         },
         {
           "id": "Y24-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y24-review.md"
         },
         {
           "id": "Y24-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y24-review.md"
         },
         {
           "id": "Y24-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y24-review.md"
         },
         {
           "id": "Y24-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y24-review.md"
         },
         {
           "id": "Y24-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y24-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y24-review.md"
     },
     {
       "source_id": "B02-G",
@@ -971,35 +1163,43 @@
       "tasks": [
         {
           "id": "Y25-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y25-review.md"
         },
         {
           "id": "Y25-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y25-review.md"
         },
         {
           "id": "Y25-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y25-review.md"
         },
         {
           "id": "Y25-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y25-review.md"
         },
         {
           "id": "Y25-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y25-review.md"
         },
         {
           "id": "Y25-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y25-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y25-review.md"
     },
     {
       "source_id": "B03-A",
@@ -1011,35 +1211,43 @@
       "tasks": [
         {
           "id": "Y26-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y26-review.md"
         },
         {
           "id": "Y26-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y26-review.md"
         },
         {
           "id": "Y26-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y26-review.md"
         },
         {
           "id": "Y26-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y26-review.md"
         },
         {
           "id": "Y26-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y26-review.md"
         },
         {
           "id": "Y26-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y26-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y26-review.md"
     },
     {
       "source_id": "B03-G",
@@ -1051,35 +1259,43 @@
       "tasks": [
         {
           "id": "Y27-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y27-review.md"
         },
         {
           "id": "Y27-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y27-review.md"
         },
         {
           "id": "Y27-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y27-review.md"
         },
         {
           "id": "Y27-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y27-review.md"
         },
         {
           "id": "Y27-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y27-review.md"
         },
         {
           "id": "Y27-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y27-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y27-review.md"
     },
     {
       "source_id": "B04-A",
@@ -1091,35 +1307,43 @@
       "tasks": [
         {
           "id": "Y28-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y28-review.md"
         },
         {
           "id": "Y28-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y28-review.md"
         },
         {
           "id": "Y28-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y28-review.md"
         },
         {
           "id": "Y28-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y28-review.md"
         },
         {
           "id": "Y28-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y28-review.md"
         },
         {
           "id": "Y28-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y28-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y28-review.md"
     },
     {
       "source_id": "B04-G",
@@ -1131,35 +1355,43 @@
       "tasks": [
         {
           "id": "Y29-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y29-review.md"
         },
         {
           "id": "Y29-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y29-review.md"
         },
         {
           "id": "Y29-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y29-review.md"
         },
         {
           "id": "Y29-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y29-review.md"
         },
         {
           "id": "Y29-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y29-review.md"
         },
         {
           "id": "Y29-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y29-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y29-review.md"
     },
     {
       "source_id": "B05-A",
@@ -1171,35 +1403,43 @@
       "tasks": [
         {
           "id": "Y30-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y30-review.md"
         },
         {
           "id": "Y30-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y30-review.md"
         },
         {
           "id": "Y30-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y30-review.md"
         },
         {
           "id": "Y30-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y30-review.md"
         },
         {
           "id": "Y30-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y30-review.md"
         },
         {
           "id": "Y30-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y30-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y30-review.md"
     },
     {
       "source_id": "B05-G",
@@ -1211,35 +1451,43 @@
       "tasks": [
         {
           "id": "Y31-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y31-review.md"
         },
         {
           "id": "Y31-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y31-review.md"
         },
         {
           "id": "Y31-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y31-review.md"
         },
         {
           "id": "Y31-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y31-review.md"
         },
         {
           "id": "Y31-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y31-review.md"
         },
         {
           "id": "Y31-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y31-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y31-review.md"
     },
     {
       "source_id": "B06-A",
@@ -1251,35 +1499,43 @@
       "tasks": [
         {
           "id": "Y32-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y32-review.md"
         },
         {
           "id": "Y32-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y32-review.md"
         },
         {
           "id": "Y32-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y32-review.md"
         },
         {
           "id": "Y32-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y32-review.md"
         },
         {
           "id": "Y32-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y32-review.md"
         },
         {
           "id": "Y32-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y32-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y32-review.md"
     },
     {
       "source_id": "B06-G",
@@ -1291,35 +1547,43 @@
       "tasks": [
         {
           "id": "Y33-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y33-review.md"
         },
         {
           "id": "Y33-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y33-review.md"
         },
         {
           "id": "Y33-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y33-review.md"
         },
         {
           "id": "Y33-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y33-review.md"
         },
         {
           "id": "Y33-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y33-review.md"
         },
         {
           "id": "Y33-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y33-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y33-review.md"
     },
     {
       "source_id": "B07-A",
@@ -1331,35 +1595,43 @@
       "tasks": [
         {
           "id": "Y34-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y34-review.md"
         },
         {
           "id": "Y34-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y34-review.md"
         },
         {
           "id": "Y34-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y34-review.md"
         },
         {
           "id": "Y34-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y34-review.md"
         },
         {
           "id": "Y34-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y34-review.md"
         },
         {
           "id": "Y34-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y34-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y34-review.md"
     },
     {
       "source_id": "B07-G",
@@ -1371,35 +1643,43 @@
       "tasks": [
         {
           "id": "Y35-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y35-review.md"
         },
         {
           "id": "Y35-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y35-review.md"
         },
         {
           "id": "Y35-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y35-review.md"
         },
         {
           "id": "Y35-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y35-review.md"
         },
         {
           "id": "Y35-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y35-review.md"
         },
         {
           "id": "Y35-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y35-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y35-review.md"
     },
     {
       "source_id": "B08-A",
@@ -1411,35 +1691,43 @@
       "tasks": [
         {
           "id": "Y36-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y36-review.md"
         },
         {
           "id": "Y36-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y36-review.md"
         },
         {
           "id": "Y36-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y36-review.md"
         },
         {
           "id": "Y36-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y36-review.md"
         },
         {
           "id": "Y36-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y36-review.md"
         },
         {
           "id": "Y36-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y36-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y36-review.md"
     },
     {
       "source_id": "B08-G",
@@ -1451,35 +1739,43 @@
       "tasks": [
         {
           "id": "Y37-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y37-review.md"
         },
         {
           "id": "Y37-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y37-review.md"
         },
         {
           "id": "Y37-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y37-review.md"
         },
         {
           "id": "Y37-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y37-review.md"
         },
         {
           "id": "Y37-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y37-review.md"
         },
         {
           "id": "Y37-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y37-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y37-review.md"
     },
     {
       "source_id": "B09-A",
@@ -1491,35 +1787,43 @@
       "tasks": [
         {
           "id": "Y38-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y38-review.md"
         },
         {
           "id": "Y38-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y38-review.md"
         },
         {
           "id": "Y38-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y38-review.md"
         },
         {
           "id": "Y38-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y38-review.md"
         },
         {
           "id": "Y38-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y38-review.md"
         },
         {
           "id": "Y38-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y38-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y38-review.md"
     },
     {
       "source_id": "B09-G",
@@ -1531,35 +1835,43 @@
       "tasks": [
         {
           "id": "Y39-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y39-review.md"
         },
         {
           "id": "Y39-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y39-review.md"
         },
         {
           "id": "Y39-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y39-review.md"
         },
         {
           "id": "Y39-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y39-review.md"
         },
         {
           "id": "Y39-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y39-review.md"
         },
         {
           "id": "Y39-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y39-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y39-review.md"
     },
     {
       "source_id": "B10-A",
@@ -1571,35 +1883,43 @@
       "tasks": [
         {
           "id": "Y40-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y40-review.md"
         },
         {
           "id": "Y40-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y40-review.md"
         },
         {
           "id": "Y40-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y40-review.md"
         },
         {
           "id": "Y40-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y40-review.md"
         },
         {
           "id": "Y40-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y40-review.md"
         },
         {
           "id": "Y40-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y40-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y40-review.md"
     },
     {
       "source_id": "B10-G",
@@ -1611,35 +1931,43 @@
       "tasks": [
         {
           "id": "Y41-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y41-review.md"
         },
         {
           "id": "Y41-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y41-review.md"
         },
         {
           "id": "Y41-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y41-review.md"
         },
         {
           "id": "Y41-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y41-review.md"
         },
         {
           "id": "Y41-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y41-review.md"
         },
         {
           "id": "Y41-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y41-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y41-review.md"
     },
     {
       "source_id": "B11-A",
@@ -1651,35 +1979,43 @@
       "tasks": [
         {
           "id": "Y42-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y42-review.md"
         },
         {
           "id": "Y42-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y42-review.md"
         },
         {
           "id": "Y42-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y42-review.md"
         },
         {
           "id": "Y42-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y42-review.md"
         },
         {
           "id": "Y42-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y42-review.md"
         },
         {
           "id": "Y42-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y42-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y42-review.md"
     },
     {
       "source_id": "B11-G",
@@ -1691,35 +2027,43 @@
       "tasks": [
         {
           "id": "Y43-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y43-review.md"
         },
         {
           "id": "Y43-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y43-review.md"
         },
         {
           "id": "Y43-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y43-review.md"
         },
         {
           "id": "Y43-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y43-review.md"
         },
         {
           "id": "Y43-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y43-review.md"
         },
         {
           "id": "Y43-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y43-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y43-review.md"
     },
     {
       "source_id": "B12-A",
@@ -1731,35 +2075,43 @@
       "tasks": [
         {
           "id": "Y44-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y44-review.md"
         },
         {
           "id": "Y44-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y44-review.md"
         },
         {
           "id": "Y44-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y44-review.md"
         },
         {
           "id": "Y44-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y44-review.md"
         },
         {
           "id": "Y44-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y44-review.md"
         },
         {
           "id": "Y44-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y44-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y44-review.md"
     },
     {
       "source_id": "B12-G",
@@ -1771,35 +2123,43 @@
       "tasks": [
         {
           "id": "Y45-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y45-review.md"
         },
         {
           "id": "Y45-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y45-review.md"
         },
         {
           "id": "Y45-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y45-review.md"
         },
         {
           "id": "Y45-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y45-review.md"
         },
         {
           "id": "Y45-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y45-review.md"
         },
         {
           "id": "Y45-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y45-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y45-review.md"
     },
     {
       "source_id": "B13-A",
@@ -1811,35 +2171,43 @@
       "tasks": [
         {
           "id": "Y46-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y46-review.md"
         },
         {
           "id": "Y46-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y46-review.md"
         },
         {
           "id": "Y46-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y46-review.md"
         },
         {
           "id": "Y46-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y46-review.md"
         },
         {
           "id": "Y46-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y46-review.md"
         },
         {
           "id": "Y46-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y46-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y46-review.md"
     },
     {
       "source_id": "B13-G",
@@ -1851,37 +2219,48 @@
       "tasks": [
         {
           "id": "Y47-01",
-          "status": "open",
-          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet."
+          "status": "acceptance_open",
+          "description": "Gerçek amaç/kazanım/ayar eşlemesini doğrula; mevcut ilerleme kurallarını kaydet.",
+          "evidence": "rollout/Y47-review.md"
         },
         {
           "id": "Y47-02",
-          "status": "open",
-          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et."
+          "status": "acceptance_open",
+          "description": "Clay görseli ve kısa örnek hamleyi hazırla; netlik ve boyutu kontrol et.",
+          "evidence": "rollout/Y47-review.md"
         },
         {
           "id": "Y47-03",
-          "status": "open",
-          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme."
+          "status": "acceptance_open",
+          "description": "Ortak giriş panelini bağla; zorluk gerçekten değişsin. Uygun olmayan ayarı sahte seçenek olarak ekleme.",
+          "evidence": "rollout/Y47-review.md"
         },
         {
           "id": "Y47-04",
-          "status": "open",
-          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula."
+          "status": "acceptance_open",
+          "description": "Süre/süresiz/reset/arka sekme davranışını doğrula.",
+          "evidence": "rollout/Y47-review.md"
         },
         {
           "id": "Y47-05",
-          "status": "open",
-          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç."
+          "status": "acceptance_open",
+          "description": "Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.",
+          "evidence": "rollout/Y47-review.md"
         },
         {
           "id": "Y47-06",
-          "status": "open",
-          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet."
+          "status": "acceptance_open",
+          "description": "Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.",
+          "evidence": "rollout/Y47-review.md"
         }
-      ]
+      ],
+      "implementation": "implemented_source_tested_browser_pending",
+      "review": "rollout/Y47-review.md"
     }
   ],
   "unit_count": 47,
-  "open_task_count": 282
+  "open_task_count": 282,
+  "implementation_count": 47,
+  "closed_task_count": 0,
+  "status_note": "K7 authorized; all47 source implementations and perflow reports exist. Source tests pass; physical/browser acceptance remains open; unchecked tasks are not claimed fully completed."
 }

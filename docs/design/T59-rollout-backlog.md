@@ -521,3 +521,7 @@ Envanter: B13-G · Kaynak: `oyun-atolyesi/etkinlikler.html` · Kontrol: `data-op
 - [ ] Y47-05 — Etkinlik/oyun ve varsa ikinci oyun sekmesini, küçük ekranı kontrol et; yeni oyun gerekiyorsa ayrı içerik görevi aç.
 - [ ] Y47-06 — Klavye/touch/reduced-motion ve matematik kontrolünü tamamla; ayrı commit ve kanıt kaydet.
 
+
+## K7 onayından sonraki entegrasyon
+
+47 akışın uygulaması ve47 ayrı raporu mevcut. Ayrıntı: [entegre durum](PROGRESS-Y01-Y47.md). Tarayıcı/fiziksel cihaz kabulü eksik olduğundan yukarıdaki282 kabul görevi tam kapatılmış sayılmaz.

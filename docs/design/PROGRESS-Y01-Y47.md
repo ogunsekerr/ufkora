@@ -1,18 +1,18 @@
-# Y01–Y47 yayılım çalışma durumu
+# Y01–Y47 · Entegre yayılım durumu
 
-Kullanıcı kapsamı: 47 akışın her biri için Yxx-01…06 (282 alt görev). Canlı yayın yetkisi yok.
+23 Ekim 2026. Kullanıcı Yxx-01…06 kapsamını ve K7'yi onayladı; ekip altı kola ayrıldı. 47 akışın kaynak uygulaması tamamlandı ve her biri için `rollout/Yxx-review.md` mevcut. Bu, 282 kabul maddesinin tamamının kapandığı anlamına gelmez.
 
-İlk dosya ailesi Toplama Macera Adası (Y01–Y05) uygulandı, fakat tarayıcı/mobil/touch kabulü yapılmadı. Yeni düzen kaynak testlerinden geçti; diğer 42 akışa doğrulanmadan topluca kopyalanmadı. T57'de kaydedilen tarayıcı erişim reddi devam eden kabul engelidir; yeni bir kullanıcı durdurması değildir.
-
-| Kapsam | Uygulama | Kabul |
+| Aile | Kartlar | Uygulama ve test |
 | --- | --- | --- |
-| Y01–Y05 | Ortak giriş; 0/1/3 alt-basamak elde modeli; süre/süresiz; tekrar; arka plan duraklaması; puan güvenliği | Kaynak/VM testleri geçti; yeni görsel/klavye/touch/OS reduced-motion kabulü açık |
-| Y06–Y47 | Kaynak envanteri ve ayrı T59 kartları mevcut; yeni UI/mantık uygulanmadı | Açık |
+| Toplama | Y01–Y05 | Gerçek elde karmaşıklığı, giriş, aktif zaman, kesin tam sayı/puan, erişilebilir feedback; üretim kodu testleri |
+| Mekânsal | Y06, Y20–Y21 | Gerçek başlangıç yapıları ve şekil/eksen karmaşıklığı, koordinat kontrolleri, erişilebilir hedefler |
+| Geometri | Y07–Y11 | Gerçek görev/ölçüm desteği, mevcut alt modlar, sonuç/tekrar, görev kimliğiyle eski callback koruması |
+| Maarif | Y12–Y16 | Beş gerçek ayar profili, tam kesir eşdeğerliği, tek ödül, sıfırda sonlu seçenek havuzu |
+| Çember/Olasılık | Y17–Y19 | Gerçek destek ve soru türleri, coin/dice/both, örneklem/epoch/aktif saat koruması |
+| Çalışma bankası | Y22–Y47 | 26 akış ×3 düzey ×3 tur, özgün matematik, ilk-deneme puanı, klavye çizim/grid |
 
-Kod ve test referansları: features/rollout/; tests/rollout-math-clock-contract.cjs; tests/toplama-rollout-contract.cjs. 6000 örnek çifti, beş gerçek akış × üç seviye, elde doğrulaması, tek puan, quiz bitiş kilidi; üretim entry'de otomatik başlamama, deep-link, hidden pause, süre sonu inert kilidi, tekrar ve ayarlar test edildi. Bunlar DOM simülasyonudur.
+Birleştirilmiş local source/VM kontrolü: 64 geçti, 0 başarısız. Bunlar gerçek tarayıcı veya cihaz kanıtı değildir. K7 onayı gerçek test yapılmadan başarılı kabulü işaretlemek için kullanılmadı.
 
-Eksikler nedeniyle hiçbir Yxx-06 tamamlandı işaretlenmedi. 282 görevin tamamlandığı iddia edilmez. İlk aile için tarayıcı erişimi tekrar sağlandığında ekran/etkileşim kabulü yapılacak; sonra sıradaki aileye geçilecek. Fiziksel dokunma erişimi yoksa ilgili madde açık kalacak.
+T57'den kalan yeni ekran matrisi, fiziksel dokunma/Safari, native %200 zoom, OS reduced-motion ve çalışma zamanı profil kabulü açık. Hiçbir Yxx-06 tümüyle kapatılmadı. T59 JSON'da tüm kartlara uygulama durumu ve kanıt bağlantısı eklendi; kabul görevleri açık kalır.
 
-Yeni query: Toplama sayfasında akis=act1|act2|act3|act4|quiz, difficulty=easy|medium|hard, duration=0|60|90|120|180. Eksik/geçersiz/yinelenen değerler act1/easy/0 olur. Süre yeni görevde sıfırlanır, gezinme puanı kendiliğinden silmez. Süre dolunca tekrar ve Ayarlar dışarıda erişilebilir; mevcut etkinlik inert olur. Yarışmanın eski 90/60 seçenekleri merkezi süre seçimine taşındı, 90 saniye korunur.
-
-Matematik sınırı: dört sütunlu sembol/ikili işlem panolarında toplam 9999'u aşmaz. Beş sonuç hanesi olan Basamak/yarışma zor düzeyinde beş basamaklı toplam mümkündür. Temel sorularda Kolay 0, Orta 1, Zor alt üç sütunda 3 elde; üst sütunda ek elde olabilir. Yarışmanın zihinden yüzlük ekleme türü ayrı olarak korunur. Kazanım kodu katalogda bulunmadığından uydurulmadı.
+T61–T68 yayın doğrulaması `T66-release-checkpoint.md` ve `T68-release-status.md` altında izlenir. Vercel scope403 nedeniyle production okunamadı/yükseltilmedi. Canlı yayın yapılmadı, main ve yedek korunur.

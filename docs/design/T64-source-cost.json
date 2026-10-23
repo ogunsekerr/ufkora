@@ -1,0 +1,109 @@
+{
+  "scope": "Local source bytes and independent per-file gzip; not network/runtime/device profiling",
+  "files": [
+    {
+      "path": "features/rollout/active-clock.js",
+      "bytes": 712,
+      "gzip_bytes": 385
+    },
+    {
+      "path": "features/rollout/addition-model.js",
+      "bytes": 727,
+      "gzip_bytes": 424
+    },
+    {
+      "path": "features/rollout/bank-entry.css",
+      "bytes": 1049,
+      "gzip_bytes": 519
+    },
+    {
+      "path": "features/rollout/bank-entry.js",
+      "bytes": 8563,
+      "gzip_bytes": 3370
+    },
+    {
+      "path": "features/rollout/bank-model.js",
+      "bytes": 669,
+      "gzip_bytes": 375
+    },
+    {
+      "path": "features/rollout/content-entry.css",
+      "bytes": 2122,
+      "gzip_bytes": 833
+    },
+    {
+      "path": "features/rollout/geometry-angle.js",
+      "bytes": 2324,
+      "gzip_bytes": 1176
+    },
+    {
+      "path": "features/rollout/geometry-entry.css",
+      "bytes": 758,
+      "gzip_bytes": 338
+    },
+    {
+      "path": "features/rollout/geometry-entry.js",
+      "bytes": 4241,
+      "gzip_bytes": 1733
+    },
+    {
+      "path": "features/rollout/geometry-poly.js",
+      "bytes": 2206,
+      "gzip_bytes": 1187
+    },
+    {
+      "path": "features/rollout/maarif-entry.css",
+      "bytes": 999,
+      "gzip_bytes": 515
+    },
+    {
+      "path": "features/rollout/maarif-entry.js",
+      "bytes": 8345,
+      "gzip_bytes": 3422
+    },
+    {
+      "path": "features/rollout/maarif-model.js",
+      "bytes": 1619,
+      "gzip_bytes": 834
+    },
+    {
+      "path": "features/rollout/probability-entry.css",
+      "bytes": 1564,
+      "gzip_bytes": 686
+    },
+    {
+      "path": "features/rollout/probability-entry.js",
+      "bytes": 8083,
+      "gzip_bytes": 3156
+    },
+    {
+      "path": "features/rollout/spatial-cube.js",
+      "bytes": 3197,
+      "gzip_bytes": 1525
+    },
+    {
+      "path": "features/rollout/spatial-entry.css",
+      "bytes": 1101,
+      "gzip_bytes": 540
+    },
+    {
+      "path": "features/rollout/spatial-entry.js",
+      "bytes": 3624,
+      "gzip_bytes": 1460
+    },
+    {
+      "path": "features/rollout/spatial-reflection.js",
+      "bytes": 4853,
+      "gzip_bytes": 1935
+    },
+    {
+      "path": "features/rollout/toplama-entry.js",
+      "bytes": 6585,
+      "gzip_bytes": 2691
+    }
+  ],
+  "total_bytes": 63341,
+  "total_gzip_bytes": 27104,
+  "new_raster_assets": 0,
+  "new_dependencies": 0
+}

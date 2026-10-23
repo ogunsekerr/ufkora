@@ -1,0 +1,391 @@
+{
+  "kind": "Local source and VM contract tests, not browser/device/performance or production checks",
+  "checks": [
+    {
+      "check": "tests/bahce-entry-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS: URL fallback/duplicates; no autostart; three real support levels; timed/untimed; pause/background; expiry/retry; keyboard corners; all 8 tasks × 3 modes; stars preserved. Browser/layout not tested.\nPASS normal fence without render frames; help/background pause; task time preserved",
+      "stderr": ""
+    },
+    {
+      "check": "tests/bank-rollout-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS 234 production rounds (26 flows ×3 levels ×3 rounds), preserved answers, support difficulty, no autostart, duplicate/invalid URL, background/help pause, expiry lock, retry dedup, keyboard grid. DOM simulation only.\nPASS first-check/reveal scoring preserved across retries.\nPASS independent angle/area/fence/invoice arithmetic; hard level retains required measuring tool.\nPASS strict integer/grouping policy: decimals/mixed/malformed rejected; plain and correctly grouped integers accepted.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/catalog-release-contract.cjs",
+      "exit_code": 0,
+      "stdout": "{\"catalog_cards\":16,\"unique_routes\":12,\"grade_counts\":{\"4\":2,\"5\":9,\"6\":2,\"7\":2,\"8\":1},\"result\":\"PASS static catalog identity, files/images/query/code-outcome alignment\",\"issues\":[{\"title\":\"Toplama Macera Adası\",\"issue\":\"No official code in catalog; source verification pending; not invented\"}],\"scope\":\"No official curriculum attestation, HTTP/browser or gameplay verification\"}",
+      "stderr": ""
+    },
+    {
+      "check": "tests/catalog-rollout-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS grades 4/6/7/8: counts, colors, URLs, topic/type/search/empty/reset, cards fallback and independent rollback; 47 queues/282 unique tasks. DOM simulation only.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/circle-entry-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS circle five tasks × three support levels; no-autostart, score dedup, hidden/help pause, expiry lock, retry and invalid/duplicate URL. DOM simulation only.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/contact-release-contract.mjs",
+      "exit_code": 0,
+      "stdout": "PASS local contact readiness shape, origin/type/size/JSON/honeypot/field validation; zero outbound messages. Not a production provider test.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/discovery-motion-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS: state is immediate; 180ms split; rapid reversal cancels; offscreen/hidden/reduced cancels; keyboard and quiet instant; no animate fallback. Simulation, not OS/browser media emulation.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/geometry-rollout-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS five geometry flows: native no-autostart/expiry/retry/hidden-pause; 3 actual reading tasks, angle relations, all five balloon modes, 2/3/4 distractor support and duplicate-score guard. DOM simulation only.\nPASS full 8-question polygon completion/retry and reduced-motion 3-balloon task with no duplicate award.\nPASS 500 randomized missions across all five preserved balloon modes.\nPASS duplicate parameters fall back to initial flow/easy/untimed.\nPASS old arrow callback cannot advance or score a replacement mission after retry.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/kesif-entry-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS: both pilots × 3 difficulties × 5 tasks; duplicate/invalid URL; no autostart; 60/120/180/untimed; hidden/help pause; expiry lock; completed retry; score dedup; circle isolation. DOM simulation only.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/maarif-rollout-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS five Maarif production flows × 3 levels; 900 profile samples; exact fraction equivalence; zero choices terminate; award dedup; native entry settings, hidden pause, expiry, retry. DOM simulation only.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/page-continuity-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS page continuity lifecycle, opt-in, origin, fallback and unloaded art contracts",
+      "stderr": ""
+    },
+    {
+      "check": "tests/probability-entry-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS coin/dice/both × free/three real question types; no autostart, frozen sample math, reset race, active time/hidden pause, expiry lock/retry, reduced-motion delay. DOM simulation only.\nPASS interrupted hidden toss cancels safely and controls remain usable on return.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/release-source-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS T62 six-vertex door, no panel before crossing, .94 focus gate, reverse/fast scroll, cached geometry, native reduced anchor and lite contract. DOM simulation only.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/rollout-math-clock-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS 6000 addition pairs: 0/1/3 carry complexity, four-digit board limits; active clock expiry once, pause and untimed.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/spatial-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS reflection involution/distance, 420 shape/axis questions, one award, quiet instant; cube 6 presets, voxel dedup, volume, front footprint and top-height counts. Rendering stubbed.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/spatial-entry-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS production spatial entry: no autostart, chosen work, 60s expiry lock, hidden pause, retry, completion, settings, untimed. DOM stub, not browser.",
+      "stderr": ""
+    },
+    {
+      "check": "tests/toplama-rollout-contract.cjs",
+      "exit_code": 0,
+      "stdout": "PASS five production flows × three levels; carries, four-column safety, cipher uniqueness, single scoring and post-expiry quiz guard.\nPASS production entry: exact deep-link settings, no autostart, expiry lock, hidden pause, retry and settings. DOM simulation only.\nPASS quiz begins on a visible answer and expiry leaves results accessible without accepting more answers.",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:api/contact.mjs",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:assets/contact.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:assets/site.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:catalog.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:docs/design/checks/T04-entrance-logic.cjs",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/aci-ustasi.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/birim-kup.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/cokgen.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/cokgen.html:1",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/cokgen.html:2",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/cokgen.html:3",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/cokgen.html:4",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/maarif-atolyesi.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/olasilik-laboratuvari.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/toplama-adasi.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:etkinlikler/yansima.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/entrance/transition.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/home/discovery-motion.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/home/workshop-preview.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/active-clock.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/addition-model.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/bank-entry.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/bank-model.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/geometry-angle.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/geometry-entry.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/geometry-poly.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/maarif-entry.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/maarif-model.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/probability-entry.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/spatial-cube.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/spatial-entry.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/spatial-reflection.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/rollout/toplama-entry.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/shared/clay-motifs.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/shared/page-continuity.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/workshop/catalog-drawer.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/workshop/catalog.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/workshop/grade-4.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/workshop/grade-6.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/workshop/grade-7.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/workshop/grade-8.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "syntax:features/workshop/pilot-preview.js",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:oyun-atolyesi/bahce.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:oyun-atolyesi/etkinlikler.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:oyun-atolyesi/index.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "inline:oyun-atolyesi/kesif.html:0",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "check": "git diff whitespace",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "passed": 64,
+  "failed": 0
+}
