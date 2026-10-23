@@ -47,3 +47,9 @@ for(let r=0;r<3;r++){const angle=t.run(`questionFor(2,'activity',${r})`);assert.
 assert.deepEqual(Array.from(t.run("[0,1,2].map(r=>questionFor(12,'activity',r).answer)")),[6*4,2*(6+4)-2,(2*(6+4)-2)*30]);
 t.start(2,'activity','hard');assert.equal(t.run('q.protractor'),true,'Hard level retains the measuring tool toggle');assert.equal(t.run('protractor'),false);
 console.log('PASS independent angle/area/fence/invoice arithmetic; hard level retains required measuring tool.');
+
+// Reject decimal/malformed input before normalization; accept only whole grouped integers.
+for(const invalid of ['1.8','18.0','1 8','1.80','1.800 000','1 800.000','1..800','18foo']){t=boot();t.start(12,'activity');t.run('state.round=1;loadRound()');t.node('numeric').value=invalid;t.run('check()');assert.equal(t.run('state.checked'),false,invalid);assert.equal(t.run('state.scores[0]'),0)}
+for(const valid of ['24006305','24 006 305','24.006.305']){t=boot();t.start(7,'game');t.node('numeric').value=valid;t.run('check()');assert.equal(t.run('state.checked'),true,valid);assert.equal(t.run('state.scores[0]'),1)}
+for(const valid of ['1800','1.800','1 800']){t=boot();t.start(7,'game');t.run('q.answer=1800');t.node('numeric').value=valid;t.run('check()');assert.equal(t.run('state.checked'),true,valid);assert.equal(t.run('state.scores[0]'),1)}
+console.log('PASS strict integer/grouping policy: decimals/mixed/malformed rejected; plain and correctly grouped integers accepted.');
