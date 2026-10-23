@@ -192,7 +192,7 @@
             animation: popIn 0.35s ease-out forwards;
         }
     </style>
-<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"></head>
+<link rel="stylesheet" href="/assets/typography.css"><link rel="icon" type="image/png" href="/assets/ufkora-favicon.png"><link rel="stylesheet" href="/assets/mobile.css"><link rel="stylesheet" href="../features/rollout/content-entry.css?v=20261023-y18"><link rel="stylesheet" href="../features/rollout/probability-entry.css?v=20261023-y18"><script src="../features/rollout/active-clock.js?v=20261023-y18"></script></head>
 <body class="ufkora-activity activity-olasilik-laboratuvari text-slate-800 pb-12"><a href="/" style="display:block;padding:12px 20px;background:#f5f4ec;color:#285c4e;font:600 14px Arial">← Ufkora’ya dön</a>
 
     <!-- Üst Başlık -->
@@ -224,7 +224,7 @@
     <main class="max-w-7xl mx-auto px-4 mt-6">
         <!-- Sekmeler: Madeni Para / Zar / İkisi Birlikte -->
         <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-3 rounded-2xl shadow-sm border border-slate-200/80 mb-6">
-            <div class="flex flex-wrap gap-2" role="tablist">
+            <div class="flex flex-wrap gap-2" role="group" aria-label="Deney görünümü">
                 <button onclick="setMode('both')" id="tab-both" class="px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center gap-2 bg-indigo-600 text-white shadow-sm">
                     <i class="fa-solid fa-layer-group"></i> İkisi Birlikte
                 </button>
@@ -239,7 +239,7 @@
             <!-- Hızlı Bilgi Kutusu -->
             <div class="flex items-center gap-2 text-xs sm:text-sm bg-indigo-50 text-indigo-800 px-3.5 py-2 rounded-xl border border-indigo-100">
                 <i class="fa-solid fa-lightbulb text-amber-500 text-base"></i>
-                <span><strong>İpucu:</strong> Deneme sayısı arttıkça <em>deneysel olasılık</em>, <em>teorik olasılığa</em> yaklaşır!</span>
+                <span><strong>İpucu:</strong> Çok sayıda denemede göreli sıklıklar teorik olasılık çevresinde dengelenme eğilimi gösterir; her yeni atışta daha yakın olması gerekmez.</span>
             </div>
         </div>
 
@@ -537,7 +537,8 @@
 
     <script>
         // ================= DURUM DEĞİŞKENLERİ =================
-        let soundEnabled = true;
+        let soundEnabled = false;
+        let probabilityEpoch=0,probabilityAcceptResult=()=>true;
         let audioCtx = null;
 
         // Madeni Para Verileri
@@ -684,6 +685,7 @@
             };
 
             Object.keys(tabs).forEach(k => {
+                tabs[k].setAttribute('aria-pressed',String(k===mode));
                 if (k === mode) {
                     tabs[k].className = 'px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center gap-2 bg-indigo-600 text-white shadow-sm';
                 } else {
@@ -751,7 +753,9 @@
             badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-amber-100 text-amber-800 animate-pulse';
             badge.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i> Para havada dönüyor...';
 
+            const throwEpoch=probabilityEpoch;
             setTimeout(() => {
+                if(throwEpoch!==probabilityEpoch||!probabilityAcceptResult())return;
                 playCoinSound('land');
                 recordCoinResult(resultText);
 
@@ -766,7 +770,7 @@
                 isCoinFlipping = false;
                 btn.disabled = false;
                 btn.classList.remove('opacity-75');
-            }, 1400);
+            }, matchMedia('(prefers-reduced-motion: reduce)').matches?0:1400);
         }
 
         function recordCoinResult(result) {
@@ -794,6 +798,7 @@
             badge.innerHTML = `<i class="fa-solid fa-bolt mr-1.5"></i> ${count} atış eklendi! (Son: ${lastRes})`;
         }
 
+        function frequencyFraction(count,total,percent) { return `<span class="observed-fraction" role="math" aria-label="${count} bölü ${total}"><span aria-hidden="true">${count}</span><span aria-hidden="true">${total}</span></span> (%${percent})`; }
         function updateCoinUI() {
             const { heads, tails, total, history } = coinStats;
             document.getElementById('coinTotalCount').textContent = total;
@@ -803,8 +808,8 @@
             const headsPct = total > 0 ? Math.round((heads / total) * 100) : 0;
             const tailsPct = total > 0 ? Math.round((tails / total) * 100) : 0;
 
-            document.getElementById('headsProb').textContent = `${heads}/${total} (%${headsPct})`;
-            document.getElementById('tailsProb').textContent = `${tails}/${total} (%${tailsPct})`;
+            document.getElementById('headsProb').innerHTML = total?frequencyFraction(heads,total,headsPct):'Henüz veri yok';
+            document.getElementById('tailsProb').innerHTML = total?frequencyFraction(tails,total,tailsPct):'Henüz veri yok';
 
             document.getElementById('headsBar').style.width = `${headsPct}%`;
             document.getElementById('tailsBar').style.width = `${tailsPct}%`;
@@ -824,6 +829,8 @@
         }
 
         function resetCoinData() {
+            probabilityEpoch++;isCoinFlipping=false;isDiceRolling=false;
+            document.getElementById("btnFlipCoin").disabled=false;document.getElementById("btnRollDice").disabled=false;
             coinStats = { heads: 0, tails: 0, total: 0, history: [] };
             updateCoinUI();
             const badge = document.getElementById('coinResultBadge');
@@ -900,7 +907,9 @@
             badge.className = 'px-5 py-1.5 rounded-full text-sm font-bold bg-indigo-100 text-indigo-800 animate-pulse';
             badge.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i> Zar yuvarlanıyor...';
 
+            const throwEpoch=probabilityEpoch;
             setTimeout(() => {
+                if(throwEpoch!==probabilityEpoch||!probabilityAcceptResult())return;
                 playDiceSound('land');
                 recordDiceResult(resultNumber);
 
@@ -920,7 +929,7 @@
                 isDiceRolling = false;
                 btn.disabled = false;
                 btn.classList.remove('opacity-75');
-            }, 1400);
+            }, matchMedia('(prefers-reduced-motion: reduce)').matches?0:1400);
         }
 
         function recordDiceResult(num) {
@@ -952,7 +961,7 @@
                 const c = counts[i];
                 const pct = total > 0 ? ((c / total) * 100).toFixed(1) : 0;
                 document.getElementById(`diceCount-${i}`).textContent = `${c} kez`;
-                document.getElementById(`diceProb-${i}`).textContent = `${c}/${total} (%${pct})`;
+                document.getElementById(`diceProb-${i}`).innerHTML = total?frequencyFraction(c,total,pct):'Henüz veri yok';
                 document.getElementById(`diceBar-${i}`).style.width = `${Math.min(100, pct * 2.2)}%`;
             }
 
@@ -969,6 +978,8 @@
         }
 
         function resetDiceData() {
+            probabilityEpoch++;isCoinFlipping=false;isDiceRolling=false;
+            document.getElementById("btnFlipCoin").disabled=false;document.getElementById("btnRollDice").disabled=false;
             diceStats = {
                 counts: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
                 total: 0,
@@ -1001,5 +1012,5 @@
             updateDiceUI();
         };
     </script>
-</body>
+<script src="../features/rollout/probability-entry.js?v=20261023-y18"></script></body>
 </html>

@@ -1,0 +1,15 @@
+.probability-task{max-width:1120px;margin:16px auto;padding:20px;background:#fff8eb;border-radius:18px;color:#204b3b}
+.probability-task[hidden],.content-session[hidden]{display:none}
+.probability-task h2{font:700 24px/1.25 'Bricolage Grotesque',sans-serif}
+.probability-task input{font:inherit;font-size:20px;min-height:48px;border:2px solid #597561;border-radius:10px;padding:10px;max-width:100%;width:180px}
+.probability-task label{display:block;margin:10px 0}
+.probability-task button{min-height:48px;background:#075a44;color:#fff;padding:10px 16px;border-radius:10px;border:0;font:inherit;font-weight:800}
+.probability-task :focus-visible{outline:3px solid #6642c0;outline-offset:3px}
+body.activity-olasilik-laboratuvari .hidden{display:none!important}
+@media(max-width:700px){.probability-task{margin:16px 0;padding:16px}}
+@media(prefers-reduced-motion:reduce){body.activity-olasilik-laboratuvari *,body.activity-olasilik-laboratuvari *::before,body.activity-olasilik-laboratuvari *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.observed-fraction{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.1;min-width:1.2em;margin-inline:3px}
+.observed-fraction>span:first-child{border-bottom:1px solid currentColor;padding:0 3px 2px}
+.observed-fraction>span:last-child{padding-top:2px}
+.content-entry #probability-title{font:750 clamp(28px,4vw,44px)/1.1 'Bricolage Grotesque',sans-serif;margin:12px 0}
+body.activity-olasilik-laboratuvari main[hidden]{display:none!important}

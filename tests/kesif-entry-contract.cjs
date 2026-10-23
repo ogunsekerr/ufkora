@@ -17,5 +17,5 @@ for(const mode of ['kargo','isik']){
  t=boot('?oyun='+mode+'&difficulty=hard&duration=60');t.start();t.advance(1000);t.run('openEntry()');t.advance(120000);assert.equal(t.run('expired'),false);assert.equal(t.run('remaining'),59000);t.start();assert.equal(t.run('difficulty'),'hard');assert.equal(t.run('remaining'),60000);assert.equal(t.run('score'),0);
  t=boot('?oyun='+mode);t.start();t.advance(9999999);assert.equal(t.run('expired'),false);
 }
-const circle=boot('?oyun=cember');assert.equal(circle.run('pilot'),false);assert.equal(circle.run('complete'),false);
+const circle=boot('?oyun=cember');assert.equal(circle.run('pilot'),true);assert.equal(circle.run('started'),false);assert.equal(circle.run('complete'),false);
 console.log('PASS: both pilots × 3 difficulties × 5 tasks; duplicate/invalid URL; no autostart; 60/120/180/untimed; hidden/help pause; expiry lock; completed retry; score dedup; circle isolation. DOM simulation only.');
