@@ -4,7 +4,7 @@ const flows={
  act2:['Şifre Bulmaca','Toplamları bul, sayı-harf anahtarıyla şifreyi aç.','1243 + 2321 = 3564. Anahtarda 3564 ile eşleşen harfi bul.'],
  act3:['Kayıp Semboller','Eksik rakamları toplama ilişkilerinden bul.','1243 + 2321 = 3564 işleminde birler rakamı 4 olur.'],
  act4:['İkili İşlem Dedektifi','İki işlemdeki eksik rakamları bul ve bağlantı sorusunu çöz.','Önce her işlemin birler sütunundan başla; sonra istenen rakamları topla.'],
- quiz:['Toplama Şampiyonası','Toplama sorularını yanıtla; süreyi kendin seç.','Bir soruda tek yanıt verilir. Doğru yanıt sonraki soruya geçirir.']};
+ quiz:['Toplama Şampiyonası','Toplama sorularını yanıtla; süreyi kendin seç.','Bir soruda tek yanıt verilir. Her yanıttan sonra yeni soru gelir.']};
 const params=new URLSearchParams(location.search),exact=(key,allowed,fallback)=>{const a=params.getAll(key);return a.length===1&&allowed.includes(a[0])?a[0]:fallback};
 let flow=exact('akis',Object.keys(flows),'act1'),duration=Number(exact('duration',['0','60','90','120','180'],'0')),running=false,settingUp=false;
 additionLevel=exact('difficulty',['easy','medium','hard'],'easy');
@@ -15,19 +15,19 @@ const bar=document.createElement('div');bar.className='content-session';bar.id='
 const $=id=>document.getElementById(id),section=()=>$('section-'+flow);
 let clock;
 function tick(left){$('content-clock').textContent=left===Infinity?'Süresiz':Math.ceil(left/1000)+' sn';if(flow==='quiz'&&running){quizTimeLeft=left===Infinity?Infinity:Math.ceil(left/1000);updateQuizHUD()}}
-clock=window.UfkoraActiveClock({onTick:tick,onExpire(){running=false;section().inert=true;$('content-state').textContent='Süre doldu. Tekrar deneyebilirsin.';if(flow==='quiz')endTimedQuiz();$('content-retry').focus()}});
+clock=window.UfkoraActiveClock({onTick:tick,onExpire(){running=false;section().inert=true;$('content-state').textContent='Süre doldu. Tekrar deneyebilirsin.';if(flow==='quiz'){endTimedQuiz();section().inert=false}$('content-retry').focus()}});
 const rawSwitch=switchTab,rawQuiz=startTimedQuiz;
 function open(id){clock.stop();running=false;quizRunning=false;if(quizInterval){clearInterval(quizInterval);quizInterval=null}flow=id;rawSwitch(id);section().inert=false;entry.hidden=false;document.body.dataset.contentStage='entry';$('content-title').textContent=flows[id][0];$('content-goal').textContent=flows[id][1];$('content-example').textContent=flows[id][2];$('content-difficulty').value=additionLevel;$('content-duration').value=String(duration);$('content-state').textContent='';}
 window.switchTab=id=>open(id);
 function begin(){settingUp=true;additionLevel=$('content-difficulty').value;duration=Number($('content-duration').value);entry.hidden=true;document.body.dataset.contentStage='play';section().inert=false;rawSwitch(flow);running=true;
  if(flow==='quiz'){quizDuration=duration;rawQuiz();clearInterval(quizInterval);quizInterval=null}else({act1:generateAct1Problem,act2:initCipherPuzzle,act3:generateAct3Problem,act4:generateAct4Problem}[flow])();
- settingUp=false;clock.start(duration);if(document.hidden)clock.pause();$('content-state').textContent='';section().querySelector('input,button')?.focus();}
+ settingUp=false;clock.start(duration);if(document.hidden)clock.pause();$('content-state').textContent='';(flow==='quiz'?$('quiz-options').querySelector('button:not(:disabled)'):section().querySelector('input,button'))?.focus();}
 $('content-start').onclick=begin;$('content-retry').onclick=begin;$('content-settings').onclick=()=>{open(flow);$('content-start').focus()};
 // Existing new-problem buttons restart this activity's clock, not the quiz's question clock.
 for(const name of ['generateAct1Problem','initCipherPuzzle','generateAct3Problem','generateAct4Problem']){const raw=window[name];window[name]=function(...args){const r=raw(...args);if(running&&!settingUp){section().inert=false;clock.start(duration);$('content-state').textContent=''}return r}}
-for(const name of ['checkAct1','checkAct3','checkAct4','checkCipherItem']){const raw=window[name];window[name]=function(...args){if(!running||document.hidden)return;clock.tick();if(!running)return;const r=raw(...args);const done=flow==='act1'?act1Solved:flow==='act3'?act3Solved:flow==='act4'?act4Solved:currentCipher?.questions.every(q=>q.solved);if(done){clock.stop();$('content-state').textContent='✓ Tamamlandı. Yeni soru veya yeniden başlat ile devam et.'}return r}}
+for(const name of ['checkAct1','checkAct3','checkAct4','checkCipherItem']){const raw=window[name];window[name]=function(...args){if(!running||document.hidden)return;clock.tick();if(!running)return;const r=raw(...args);const done=flow==='act1'?act1Solved:flow==='act3'?act3Solved:flow==='act4'?act4Solved:currentCipher?.questions.every(q=>q.solved);if(name==='checkCipherItem'&&!done){$('content-state').textContent=currentCipher.questions[args[0]]?.solved?'✓ Harf açıldı. Diğer işlemlere devam et.':'↻ Yeniden dene. Tam sayı toplamını yaz; birler basamağından başlayıp eldeleri kontrol et.'}if(done){clock.stop();$('content-state').textContent='✓ Tamamlandı. Yeni soru veya yeniden başlat ile devam et.'}return r}}
 window.startTimedQuiz=()=>{if(flow==='quiz')begin()};
-const rawSubmit=submitQuizOption;window.submitQuizOption=(...args)=>{clock.tick();if(!running||document.hidden)return;return rawSubmit(...args)};
+const rawSubmit=submitQuizOption;window.submitQuizOption=(...args)=>{clock.tick();if(!running||document.hidden||!quizRunning||quizLocked)return;const correct=currentQuizAnswer,ok=args[0]===correct;const result=rawSubmit(...args);$('content-state').textContent=ok?'✓ Doğru. Yeni soruyla devam et.':'↻ Bu kez olmadı. Doğru toplam '+correct+'. Birler basamağından başlayıp eldeleri kontrol et.';return result};
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clock.pause();else clock.resume()});
 setInterval(()=>{if(running)clock.tick()},100);
 open(flow);

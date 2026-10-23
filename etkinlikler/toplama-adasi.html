@@ -592,6 +592,7 @@
         }
 
         // ==================== GENEL PUAN VE SEKME YÖNETİMİ ====================
+        function wholeAnswer(value){const raw=String(value).trim();return /^\d+$/.test(raw)?Number(raw):NaN;}
         let globalScore = 0;
         let additionLevel="easy";
         let act1Solved=false,act3Solved=false,act4Solved=false,quizLocked=false,quizRunning=false,quizSession=0;
@@ -863,7 +864,7 @@
             if (q.solved) return;
 
             const input = document.getElementById(`cipher-input-${idx}`);
-            const userVal = parseInt(input.value, 10);
+            const userVal = wholeAnswer(input.value);
 
             if (userVal === q.sum) {
                 q.solved = true;
@@ -970,7 +971,7 @@
             let allOk = true;
             act3State.hidden.forEach((h, i) => {
                 const inp = document.getElementById(`act3-inp-${i}`);
-                const val = parseInt(inp.value, 10);
+                const val = wholeAnswer(inp.value);
                 if (val === h.answer) {
                     inp.classList.remove('border-rose-500', 'bg-rose-50');
                     inp.classList.add('border-emerald-500', 'bg-emerald-50');
@@ -996,7 +997,7 @@
         function solveAct3Hint() {
             for (let i = 0; i < act3State.hidden.length; i++) {
                 const inp = document.getElementById(`act3-inp-${i}`);
-                if (parseInt(inp.value, 10) !== act3State.hidden[i].answer) {
+                if (wholeAnswer(inp.value) !== act3State.hidden[i].answer) {
                     inp.value = act3State.hidden[i].answer;
                     document.getElementById('act3-feedback').innerHTML = `🔍 <strong>${act3State.hidden[i].meta.name}</strong> sembolünün değeri <strong>${act3State.hidden[i].answer}</strong> olarak açıldı!`;
                     break;
@@ -1138,7 +1139,7 @@
             });
 
             const bonusInp = document.getElementById('act4-bonus-input');
-            const bonusVal = parseInt(bonusInp.value, 10);
+            const bonusVal = wholeAnswer(bonusInp.value);
             let bonusCorrect = false;
 
             if (bonusVal === act4State.bonusExpected) {
@@ -1180,7 +1181,7 @@
             }
 
             const bonusInp = document.getElementById('act4-bonus-input');
-            if (parseInt(bonusInp.value, 10) !== act4State.bonusExpected) {
+            if (wholeAnswer(bonusInp.value) !== act4State.bonusExpected) {
                 bonusInp.value = act4State.bonusExpected;
                 document.getElementById('act4-feedback-text').innerHTML = `💡 <strong>Bonus İpucu:</strong> Bulduğun rakamların toplamı <strong>${act4State.bonusExpected}</strong> yapıyor!`;
             }
