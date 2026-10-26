@@ -1,3 +1,4 @@
+import '../scripts/check-node-runtime.mjs';
 import { createHash } from 'node:crypto';
 const origins=new Set(['https://www.ufkora.com','https://ufkora.com']);
 const json=(body,status=200)=>Response.json(body,{status,headers:{'Cache-Control':'no-store'}});
